@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      lang="en">
+<head>
+    <title>Edit ticket</title>
+</head>
+<body>
+<div>
+
+    <h1>Create new ticket</h1>
+    <form th:action="@{/edit}" th:object="${ticket}" enctype="multipart/form-data" method="put">
+
+        <div>
+            <label for="abc">Category</label>
+            <select id="abc" name="category" >
+                <option th:each="category : ${categories}"
+                        th:value="${category.getName()}"><span th:text="${category.getName()}" /></option>
+            </select>
+        </div>
+
+        <div>
+            <label for="abc1">Name</label>
+            <input type="text" id="abc1" th:field="*{name}"/>
+        </div>
+
+        <div>
+            <label for="abc2">Description</label>
+            <input type="text" id="abc2" th:field="*{description}"/>
+        </div>
+
+        <div>
+            <label for="abc3">Urgency</label>
+            <select id="abc3" th:field="*{urgency}">
+                <option value="CRITICAL">CRITICAL</option>
+                <option value="HIGH">HIGH</option>
+                <option value="MEDIUM">MEDIUM</option>
+                <option value="LOW">LOW</option>
+            </select>
+        </div>
+
+        <div>
+            <label for="abc4">Desired resolution date</label>
+            <input type="date" id="abc4" name="desiredDate"/>
+        </div>
+
+        <div>
+            <label for="abc5">Add attachments</label>
+            <input type="file" id="abc5" name="file"/>
+        </div>
+
+        <div>
+            <label for="abc6">Comment</label>
+            <input type="text" id="abc6" name="comment"/>
+        </div>
+
+        <div>
+            <button type="submit" name="save" value="save">Save changes</button>
+            <button type="submit" name="submit" value="submit">Submit</button>
+        </div>
+
+    </form>
+
+</div>
+</body>
+</html>

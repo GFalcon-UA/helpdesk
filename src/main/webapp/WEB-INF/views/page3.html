@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<tr th:each="ticket: ${tickets}">
+    <td th:text="${ticket.getId()}" />
+    <td th:text="${ticket.getName()}" />
+    <td th:text="${ticket.getCategory().getName()}" />
+    <td th:text="${ticket.getDescription()}" />
+    <td th:text="${ticket.getCreatedOn()}" />
+    <td th:text="${ticket.getUrgency()}" />
+    <td th:text="${ticket.getDesiredDate()}" />
+    <td th:text="${ticket.getState()}" />
+</tr>
+
+</body>
+</html>
