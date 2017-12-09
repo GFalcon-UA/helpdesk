@@ -2,7 +2,7 @@ package com.javamog.potapov.utils;
 
 import com.javamog.potapov.model.FileBucket;
 
-import org.springframework.lang.Nullable;
+//import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
@@ -16,7 +16,7 @@ public class FileValidator implements Validator {
     }
 
     @Override
-    public void validate(@Nullable Object object, Errors errors) {
+    public void validate(/*@Nullable*/ Object object, Errors errors) {
         FileBucket file = (FileBucket) object;
 
         if(file.getFile()!=null){

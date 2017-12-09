@@ -1,19 +1,22 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymeleaf.org"
-      lang="en">
+      xmlns:th="http://www.thymeleaf.org" xmlns:https="http://www.w3.org/1999/xhtml"
+      lang="en"
+      ng-app="myApp">
 <head>
     <meta charset="UTF-8">
     <title>Home</title>
 </head>
-<body>
+<body ng-controller="AppController as ctrl">
 
 <h2>Login to the Help Desk</h2>
 
-<form th:action="@{/hello}" method="POST">
+<form  ng-submit="ctrl.submit()" name="myForm"> <!--th:action="@{/hello}" method="POST"-->
     <div>
         <label><b>Username</b></label>
-        <input type="email" placeholder="Enter e-mail" name="email" required>
+        <input type="email" ng-model="ctrl.user.email" placeholder="Enter e-mail" name="email" required />
+        <span ng-show="myForm.$dirty && myForm.email.$error.required">This is a required field</span>
+        <span ng-show="myForm.$dirty && myForm.email.$invalid">This field is invalid </span><br/><br/>
 
         <label><b>Password</b></label>
         <input type="password" placeholder="Enter Password" name="password" required>
@@ -21,6 +24,17 @@
         <button type="submit">Login</button>
     </div>
 </form>
+
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.4/angular.js"></script>
+<script>
+    angular.module('myApp', [])
+        .controller('AppController', [function() {
+            var self = this;
+            self.submit = function() {
+                console.log('Form is submitted with following user', self.user);
+            };
+        }]);
+</script>
 
 
 </body>
