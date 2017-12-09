@@ -52,6 +52,7 @@ public class WebConfiguration extends WebMvcConfigurerAdapter {
     }
 
     //@Bean
+    @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         registry.addResourceHandler("/static/**").addResourceLocations("/static/");
     }
