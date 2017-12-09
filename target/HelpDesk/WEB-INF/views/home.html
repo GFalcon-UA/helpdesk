@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Home</title>
+</head>
+<body>
+
+<h2>Login to the Help Desk</h2>
+
+<form th:action="@{/hello}" method="POST">
+    <div>
+        <label><b>Username</b></label>
+        <input type="email" placeholder="Enter e-mail" name="email" required>
+
+        <label><b>Password</b></label>
+        <input type="password" placeholder="Enter Password" name="password" required>
+
+        <button type="submit">Login</button>
+    </div>
+</form>
+
+
+</body>
+</html>
