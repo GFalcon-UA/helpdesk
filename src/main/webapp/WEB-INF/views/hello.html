@@ -1,15 +1,19 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org"
-      lang="en">
+      lang="en"
+      ng-app="myApp">
 <head>
     <meta charset="UTF-8">
     <title>Hello</title>
 </head>
-<body>
-Hello <span th:text="${userName}" />
+<body ng-controller="AppController as ctrl">
+Hello <span {{ctrl.user.username}}></span>
 
-<form th:action="@{/edit}">
+
+<!--<span th:text="${userName}" />-->
+
+<!--<form th:action="@{/edit}">
 <tr th:each="ticket: ${tickets}">
     <td th:name="id" th:value="${ticket.getId()}" th:text="${ticket.getId()}" />
     <td th:text="${ticket.getName()}" />
@@ -21,7 +25,7 @@ Hello <span th:text="${userName}" />
     <td th:text="${ticket.getState()}" />
     <button type="submit" name="draft" value="draft">Edit</button>
 </tr>
-</form>
+</form>-->
 
 <div>
     <span><a href="/" th:href="@{/create}">Create new ticket</a></span>

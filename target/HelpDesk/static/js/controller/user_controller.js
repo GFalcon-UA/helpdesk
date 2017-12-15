@@ -1,9 +1,31 @@
 'use strict';
-
-App.controller('AppController', ['$scope', 'UserService', function($scope, UserService) {
+//App.value('userEmail', '');
+App.controller('AppController', ['userEmail', '$window', '$scope', 'UserService', function(userEmail, $window,
+                                                                                                        $scope, UserService) {
     var self = this;
-    self.user={id:null,username:'',address:'',email:''};
+    self.email = '';
+    self.user={username:'',email:''};
     self.users=[];
+
+    self.submitLogin = function(email){
+        UserService.submitLogin(email)
+            .then(
+                function(response){
+                    self.user = response;
+                    $window.location.assign("/hello");
+                },
+                function(errResponse){
+                    console.error('Error while creating User.');
+                }
+            );
+    };
+
+    self.submit = function () {
+        console.log('Login User', self.email);
+        self.submitLogin(self.email);
+        userEmail = self.email;
+    };
+
 
     self.fetchAllUsers = function(){
         UserService.fetchAllUsers()
@@ -47,9 +69,9 @@ App.controller('AppController', ['$scope', 'UserService', function($scope, UserS
             );
     };
 
-    self.fetchAllUsers();
+    //self.fetchAllUsers();
 
-    self.submit = function() {
+    /*self.submit = function() {
         if(self.user.id===null){
             console.log('Saving New User', self.user);
             self.createUser(self.user);
@@ -58,7 +80,7 @@ App.controller('AppController', ['$scope', 'UserService', function($scope, UserS
             console.log('User updated with id ', self.user.id);
         }
         self.reset();
-    };
+    };*/
 
     self.edit = function(id){
         console.log('id to be edited', id);
@@ -68,7 +90,7 @@ App.controller('AppController', ['$scope', 'UserService', function($scope, UserS
                 break;
             }
         }
-    }
+    };
 
     self.remove = function(id){
         console.log('id to be deleted', id);
@@ -76,7 +98,7 @@ App.controller('AppController', ['$scope', 'UserService', function($scope, UserS
             self.reset();
         }
         self.deleteUser(id);
-    }
+    };
 
     self.reset = function(){
         self.user={id:null,username:'',address:'',email:''};

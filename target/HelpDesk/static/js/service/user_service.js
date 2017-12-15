@@ -4,8 +4,34 @@ App.factory('UserService', ['$http', '$q', function($http, $q){
 
     return {
 
+        showTicketList: function () {
+            return $http.get('http://localhost:8080/hello/')
+                .then(
+                    function(response){
+                        return response.data;
+                    },
+                    function(errResponse){
+                        console.error('Error while fetching users');
+                        return $q.reject(errResponse);
+                    }
+                );
+        },
+
+        submitLogin: function(email){
+            return $http.post('http://localhost:8080/hello/', email)
+                .then(
+                    function(response){
+                        return response.data;
+                    },
+                    function(errResponse){
+                        console.error('Error while login user');
+                        return $q.reject(errResponse);
+                    }
+                );
+        },
+
         fetchAllUsers: function() {
-            return $http.get('<a class="vglnk" href="http://localhost:8080/SpringMVC4RestAPI/user/" rel="nofollow"><span>http</span><span>://</span><span>localhost</span><span>:</span><span>8080</span><span>/</span><span>SpringMVC4RestAPI</span><span>/</span><span>user</span><span>/</span></a>')
+            return $http.get('http://localhost:8080/SpringMVC4RestAPI/user/')
                 .then(
                     function(response){
                         return response.data;
@@ -18,7 +44,7 @@ App.factory('UserService', ['$http', '$q', function($http, $q){
         },
 
         createUser: function(user){
-            return $http.post('<a class="vglnk" href="http://localhost:8080/SpringMVC4RestAPI/user/" rel="nofollow"><span>http</span><span>://</span><span>localhost</span><span>:</span><span>8080</span><span>/</span><span>SpringMVC4RestAPI</span><span>/</span><span>user</span><span>/</span></a>', user)
+            return $http.post('http://localhost:8080/SpringMVC4RestAPI/user/', user)
                 .then(
                     function(response){
                         return response.data;
@@ -31,7 +57,7 @@ App.factory('UserService', ['$http', '$q', function($http, $q){
         },
 
         updateUser: function(user, id){
-            return $http.put('<a class="vglnk" href="http://localhost:8080/SpringMVC4RestAPI/user/'+id" rel="nofollow"><span>http</span><span>://</span><span>localhost</span><span>:</span><span>8080</span><span>/</span><span>SpringMVC4RestAPI</span><span>/</span><span>user</span><span>/'+</span><span>id</span></a>, user)
+            return $http.put('http://localhost:8080/SpringMVC4RestAPI/user/'+id, user)
                 .then(
                     function(response){
                         return response.data;
@@ -44,7 +70,7 @@ App.factory('UserService', ['$http', '$q', function($http, $q){
         },
 
         deleteUser: function(id){
-            return $http.delete('<a class="vglnk" href="http://localhost:8080/SpringMVC4RestAPI/user/'+id" rel="nofollow"><span>http</span><span>://</span><span>localhost</span><span>:</span><span>8080</span><span>/</span><span>SpringMVC4RestAPI</span><span>/</span><span>user</span><span>/'+</span><span>id</span></a>)
+            return $http.delete('http://localhost:8080/SpringMVC4RestAPI/user/'+id)
                 .then(
                     function(response){
                         return response.data;

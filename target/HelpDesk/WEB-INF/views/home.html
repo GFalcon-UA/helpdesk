@@ -14,7 +14,7 @@
 <form  ng-submit="ctrl.submit()" name="myForm"> <!--th:action="@{/hello}" method="POST"-->
     <div>
         <label><b>Username</b></label>
-        <input type="email" ng-model="ctrl.user.email" placeholder="Enter e-mail" name="email" required />
+        <input type="email" ng-model="ctrl.email" placeholder="Enter e-mail" name="email" required />
         <span ng-show="myForm.$dirty && myForm.email.$error.required">This is a required field</span>
         <span ng-show="myForm.$dirty && myForm.email.$invalid">This field is invalid </span><br/><br/>
 
@@ -26,7 +26,11 @@
 </form>
 
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.4/angular.js"></script>
-<script>
+<script type="text/javascript" th:src="@{/static/js/app.js}"></script>
+<script type="text/javascript" th:src="@{/static/js/service/user_service.js}"></script>
+<script type="text/javascript" th:src="@{/static/js/controller/user_controller.js}"></script>
+
+<!--<script>
     angular.module('myApp', [])
         .controller('AppController', [function() {
             var self = this;
@@ -34,7 +38,7 @@
                 console.log('Form is submitted with following user', self.user);
             };
         }]);
-</script>
+</script>-->
 
 
 </body>
