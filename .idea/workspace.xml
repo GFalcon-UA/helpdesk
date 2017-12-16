@@ -7,32 +7,17 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="653533ab-2f0e-4fa4-a8c3-116d0f618b94" name="Default" comment="">
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/javamog/potapov/controller/TicketListController.java" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/static/js/controller/login_controller.js" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/javamog/potapov/configuration/WebConfiguration.java" afterPath="$PROJECT_DIR$/src/main/java/com/javamog/potapov/configuration/WebConfiguration.java" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/javamog/potapov/controller/CreateTicketController.java" afterPath="$PROJECT_DIR$/src/main/java/com/javamog/potapov/controller/CreateTicketController.java" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/javamog/potapov/controller/HelloController.java" afterPath="$PROJECT_DIR$/src/main/java/com/javamog/potapov/controller/TicketListRestController.java" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/javamog/potapov/model/Category.java" afterPath="$PROJECT_DIR$/src/main/java/com/javamog/potapov/model/Category.java" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/javamog/potapov/model/Ticket.java" afterPath="$PROJECT_DIR$/src/main/java/com/javamog/potapov/model/Ticket.java" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/javamog/potapov/model/User.java" afterPath="$PROJECT_DIR$/src/main/java/com/javamog/potapov/model/User.java" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/javamog/potapov/service/TicketServiceImpl.java" afterPath="$PROJECT_DIR$/src/main/java/com/javamog/potapov/service/TicketServiceImpl.java" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/hello.html" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/new_ticket.html" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/new_ticket.html" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/static/js/app.js" afterPath="$PROJECT_DIR$/src/main/webapp/static/js/app.js" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/static/js/controller/user_controller.js" afterPath="$PROJECT_DIR$/src/main/webapp/static/js/controller/user_controller.js" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/static/js/service/user_service.js" afterPath="$PROJECT_DIR$/src/main/webapp/static/js/service/user_service.js" />
-      <change beforePath="$PROJECT_DIR$/target/HelpDesk/WEB-INF/classes/com/javamog/potapov/configuration/WebConfiguration.class" afterPath="$PROJECT_DIR$/target/HelpDesk/WEB-INF/classes/com/javamog/potapov/configuration/WebConfiguration.class" />
-      <change beforePath="$PROJECT_DIR$/target/HelpDesk/WEB-INF/classes/com/javamog/potapov/controller/CreateTicketController.class" afterPath="$PROJECT_DIR$/target/HelpDesk/WEB-INF/classes/com/javamog/potapov/controller/CreateTicketController.class" />
-      <change beforePath="$PROJECT_DIR$/target/HelpDesk/WEB-INF/classes/com/javamog/potapov/controller/HelloController.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/HelpDesk/WEB-INF/lib/thymeleaf-spring4-3.0.9.RELEASE.jar" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/HelpDesk/WEB-INF/views/hello.html" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/HelpDesk/static/js/app.js" afterPath="$PROJECT_DIR$/target/HelpDesk/static/js/app.js" />
-      <change beforePath="$PROJECT_DIR$/target/HelpDesk/static/js/controller/user_controller.js" afterPath="$PROJECT_DIR$/target/HelpDesk/static/js/controller/user_controller.js" />
-      <change beforePath="$PROJECT_DIR$/target/HelpDesk/static/js/service/user_service.js" afterPath="$PROJECT_DIR$/target/HelpDesk/static/js/service/user_service.js" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/javamog/potapov/configuration/WebConfiguration.class" afterPath="$PROJECT_DIR$/target/classes/com/javamog/potapov/configuration/WebConfiguration.class" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/javamog/potapov/controller/CreateTicketController.class" afterPath="$PROJECT_DIR$/target/classes/com/javamog/potapov/controller/CreateTicketController.class" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/javamog/potapov/controller/HelloController.class" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/target/HelpDesk/WEB-INF/classes/com/javamog/potapov/model/Category.class" afterPath="$PROJECT_DIR$/target/HelpDesk/WEB-INF/classes/com/javamog/potapov/model/Category.class" />
+      <change beforePath="$PROJECT_DIR$/target/HelpDesk/WEB-INF/classes/com/javamog/potapov/model/Ticket.class" afterPath="$PROJECT_DIR$/target/HelpDesk/WEB-INF/classes/com/javamog/potapov/model/Ticket.class" />
+      <change beforePath="$PROJECT_DIR$/target/HelpDesk/WEB-INF/classes/com/javamog/potapov/model/User.class" afterPath="$PROJECT_DIR$/target/HelpDesk/WEB-INF/classes/com/javamog/potapov/model/User.class" />
+      <change beforePath="$PROJECT_DIR$/target/HelpDesk/WEB-INF/classes/com/javamog/potapov/service/TicketServiceImpl.class" afterPath="$PROJECT_DIR$/target/HelpDesk/WEB-INF/classes/com/javamog/potapov/service/TicketServiceImpl.class" />
+      <change beforePath="$PROJECT_DIR$/target/HelpDesk/WEB-INF/views/new_ticket.html" afterPath="$PROJECT_DIR$/target/HelpDesk/WEB-INF/views/new_ticket.html" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/javamog/potapov/model/Category.class" afterPath="$PROJECT_DIR$/target/classes/com/javamog/potapov/model/Category.class" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/javamog/potapov/model/Ticket.class" afterPath="$PROJECT_DIR$/target/classes/com/javamog/potapov/model/Ticket.class" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/javamog/potapov/model/User.class" afterPath="$PROJECT_DIR$/target/classes/com/javamog/potapov/model/User.class" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/javamog/potapov/service/TicketServiceImpl.class" afterPath="$PROJECT_DIR$/target/classes/com/javamog/potapov/service/TicketServiceImpl.class" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -96,11 +81,21 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="CreateTicketController.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="CreateTicketController.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/javamog/potapov/controller/CreateTicketController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="314">
-              <caret line="69" column="10" lean-forward="false" selection-start-line="69" selection-start-column="10" selection-end-line="69" selection-end-column="10" />
+            <state relative-caret-position="646">
+              <caret line="67" column="22" lean-forward="false" selection-start-line="67" selection-start-column="22" selection-end-line="67" selection-end-column="22" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Ticket.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/javamog/potapov/model/Ticket.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="136">
+              <caret line="27" column="72" lean-forward="false" selection-start-line="27" selection-start-column="72" selection-end-line="27" selection-end-column="72" />
               <folding />
             </state>
           </provider>
@@ -191,7 +186,6 @@
         <option value="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/home.html" />
         <option value="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/new_ticket.html" />
         <option value="$PROJECT_DIR$/src/main/java/com/javamog/potapov/controller/CreateTicketController.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/javamog/potapov/model/Ticket.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/javamog/potapov/model/Category.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/javamog/potapov/service/TicketServiceImpl.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/javamog/potapov/controller/TicketListRestController.java" />
@@ -199,6 +193,7 @@
         <option value="$PROJECT_DIR$/src/main/webapp/static/js/controller/user_controller.js" />
         <option value="$PROJECT_DIR$/src/main/webapp/static/js/service/user_service.js" />
         <option value="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/ticket_list.html" />
+        <option value="$PROJECT_DIR$/src/main/java/com/javamog/potapov/model/Ticket.java" />
       </list>
     </option>
   </component>
@@ -611,7 +606,7 @@
       <workItem from="1513228415145" duration="1565000" />
       <workItem from="1513303560112" duration="17650000" />
       <workItem from="1513340472149" duration="11825000" />
-      <workItem from="1513390349030" duration="8711000" />
+      <workItem from="1513390349030" duration="9278000" />
     </task>
     <task id="LOCAL-00001" summary="addOverride">
       <created>1512841856710</created>
@@ -634,11 +629,18 @@
       <option name="project" value="LOCAL" />
       <updated>1513320090946</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="Js Added to home page, and ticketlist. But Date-format mapping on json not working yet">
+      <created>1513403155086</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1513403155086</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="204815000" />
+    <option name="totallyTimeSpent" value="205382000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="1358" y="-8" width="1382" height="744" extended-state="6" />
@@ -716,7 +718,8 @@
     <MESSAGE value="addOverride" />
     <MESSAGE value="Work with spring 5.0.0" />
     <MESSAGE value="Adding js to home page. Moving to the second page (ticketlist) is working, but need to delete something from config and utils." />
-    <option name="LAST_COMMIT_MESSAGE" value="Adding js to home page. Moving to the second page (ticketlist) is working, but need to delete something from config and utils." />
+    <MESSAGE value="Js Added to home page, and ticketlist. But Date-format mapping on json not working yet" />
+    <option name="LAST_COMMIT_MESSAGE" value="Js Added to home page, and ticketlist. But Date-format mapping on json not working yet" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -977,6 +980,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="51">
           <caret line="3" column="0" lean-forward="true" selection-start-line="3" selection-start-column="0" selection-end-line="3" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1071,22 +1075,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/javamog/potapov/service/TicketServiceImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="246">
-          <caret line="66" column="33" lean-forward="true" selection-start-line="66" selection-start-column="33" selection-end-line="66" selection-end-column="33" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/javamog/potapov/model/Ticket.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="323">
-          <caret line="52" column="37" lean-forward="true" selection-start-line="52" selection-start-column="37" selection-end-line="52" selection-end-column="37" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/webapp/static/js/service/user_service.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="255">
@@ -1119,10 +1107,26 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/javamog/potapov/service/TicketServiceImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="399">
+          <caret line="66" column="33" lean-forward="true" selection-start-line="66" selection-start-column="33" selection-end-line="66" selection-end-column="33" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/javamog/potapov/controller/CreateTicketController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="314">
-          <caret line="69" column="10" lean-forward="false" selection-start-line="69" selection-start-column="10" selection-end-line="69" selection-end-column="10" />
+        <state relative-caret-position="646">
+          <caret line="67" column="22" lean-forward="false" selection-start-line="67" selection-start-column="22" selection-end-line="67" selection-end-column="22" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/javamog/potapov/model/Ticket.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="136">
+          <caret line="27" column="72" lean-forward="false" selection-start-line="27" selection-start-column="72" selection-end-line="27" selection-end-column="72" />
           <folding />
         </state>
       </provider>

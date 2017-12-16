@@ -1,5 +1,6 @@
 package com.javamog.potapov.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.javamog.potapov.utils.State;
 import com.javamog.potapov.utils.Urgency;
@@ -24,9 +25,11 @@ public class Ticket {
     private String description;
 
     @Column(name = "created_on")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
     private Date createdOn;
 
     @Column(name = "desired_resolution_date")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
     private Date desiredDate;
 
     @Column(name = "state_id")
