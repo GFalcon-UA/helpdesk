@@ -63,8 +63,9 @@ public class TicketServiceImpl implements TicketService {
         Comment comment = CommentUtils.setComment(user, ticket, commentText);
         commentDao.saveComment(comment);
 
-        userDao.updateUser(user);
         ticketDao.saveTicket(ticket);
+        userDao.updateUser(user);
+
 
         return user.getOwnTickets();
     }

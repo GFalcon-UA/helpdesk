@@ -1,29 +1,51 @@
 'use strict';
-//App.value('userEmail', '');
-App.controller('AppController', ['userEmail', '$window', '$scope', 'UserService', function(userEmail, $window,
-                                                                                                        $scope, UserService) {
-    var self = this;
-    self.email = '';
-    self.user={username:'',email:''};
-    self.users=[];
 
-    self.submitLogin = function(email){
-        UserService.submitLogin(email)
+App.controller('AppController', ['$window', '$scope', 'UserService', function($window, $scope, UserService) {
+    var self = this;
+    self.loggedInUser = $window.localStorage['email'];
+    self.email = '';
+    /*self.user={id:null, firstName:'', lastName:'', phone:'', roleId:'', email:'',
+                addres:'', ownTickets:[], assignTickets:[], approveTickets:[],
+                userHistory:[], userComments:[], userFeedback:[]};*/
+    self.tickets=[];
+
+    self.showTicketList = function(){
+        UserService.showTicketList()
             .then(
-                function(response){
-                    self.user = response;
-                    $window.location.assign("/hello");
+                function(d){
+                    self.tickets = d;
+                    //$window.location.assign("/ticketList");
                 },
                 function(errResponse){
-                    console.error('Error while creating User.');
+                    console.error('Error while show ticketlist (controller)');
                 }
             );
     };
 
+    self.submitLogin = function(email){
+        UserService.submitLogin(email)
+            .then(
+                //self.showTicketList(),
+                //$window.location.assign("/ticketList")
+                function(){
+                    //self.user = d;
+                    self.showTicketList();
+                    $window.location.assign("/ticketList");
+                },
+                function(errResponse){
+                    console.error('Error while submit login (controller).');
+                }
+            );
+    };
+
+    self.showTicketList();
+
+
     self.submit = function () {
         console.log('Login User', self.email);
+        $window.localStorage['email'] = self.email;
         self.submitLogin(self.email);
-        userEmail = self.email;
+        //self.showTicketList(self.email);
     };
 
 

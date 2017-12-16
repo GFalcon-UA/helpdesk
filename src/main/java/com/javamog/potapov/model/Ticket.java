@@ -1,5 +1,6 @@
 package com.javamog.potapov.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.javamog.potapov.utils.State;
 import com.javamog.potapov.utils.Urgency;
 
@@ -53,15 +54,19 @@ public class Ticket {
     private Category category;
 
     @OneToMany(mappedBy = "historyTicket", cascade = CascadeType.ALL)
+    @JsonIgnore
     private List<History> ticketHistory;
 
     @OneToMany(mappedBy = "attachmentTicket", cascade = CascadeType.ALL)
+    @JsonIgnore
     private List<Attachment> ticketAttachments;
 
     @OneToMany(mappedBy = "commentTicket", cascade = CascadeType.ALL)
+    @JsonIgnore
     private List<Comment> ticketComments;
 
     @OneToMany(mappedBy = "feedbackTicket", cascade = CascadeType.ALL)
+    @JsonIgnore
     private List<Feedback> ticketFeedback;
 
     public int getId() {

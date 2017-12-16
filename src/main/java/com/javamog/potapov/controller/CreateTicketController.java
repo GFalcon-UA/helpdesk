@@ -67,9 +67,9 @@ public class CreateTicketController {
 
         ticket.setState(State.NEW);
         List<Ticket> tickets = ticketService.createNewTicket(ticket, category, dateInString, file, commentText);
-        model.addAttribute("tickets", tickets);
-        return "hello";
-        //return "redirect:/hello";
+        //model.addAttribute("tickets", tickets);
+        //return "hello";
+        return "redirect:/ticketList";
         //return "page3";
     }
 

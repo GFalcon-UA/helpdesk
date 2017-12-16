@@ -16,16 +16,20 @@ import java.util.List;
 
 //@Controller
 @RestController
-@RequestMapping("/hello")
-public class HelloController {
+@RequestMapping("/ticket-list")
+public class TicketListRestController {
 
     @Autowired
     private UserService userService;
 
+    private static String loggedInUser = "user1_mogilev@yopmail.com";
+
     @GetMapping
-    public String ShowHelloPage(Model model/*, @ModelAttribute("tickets") List<Ticket> tickets*/) {
-        //model.addAttribute("tickets", tickets);
-        return "hello";
+    public ResponseEntity<List<Ticket>> ShowHelloPage() {
+        User user = userService.getUser(loggedInUser);
+        List<Ticket> tickets = user.getOwnTickets();
+        //return new ResponseEntity<>(user, HttpStatus.OK);
+        return new ResponseEntity<>(tickets, HttpStatus.OK);
     }
 
 
@@ -38,10 +42,11 @@ public class HelloController {
         model.addAttribute("tickets", user.getOwnTickets());
         return "hello";
     }*/
-    public ResponseEntity<User> submitLogin(@RequestBody String email) {
+    public ResponseEntity<Void> submitLogin(@RequestBody String email) {
 
-        User user = userService.getUser(email);
-        return new ResponseEntity<User>(user, HttpStatus.OK);
+        loggedInUser = email;
+        //User user = userService.getUser("user1_mogilev@yopmail.com");
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
 }

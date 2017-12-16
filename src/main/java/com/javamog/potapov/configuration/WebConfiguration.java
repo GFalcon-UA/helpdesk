@@ -65,23 +65,23 @@ public class WebConfiguration /*extends WebMvcConfigurerAdapter*/ implements App
         return templateResolver;
     }*/
 
-    @Bean
+    /*@Bean
     public ViewResolver cssViewResolver() {
         ThymeleafViewResolver resolver = new ThymeleafViewResolver();
         resolver.setTemplateEngine(templateEngine(cssTemplateResolver()));
         resolver.setContentType("text/css");
         resolver.setCharacterEncoding(UTF8);
         return resolver;
-    }
+    }*/
 
-    @Bean
+    /*@Bean
     public ViewResolver javascriptViewResolver() {
         ThymeleafViewResolver resolver = new ThymeleafViewResolver();
         resolver.setTemplateEngine(templateEngine(javascriptTemplateResolver()));
         resolver.setContentType("application/javascript");
         resolver.setCharacterEncoding(UTF8);
         return resolver;
-    }
+    }*/
 
     /*@Bean
     public SpringTemplateEngine templateEngine(){

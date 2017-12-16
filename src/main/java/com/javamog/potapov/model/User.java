@@ -1,5 +1,6 @@
 package com.javamog.potapov.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.javamog.potapov.utils.Role;
 
 import javax.persistence.*;
@@ -34,21 +35,27 @@ public class User {
     private String addres;
 
     @OneToMany(mappedBy = "owner", cascade = CascadeType.ALL)
+    @JsonIgnore
     private List<Ticket> ownTickets;
 
     @OneToMany(mappedBy = "assignee", cascade = CascadeType.ALL)
+    @JsonIgnore
     private List<Ticket> assignTickets;
 
     @OneToMany(mappedBy = "approver", cascade = CascadeType.ALL)
+    @JsonIgnore
     private List<Ticket> approveTickets;
 
     @OneToMany(mappedBy = "historyUser", cascade = CascadeType.ALL)
+    @JsonIgnore
     private List<History> userHistory;
 
     @OneToMany(mappedBy = "commentUser", cascade = CascadeType.ALL)
+    @JsonIgnore
     private List<Comment> userComments;
 
     @OneToMany(mappedBy = "feedbackUser", cascade = CascadeType.ALL)
+    @JsonIgnore
     private List<Feedback> userFeedback;
 
     public int getId() {

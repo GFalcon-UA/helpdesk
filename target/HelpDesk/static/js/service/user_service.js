@@ -5,26 +5,26 @@ App.factory('UserService', ['$http', '$q', function($http, $q){
     return {
 
         showTicketList: function () {
-            return $http.get('http://localhost:8080/hello/')
+            return $http.get('http://localhost:8080/ticket-list/')
                 .then(
                     function(response){
                         return response.data;
                     },
                     function(errResponse){
-                        console.error('Error while fetching users');
+                        console.error('Error while show ticketlist (Service)');
                         return $q.reject(errResponse);
                     }
                 );
         },
 
         submitLogin: function(email){
-            return $http.post('http://localhost:8080/hello/', email)
+            return $http.post('http://localhost:8080/ticket-list/', email)
                 .then(
                     function(response){
-                        return response.data;
+                        return response;
                     },
                     function(errResponse){
-                        console.error('Error while login user');
+                        console.error('Error while login user (Service)');
                         return $q.reject(errResponse);
                     }
                 );
