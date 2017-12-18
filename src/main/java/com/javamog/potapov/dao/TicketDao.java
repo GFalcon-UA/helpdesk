@@ -8,5 +8,7 @@ public interface TicketDao {
 
     void updateTicket(Ticket ticket);
 
+    void evictTicket(Ticket ticket);
+
     Ticket getTicketById(int id);
 }

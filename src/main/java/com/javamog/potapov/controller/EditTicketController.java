@@ -2,8 +2,10 @@ package com.javamog.potapov.controller;
 
 import com.javamog.potapov.model.Category;
 import com.javamog.potapov.model.Ticket;
+import com.javamog.potapov.model.User;
 import com.javamog.potapov.service.CategoryService;
 import com.javamog.potapov.service.TicketService;
+import com.javamog.potapov.service.UserService;
 import com.javamog.potapov.utils.State;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -22,6 +24,9 @@ public class EditTicketController {
     private CategoryService categoryService;
 
     @Autowired
+    private UserService userService;
+
+    @Autowired
     private TicketService ticketService;
 
     @ModelAttribute("categories")
@@ -31,17 +36,18 @@ public class EditTicketController {
 
     @ModelAttribute("ticket")
     public Ticket ticket() {
-        return new Ticket();
+        User user = userService.getUser("user1_mogilev@yopmail.com");
+        Ticket ticket = user.getOwnTickets().get(0);
+        return ticket;
+        //return new Ticket();
     }
 
     @GetMapping
-    public String createTicket(Model model/*, @RequestParam("id") String sId*/) {
-        //Integer id = Integer.parseInt(sId);
-
+    public String editTicket(Model model) {
         return "edit";
     }
 
-    @PutMapping(params = "submit")
+    @PostMapping(params = "submit")
     public String submitTicket(@ModelAttribute("ticket") Ticket ticket, BindingResult errors, Model model,
                                @RequestParam("desiredDate") String dateInString,
                                @RequestParam("comment") String commentText,
@@ -50,13 +56,14 @@ public class EditTicketController {
 
         ticket.setState(State.NEW);
         List<Ticket> tickets = ticketService.editTicket(ticket, category, dateInString, file, commentText);
-        model.addAttribute("tickets", tickets);
-        return "hello";
-        // return "redirect:/hello";
+        //model.addAttribute("tickets", tickets);
+        //return "hello";
+        return "redirect:/ticketOverview";
+        //return "ticketOverview";
         //return "page3";
     }
 
-    @PutMapping(params = "save")
+    @PostMapping(params = "save")
     public String saveTicket(@ModelAttribute("ticket") Ticket ticket, BindingResult errors, Model model,
                                @RequestParam("desiredDate") String dateInString,
                                @RequestParam("comment") String commentText,

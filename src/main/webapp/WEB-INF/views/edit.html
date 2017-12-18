@@ -8,8 +8,8 @@
 <body>
 <div>
 
-    <h1>Create new ticket</h1>
-    <form th:action="@{/edit}" th:object="${ticket}" enctype="multipart/form-data" method="put">
+    <h1>Edit ticket</h1>
+    <form th:action="@{/edit}" th:object="${ticket}" enctype="multipart/form-data" method="post">
 
         <div>
             <label for="abc">Category</label>

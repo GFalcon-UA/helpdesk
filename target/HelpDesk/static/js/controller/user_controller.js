@@ -48,6 +48,10 @@ App.controller('AppController', ['$window', '$scope', 'UserService', function($w
         //self.showTicketList(self.email);
     };
 
+    self.goToTicket = function () {
+        $window.location.assign("/ticketOverview");
+    };
+
 
     self.fetchAllUsers = function(){
         UserService.fetchAllUsers()

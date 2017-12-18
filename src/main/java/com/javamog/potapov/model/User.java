@@ -34,7 +34,7 @@ public class User {
     @Column(name = "addres", nullable = false)
     private String addres;
 
-    @OneToMany(mappedBy = "owner", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "owner", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JsonIgnore
     private List<Ticket> ownTickets;
 

@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      lang="en"
+      ng-app="myApp">
+<head>
+    <meta charset="UTF-8">
+    <title>Ticket overview</title>
+</head>
+<body ng-controller="TicketOverviewController as ctrl">
+<div>
+    <h1>Ticket - <span ng-bind="ctrl.ticket.name"></span></h1>
+    Created on: <span ng-bind="ctrl.ticket.createdOn"></span></br>
+    Status: <span ng-bind="ctrl.ticket.state"></span>  Category <span ng-bind="ctrl.ticket.category.name"></span></br>
+    Urgency: <span ng-bind="ctrl.ticket.urgency"></span></br>
+    Desired resolution date: <span ng-bind="ctrl.ticket.desiredDate"></span></br>
+    Owner: <span ng-bind="ctrl.ticket.owner.firstName"></span></br>
+    Approver: <span ng-bind="ctrl.ticket.approver.firstName"></span></br>
+    Assignee: <span ng-bind="ctrl.ticket.assignee.firstName"></span></br>
+    <!--Attachments: <span ng-bind="ctrl.ticket.name"></span></br>-->
+    Description: <span ng-bind="ctrl.ticket.description"></span></br>
+</div>
+
+<div>
+    <span><a href="/" th:href="@{/edit}">Edit ticket</a></span>
+</div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.4/angular.js"></script>
+<script type="text/javascript" th:src="@{/static/js/app.js}"></script>
+<script type="text/javascript" th:src="@{/static/js/service/user_service.js}"></script>
+<script type="text/javascript" th:src="@{/static/js/controller/ticket_overview_controller.js}"></script>
+
+</body>
+</html>

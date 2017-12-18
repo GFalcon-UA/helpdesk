@@ -60,9 +60,9 @@ public class Ticket {
     @JsonIgnore
     private List<History> ticketHistory;
 
-    @OneToMany(mappedBy = "attachmentTicket", cascade = CascadeType.ALL)
+    /*@OneToMany(mappedBy = "attachmentTicket", cascade = CascadeType.ALL)
     @JsonIgnore
-    private List<Attachment> ticketAttachments;
+    private List<Attachment> ticketAttachments;*/
 
     @OneToMany(mappedBy = "commentTicket", cascade = CascadeType.ALL)
     @JsonIgnore
@@ -164,13 +164,13 @@ public class Ticket {
         this.ticketHistory = ticketHistory;
     }
 
-    public List<Attachment> getTicketAttachments() {
+    /*public List<Attachment> getTicketAttachments() {
         return ticketAttachments;
     }
 
     public void setTicketAttachments(List<Attachment> ticketAttachments) {
         this.ticketAttachments = ticketAttachments;
-    }
+    }*/
 
     public List<Comment> getTicketComments() {
         return ticketComments;

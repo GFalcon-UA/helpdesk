@@ -27,7 +27,8 @@ public class TicketListRestController {
     @GetMapping
     public ResponseEntity<List<Ticket>> ShowHelloPage() {
         User user = userService.getUser(loggedInUser);
-        List<Ticket> tickets = user.getOwnTickets();
+        //List<Ticket> tickets = user.getOwnTickets();
+        List<Ticket> tickets = userService.getUserTickets(user);
         //return new ResponseEntity<>(user, HttpStatus.OK);
         return new ResponseEntity<>(tickets, HttpStatus.OK);
     }

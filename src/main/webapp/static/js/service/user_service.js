@@ -30,6 +30,19 @@ App.factory('UserService', ['$http', '$q', function($http, $q){
                 );
         },
 
+        showTicketOverview: function(){
+            return $http.get('http://localhost:8080/ticket-overview/')
+                .then(
+                    function(response){
+                        return response.data;
+                    },
+                    function(errResponse){
+                        console.error('Error while ticket overview (Service)');
+                        return $q.reject(errResponse);
+                    }
+                );
+        },
+
         fetchAllUsers: function() {
             return $http.get('http://localhost:8080/SpringMVC4RestAPI/user/')
                 .then(

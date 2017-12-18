@@ -16,9 +16,9 @@ public class Attachment {
     @Column(name = "blob", nullable=false)
     private byte[] content;
 
-    @ManyToOne
+    /*@ManyToOne
     @JoinColumn(name = "ticket_id")
-    private Ticket attachmentTicket;
+    private Ticket attachmentTicket;*/
 
     public int getId() {
         return id;
@@ -32,13 +32,13 @@ public class Attachment {
         this.content = file;
     }
 
-    public Ticket getAttachmentTicket() {
+   /* public Ticket getAttachmentTicket() {
         return attachmentTicket;
     }
 
     public void setAttachmentTicket(Ticket attackmentTicket) {
         this.attachmentTicket = attackmentTicket;
-    }
+    }*/
 
 
 }

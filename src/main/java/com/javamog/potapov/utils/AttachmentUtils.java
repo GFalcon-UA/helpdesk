@@ -1,3 +1,4 @@
+/*
 package com.javamog.potapov.utils;
 
 import com.javamog.potapov.model.Attachment;
@@ -26,3 +27,4 @@ public class AttachmentUtils {
 
 
 }
+*/
