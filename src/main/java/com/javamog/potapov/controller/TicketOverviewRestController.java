@@ -1,5 +1,6 @@
 package com.javamog.potapov.controller;
 
+import com.javamog.potapov.model.Attachment;
 import com.javamog.potapov.model.Ticket;
 import com.javamog.potapov.model.User;
 import com.javamog.potapov.service.UserService;

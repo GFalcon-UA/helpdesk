@@ -54,12 +54,11 @@ public class TicketServiceImpl implements TicketService {
             exception.printStackTrace();
         }
 
-        int n0 = user.getOwnTickets().size();
-
         ticket.setCreatedOn(new Date());
         ticket.setOwner(user);
 
-        int n1 = user.getOwnTickets().size();
+        //ticketDao.saveTicket(ticket); //!!!!!!!!!!!!!!!!!!
+
         //ticket.setState(State.NEW);
 
         Attachment attachment = AttachmentUtils.setAttachment(ticket, file);
@@ -68,14 +67,14 @@ public class TicketServiceImpl implements TicketService {
         Comment comment = CommentUtils.setComment(user, ticket, commentText);
         commentDao.saveComment(comment);
 
-        List<Ticket> lt = user.getOwnTickets();
-        lt.add(ticket);
-        user.setOwnTickets(lt);
-
-        int n2 = user.getOwnTickets().size();
-
         ticketDao.saveTicket(ticket);
+
+
+        //int n2 = user.getOwnTickets().size();
+
         //userDao.updateUser(user);
+
+        List<Attachment> attachments = ticket.getTicketAttachments();
 
         return user.getOwnTickets();
     }

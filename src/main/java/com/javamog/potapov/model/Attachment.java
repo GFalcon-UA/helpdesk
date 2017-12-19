@@ -2,10 +2,11 @@ package com.javamog.potapov.model;
 
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 @Entity
 @Table(name = "ATTACHMENT")
-public class Attachment {
+public class Attachment implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
