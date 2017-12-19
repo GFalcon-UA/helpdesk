@@ -9,26 +9,7 @@
     <list default="true" id="653533ab-2f0e-4fa4-a8c3-116d0f618b94" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/javamog/potapov/controller/TicketOverviewController.java" afterPath="$PROJECT_DIR$/src/main/java/com/javamog/potapov/controller/TicketOverviewController.java" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/javamog/potapov/controller/TicketOverviewRestController.java" afterPath="$PROJECT_DIR$/src/main/java/com/javamog/potapov/controller/TicketOverviewRestController.java" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/javamog/potapov/dao/AttachmentDaoImpl.java" afterPath="$PROJECT_DIR$/src/main/java/com/javamog/potapov/dao/AttachmentDaoImpl.java" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/javamog/potapov/dao/FeedbackDaoImpl.java" afterPath="$PROJECT_DIR$/src/main/java/com/javamog/potapov/dao/FeedbackDaoImpl.java" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/javamog/potapov/dao/HistoryDaoImpl.java" afterPath="$PROJECT_DIR$/src/main/java/com/javamog/potapov/dao/HistoryDaoImpl.java" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/javamog/potapov/model/Attachment.java" afterPath="$PROJECT_DIR$/src/main/java/com/javamog/potapov/model/Attachment.java" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/javamog/potapov/model/Ticket.java" afterPath="$PROJECT_DIR$/src/main/java/com/javamog/potapov/model/Ticket.java" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/javamog/potapov/service/TicketServiceImpl.java" afterPath="$PROJECT_DIR$/src/main/java/com/javamog/potapov/service/TicketServiceImpl.java" />
       <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/ticket_overview.html" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/ticket_overview.html" />
-      <change beforePath="$PROJECT_DIR$/target/HelpDesk/WEB-INF/classes/com/javamog/potapov/dao/AttachmentDaoImpl.class" afterPath="$PROJECT_DIR$/target/HelpDesk/WEB-INF/classes/com/javamog/potapov/dao/AttachmentDaoImpl.class" />
-      <change beforePath="$PROJECT_DIR$/target/HelpDesk/WEB-INF/classes/com/javamog/potapov/dao/FeedbackDaoImpl.class" afterPath="$PROJECT_DIR$/target/HelpDesk/WEB-INF/classes/com/javamog/potapov/dao/FeedbackDaoImpl.class" />
-      <change beforePath="$PROJECT_DIR$/target/HelpDesk/WEB-INF/classes/com/javamog/potapov/dao/HistoryDaoImpl.class" afterPath="$PROJECT_DIR$/target/HelpDesk/WEB-INF/classes/com/javamog/potapov/dao/HistoryDaoImpl.class" />
-      <change beforePath="$PROJECT_DIR$/target/HelpDesk/WEB-INF/classes/com/javamog/potapov/model/Attachment.class" afterPath="$PROJECT_DIR$/target/HelpDesk/WEB-INF/classes/com/javamog/potapov/model/Attachment.class" />
-      <change beforePath="$PROJECT_DIR$/target/HelpDesk/WEB-INF/classes/com/javamog/potapov/model/Ticket.class" afterPath="$PROJECT_DIR$/target/HelpDesk/WEB-INF/classes/com/javamog/potapov/model/Ticket.class" />
-      <change beforePath="$PROJECT_DIR$/target/HelpDesk/WEB-INF/classes/com/javamog/potapov/service/TicketServiceImpl.class" afterPath="$PROJECT_DIR$/target/HelpDesk/WEB-INF/classes/com/javamog/potapov/service/TicketServiceImpl.class" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/javamog/potapov/dao/AttachmentDaoImpl.class" afterPath="$PROJECT_DIR$/target/classes/com/javamog/potapov/dao/AttachmentDaoImpl.class" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/javamog/potapov/dao/FeedbackDaoImpl.class" afterPath="$PROJECT_DIR$/target/classes/com/javamog/potapov/dao/FeedbackDaoImpl.class" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/javamog/potapov/dao/HistoryDaoImpl.class" afterPath="$PROJECT_DIR$/target/classes/com/javamog/potapov/dao/HistoryDaoImpl.class" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/javamog/potapov/model/Attachment.class" afterPath="$PROJECT_DIR$/target/classes/com/javamog/potapov/model/Attachment.class" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/javamog/potapov/model/Ticket.class" afterPath="$PROJECT_DIR$/target/classes/com/javamog/potapov/model/Ticket.class" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/javamog/potapov/service/TicketServiceImpl.class" afterPath="$PROJECT_DIR$/target/classes/com/javamog/potapov/service/TicketServiceImpl.class" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -52,10 +33,10 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="TicketServiceImpl.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="TicketServiceImpl.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/javamog/potapov/service/TicketServiceImpl.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="238">
+            <state relative-caret-position="1292">
               <caret line="78" column="0" lean-forward="false" selection-start-line="78" selection-start-column="0" selection-end-line="78" selection-end-column="0" />
               <folding>
                 <element signature="imports" expanded="true" />
@@ -74,11 +55,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="TicketOverviewController.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="TicketOverviewController.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/javamog/potapov/controller/TicketOverviewController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="212">
-              <caret line="42" column="1" lean-forward="true" selection-start-line="42" selection-start-column="1" selection-end-line="42" selection-end-column="1" />
+            <state relative-caret-position="210">
+              <caret line="55" column="55" lean-forward="true" selection-start-line="55" selection-start-column="55" selection-end-line="55" selection-end-column="55" />
               <folding />
             </state>
           </provider>
@@ -87,18 +68,28 @@
       <file leaf-file-name="ticket_overview.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/views/ticket_overview.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="272">
-              <caret line="22" column="53" lean-forward="true" selection-start-line="22" selection-start-column="53" selection-end-line="22" selection-end-column="53" />
+            <state relative-caret-position="159">
+              <caret line="24" column="78" lean-forward="true" selection-start-line="24" selection-start-column="78" selection-end-line="24" selection-end-column="78" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="AttachmentUtils.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/javamog/potapov/utils/AttachmentUtils.java">
+      <file leaf-file-name="ticket_list.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/views/ticket_list.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="187">
-              <caret line="20" column="8" lean-forward="true" selection-start-line="20" selection-start-column="8" selection-end-line="20" selection-end-column="8" />
+            <state relative-caret-position="332">
+              <caret line="55" column="64" lean-forward="true" selection-start-line="55" selection-start-column="10" selection-end-line="55" selection-end-column="64" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="home.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/views/home.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="369">
+              <caret line="30" column="93" lean-forward="true" selection-start-line="30" selection-start-column="93" selection-end-line="30" selection-end-column="93" />
               <folding />
             </state>
           </provider>
@@ -198,10 +189,10 @@
         <option value="$PROJECT_DIR$/src/main/java/com/javamog/potapov/model/Attachment.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/javamog/potapov/model/Ticket.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/javamog/potapov/controller/TicketOverviewRestController.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/javamog/potapov/controller/TicketOverviewController.java" />
-        <option value="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/ticket_overview.html" />
         <option value="$PROJECT_DIR$/src/main/java/com/javamog/potapov/service/TicketServiceImpl.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/javamog/potapov/utils/AttachmentUtils.java" />
+        <option value="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/ticket_overview.html" />
+        <option value="$PROJECT_DIR$/src/main/java/com/javamog/potapov/controller/TicketOverviewController.java" />
       </list>
     </option>
   </component>
@@ -626,7 +617,7 @@
       <workItem from="1513390349030" duration="17800000" />
       <workItem from="1513502732019" duration="9372000" />
       <workItem from="1513576106412" duration="10857000" />
-      <workItem from="1513649366143" duration="11614000" />
+      <workItem from="1513649366143" duration="14056000" />
     </task>
     <task id="LOCAL-00001" summary="addOverride">
       <created>1512841856710</created>
@@ -677,11 +668,18 @@
       <option name="project" value="LOCAL" />
       <updated>1513650107342</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="Добавил отображения Id файла. Но доступ для скачки все еще не работает">
+      <created>1513664904541</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1513664904541</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="245747000" />
+    <option name="totallyTimeSpent" value="248189000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="1358" y="-8" width="1382" height="744" extended-state="6" />
@@ -706,7 +704,7 @@
       <window_info id="Java Enterprise" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32913387" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32755905" sideWeight="0.49697885" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32755905" sideWeight="0.49697885" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Spring" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Persistence" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
@@ -763,7 +761,8 @@
     <MESSAGE value="Js Added to home page, and ticketlist. Date-format mapping is working" />
     <MESSAGE value="Тикет редачится. Но в проге пока очень много заглушек." />
     <MESSAGE value="Добавил прикрепление файла к созданию и редакту тикета, но он пока не отображается в обзоре тикета." />
-    <option name="LAST_COMMIT_MESSAGE" value="Добавил прикрепление файла к созданию и редакту тикета, но он пока не отображается в обзоре тикета." />
+    <MESSAGE value="Добавил отображения Id файла. Но доступ для скачки все еще не работает" />
+    <option name="LAST_COMMIT_MESSAGE" value="Добавил отображения Id файла. Но доступ для скачки все еще не работает" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -882,13 +881,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="425">
           <caret line="25" column="4" lean-forward="true" selection-start-line="25" selection-start-column="4" selection-end-line="25" selection-end-column="4" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/views/home.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="369">
-          <caret line="30" column="93" lean-forward="true" selection-start-line="30" selection-start-column="93" selection-end-line="30" selection-end-column="93" />
         </state>
       </provider>
     </entry>
@@ -1141,14 +1133,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/views/ticket_list.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-85">
-          <caret line="30" column="11" lean-forward="true" selection-start-line="30" selection-start-column="11" selection-end-line="30" selection-end-column="11" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/webapp/static/js/controller/user_controller.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-391">
@@ -1197,18 +1181,36 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/views/ticket_overview.html">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/javamog/potapov/utils/AttachmentUtils.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="272">
-          <caret line="22" column="53" lean-forward="true" selection-start-line="22" selection-start-column="53" selection-end-line="22" selection-end-column="53" />
+        <state relative-caret-position="187">
+          <caret line="20" column="8" lean-forward="true" selection-start-line="20" selection-start-column="8" selection-end-line="20" selection-end-column="8" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/javamog/potapov/controller/TicketOverviewController.java">
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/views/home.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="212">
-          <caret line="42" column="1" lean-forward="true" selection-start-line="42" selection-start-column="1" selection-end-line="42" selection-end-column="1" />
+        <state relative-caret-position="369">
+          <caret line="30" column="93" lean-forward="true" selection-start-line="30" selection-start-column="93" selection-end-line="30" selection-end-column="93" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/javamog/potapov/service/TicketServiceImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1292">
+          <caret line="78" column="0" lean-forward="false" selection-start-line="78" selection-start-column="0" selection-end-line="78" selection-end-column="0" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/views/ticket_list.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="332">
+          <caret line="55" column="64" lean-forward="true" selection-start-line="55" selection-start-column="10" selection-end-line="55" selection-end-column="64" />
           <folding />
         </state>
       </provider>
@@ -1221,21 +1223,19 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/javamog/potapov/utils/AttachmentUtils.java">
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/views/ticket_overview.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
-          <caret line="20" column="8" lean-forward="true" selection-start-line="20" selection-start-column="8" selection-end-line="20" selection-end-column="8" />
+        <state relative-caret-position="159">
+          <caret line="24" column="78" lean-forward="true" selection-start-line="24" selection-start-column="78" selection-end-line="24" selection-end-column="78" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/javamog/potapov/service/TicketServiceImpl.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/javamog/potapov/controller/TicketOverviewController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="238">
-          <caret line="78" column="0" lean-forward="false" selection-start-line="78" selection-start-column="0" selection-end-line="78" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
+        <state relative-caret-position="210">
+          <caret line="55" column="55" lean-forward="true" selection-start-line="55" selection-start-column="55" selection-end-line="55" selection-end-column="55" />
+          <folding />
         </state>
       </provider>
     </entry>
