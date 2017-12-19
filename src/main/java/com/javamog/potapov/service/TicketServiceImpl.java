@@ -2,7 +2,7 @@ package com.javamog.potapov.service;
 
 import com.javamog.potapov.dao.*;
 import com.javamog.potapov.model.*;
-//import com.javamog.potapov.utils.AttachmentUtils;
+import com.javamog.potapov.utils.AttachmentUtils;
 import com.javamog.potapov.utils.CommentUtils;
 import com.javamog.potapov.utils.State;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -62,8 +62,8 @@ public class TicketServiceImpl implements TicketService {
         int n1 = user.getOwnTickets().size();
         //ticket.setState(State.NEW);
 
-        /*Attachment attachment = AttachmentUtils.setAttachment(ticket, file);
-        attachmentDao.saveAttachment(attachment);*/
+        Attachment attachment = AttachmentUtils.setAttachment(ticket, file);
+        attachmentDao.saveAttachment(attachment);
 
         Comment comment = CommentUtils.setComment(user, ticket, commentText);
         commentDao.saveComment(comment);
@@ -73,8 +73,6 @@ public class TicketServiceImpl implements TicketService {
         user.setOwnTickets(lt);
 
         int n2 = user.getOwnTickets().size();
-
-
 
         ticketDao.saveTicket(ticket);
         //userDao.updateUser(user);
@@ -127,10 +125,10 @@ public class TicketServiceImpl implements TicketService {
             }
         }
 
-        /*if (file != null) {
+        if (file != null) {
             Attachment attachment = AttachmentUtils.setAttachment(ticket, file);
             attachmentDao.saveAttachment(attachment);
-        }*/
+        }
 
         if (commentText != null) {
             Comment comment = CommentUtils.setComment(user, ticket, commentText);
@@ -139,14 +137,8 @@ public class TicketServiceImpl implements TicketService {
 
         //userDao.updateUser(user);
 
-        ticket.setName("123");
-
-
-
         ticketDao.updateTicket(ticket);
         //userDao.updateUser(user);
-
-
 
         return user.getOwnTickets();
     }
