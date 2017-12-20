@@ -8,6 +8,7 @@ import org.springframework.context.ApplicationContextAware;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 import org.springframework.web.multipart.support.StandardServletMultipartResolver;
 import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
@@ -45,8 +46,13 @@ public class WebConfiguration /*extends WebMvcConfigurerAdapter*/ implements App
     }
 
     @Bean(name="multipartResolver")
-    public StandardServletMultipartResolver resolver(){
+    /*public StandardServletMultipartResolver resolver(){
         return new StandardServletMultipartResolver();
+    }*/
+    public CommonsMultipartResolver multipartResolver() {
+        CommonsMultipartResolver multipartResolver = new CommonsMultipartResolver();
+        multipartResolver.setMaxUploadSize(5242880);
+        return multipartResolver;
     }
 
     @Bean

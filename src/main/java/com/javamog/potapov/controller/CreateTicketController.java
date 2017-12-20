@@ -67,10 +67,9 @@ public class CreateTicketController {
 
         ticket.setState(State.NEW);
         List<Ticket> tickets = ticketService.createNewTicket(ticket, category, dateInString, file, commentText);
+        long l = file.getSize();
         //model.addAttribute("tickets", tickets);
-        //return "hello";
         return "redirect:/ticketList";
-        //return "page3";
     }
 
     @PostMapping(params = "draft")
@@ -85,9 +84,7 @@ public class CreateTicketController {
         List<Ticket> tickets = ticketService.createNewTicket(ticket, category, dateInString, file, commentText);
          model.addAttribute("tickets", tickets);
         //redirectAttributes.addFlashAttribute("tickets", tickets);
-        //return "redirect:/hello";
-        return "hello";
-        //return "page3";
+        return "redirect:/ticketList";
     }
 
 

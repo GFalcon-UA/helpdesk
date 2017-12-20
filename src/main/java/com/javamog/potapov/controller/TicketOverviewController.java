@@ -29,14 +29,6 @@ public class TicketOverviewController {
     @Autowired
     private UserService userService;
 
-    /*@ModelAttribute("ticket")
-    public Ticket ticket() {
-        User user = userService.getUser("user1_mogilev@yopmail.com");
-        Ticket ticket = user.getOwnTickets().get(0);
-        return ticket;
-        //return new Ticket();
-    }*/
-
     @GetMapping
     public String showTicketOverviewPage(Model model) {
         User user = userService.getUser("user1_mogilev@yopmail.com");

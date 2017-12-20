@@ -19,6 +19,9 @@ public class History {
     @Column(name = "action")
     private String action;
 
+    @Column(name = "description")
+    private String description;
+
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User historyUser;
@@ -45,6 +48,14 @@ public class History {
 
     public void setAction(String action) {
         this.action = action;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public User getHistoryUser() {

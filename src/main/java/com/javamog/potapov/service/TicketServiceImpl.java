@@ -4,6 +4,7 @@ import com.javamog.potapov.dao.*;
 import com.javamog.potapov.model.*;
 import com.javamog.potapov.utils.AttachmentUtils;
 import com.javamog.potapov.utils.CommentUtils;
+import com.javamog.potapov.utils.HistoryUtils;
 import com.javamog.potapov.utils.State;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -33,18 +34,35 @@ public class TicketServiceImpl implements TicketService {
     @Autowired
     private CommentDao commentDao;
 
+    @Autowired
+    private HistoryDao historyDao;
+
+    private static final String TICKET_IS_CREATED = "Ticket is created";
+    private static final String FILE_IS_ATTACHED = "File is attached";
+    private static final String TICKET_IS_EDITED = "Ticket is edited";
+    private static final String TICKET_STATUS_CHANGED = "Ticket status is changed";
+
+
     @Override
     public void saveTicket(Ticket ticket) {
         ticketDao.saveTicket(ticket);
     }
+
+
 
     @Override
     @Transactional
     public List<Ticket> createNewTicket(Ticket ticket, String category, String dateInString,
                                         MultipartFile file, String commentText) {
 
+
         User user = userDao.getUser();
+
         ticket.setCategory(categoryDao.getCategoryByName(category));
+
+        History createHistory = HistoryUtils.addHistoryRecord(user, ticket, TICKET_IS_CREATED, TICKET_IS_CREATED);
+        historyDao.saveHistory(createHistory);
+
 
         try {
             SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
@@ -57,22 +75,18 @@ public class TicketServiceImpl implements TicketService {
         ticket.setCreatedOn(new Date());
         ticket.setOwner(user);
 
-        //ticketDao.saveTicket(ticket); //!!!!!!!!!!!!!!!!!!
-
-        //ticket.setState(State.NEW);
-
-        Attachment attachment = AttachmentUtils.setAttachment(ticket, file);
-        attachmentDao.saveAttachment(attachment);
+        if (file.getSize() != 0) {
+            Attachment attachment = AttachmentUtils.setAttachment(ticket, file);
+            attachmentDao.saveAttachment(attachment);
+            History attachmentHistory = HistoryUtils.addHistoryRecord(user, ticket, FILE_IS_ATTACHED,
+                    FILE_IS_ATTACHED + ": " + file.getName());
+            historyDao.saveHistory(attachmentHistory);
+        }
 
         Comment comment = CommentUtils.setComment(user, ticket, commentText);
         commentDao.saveComment(comment);
 
         ticketDao.saveTicket(ticket);
-
-
-        //int n2 = user.getOwnTickets().size();
-
-        //userDao.updateUser(user);
 
         List<Attachment> attachments = ticket.getTicketAttachments();
 
@@ -85,33 +99,17 @@ public class TicketServiceImpl implements TicketService {
                                         MultipartFile file, String commentText) {
         User user = userDao.getUser();
 
-
-        //Ticket ticket = user.getOwnTickets().get(0);
-
-        //Ticket ticket = ticketDao.getTicketById(1);
-
-        //ticketDao.evictTicket(ticket);
-
-        //ticketDao.updateTicket(ticket);
-
-        // --------------------------------
-
-       /* if (ticket1.getName() != null) {
-            ticket.setName(ticket1.getName());
-        }
-
-        if (ticket1.getDescription() != null) {
-            ticket.setDescription(ticket1.getDescription());
-        }
-
-        if (ticket1.getUrgency() != null) {
-            ticket.setUrgency(ticket1.getUrgency());
-        }*/
-
-        //---------------------------------
-
         if (category != null) {
             ticket.setCategory(categoryDao.getCategoryByName(category));
+        }
+
+        History editHistory = HistoryUtils.addHistoryRecord(user, ticket, TICKET_IS_EDITED, TICKET_IS_EDITED);
+        historyDao.saveHistory(editHistory);
+
+        if (ticket.getState().equals(State.NEW)) {
+            History statusHistory = HistoryUtils.addHistoryRecord(user, ticket, TICKET_STATUS_CHANGED,
+                    TICKET_STATUS_CHANGED + "from " + State.DRAFT + "to" + State.NEW);
+            historyDao.saveHistory(statusHistory);
         }
 
         if (dateInString != null) {
@@ -124,9 +122,12 @@ public class TicketServiceImpl implements TicketService {
             }
         }
 
-        if (file != null) {
+        if (file.getSize() != 0) {
             Attachment attachment = AttachmentUtils.setAttachment(ticket, file);
             attachmentDao.saveAttachment(attachment);
+            History attachmentHistory = HistoryUtils.addHistoryRecord(user, ticket, FILE_IS_ATTACHED,
+                    FILE_IS_ATTACHED + ": " + file.getName());
+            historyDao.saveHistory(attachmentHistory);
         }
 
         if (commentText != null) {
@@ -134,10 +135,7 @@ public class TicketServiceImpl implements TicketService {
             commentDao.saveComment(comment);
         }
 
-        //userDao.updateUser(user);
-
         ticketDao.updateTicket(ticket);
-        //userDao.updateUser(user);
 
         return user.getOwnTickets();
     }

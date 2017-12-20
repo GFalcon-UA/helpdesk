@@ -7,13 +7,13 @@ import javax.servlet.ServletRegistration;
 
 public class ApplicationInitializer extends AbstractAnnotationConfigDispatcherServletInitializer {
 
-    private static final String LOCATION = "D:/folder/";
+    /*private static final String LOCATION = "D:/folder/";
 
     private static final long MAX_FILE_SIZE = 1024 * 1024 * 25;//25MB
 
     private static final long MAX_REQUEST_SIZE = 1024 * 1024 * 30;//30MB
 
-    private static final int FILE_SIZE_THRESHOLD = 0;
+    private static final int FILE_SIZE_THRESHOLD = 0;*/
 
     @Override
     protected Class<?>[] getRootConfigClasses() {
@@ -30,7 +30,7 @@ public class ApplicationInitializer extends AbstractAnnotationConfigDispatcherSe
         return new String[]{"/"};
     }
 
-    @Override
+    /*@Override
     protected void customizeRegistration(ServletRegistration.Dynamic registration) {
         registration.setMultipartConfig(getMultipartConfigElement());
     }
@@ -38,6 +38,6 @@ public class ApplicationInitializer extends AbstractAnnotationConfigDispatcherSe
     private MultipartConfigElement getMultipartConfigElement(){
         MultipartConfigElement multipartConfigElement = new MultipartConfigElement(LOCATION, MAX_FILE_SIZE, MAX_REQUEST_SIZE, FILE_SIZE_THRESHOLD);
         return multipartConfigElement;
-    }
+    }*/
 
 }

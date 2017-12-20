@@ -56,11 +56,7 @@ public class EditTicketController {
 
         ticket.setState(State.NEW);
         List<Ticket> tickets = ticketService.editTicket(ticket, category, dateInString, file, commentText);
-        //model.addAttribute("tickets", tickets);
-        //return "hello";
         return "redirect:/ticketOverview";
-        //return "ticketOverview";
-        //return "page3";
     }
 
     @PostMapping(params = "save")
@@ -72,8 +68,6 @@ public class EditTicketController {
 
         List<Ticket> tickets = ticketService.editTicket(ticket, category, dateInString, file, commentText);
         model.addAttribute("tickets", tickets);
-        return "hello";
-        //return "redirect:/hello";
-        //return "page3";
+        return "redirect:/ticketOverview";
     }
 }
