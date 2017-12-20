@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      lang="en"
+      ng-app="myApp">
+<head>
+    <meta charset="UTF-8">
+    <title>Hello</title>
+</head>
+<body ng-controller="AppController as ctrl">
+Hello <span ng-bind="ctrl.tickets"></span>
+
+
+<!--<span th:text="${userName}" />-->
+
+<!--<form th:action="@{/edit}">
+<tr th:each="ticket: ${tickets}">
+    <td th:name="id" th:value="${ticket.getId()}" th:text="${ticket.getId()}" />
+    <td th:text="${ticket.getName()}" />
+    <td th:text="${ticket.getCategory().getName()}" />
+    <td th:text="${ticket.getDescription()}" />
+    <td th:text="${ticket.getCreatedOn()}" />
+    <td th:text="${ticket.getUrgency()}" />
+    <td th:text="${ticket.getDesiredDate()}" />
+    <td th:text="${ticket.getState()}" />
+    <button type="submit" name="draft" value="draft">Edit</button>
+</tr>
+</form>-->
+
+<table>
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Desired Date</th>
+        <th>Urgency</th>
+        <th>Status</th>
+        <th width="100"></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr ng-repeat="ticket in ctrl.tickets">
+        <td><span ng-bind="ticket.id"></span></td>
+        <td><span ng-bind="ticket.name"></span></td>
+        <td><span ng-bind="ticket.desiredDate"></span></td>
+        <td><span ng-bind="ticket.urgency"></span></td>
+        <td><span ng-bind="ticket.state"></span></td>
+        <td>
+            <button type="button" ng-click="ctrl.edit(u.id)" class="btn btn-success custom-width">Edit</button>  <button type="button" ng-click="ctrl.goToTicket()" class="btn btn-danger custom-width">Show</button>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+<div>
+    <span><a href="/" th:href="@{/create}">Create new ticket</a></span>
+</div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.4/angular.js"></script>
+<script type="text/javascript" th:src="@{/static/js/app.js}"></script>
+<script type="text/javascript" th:src="@{/static/js/service/user_service.js}"></script>
+<script type="text/javascript" th:src="@{/static/js/controller/user_controller.js}"></script>
+</body>
+</html>

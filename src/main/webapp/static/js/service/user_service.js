@@ -43,6 +43,19 @@ App.factory('UserService', ['$http', '$q', function($http, $q){
                 );
         },
 
+        showHistory: function(){
+            return $http.get('http://localhost:8080/showHistory/')
+                .then(
+                    function(response){
+                        return response.data;
+                    },
+                    function(errResponse){
+                        console.error('Error while showing history (Service)');
+                        return $q.reject(errResponse);
+                    }
+                );
+        },
+
         fetchAllUsers: function() {
             return $http.get('http://localhost:8080/SpringMVC4RestAPI/user/')
                 .then(

@@ -56,7 +56,7 @@ public class Ticket {
     @JoinColumn(name = "category_id")
     private Category category;
 
-    @OneToMany(mappedBy = "historyTicket", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "historyTicket", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JsonIgnore
     private List<History> ticketHistory;
 
