@@ -79,16 +79,15 @@ public class TicketServiceImpl implements TicketService {
             Attachment attachment = AttachmentUtils.setAttachment(ticket, file);
             attachmentDao.saveAttachment(attachment);
             History attachmentHistory = HistoryUtils.addHistoryRecord(user, ticket, FILE_IS_ATTACHED,
-                    FILE_IS_ATTACHED + ": " + file.getName());
+                    FILE_IS_ATTACHED + ": " + file.getOriginalFilename());
             historyDao.saveHistory(attachmentHistory);
         }
+
 
         Comment comment = CommentUtils.setComment(user, ticket, commentText);
         commentDao.saveComment(comment);
 
         ticketDao.saveTicket(ticket);
-
-        List<Attachment> attachments = ticket.getTicketAttachments();
 
         return user.getOwnTickets();
     }
@@ -108,7 +107,7 @@ public class TicketServiceImpl implements TicketService {
 
         if (ticket.getState().equals(State.NEW)) {
             History statusHistory = HistoryUtils.addHistoryRecord(user, ticket, TICKET_STATUS_CHANGED,
-                    TICKET_STATUS_CHANGED + "from " + State.DRAFT + "to" + State.NEW);
+                    TICKET_STATUS_CHANGED + " from " + State.DRAFT + " to " + State.NEW);
             historyDao.saveHistory(statusHistory);
         }
 

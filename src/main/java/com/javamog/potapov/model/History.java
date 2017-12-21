@@ -1,6 +1,8 @@
 package com.javamog.potapov.model;
 
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import javax.persistence.*;
 import java.util.Date;
 
@@ -14,6 +16,7 @@ public class History {
     private int id;
 
     @Column(name = "date")
+    @JsonFormat(shape = JsonFormat.Shape.STRING)
     private Date historyDate;
 
     @Column(name = "action")
