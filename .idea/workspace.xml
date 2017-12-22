@@ -7,36 +7,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="653533ab-2f0e-4fa4-a8c3-116d0f618b94" name="Default" comment="">
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/javamog/potapov/service/AttachmentService.java" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/javamog/potapov/service/AttachmentServiceImpl.java" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/javamog/potapov/controller/EditTicketController.java" afterPath="$PROJECT_DIR$/src/main/java/com/javamog/potapov/controller/EditTicketController.java" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/javamog/potapov/controller/HomeController.java" afterPath="$PROJECT_DIR$/src/main/java/com/javamog/potapov/controller/HomeController.java" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/javamog/potapov/controller/page3Controller.java" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/javamog/potapov/dao/AttachmentDao.java" afterPath="$PROJECT_DIR$/src/main/java/com/javamog/potapov/dao/AttachmentDao.java" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/javamog/potapov/dao/AttachmentDaoImpl.java" afterPath="$PROJECT_DIR$/src/main/java/com/javamog/potapov/dao/AttachmentDaoImpl.java" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/javamog/potapov/model/Attachment.java" afterPath="$PROJECT_DIR$/src/main/java/com/javamog/potapov/model/Attachment.java" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/javamog/potapov/service/TicketServiceImpl.java" afterPath="$PROJECT_DIR$/src/main/java/com/javamog/potapov/service/TicketServiceImpl.java" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/javamog/potapov/utils/AttachmentUtils.java" afterPath="$PROJECT_DIR$/src/main/java/com/javamog/potapov/utils/AttachmentUtils.java" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/edit.html" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/edit.html" />
-      <change beforePath="$PROJECT_DIR$/target/HelpDesk/WEB-INF/classes/com/javamog/potapov/controller/EditTicketController.class" afterPath="$PROJECT_DIR$/target/HelpDesk/WEB-INF/classes/com/javamog/potapov/controller/EditTicketController.class" />
-      <change beforePath="$PROJECT_DIR$/target/HelpDesk/WEB-INF/classes/com/javamog/potapov/controller/HomeController.class" afterPath="$PROJECT_DIR$/target/HelpDesk/WEB-INF/classes/com/javamog/potapov/controller/HomeController.class" />
-      <change beforePath="$PROJECT_DIR$/target/HelpDesk/WEB-INF/classes/com/javamog/potapov/controller/page3Controller.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/HelpDesk/WEB-INF/classes/com/javamog/potapov/dao/AttachmentDao.class" afterPath="$PROJECT_DIR$/target/HelpDesk/WEB-INF/classes/com/javamog/potapov/dao/AttachmentDao.class" />
-      <change beforePath="$PROJECT_DIR$/target/HelpDesk/WEB-INF/classes/com/javamog/potapov/dao/AttachmentDaoImpl.class" afterPath="$PROJECT_DIR$/target/HelpDesk/WEB-INF/classes/com/javamog/potapov/dao/AttachmentDaoImpl.class" />
-      <change beforePath="$PROJECT_DIR$/target/HelpDesk/WEB-INF/classes/com/javamog/potapov/model/Attachment.class" afterPath="$PROJECT_DIR$/target/HelpDesk/WEB-INF/classes/com/javamog/potapov/model/Attachment.class" />
-      <change beforePath="$PROJECT_DIR$/target/HelpDesk/WEB-INF/classes/com/javamog/potapov/service/TicketServiceImpl.class" afterPath="$PROJECT_DIR$/target/HelpDesk/WEB-INF/classes/com/javamog/potapov/service/TicketServiceImpl.class" />
-      <change beforePath="$PROJECT_DIR$/target/HelpDesk/WEB-INF/classes/com/javamog/potapov/utils/AttachmentUtils.class" afterPath="$PROJECT_DIR$/target/HelpDesk/WEB-INF/classes/com/javamog/potapov/utils/AttachmentUtils.class" />
-      <change beforePath="$PROJECT_DIR$/target/HelpDesk/WEB-INF/views/edit.html" afterPath="$PROJECT_DIR$/target/HelpDesk/WEB-INF/views/edit.html" />
-      <change beforePath="$PROJECT_DIR$/target/HelpDesk/WEB-INF/views/ticket_overview.html" afterPath="$PROJECT_DIR$/target/HelpDesk/WEB-INF/views/ticket_overview.html" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/javamog/potapov/controller/EditTicketController.class" afterPath="$PROJECT_DIR$/target/classes/com/javamog/potapov/controller/EditTicketController.class" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/javamog/potapov/controller/HomeController.class" afterPath="$PROJECT_DIR$/target/classes/com/javamog/potapov/controller/HomeController.class" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/javamog/potapov/controller/page3Controller.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/javamog/potapov/dao/AttachmentDao.class" afterPath="$PROJECT_DIR$/target/classes/com/javamog/potapov/dao/AttachmentDao.class" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/javamog/potapov/dao/AttachmentDaoImpl.class" afterPath="$PROJECT_DIR$/target/classes/com/javamog/potapov/dao/AttachmentDaoImpl.class" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/javamog/potapov/model/Attachment.class" afterPath="$PROJECT_DIR$/target/classes/com/javamog/potapov/model/Attachment.class" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/javamog/potapov/service/TicketServiceImpl.class" afterPath="$PROJECT_DIR$/target/classes/com/javamog/potapov/service/TicketServiceImpl.class" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/javamog/potapov/utils/AttachmentUtils.class" afterPath="$PROJECT_DIR$/target/classes/com/javamog/potapov/utils/AttachmentUtils.class" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -246,7 +217,7 @@
       </MavenImportingSettings>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
+  <component name="ProjectFrameBounds" extendedState="7">
     <option name="x" value="1195" />
     <option name="y" value="-15" />
     <option name="width" value="1366" />
@@ -647,7 +618,7 @@
       <workItem from="1513735691339" duration="5606000" />
       <workItem from="1513847916319" duration="8829000" />
       <workItem from="1513908382219" duration="1474000" />
-      <workItem from="1513909946830" duration="3697000" />
+      <workItem from="1513909946830" duration="3767000" />
     </task>
     <task id="LOCAL-00001" summary="addOverride">
       <created>1512841856710</created>
@@ -733,14 +704,21 @@
       <option name="project" value="LOCAL" />
       <updated>1513910775055</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="Добавил удаление файла">
+      <created>1513913698809</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1513913698809</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="275232000" />
+    <option name="totallyTimeSpent" value="275302000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="1358" y="-8" width="1382" height="744" extended-state="6" />
+    <frame x="1358" y="-8" width="1382" height="744" extended-state="7" />
     <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -824,7 +802,8 @@
     <MESSAGE value="Загрузка работает. Но пока корявая: одного файла с одного источника. + Изменил немного реализацию загрузки, убрал лишнее. И пофиксил косякс тем, что постоянно добавляется пустой файл." />
     <MESSAGE value="Добавил истории. Отображаются." />
     <MESSAGE value="Добавил комментарии" />
-    <option name="LAST_COMMIT_MESSAGE" value="Добавил комментарии" />
+    <MESSAGE value="Добавил удаление файла" />
+    <option name="LAST_COMMIT_MESSAGE" value="Добавил удаление файла" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
