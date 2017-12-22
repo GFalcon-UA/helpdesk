@@ -1,17 +1,17 @@
 'use strict';
 
-App.controller('ShowHistoryController', ['$window', '$scope', 'UserService', function($window, $scope, UserService) {
+App.controller('ShowHistoryController', ['$window', '$scope', 'AppService', function($window, $scope, AppService) {
     var self = this;
     self.histories = [];
 
     self.showHistory = function(){
-        UserService.showHistory()
+        AppService.showHistory()
             .then(
                 function(d){
                     self.histories = d;
                 },
                 function(errResponse){
-                    console.error('Error while showing history (controller).');
+                    console.error('Error while showing histoty (controller).');
                 }
             );
     };

@@ -1,6 +1,5 @@
 package com.javamog.potapov.model;
 
-
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 import javax.persistence.*;

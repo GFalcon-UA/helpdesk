@@ -1,6 +1,6 @@
 'use strict';
 
-App.factory('UserService', ['$http', '$q', function($http, $q){
+App.factory('AppService', ['$http', '$q', function($http, $q){
 
     return {
 
@@ -55,6 +55,21 @@ App.factory('UserService', ['$http', '$q', function($http, $q){
                     }
                 );
         },
+
+        showComments: function(){
+            return $http.get('http://localhost:8080/showComments/')
+                .then(
+                    function(response){
+                        return response.data;
+                    },
+                    function(errResponse){
+                        console.error('Error while showing comments (Service)');
+                        return $q.reject(errResponse);
+                    }
+                );
+        },
+
+
 
         fetchAllUsers: function() {
             return $http.get('http://localhost:8080/SpringMVC4RestAPI/user/')

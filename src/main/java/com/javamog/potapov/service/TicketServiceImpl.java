@@ -84,7 +84,7 @@ public class TicketServiceImpl implements TicketService {
         }
 
 
-        Comment comment = CommentUtils.setComment(user, ticket, commentText);
+        Comment comment = CommentUtils.addComment(user, ticket, commentText);
         commentDao.saveComment(comment);
 
         ticketDao.saveTicket(ticket);
@@ -130,7 +130,7 @@ public class TicketServiceImpl implements TicketService {
         }
 
         if (commentText != null) {
-            Comment comment = CommentUtils.setComment(user, ticket, commentText);
+            Comment comment = CommentUtils.addComment(user, ticket, commentText);
             commentDao.saveComment(comment);
         }
 

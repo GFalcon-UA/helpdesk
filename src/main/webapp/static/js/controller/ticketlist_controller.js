@@ -1,6 +1,6 @@
 'use strict';
 
-App.controller('AppController', ['$window', '$scope', 'UserService', function($window, $scope, UserService) {
+App.controller('AppController', ['$window', '$scope', 'AppService', function($window, $scope, AppService) {
     var self = this;
     self.loggedInUser = $window.localStorage['email'];
     self.email = '';
@@ -10,7 +10,7 @@ App.controller('AppController', ['$window', '$scope', 'UserService', function($w
     self.tickets=[];
 
     self.showTicketList = function(){
-        UserService.showTicketList()
+        AppService.showTicketList()
             .then(
                 function(d){
                     self.tickets = d;
@@ -23,7 +23,7 @@ App.controller('AppController', ['$window', '$scope', 'UserService', function($w
     };
 
     self.submitLogin = function(email){
-        UserService.submitLogin(email)
+        AppService.submitLogin(email)
             .then(
                 //self.showTicketList(),
                 //$window.location.assign("/ticketList")
@@ -54,7 +54,7 @@ App.controller('AppController', ['$window', '$scope', 'UserService', function($w
 
 
     self.fetchAllUsers = function(){
-        UserService.fetchAllUsers()
+        AppService.fetchAllUsers()
             .then(
                 function(d) {
                     self.users = d;
@@ -66,7 +66,7 @@ App.controller('AppController', ['$window', '$scope', 'UserService', function($w
     };
 
     self.createUser = function(user){
-        UserService.createUser(user)
+        AppService.createUser(user)
             .then(
                 self.fetchAllUsers,
                 function(errResponse){
@@ -76,7 +76,7 @@ App.controller('AppController', ['$window', '$scope', 'UserService', function($w
     };
 
     self.updateUser = function(user, id){
-        UserService.updateUser(user, id)
+        AppService.updateUser(user, id)
             .then(
                 self.fetchAllUsers,
                 function(errResponse){
@@ -86,7 +86,7 @@ App.controller('AppController', ['$window', '$scope', 'UserService', function($w
     };
 
     self.deleteUser = function(id){
-        UserService.deleteUser(id)
+        AppService.deleteUser(id)
             .then(
                 self.fetchAllUsers,
                 function(errResponse){

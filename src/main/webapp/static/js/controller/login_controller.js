@@ -1,6 +1,6 @@
 'use strict';
 
-App.controller('LoginController', ['$window', '$scope', 'UserService', function($window, $scope, UserService) {
+App.controller('LoginController', ['$window', '$scope', 'AppService', function($window, $scope, AppService) {
     var self = this;
     self.email = '';
 

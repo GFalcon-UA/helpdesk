@@ -1,6 +1,8 @@
 package com.javamog.potapov.model;
 
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import javax.persistence.*;
 import java.util.Date;
 
@@ -17,6 +19,7 @@ public class Comment {
     private String text;
 
     @Column(name = "commentDate")
+    @JsonFormat(shape = JsonFormat.Shape.STRING)
     private Date commentDate;
 
     @ManyToOne

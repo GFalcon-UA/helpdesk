@@ -8,7 +8,7 @@ import java.util.Date;
 
 public class CommentUtils {
 
-    public static Comment setComment(User user, Ticket ticket, String text) {
+    public static Comment addComment(User user, Ticket ticket, String text) {
 
         Comment comment = new Comment();
 

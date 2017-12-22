@@ -1,11 +1,11 @@
 'use strict';
 
-App.controller('TicketOverviewController', ['$window', '$scope', 'UserService', function($window, $scope, UserService) {
+App.controller('TicketOverviewController', ['$window', '$scope', 'AppService', function($window, $scope, AppService) {
     var self = this;
     self.ticket = {};
 
     self.showTicketOverview = function(){
-        UserService.showTicketOverview()
+        AppService.showTicketOverview()
             .then(
                 function(d){
                     self.ticket = d;

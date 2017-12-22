@@ -64,7 +64,7 @@ public class Ticket {
     @JsonIgnore
     private List<Attachment> ticketAttachments;
 
-    @OneToMany(mappedBy = "commentTicket", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "commentTicket", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JsonIgnore
     private List<Comment> ticketComments;
 
