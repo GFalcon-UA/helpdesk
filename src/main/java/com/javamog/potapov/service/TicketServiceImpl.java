@@ -19,6 +19,11 @@ import java.util.List;
 @Transactional
 public class TicketServiceImpl implements TicketService {
 
+    private static final String TICKET_IS_CREATED = "Ticket is created";
+    private static final String FILE_IS_ATTACHED = "File is attached";
+    private static final String TICKET_IS_EDITED = "Ticket is edited";
+    private static final String TICKET_STATUS_CHANGED = "Ticket status is changed";
+
     @Autowired
     private TicketDao ticketDao;
 
@@ -36,12 +41,6 @@ public class TicketServiceImpl implements TicketService {
 
     @Autowired
     private HistoryDao historyDao;
-
-    private static final String TICKET_IS_CREATED = "Ticket is created";
-    private static final String FILE_IS_ATTACHED = "File is attached";
-    private static final String TICKET_IS_EDITED = "Ticket is edited";
-    private static final String TICKET_STATUS_CHANGED = "Ticket status is changed";
-
 
     @Override
     public void saveTicket(Ticket ticket) {

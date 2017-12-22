@@ -6,5 +6,6 @@ public interface AttachmentDao {
 
     void saveAttachment(Attachment attachment);
 
+    void deleteAttachment(Attachment attachment);
 
 }

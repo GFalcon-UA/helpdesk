@@ -10,7 +10,7 @@ public class AttachmentUtils {
     public static Attachment setAttachment(Ticket ticket, MultipartFile multipartFile){
 
         Attachment attachment = new Attachment();
-        //MultipartFile multipartFile = fileBucket.getFile();
+        attachment.setAttachmentName(multipartFile.getOriginalFilename());
 
         try {
             attachment.setContent(multipartFile.getBytes());

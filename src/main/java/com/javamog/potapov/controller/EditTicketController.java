@@ -1,8 +1,10 @@
 package com.javamog.potapov.controller;
 
+import com.javamog.potapov.model.Attachment;
 import com.javamog.potapov.model.Category;
 import com.javamog.potapov.model.Ticket;
 import com.javamog.potapov.model.User;
+import com.javamog.potapov.service.AttachmentService;
 import com.javamog.potapov.service.CategoryService;
 import com.javamog.potapov.service.TicketService;
 import com.javamog.potapov.service.UserService;
@@ -28,6 +30,9 @@ public class EditTicketController {
 
     @Autowired
     private TicketService ticketService;
+
+    @Autowired
+    private AttachmentService attachmentService;
 
     @ModelAttribute("categories")
     public List<Category> categories() {
@@ -70,4 +75,13 @@ public class EditTicketController {
         model.addAttribute("tickets", tickets);
         return "redirect:/ticketOverview";
     }
+
+    @RequestMapping(value = "/delete", method = RequestMethod.GET)
+    public String deleteAttachment(@ModelAttribute("ticket") Ticket ticket) {
+        User user = ticket.getOwner();
+        Attachment attachment = ticket.getTicketAttachments().get(0);
+        attachmentService.deleteAttachment(attachment, user, ticket);
+        return "redirect:/edit";
+    }
+
 }

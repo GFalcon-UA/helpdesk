@@ -45,6 +45,15 @@
         </div>
 
         <div>
+            <!--<div>
+                <table>
+                    <tr th:each="attachment: ${ticket.attachments}">
+                        <td th:text="${attachment.id}" />
+                        <a href="/" th:href="@{/edit/delete}">Delete</a>
+                    </tr>
+                </table>
+            </div>-->
+            <a href="/" th:href="@{/edit/delete}">Delete</a>
             <label for="abc5">Add attachments</label>
             <input type="file" id="abc5" name="file"/>
         </div>

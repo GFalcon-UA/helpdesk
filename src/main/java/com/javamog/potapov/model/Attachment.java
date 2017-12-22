@@ -13,6 +13,9 @@ public class Attachment implements Serializable {
     @Column(name = "ATTACHMENT_ID")
     private int id;
 
+    @Column(name = "ATTACHMENT_name")
+    private String attachmentName;
+
     @Lob @Basic(fetch = FetchType.LAZY)
     @Column(name = "blob", nullable=false)
     private byte[] content;
@@ -23,6 +26,14 @@ public class Attachment implements Serializable {
 
     public int getId() {
         return id;
+    }
+
+    public String getAttachmentName() {
+        return attachmentName;
+    }
+
+    public void setAttachmentName(String attachmentName) {
+        this.attachmentName = attachmentName;
     }
 
     public byte[] getContent() {

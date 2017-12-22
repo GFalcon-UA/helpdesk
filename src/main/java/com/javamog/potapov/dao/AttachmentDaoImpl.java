@@ -20,4 +20,9 @@ public class AttachmentDaoImpl implements AttachmentDao {
     public void saveAttachment(Attachment attachment) {
         getSession().save(attachment);
     }
+
+    @Override
+    public void deleteAttachment(Attachment attachment) {
+        getSession().delete(attachment);
+    }
 }
