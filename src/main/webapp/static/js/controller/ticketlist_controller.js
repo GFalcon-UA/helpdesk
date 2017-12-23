@@ -44,7 +44,8 @@ App.controller('AppController', ['$window', '$scope', 'AppService', function($wi
     self.submit = function () {
         console.log('Login User', self.email);
         $window.localStorage['email'] = self.email;
-        self.submitLogin(self.email);
+        $window.location.assign("/ticketList");
+        //self.submitLogin(self.email);
         //self.showTicketList(self.email);
     };
 
