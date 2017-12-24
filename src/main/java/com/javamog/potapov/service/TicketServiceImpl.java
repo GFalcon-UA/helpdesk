@@ -2,10 +2,7 @@ package com.javamog.potapov.service;
 
 import com.javamog.potapov.dao.*;
 import com.javamog.potapov.model.*;
-import com.javamog.potapov.utils.AttachmentUtils;
-import com.javamog.potapov.utils.CommentUtils;
-import com.javamog.potapov.utils.HistoryUtils;
-import com.javamog.potapov.utils.State;
+import com.javamog.potapov.utils.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -55,7 +52,7 @@ public class TicketServiceImpl implements TicketService {
                                         MultipartFile file, String commentText) {
 
 
-        User user = userDao.getUser();
+        User user = userDao.getUser(UserUtils.getLoggedInUserEmail());
 
         ticket.setCategory(categoryDao.getCategoryByName(category));
 
@@ -95,7 +92,8 @@ public class TicketServiceImpl implements TicketService {
     @Transactional
     public List<Ticket> editTicket(Ticket ticket, String category, String dateInString,
                                         MultipartFile file, String commentText) {
-        User user = userDao.getUser();
+
+        User user = userDao.getUser(UserUtils.getLoggedInUserEmail());
 
         if (category != null) {
             ticket.setCategory(categoryDao.getCategoryByName(category));

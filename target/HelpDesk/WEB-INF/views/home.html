@@ -11,7 +11,7 @@
 
 <h2>Login to the Help Desk</h2>
 
-<form  ng-submit="ctrl.submit()" name="myForm"> <!--th:action="@{/hello}" method="POST"-->
+<form   name="myForm" th:action="@{/login}" method="POST"> <!--th:action="@{/hello}" method="POST"--> <!--ng-submit="ctrl.submit()"-->
     <div>
         <label><b>Username</b></label>
         <input type="email" ng-model="ctrl.email" placeholder="Enter e-mail" name="email" required />

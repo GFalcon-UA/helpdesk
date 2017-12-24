@@ -9,6 +9,7 @@ import com.javamog.potapov.service.CategoryService;
 import com.javamog.potapov.service.TicketService;
 import com.javamog.potapov.service.UserService;
 import com.javamog.potapov.utils.State;
+import com.javamog.potapov.utils.UserUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -41,10 +42,9 @@ public class EditTicketController {
 
     @ModelAttribute("ticket")
     public Ticket ticket() {
-        User user = userService.getUser("user1_mogilev@yopmail.com");
-        Ticket ticket = user.getOwnTickets().get(0);
+        User user = userService.getUser(UserUtils.getLoggedInUserEmail());
+        Ticket ticket = user.getOwnTickets().get(0);                        // Получить тикет по айди!!!!
         return ticket;
-        //return new Ticket();
     }
 
     @GetMapping
@@ -72,7 +72,7 @@ public class EditTicketController {
                                @RequestParam("file") MultipartFile file) {
 
         List<Ticket> tickets = ticketService.editTicket(ticket, category, dateInString, file, commentText);
-        model.addAttribute("tickets", tickets);
+        //model.addAttribute("tickets", tickets);
         return "redirect:/ticketOverview";
     }
 

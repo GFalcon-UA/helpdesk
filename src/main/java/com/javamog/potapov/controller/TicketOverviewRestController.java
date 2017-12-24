@@ -4,6 +4,7 @@ import com.javamog.potapov.model.Attachment;
 import com.javamog.potapov.model.Ticket;
 import com.javamog.potapov.model.User;
 import com.javamog.potapov.service.UserService;
+import com.javamog.potapov.utils.UserUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -22,8 +23,8 @@ public class TicketOverviewRestController {
 
     @GetMapping
     public ResponseEntity<Ticket> ShowOverviewPage() {
-        User user = userService.getUser("user1_mogilev@yopmail.com");
-        Ticket ticket = user.getOwnTickets().get(0);
+        User user = userService.getUser(UserUtils.getLoggedInUserEmail());
+        Ticket ticket = user.getOwnTickets().get(0); // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
         return new ResponseEntity<>(ticket, HttpStatus.OK);
     }
 }

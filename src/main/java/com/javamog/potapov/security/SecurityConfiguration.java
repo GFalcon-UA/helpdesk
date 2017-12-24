@@ -16,6 +16,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     /*@Autowired
     public void configureGlobalSecurity(AuthenticationManagerBuilder auth) throws Exception {
         auth.inMemoryAuthentication().withUser("user1_mogilev@yopmail.com").password("1234").roles("EMPLOYEE");
+        //auth.inMemoryAuthentication().withUser("user2_mogilev@yopmail.com").password("12345").roles("MANAGER");
     }*/
 
     @Autowired
@@ -32,9 +33,17 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
         http.authorizeRequests()
                 .antMatchers("/").permitAll()
-                .antMatchers("/ticketOverview").access("hasRole('MANAGER')")
+                //.antMatchers("/ticketList/**").access("hasRole('EMPLOYEE') and hasRole('MANAGER')")
+                //.antMatchers("/edit/**").access("hasRole('MANAGER')")
                 .and().formLogin().loginPage("/")
+                .loginProcessingUrl("/login")
                 .usernameParameter("email").passwordParameter("password")
+                .successHandler((req, res, auth) -> {
+                    res.sendRedirect("/ticketList");
+                })
+                .failureHandler((req, res, auth) -> {
+                    res.sendRedirect("/Access_Denied");
+                }).permitAll()
                 .and().exceptionHandling().accessDeniedPage("/Access_Denied")
                 .and().csrf().disable();
     }

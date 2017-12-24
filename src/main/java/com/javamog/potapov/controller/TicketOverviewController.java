@@ -5,6 +5,7 @@ import com.javamog.potapov.model.Ticket;
 import com.javamog.potapov.model.User;
 import com.javamog.potapov.service.TicketService;
 import com.javamog.potapov.service.UserService;
+import com.javamog.potapov.utils.UserUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -31,8 +32,8 @@ public class TicketOverviewController {
 
     @GetMapping
     public String showTicketOverviewPage(Model model) {
-        User user = userService.getUser("user1_mogilev@yopmail.com");
-        Ticket ticket = user.getOwnTickets().get(0);
+        User user = userService.getUser(UserUtils.getLoggedInUserEmail());
+        Ticket ticket = user.getOwnTickets().get(0); // !!!!!!!!!!!!!!!!!!!!!!!!!
         List<Attachment> attachments = ticket.getTicketAttachments();
         model.addAttribute("attachments", attachments);
         return "ticket_overview";

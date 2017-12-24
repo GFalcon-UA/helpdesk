@@ -8,8 +8,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 @RequestMapping("/Access_Denied")
 public class AccessDeniedController {
+
     @GetMapping
-    public String showHomePage(Model model) {
+    public String accessDeniedPage(Model model) {
         return "access_denied";
     }
+
 }
