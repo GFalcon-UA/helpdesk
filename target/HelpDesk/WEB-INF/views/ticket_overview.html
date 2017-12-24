@@ -29,10 +29,11 @@
     <!--Attachments: <span ng-bind="ctrl.ticket.ticketAttachments"></span></br>-->
     </div>
     Description: <span ng-bind="ctrl.ticket.description"></span></br>
-</div>
+<!--</div>
 
-<div>
-    <span><a href="/" th:href="@{/edit}">Edit ticket</a></span>
+<div>-->
+    <button type="button" ng-click="ctrl.edit(ctrl.ticket.id)" class="btn btn-success custom-width">Edit</button>
+    <!--<span><a href="/" th:href="@{/edit}">Edit ticket</a></span>-->
 </div>
 
 <div ng-controller="ShowHistoryController as hstr">

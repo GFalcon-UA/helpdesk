@@ -10,10 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.FileCopyUtils;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.*;
@@ -21,7 +18,7 @@ import java.net.URLConnection;
 import java.util.List;
 
 @Controller
-@RequestMapping("/ticketOverview")
+@RequestMapping("/ticketOverview/{id}")
 public class TicketOverviewController {
 
     @Autowired
@@ -31,9 +28,9 @@ public class TicketOverviewController {
     private UserService userService;
 
     @GetMapping
-    public String showTicketOverviewPage(Model model) {
+    public String showTicketOverviewPage(Model model, @PathVariable("id") int id) {
         User user = userService.getUser(UserUtils.getLoggedInUserEmail());
-        Ticket ticket = user.getOwnTickets().get(0); // !!!!!!!!!!!!!!!!!!!!!!!!!
+        Ticket ticket = ticketService.getTicketById(id);
         List<Attachment> attachments = ticket.getTicketAttachments();
         model.addAttribute("attachments", attachments);
         return "ticket_overview";

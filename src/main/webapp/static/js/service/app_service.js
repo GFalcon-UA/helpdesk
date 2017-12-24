@@ -30,8 +30,8 @@ App.factory('AppService', ['$http', '$q', function($http, $q){
                 );
         },
 
-        showTicketOverview: function(){
-            return $http.get('http://localhost:8080/ticket-overview/')
+        showTicketOverview: function(id){
+            return $http.get('http://localhost:8080/ticket-overview/'+id)
                 .then(
                     function(response){
                         return response.data;
@@ -43,8 +43,8 @@ App.factory('AppService', ['$http', '$q', function($http, $q){
                 );
         },
 
-        showHistory: function(){
-            return $http.get('http://localhost:8080/showHistory/')
+        showHistory: function(id){
+            return $http.get('http://localhost:8080/showHistory/' + id)
                 .then(
                     function(response){
                         return response.data;
@@ -56,8 +56,8 @@ App.factory('AppService', ['$http', '$q', function($http, $q){
                 );
         },
 
-        showComments: function(){
-            return $http.get('http://localhost:8080/showComments/')
+        showComments: function(id){
+            return $http.get('http://localhost:8080/showComments/' + id)
                 .then(
                     function(response){
                         return response.data;

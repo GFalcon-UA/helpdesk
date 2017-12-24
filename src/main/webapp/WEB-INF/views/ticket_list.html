@@ -46,7 +46,7 @@ Hello <span ng-bind="ctrl.tickets"></span>
         <td><span ng-bind="ticket.urgency"></span></td>
         <td><span ng-bind="ticket.state"></span></td>
         <td>
-            <button type="button" ng-click="ctrl.edit(u.id)" class="btn btn-success custom-width">Edit</button>  <button type="button" ng-click="ctrl.goToTicket()" class="btn btn-danger custom-width">Show</button>
+            <button type="button" ng-click="ctrl.edit(u.id)" class="btn btn-success custom-width">Edit</button>  <button type="button" ng-click="ctrl.goToTicket(ticket.id)" class="btn btn-danger custom-width">Show</button>
         </td>
     </tr>
     </tbody>

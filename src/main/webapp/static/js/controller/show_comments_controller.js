@@ -3,9 +3,10 @@
 App.controller('ShowCommentsController', ['$window', '$scope', 'AppService', function($window, $scope, AppService) {
     var self = this;
     self.comments = [];
+    self.id = $window.localStorage.getItem('id');
 
-    self.showComments = function(){
-        AppService.showComments()
+    self.showComments = function(id){
+        AppService.showComments(id)
             .then(
                 function(d){
                     self.comments = d;
@@ -16,6 +17,6 @@ App.controller('ShowCommentsController', ['$window', '$scope', 'AppService', fun
             );
     };
 
-    self.showComments();
+    self.showComments(self.id);
 
 }]);

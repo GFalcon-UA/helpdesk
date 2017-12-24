@@ -2,10 +2,11 @@
 
 App.controller('TicketOverviewController', ['$window', '$scope', 'AppService', function($window, $scope, AppService) {
     var self = this;
+    self.id = $window.localStorage.getItem('id');
     self.ticket = {};
 
-    self.showTicketOverview = function(){
-        AppService.showTicketOverview()
+    self.showTicketOverview = function(id){
+        AppService.showTicketOverview(id)
             .then(
                 function(d){
                     self.ticket = d;
@@ -16,6 +17,12 @@ App.controller('TicketOverviewController', ['$window', '$scope', 'AppService', f
             );
     };
 
-    self.showTicketOverview();
+
+
+    self.edit = function(id){
+        $window.location.assign("/edit/" + id);
+    };
+
+    self.showTicketOverview(self.id);
 
 }]);

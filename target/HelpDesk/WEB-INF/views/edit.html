@@ -9,7 +9,7 @@
 <div>
 
     <h1>Edit ticket</h1>
-    <form th:action="@{/edit}" th:object="${ticket}" enctype="multipart/form-data" method="post">
+    <form th:action="@{/edit/__${id}__}" th:object="${ticket}" enctype="multipart/form-data" method="post">
 
         <div>
             <label for="abc">Category</label>

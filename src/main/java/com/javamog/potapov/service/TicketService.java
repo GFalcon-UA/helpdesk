@@ -7,7 +7,8 @@ import org.springframework.web.multipart.MultipartFile;
 import java.util.List;
 
 public interface TicketService {
-    public void saveTicket(Ticket ticket);
+
+    Ticket getTicketById(int id);
 
     public List<Ticket> createNewTicket(Ticket ticket, String category, String dateInString,
                                         MultipartFile file, String comment);

@@ -40,11 +40,9 @@ public class TicketServiceImpl implements TicketService {
     private HistoryDao historyDao;
 
     @Override
-    public void saveTicket(Ticket ticket) {
-        ticketDao.saveTicket(ticket);
+    public Ticket getTicketById(int id) {
+        return ticketDao.getTicketById(id);
     }
-
-
 
     @Override
     @Transactional

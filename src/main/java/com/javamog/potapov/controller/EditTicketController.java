@@ -20,7 +20,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.util.List;
 
 @Controller
-@RequestMapping("/edit")
+@RequestMapping("/edit/{id}")
 public class EditTicketController {
 
     @Autowired
@@ -41,10 +41,15 @@ public class EditTicketController {
     }
 
     @ModelAttribute("ticket")
-    public Ticket ticket() {
+    public Ticket ticket(@PathVariable("id") int id) {
         User user = userService.getUser(UserUtils.getLoggedInUserEmail());
-        Ticket ticket = user.getOwnTickets().get(0);                        // Получить тикет по айди!!!!
+        Ticket ticket = ticketService.getTicketById(id);
         return ticket;
+    }
+
+    @ModelAttribute("id")
+    public String getId(@PathVariable("id") String id) {
+        return id;
     }
 
     @GetMapping
@@ -61,7 +66,7 @@ public class EditTicketController {
 
         ticket.setState(State.NEW);
         List<Ticket> tickets = ticketService.editTicket(ticket, category, dateInString, file, commentText);
-        return "redirect:/ticketOverview";
+        return "redirect:/ticketOverview/{id}";
     }
 
     @PostMapping(params = "save")
@@ -72,8 +77,7 @@ public class EditTicketController {
                                @RequestParam("file") MultipartFile file) {
 
         List<Ticket> tickets = ticketService.editTicket(ticket, category, dateInString, file, commentText);
-        //model.addAttribute("tickets", tickets);
-        return "redirect:/ticketOverview";
+        return "redirect:/ticketOverview/{id}";
     }
 
     @RequestMapping(value = "/delete", method = RequestMethod.GET)

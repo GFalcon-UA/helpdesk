@@ -49,8 +49,9 @@ App.controller('AppController', ['$window', '$scope', 'AppService', function($wi
         //self.showTicketList(self.email);
     };
 
-    self.goToTicket = function () {
-        $window.location.assign("/ticketOverview");
+    self.goToTicket = function (id) {
+        $window.localStorage.setItem('id', id);
+        $window.location.assign("/ticketOverview/" + id);
     };
 
 
