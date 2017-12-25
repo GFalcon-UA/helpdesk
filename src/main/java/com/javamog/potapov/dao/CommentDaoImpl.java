@@ -18,8 +18,11 @@ public class CommentDaoImpl implements CommentDao {
 
     @Override
     public void saveComment(Comment comment) {
-        //sessionFactory.openSession().save(comment);
         getSession().save(comment);
-        //sessionFactory.getCurrentSession().save(comment);
+    }
+
+    @Override
+    public void evictComment(Comment comment) {
+        getSession().evict(comment);
     }
 }

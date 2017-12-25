@@ -21,6 +21,11 @@ public class HistoryDaoImpl implements HistoryDao {
         getSession().save(history);
     }
 
+    @Override
+    public void evictHistory(History history) {
+        getSession().evict(history);
+    }
+
 }
 
 

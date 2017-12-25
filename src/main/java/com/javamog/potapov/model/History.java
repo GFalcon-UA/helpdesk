@@ -11,7 +11,7 @@ public class History {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "HISTORY_ID")
+    @Column(name = "HISTORY_ID", unique = true)
     private int id;
 
     @Column(name = "date")

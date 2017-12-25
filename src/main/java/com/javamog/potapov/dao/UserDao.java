@@ -10,6 +10,8 @@ public interface UserDao {
 
     User getUser(String email);
 
+    void evictUser(User user);
+
     void updateUser(User user);
 
 }

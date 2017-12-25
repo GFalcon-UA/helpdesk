@@ -45,17 +45,18 @@ public class TicketServiceImpl implements TicketService {
     }
 
     @Override
-    @Transactional
-    public List<Ticket> createNewTicket(Ticket ticket, String category, String dateInString,
+    public void createNewTicket(Ticket ticket, String category, String dateInString,
                                         MultipartFile file, String commentText) {
 
 
+        ticketDao.saveTicket(ticket);
         User user = userDao.getUser(UserUtils.getLoggedInUserEmail());
 
         ticket.setCategory(categoryDao.getCategoryByName(category));
 
         History createHistory = HistoryUtils.addHistoryRecord(user, ticket, TICKET_IS_CREATED, TICKET_IS_CREATED);
         historyDao.saveHistory(createHistory);
+        //historyDao.evictHistory(createHistory);
 
 
         try {
@@ -72,22 +73,26 @@ public class TicketServiceImpl implements TicketService {
         if (file.getSize() != 0) {
             Attachment attachment = AttachmentUtils.setAttachment(ticket, file);
             attachmentDao.saveAttachment(attachment);
+            attachment.setAttachmentTicket(ticket);
             History attachmentHistory = HistoryUtils.addHistoryRecord(user, ticket, FILE_IS_ATTACHED,
                     FILE_IS_ATTACHED + ": " + file.getOriginalFilename());
             historyDao.saveHistory(attachmentHistory);
+            //attachmentDao.evictAttachment(attachment);
+            //historyDao.evictHistory(attachmentHistory);
         }
 
 
-        Comment comment = CommentUtils.addComment(user, ticket, commentText);
-        commentDao.saveComment(comment);
+        if (commentText.length() != 0) {
+            Comment comment = CommentUtils.addComment(user, ticket, commentText);
+            commentDao.saveComment(comment);
+            //commentDao.evictComment(comment);
+        }
 
-        ticketDao.saveTicket(ticket);
+        //ticketDao.saveTicket(ticket);
 
-        return user.getOwnTickets();
     }
 
     @Override
-    @Transactional
     public List<Ticket> editTicket(Ticket ticket, String category, String dateInString,
                                         MultipartFile file, String commentText) {
 

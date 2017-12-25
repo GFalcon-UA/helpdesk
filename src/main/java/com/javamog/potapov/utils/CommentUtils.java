@@ -13,7 +13,7 @@ public class CommentUtils {
         Comment comment = new Comment();
 
         comment.setCommentUser(user);
-        comment.setCommentTicket(ticket);
+        //comment.setCommentTicket(ticket);
         comment.setText(text);
         comment.setCommentDate(new Date());
 

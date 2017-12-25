@@ -24,12 +24,13 @@ public class TicketOverviewController {
     @Autowired
     private TicketService ticketService;
 
-    @Autowired
-    private UserService userService;
+    @ModelAttribute("id")
+    public String getId(@PathVariable("id") String id) {
+        return id;
+    }
 
     @GetMapping
     public String showTicketOverviewPage(Model model, @PathVariable("id") int id) {
-        User user = userService.getUser(UserUtils.getLoggedInUserEmail());
         Ticket ticket = ticketService.getTicketById(id);
         List<Attachment> attachments = ticket.getTicketAttachments();
         model.addAttribute("attachments", attachments);

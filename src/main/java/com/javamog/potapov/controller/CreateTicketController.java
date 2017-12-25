@@ -1,9 +1,6 @@
 package com.javamog.potapov.controller;
 
-import com.javamog.potapov.model.Category;
-import com.javamog.potapov.model.FileBucket;
-import com.javamog.potapov.model.Ticket;
-import com.javamog.potapov.model.User;
+import com.javamog.potapov.model.*;
 import com.javamog.potapov.service.CategoryService;
 import com.javamog.potapov.service.TicketService;
 import com.javamog.potapov.service.UserService;
@@ -66,7 +63,11 @@ public class CreateTicketController {
                                @RequestParam("file") MultipartFile file) {
 
         ticket.setState(State.NEW);
-        List<Ticket> tickets = ticketService.createNewTicket(ticket, category, dateInString, file, commentText);
+        ticketService.createNewTicket(ticket, category, dateInString, file, commentText);
+
+        Ticket t = ticketService.getTicketById(1);
+        List<Comment> com = t.getTicketComments();
+
         return "redirect:/ticketList";
     }
 
@@ -79,7 +80,7 @@ public class CreateTicketController {
                                RedirectAttributes redirectAttributes) {
 
         ticket.setState(State.DRAFT);
-        List<Ticket> tickets = ticketService.createNewTicket(ticket, category, dateInString, file, commentText);
+        ticketService.createNewTicket(ticket, category, dateInString, file, commentText);
         //model.addAttribute("tickets", tickets);
         return "redirect:/ticketList";
     }

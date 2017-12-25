@@ -22,7 +22,7 @@
         <table>
             <tr th:each="attachment: ${attachments}">
                 <td th:text="${attachment.id}" />
-                <a href="/" th:href="@{/ticketOverview/download}">Download</a>
+                <a href="/" th:href="@{/ticketOverview/__${id}__/download}">Download</a>
                 <!--<td><span ng-bind="attachment.content"></span></td>-->
             </tr>
         </table>

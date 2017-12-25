@@ -21,15 +21,10 @@ import java.util.List;
 public class TicketOverviewRestController {
 
     @Autowired
-    private UserService userService;
-
-    @Autowired
     private TicketService ticketService;
 
     @GetMapping
     public ResponseEntity<Ticket> ShowOverviewPage(@PathVariable("id") int id) {
-        User user = userService.getUser(UserUtils.getLoggedInUserEmail());
-        //Ticket ticket = user.getOwnTickets().get(0); // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
         Ticket ticket = ticketService.getTicketById(id);
         return new ResponseEntity<>(ticket, HttpStatus.OK);
     }

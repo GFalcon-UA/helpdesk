@@ -24,6 +24,11 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
+    public void evictUser(User user){
+        getSession().evict(user);
+    }
+
+    @Override
     public User getUser() {
         //User user = (User) sessionFactory.openSession().createQuery("FROM User").getSingleResult();
         User user = (User) getSession().createQuery("FROM User").getSingleResult();

@@ -3,9 +3,10 @@
 App.controller('ShowHistoryController', ['$window', '$scope', 'AppService', function($window, $scope, AppService) {
     var self = this;
     self.histories = [];
+    self.id = $window.localStorage.getItem('id');
 
-    self.showHistory = function(){
-        AppService.showHistory()
+    self.showHistory = function(id){
+        AppService.showHistory(id)
             .then(
                 function(d){
                     self.histories = d;
@@ -16,6 +17,6 @@ App.controller('ShowHistoryController', ['$window', '$scope', 'AppService', func
             );
     };
 
-    self.showHistory();
+    self.showHistory(self.id);
 
 }]);

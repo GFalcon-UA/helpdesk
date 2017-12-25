@@ -8,4 +8,6 @@ public interface AttachmentDao {
 
     void deleteAttachment(Attachment attachment);
 
+    void evictAttachment(Attachment attachment);
+
 }

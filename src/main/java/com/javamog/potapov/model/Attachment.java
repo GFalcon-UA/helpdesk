@@ -10,7 +10,7 @@ public class Attachment implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "ATTACHMENT_ID")
+    @Column(name = "ATTACHMENT_ID", unique = true)
     private int id;
 
     @Column(name = "ATTACHMENT_name")
