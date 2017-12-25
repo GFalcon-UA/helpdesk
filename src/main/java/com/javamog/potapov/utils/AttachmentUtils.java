@@ -18,7 +18,7 @@ public class AttachmentUtils {
             exception.printStackTrace();
         }
 
-        //attachment.setAttachmentTicket(ticket);
+        attachment.setAttachmentTicket(ticket);
 
         return attachment;
     }

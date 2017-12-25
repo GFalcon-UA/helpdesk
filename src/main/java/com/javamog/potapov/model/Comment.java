@@ -13,7 +13,7 @@ public class Comment {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "COMMENT_ID", unique = true)
-    private int id;
+    private Integer id;
 
     @Column(name = "text")
     private String text;
@@ -65,5 +65,52 @@ public class Comment {
     public void setCommentTicket(Ticket commentTicket) {
         this.commentTicket = commentTicket;
     }
+
+    @Override
+    public int hashCode() {
+        if (id != null) {
+            return id.hashCode();
+        } else {
+            return super.hashCode();
+        }
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (!(obj instanceof Comment))
+            return false;
+        Comment other = (Comment) obj;
+        if (id != other.id)
+            return false;
+        return true;
+    }
+
+    /*public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || !(o instanceof Person))
+            return false;
+
+        Person other = (Person)o;
+
+        if (id == other.getId()) return true;
+        if (id == null) return false;
+
+// equivalence by id
+        return id.equals(other.getId());
+    }
+
+    public int hashCode() {
+        if (id != null) {
+            return id.hashCode();
+        } else {
+            return super.hashCode();
+        }
+    }*/
+
+
 }
 
