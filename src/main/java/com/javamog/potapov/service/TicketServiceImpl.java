@@ -40,14 +40,13 @@ public class TicketServiceImpl implements TicketService {
     private HistoryDao historyDao;
 
     @Override
-    public Ticket getTicketById(int id) {
+    public Ticket getTicketById(Long id) {
         return ticketDao.getTicketById(id);
     }
 
     @Override
     public void createNewTicket(Ticket ticket, String category, String dateInString,
                                         MultipartFile file, String commentText) {
-
 
         ticketDao.saveTicket(ticket);
         User user = userDao.getUser(UserUtils.getLoggedInUserEmail());
@@ -56,7 +55,6 @@ public class TicketServiceImpl implements TicketService {
 
         History createHistory = HistoryUtils.addHistoryRecord(user, ticket, TICKET_IS_CREATED, TICKET_IS_CREATED);
         historyDao.saveHistory(createHistory);
-        //historyDao.evictHistory(createHistory);
 
 
         try {
@@ -71,24 +69,21 @@ public class TicketServiceImpl implements TicketService {
         ticket.setOwner(user);
 
         if (file.getSize() != 0) {
-            Attachment attachment = AttachmentUtils.setAttachment(ticket, file);
-            attachmentDao.saveAttachment(attachment);
+            Attachment attachment = AttachmentUtils.setAttachment(/*ticket, */file);
             attachment.setAttachmentTicket(ticket);
+            attachmentDao.saveAttachment(attachment);
             History attachmentHistory = HistoryUtils.addHistoryRecord(user, ticket, FILE_IS_ATTACHED,
                     FILE_IS_ATTACHED + ": " + file.getOriginalFilename());
             historyDao.saveHistory(attachmentHistory);
-            //attachmentDao.evictAttachment(attachment);
-            //historyDao.evictHistory(attachmentHistory);
         }
 
 
         if (commentText.length() != 0) {
-            Comment comment = CommentUtils.addComment(user, ticket, commentText);
+            Comment comment = CommentUtils.addComment(user, /*ticket, */commentText);
+            comment.setCommentTicket(ticket);
             commentDao.saveComment(comment);
-            //commentDao.evictComment(comment);
         }
 
-        //ticketDao.saveTicket(ticket);
 
     }
 
@@ -122,15 +117,20 @@ public class TicketServiceImpl implements TicketService {
         }
 
         if (file.getSize() != 0) {
-            Attachment attachment = AttachmentUtils.setAttachment(ticket, file);
+            Attachment attachment = AttachmentUtils.setAttachment(/*ticket, */file);
+            List<Attachment> attachments = ticket.getTicketAttachments();
+            attachments.add(attachment);
+            ticket.setTicketAttachments(attachments);
+
             attachmentDao.saveAttachment(attachment);
+
             History attachmentHistory = HistoryUtils.addHistoryRecord(user, ticket, FILE_IS_ATTACHED,
                     FILE_IS_ATTACHED + ": " + file.getName());
             historyDao.saveHistory(attachmentHistory);
         }
 
         if (commentText != null) {
-            Comment comment = CommentUtils.addComment(user, ticket, commentText);
+            Comment comment = CommentUtils.addComment(user, /*ticket, */commentText);
             commentDao.saveComment(comment);
         }
 

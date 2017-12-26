@@ -8,12 +8,12 @@ import java.util.Date;
 
 public class CommentUtils {
 
-    public static Comment addComment(User user, Ticket ticket, String text) {
+    public static Comment addComment(User user, /*Ticket ticket, */String text) {
 
         Comment comment = new Comment();
 
         comment.setCommentUser(user);
-        comment.setCommentTicket(ticket);
+        //comment.setCommentTicket(ticket);
         comment.setText(text);
         comment.setCommentDate(new Date());
 

@@ -25,7 +25,7 @@ public class ShowCommentsRestController {
     private TicketService ticketService;
 
     @GetMapping
-    public ResponseEntity<List<Comment>> ShowOverviewPage(@PathVariable("id") int id) {
+    public ResponseEntity<List<Comment>> ShowOverviewPage(@PathVariable("id") Long id) {
         Ticket ticket = ticketService.getTicketById(id);
         List<Comment> comments = ticket.getTicketComments();
         return new ResponseEntity<>(comments, HttpStatus.OK);

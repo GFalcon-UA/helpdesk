@@ -16,7 +16,7 @@ public class Ticket {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "TICKET_ID", unique = true)
-    private int id;
+    private Long id;
 
     @Column(name = "name")
     private String name;
@@ -72,8 +72,12 @@ public class Ticket {
     @JsonIgnore
     private List<Feedback> ticketFeedback;
 
-    public int getId() {
+    public Long getId() {
         return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getName() {

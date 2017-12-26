@@ -13,7 +13,7 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "USER_ID", unique = true)
-    private int id;
+    private Long id;
 
     @Column(name = "first_name", nullable = false)
     private String firstName;
@@ -61,8 +61,12 @@ public class User {
     @JsonIgnore
     private List<Feedback> userFeedback;
 
-    public int getId() {
+    public Long getId() {
         return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getFirstName() {

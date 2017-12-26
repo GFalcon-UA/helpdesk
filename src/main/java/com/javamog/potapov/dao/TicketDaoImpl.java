@@ -31,7 +31,7 @@ public class TicketDaoImpl implements TicketDao {
     }
 
     @Override
-    public Ticket getTicketById(int id) {
+    public Ticket getTicketById(Long id) {
         Ticket ticket = getSession().get(Ticket.class, id);
         return ticket;
     }

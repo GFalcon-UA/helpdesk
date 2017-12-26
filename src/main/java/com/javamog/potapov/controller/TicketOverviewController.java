@@ -30,7 +30,7 @@ public class TicketOverviewController {
     }
 
     @GetMapping
-    public String showTicketOverviewPage(Model model, @PathVariable("id") int id) {
+    public String showTicketOverviewPage(Model model, @PathVariable("id") Long id) {
         Ticket ticket = ticketService.getTicketById(id);
         List<Attachment> attachments = ticket.getTicketAttachments();
         model.addAttribute("attachments", attachments);

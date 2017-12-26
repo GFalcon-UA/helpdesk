@@ -8,7 +8,7 @@ import java.util.List;
 
 public interface TicketService {
 
-    Ticket getTicketById(int id);
+    Ticket getTicketById(Long id);
 
     public void createNewTicket(Ticket ticket, String category, String dateInString,
                                         MultipartFile file, String comment);

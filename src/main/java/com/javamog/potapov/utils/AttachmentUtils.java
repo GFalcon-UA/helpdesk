@@ -7,7 +7,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 public class AttachmentUtils {
 
-    public static Attachment setAttachment(Ticket ticket, MultipartFile multipartFile){
+    public static Attachment setAttachment(/*Ticket ticket, */MultipartFile multipartFile){
 
         Attachment attachment = new Attachment();
         attachment.setAttachmentName(multipartFile.getOriginalFilename());
@@ -18,7 +18,7 @@ public class AttachmentUtils {
             exception.printStackTrace();
         }
 
-        attachment.setAttachmentTicket(ticket);
+        //attachment.setAttachmentTicket(ticket);
 
         return attachment;
     }

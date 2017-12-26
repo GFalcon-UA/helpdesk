@@ -12,7 +12,7 @@ public class History {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "HISTORY_ID", unique = true)
-    private int id;
+    private Long id;
 
     @Column(name = "date")
     @JsonFormat(shape = JsonFormat.Shape.STRING)
@@ -32,8 +32,12 @@ public class History {
     @JoinColumn(name = "ticket_id")
     private Ticket historyTicket;
 
-    public int getId() {
+    public Long getId() {
         return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public Date getHistoryDate() {

@@ -24,7 +24,7 @@ public class ShowHistoryRestController {
     private TicketService ticketService;
 
     @GetMapping
-    public ResponseEntity<List<History>> ShowOverviewPage(@PathVariable("id") int id) {
+    public ResponseEntity<List<History>> ShowOverviewPage(@PathVariable("id") Long id) {
         Ticket ticket = ticketService.getTicketById(id);
         List<History> histories = ticket.getTicketHistory();
         return new ResponseEntity<>(histories, HttpStatus.OK);

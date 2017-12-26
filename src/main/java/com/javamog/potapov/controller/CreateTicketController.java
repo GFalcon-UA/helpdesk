@@ -64,10 +64,6 @@ public class CreateTicketController {
 
         ticket.setState(State.NEW);
         ticketService.createNewTicket(ticket, category, dateInString, file, commentText);
-
-        Ticket t = ticketService.getTicketById(1);
-        List<Comment> com = t.getTicketComments();
-
         return "redirect:/ticketList";
     }
 
@@ -81,7 +77,6 @@ public class CreateTicketController {
 
         ticket.setState(State.DRAFT);
         ticketService.createNewTicket(ticket, category, dateInString, file, commentText);
-        //model.addAttribute("tickets", tickets);
         return "redirect:/ticketList";
     }
 

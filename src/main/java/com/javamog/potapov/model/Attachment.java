@@ -11,7 +11,7 @@ public class Attachment implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ATTACHMENT_ID", unique = true)
-    private int id;
+    private Long id;
 
     @Column(name = "ATTACHMENT_name")
     private String attachmentName;
@@ -24,8 +24,12 @@ public class Attachment implements Serializable {
     @JoinColumn(name = "ticket_id")
     private Ticket attachmentTicket;
 
-    public int getId() {
+    public Long getId() {
         return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getAttachmentName() {

@@ -24,7 +24,7 @@ public class TicketOverviewRestController {
     private TicketService ticketService;
 
     @GetMapping
-    public ResponseEntity<Ticket> ShowOverviewPage(@PathVariable("id") int id) {
+    public ResponseEntity<Ticket> ShowOverviewPage(@PathVariable("id") Long id) {
         Ticket ticket = ticketService.getTicketById(id);
         return new ResponseEntity<>(ticket, HttpStatus.OK);
     }

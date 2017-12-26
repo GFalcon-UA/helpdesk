@@ -10,7 +10,7 @@ public class Feedback {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "FEEDBACK_ID")
-    private int id;
+    private Long id;
 
 
     @Column(name = "rate")
@@ -21,10 +21,6 @@ public class Feedback {
 
     private String text;
 
-    public int getId() {
-        return id;
-    }
-
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User feedbackUser;
@@ -32,6 +28,14 @@ public class Feedback {
     @ManyToOne
     @JoinColumn(name = "ticket_id")
     private Ticket feedbackTicket;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     public int getRate() {
         return rate;

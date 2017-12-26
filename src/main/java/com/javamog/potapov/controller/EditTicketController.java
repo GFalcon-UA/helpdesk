@@ -27,9 +27,6 @@ public class EditTicketController {
     private CategoryService categoryService;
 
     @Autowired
-    private UserService userService;
-
-    @Autowired
     private TicketService ticketService;
 
     @Autowired
@@ -41,8 +38,7 @@ public class EditTicketController {
     }
 
     @ModelAttribute("ticket")
-    public Ticket ticket(@PathVariable("id") int id) {
-        User user = userService.getUser(UserUtils.getLoggedInUserEmail());
+    public Ticket ticket(@PathVariable("id") Long id) {
         Ticket ticket = ticketService.getTicketById(id);
         return ticket;
     }

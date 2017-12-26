@@ -10,5 +10,5 @@ public interface TicketDao {
 
     void evictTicket(Ticket ticket);
 
-    Ticket getTicketById(int id);
+    Ticket getTicketById(Long id);
 }
