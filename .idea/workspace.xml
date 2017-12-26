@@ -8,27 +8,6 @@
   <component name="ChangeListManager">
     <list default="true" id="653533ab-2f0e-4fa4-a8c3-116d0f618b94" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/javamog/potapov/controller/CreateTicketController.java" afterPath="$PROJECT_DIR$/src/main/java/com/javamog/potapov/controller/CreateTicketController.java" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/javamog/potapov/controller/EditTicketController.java" afterPath="$PROJECT_DIR$/src/main/java/com/javamog/potapov/controller/EditTicketController.java" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/javamog/potapov/controller/ShowCommentsRestController.java" afterPath="$PROJECT_DIR$/src/main/java/com/javamog/potapov/controller/ShowCommentsRestController.java" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/javamog/potapov/controller/ShowHistoryRestController.java" afterPath="$PROJECT_DIR$/src/main/java/com/javamog/potapov/controller/ShowHistoryRestController.java" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/javamog/potapov/controller/TicketOverviewController.java" afterPath="$PROJECT_DIR$/src/main/java/com/javamog/potapov/controller/TicketOverviewController.java" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/javamog/potapov/controller/TicketOverviewRestController.java" afterPath="$PROJECT_DIR$/src/main/java/com/javamog/potapov/controller/TicketOverviewRestController.java" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/javamog/potapov/dao/TicketDao.java" afterPath="$PROJECT_DIR$/src/main/java/com/javamog/potapov/dao/TicketDao.java" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/javamog/potapov/dao/TicketDaoImpl.java" afterPath="$PROJECT_DIR$/src/main/java/com/javamog/potapov/dao/TicketDaoImpl.java" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/javamog/potapov/model/Attachment.java" afterPath="$PROJECT_DIR$/src/main/java/com/javamog/potapov/model/Attachment.java" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/javamog/potapov/model/Category.java" afterPath="$PROJECT_DIR$/src/main/java/com/javamog/potapov/model/Category.java" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/javamog/potapov/model/Comment.java" afterPath="$PROJECT_DIR$/src/main/java/com/javamog/potapov/model/Comment.java" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/javamog/potapov/model/Feedback.java" afterPath="$PROJECT_DIR$/src/main/java/com/javamog/potapov/model/Feedback.java" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/javamog/potapov/model/History.java" afterPath="$PROJECT_DIR$/src/main/java/com/javamog/potapov/model/History.java" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/javamog/potapov/model/Ticket.java" afterPath="$PROJECT_DIR$/src/main/java/com/javamog/potapov/model/Ticket.java" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/javamog/potapov/model/User.java" afterPath="$PROJECT_DIR$/src/main/java/com/javamog/potapov/model/User.java" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/javamog/potapov/service/TicketService.java" afterPath="$PROJECT_DIR$/src/main/java/com/javamog/potapov/service/TicketService.java" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/javamog/potapov/service/TicketServiceImpl.java" afterPath="$PROJECT_DIR$/src/main/java/com/javamog/potapov/service/TicketServiceImpl.java" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/javamog/potapov/utils/AttachmentUtils.java" afterPath="$PROJECT_DIR$/src/main/java/com/javamog/potapov/utils/AttachmentUtils.java" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/javamog/potapov/utils/CommentUtils.java" afterPath="$PROJECT_DIR$/src/main/java/com/javamog/potapov/utils/CommentUtils.java" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/ticket_list.html" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/ticket_list.html" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/ticket_overview.html" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/ticket_overview.html" />
       <change beforePath="$PROJECT_DIR$/target/HelpDesk/WEB-INF/classes/com/javamog/potapov/controller/CreateTicketController.class" afterPath="$PROJECT_DIR$/target/HelpDesk/WEB-INF/classes/com/javamog/potapov/controller/CreateTicketController.class" />
       <change beforePath="$PROJECT_DIR$/target/HelpDesk/WEB-INF/classes/com/javamog/potapov/controller/EditTicketController.class" afterPath="$PROJECT_DIR$/target/HelpDesk/WEB-INF/classes/com/javamog/potapov/controller/EditTicketController.class" />
       <change beforePath="$PROJECT_DIR$/target/HelpDesk/WEB-INF/classes/com/javamog/potapov/controller/ShowCommentsRestController.class" afterPath="$PROJECT_DIR$/target/HelpDesk/WEB-INF/classes/com/javamog/potapov/controller/ShowCommentsRestController.class" />
@@ -256,7 +235,7 @@
       </MavenImportingSettings>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
+  <component name="ProjectFrameBounds" extendedState="7">
     <option name="x" value="1195" />
     <option name="y" value="-15" />
     <option name="width" value="1366" />
@@ -684,7 +663,7 @@
       <workItem from="1514222675197" duration="2658000" />
       <workItem from="1514225385824" duration="286000" />
       <workItem from="1514226152713" duration="341000" />
-      <workItem from="1514313189823" duration="828000" />
+      <workItem from="1514313189823" duration="967000" />
     </task>
     <task id="LOCAL-00001" summary="addOverride">
       <created>1512841856710</created>
@@ -805,14 +784,21 @@
       <option name="project" value="LOCAL" />
       <updated>1514200674346</updated>
     </task>
-    <option name="localTasksCounter" value="18" />
+    <task id="LOCAL-00018" summary="Переходы работают в идее">
+      <created>1514314253985</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1514314253985</updated>
+    </task>
+    <option name="localTasksCounter" value="19" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="337770000" />
+    <option name="totallyTimeSpent" value="337909000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="1358" y="-8" width="1382" height="744" extended-state="6" />
+    <frame x="1358" y="-8" width="1382" height="744" extended-state="7" />
     <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -916,7 +902,8 @@
     <MESSAGE value="Секьюрити через базу работает. Заглушки с юзерами убрал. Остались заглушки с тикетами" />
     <MESSAGE value="Убрал все заглушки. Но пока есть ошибки с файлами и конмментами/историями." />
     <MESSAGE value="Хуй" />
-    <option name="LAST_COMMIT_MESSAGE" value="Хуй" />
+    <MESSAGE value="Переходы работают в идее" />
+    <option name="LAST_COMMIT_MESSAGE" value="Переходы работают в идее" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
