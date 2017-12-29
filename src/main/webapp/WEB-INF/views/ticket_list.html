@@ -1,13 +1,3 @@
-<!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymeleaf.org"
-      lang="en"
-      ng-app="myApp">
-<head>
-    <meta charset="UTF-8">
-    <title>Hello</title>
-</head>
-<body ng-controller="AppController as ctrl">
 
 <table>
     <thead>
@@ -37,10 +27,3 @@
 <div>
     <span><a href="/" th:href="@{/create}">Create new ticket</a></span>
 </div>
-
-<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.4/angular.js"></script>
-<script type="text/javascript" th:src="@{/static/js/app.js}"></script>
-<script type="text/javascript" th:src="@{/static/js/service/app_service.js}"></script>
-<script type="text/javascript" th:src="@{/static/js/controller/ticketlist_controller.js}"></script>
-</body>
-</html>

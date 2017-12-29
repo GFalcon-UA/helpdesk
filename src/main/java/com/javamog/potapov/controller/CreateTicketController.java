@@ -1,25 +1,18 @@
 package com.javamog.potapov.controller;
 
-import com.javamog.potapov.model.*;
+import com.javamog.potapov.model.Category;
+import com.javamog.potapov.model.Ticket;
 import com.javamog.potapov.service.CategoryService;
 import com.javamog.potapov.service.TicketService;
-import com.javamog.potapov.service.UserService;
-import com.javamog.potapov.utils.FileValidator;
 import com.javamog.potapov.utils.State;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import javax.validation.Valid;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.GregorianCalendar;
 import java.util.List;
 
 @Controller
@@ -31,14 +24,6 @@ public class CreateTicketController {
 
     @Autowired
     private TicketService ticketService;
-
-   /* @Autowired
-    FileValidator fileValidator;
-
-    @InitBinder("fileBucket")
-    protected void initBinder(WebDataBinder binder) {
-        binder.setValidator(fileValidator);
-    }*/
 
     @ModelAttribute("categories")
     public List<Category> categories() {

@@ -7,9 +7,7 @@ import com.javamog.potapov.model.User;
 import com.javamog.potapov.service.AttachmentService;
 import com.javamog.potapov.service.CategoryService;
 import com.javamog.potapov.service.TicketService;
-import com.javamog.potapov.service.UserService;
 import com.javamog.potapov.utils.State;
-import com.javamog.potapov.utils.UserUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -39,8 +37,7 @@ public class EditTicketController {
 
     @ModelAttribute("ticket")
     public Ticket ticket(@PathVariable("id") Long id) {
-        Ticket ticket = ticketService.getTicketById(id);
-        return ticket;
+        return ticketService.getTicketById(id);
     }
 
     @ModelAttribute("id")

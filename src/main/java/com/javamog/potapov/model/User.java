@@ -1,7 +1,6 @@
 package com.javamog.potapov.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.javamog.potapov.utils.Role;
 
 import javax.persistence.*;
 import java.util.List;
@@ -24,9 +23,9 @@ public class User {
     @Column(name = "phone", nullable = false)
     private String phone;
 
-    @Column(name = "role_id", nullable = false)
+    @Column(name = "role", nullable = false)
     @Enumerated(EnumType.STRING)
-    private Role roleId;
+    private Role role;
 
     @Column(name = "email", nullable = false)
     private String email;
@@ -34,8 +33,8 @@ public class User {
     @Column(name = "password", nullable = false)
     private String password;
 
-    @Column(name = "addres", nullable = false)
-    private String addres;
+    @Column(name = "address", nullable = false)
+    private String address;
 
     @OneToMany(mappedBy = "owner", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JsonIgnore
@@ -94,11 +93,11 @@ public class User {
     }
 
     public Role getRoleId() {
-        return roleId;
+        return role;
     }
 
     public void setRoleId(Role roleId) {
-        this.roleId = roleId;
+        this.role = roleId;
     }
 
     public String getEmail() {
@@ -117,12 +116,12 @@ public class User {
         this.password = password;
     }
 
-    public String getAddres() {
-        return addres;
+    public String getAddress() {
+        return address;
     }
 
-    public void setAddres(String addres) {
-        this.addres = addres;
+    public void setAddress(String addres) {
+        this.address = addres;
     }
 
     public List<Ticket> getOwnTickets() {
