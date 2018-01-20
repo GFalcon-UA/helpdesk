@@ -50,6 +50,7 @@
       <file leaf-file-name="ticket_list.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/views/ticket_list.html">
           <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
             <state relative-caret-position="306">
               <caret line="30" column="56" lean-forward="true" selection-start-line="30" selection-start-column="56" selection-end-line="30" selection-end-column="56" />
               <folding />
@@ -92,6 +93,10 @@
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="476">
               <caret line="43" column="3" lean-forward="false" selection-start-line="43" selection-start-column="3" selection-end-line="43" selection-end-column="3" />
+=======
+            <state relative-caret-position="374">
+              <caret line="22" column="11" lean-forward="false" selection-start-line="22" selection-start-column="11" selection-end-line="22" selection-end-column="11" />
+>>>>>>> de9d9821a384ac4c3caed4d68776c2a1c7f03d03
               <folding />
             </state>
           </provider>
@@ -113,8 +118,13 @@
       <file leaf-file-name="authentication_service.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/webapp/static/js/service/authentication_service.js">
           <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
             <state relative-caret-position="629">
               <caret line="37" column="18" lean-forward="false" selection-start-line="37" selection-start-column="18" selection-end-line="37" selection-end-column="18" />
+=======
+            <state relative-caret-position="17">
+              <caret line="26" column="16" lean-forward="false" selection-start-line="26" selection-start-column="16" selection-end-line="26" selection-end-column="16" />
+>>>>>>> de9d9821a384ac4c3caed4d68776c2a1c7f03d03
               <folding />
             </state>
           </provider>
@@ -218,7 +228,11 @@
       </MavenImportingSettings>
     </option>
   </component>
+<<<<<<< HEAD
   <component name="ProjectFrameBounds" extendedState="7">
+=======
+  <component name="ProjectFrameBounds" extendedState="6">
+>>>>>>> de9d9821a384ac4c3caed4d68776c2a1c7f03d03
     <option name="x" value="-8" />
     <option name="y" value="-8" />
     <option name="width" value="1382" />
@@ -243,8 +257,12 @@
     </navigator>
     <panes>
       <pane id="Scope" />
+<<<<<<< HEAD
       <pane id="AndroidView" />
       <pane id="Scratches" />
+=======
+      <pane id="PackagesPane" />
+>>>>>>> de9d9821a384ac4c3caed4d68776c2a1c7f03d03
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -463,7 +481,12 @@
           <select />
         </subPane>
       </pane>
+<<<<<<< HEAD
       <pane id="PackagesPane" />
+=======
+      <pane id="AndroidView" />
+      <pane id="Scratches" />
+>>>>>>> de9d9821a384ac4c3caed4d68776c2a1c7f03d03
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -643,8 +666,53 @@
       <created>1515411987769</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
+<<<<<<< HEAD
       <updated>1515411987769</updated>
       <workItem from="1516427718507" duration="8402000" />
+=======
+      <updated>1511446088767</updated>
+      <workItem from="1511446095765" duration="5533000" />
+      <workItem from="1511526677722" duration="4394000" />
+      <workItem from="1511540105825" duration="2942000" />
+      <workItem from="1511587476494" duration="15600000" />
+      <workItem from="1511689888741" duration="13177000" />
+      <workItem from="1511710899752" duration="2094000" />
+      <workItem from="1511755400270" duration="12748000" />
+      <workItem from="1511843477207" duration="14038000" />
+      <workItem from="1511874468149" duration="1260000" />
+      <workItem from="1511927914580" duration="14642000" />
+      <workItem from="1511975806337" duration="3039000" />
+      <workItem from="1512014645319" duration="14159000" />
+      <workItem from="1512187531721" duration="16046000" />
+      <workItem from="1512439649266" duration="16624000" />
+      <workItem from="1512526429703" duration="14529000" />
+      <workItem from="1512807256689" duration="4742000" />
+      <workItem from="1512830708822" duration="9497000" />
+      <workItem from="1513228415145" duration="1565000" />
+      <workItem from="1513303560112" duration="17650000" />
+      <workItem from="1513340472149" duration="11825000" />
+      <workItem from="1513390349030" duration="17800000" />
+      <workItem from="1513502732019" duration="9372000" />
+      <workItem from="1513576106412" duration="10857000" />
+      <workItem from="1513649366143" duration="18219000" />
+      <workItem from="1513687071741" duration="3274000" />
+      <workItem from="1513735691339" duration="5606000" />
+      <workItem from="1513847916319" duration="8829000" />
+      <workItem from="1513908382219" duration="1474000" />
+      <workItem from="1513909946830" duration="6180000" />
+      <workItem from="1513948761246" duration="7022000" />
+      <workItem from="1513995099427" duration="9535000" />
+      <workItem from="1514033659549" duration="2193000" />
+      <workItem from="1514099490091" duration="16044000" />
+      <workItem from="1514185286022" duration="16499000" />
+      <workItem from="1514205180661" duration="142000" />
+      <workItem from="1514205553184" duration="4507000" />
+      <workItem from="1514222675197" duration="2658000" />
+      <workItem from="1514225385824" duration="286000" />
+      <workItem from="1514226152713" duration="341000" />
+      <workItem from="1514313189823" duration="1495000" />
+      <workItem from="1516427374638" duration="20000" />
+>>>>>>> de9d9821a384ac4c3caed4d68776c2a1c7f03d03
     </task>
     <task id="LOCAL-00001" summary="e2">
       <created>1516468961645</created>
@@ -657,10 +725,17 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
+<<<<<<< HEAD
     <option name="totallyTimeSpent" value="8402000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="7" />
+=======
+    <option name="totallyTimeSpent" value="338457000" />
+  </component>
+  <component name="ToolWindowManager">
+    <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
+>>>>>>> de9d9821a384ac4c3caed4d68776c2a1c7f03d03
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32913387" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
@@ -678,9 +753,15 @@
       <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Java Enterprise" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+<<<<<<< HEAD
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.31811023" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Spring" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+=======
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32440946" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32755905" sideWeight="0.49697885" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Spring" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+>>>>>>> de9d9821a384ac4c3caed4d68776c2a1c7f03d03
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Persistence" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="true" content_ui="tabs" />
       <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24743778" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
@@ -693,11 +774,15 @@
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="DB Execution Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+<<<<<<< HEAD
       <window_info id="Project Explorer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Job Explorer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="DB Browser" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3294271" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+=======
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32755905" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+>>>>>>> de9d9821a384ac4c3caed4d68776c2a1c7f03d03
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="FAQ Robot" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -1180,16 +1265,26 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/webapp/static/js/app.js">
       <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
         <state relative-caret-position="476">
           <caret line="34" column="15" lean-forward="true" selection-start-line="34" selection-start-column="15" selection-end-line="34" selection-end-column="15" />
+=======
+        <state relative-caret-position="374">
+          <caret line="22" column="11" lean-forward="false" selection-start-line="22" selection-start-column="11" selection-end-line="22" selection-end-column="11" />
+>>>>>>> de9d9821a384ac4c3caed4d68776c2a1c7f03d03
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/javamog/potapov/controller/ViewController.java">
       <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
         <state relative-caret-position="136">
           <caret line="11" column="13" lean-forward="false" selection-start-line="11" selection-start-column="13" selection-end-line="11" selection-end-column="13" />
+=======
+        <state relative-caret-position="17">
+          <caret line="26" column="16" lean-forward="false" selection-start-line="26" selection-start-column="16" selection-end-line="26" selection-end-column="16" />
+>>>>>>> de9d9821a384ac4c3caed4d68776c2a1c7f03d03
           <folding />
         </state>
       </provider>
