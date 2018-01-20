@@ -1,7 +1,7 @@
 package com.javamog.potapov.dao.impl;
 
 import com.javamog.potapov.dao.AttachmentDao;
-import com.javamog.potapov.model.Attachment;
+import com.javamog.potapov.model.ticket.Attachment;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;

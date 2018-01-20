@@ -1,9 +1,9 @@
 package com.javamog.potapov.service.impl;
 
 import com.javamog.potapov.dao.UserDao;
-import com.javamog.potapov.model.Ticket;
-import com.javamog.potapov.model.User;
+import com.javamog.potapov.model.user.User;
 import com.javamog.potapov.service.UserService;
+import com.javamog.potapov.utils.UserUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -24,7 +24,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User getUser(){
-        return userDao.getUser();
+        return userDao.getUser(UserUtils.getCurrentUser().getUsername());
     }
 
     @Override
@@ -33,12 +33,12 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public List<Ticket> getUserTickets(User user) {
-        return user.getOwnTickets();
+    public void updateUser(User user) {
+        userDao.updateUser(user);
     }
 
     @Override
-    public void updateUser(User user) {
-        userDao.updateUser(user);
+    public List<User> getAll() {
+        return userDao.getAll();
     }
 }

@@ -1,5 +1,7 @@
-package com.javamog.potapov.model;
+package com.javamog.potapov.model.ticket;
 
+
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -19,10 +21,6 @@ public class Attachment implements Serializable {
     @Lob @Basic(fetch = FetchType.LAZY)
     @Column(name = "blob", nullable=false)
     private byte[] content;
-
-    @ManyToOne
-    @JoinColumn(name = "ticket_id")
-    private Ticket attachmentTicket;
 
     public Long getId() {
         return id;
@@ -47,14 +45,4 @@ public class Attachment implements Serializable {
     public void setContent(byte[] file) {
         this.content = file;
     }
-
-    public Ticket getAttachmentTicket() {
-        return attachmentTicket;
-    }
-
-    public void setAttachmentTicket(Ticket attackmentTicket) {
-        this.attachmentTicket = attackmentTicket;
-    }
-
-
 }

@@ -1,5 +1,5 @@
 package com.javamog.potapov.model;
 
-public enum Role {
+public enum UserRole {
     EMPLOYEE, MANAGER, ENGINEER;
 }

@@ -26,9 +26,20 @@ public class ViewController {
         return "access_denied";
     }
 
-    @GetMapping(value = "ticket_list.html")
+    @GetMapping(value = "ticket_list")
     public String showTicketListPage() {
         return "ticket_list";
     }
+
+    @GetMapping(value = "ticket_overview")
+    public String showTicketOverviewPage() {
+        return "ticket_overview";
+    }
+
+    @GetMapping(value = "ticket/edit")
+    public String editTicket() {
+        return "edit";
+    }
+
 
 }

@@ -1,81 +1,76 @@
-<!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymeleaf.org"
-      lang="en"
-      ng-app="myApp">
-<head>
-    <meta charset="UTF-8">
-    <title>Ticket overview</title>
-</head>
-<body>
-<div ng-controller="TicketOverviewController as ctrl">
-    <h1>Ticket - <span ng-bind="ctrl.ticket.name"></span></h1>
-    Created on: <span ng-bind="ctrl.ticket.createdOn"></span></br>
-    Status: <span ng-bind="ctrl.ticket.state"></span>  Category <span ng-bind="ctrl.ticket.category.name"></span></br>
-    Urgency: <span ng-bind="ctrl.ticket.urgency"></span></br>
-    Desired resolution date: <span ng-bind="ctrl.ticket.desiredDate"></span></br>
-    Owner: <span ng-bind="ctrl.ticket.owner.firstName"></span></br>
-    Approver: <span ng-bind="ctrl.ticket.approver.firstName"></span></br>
-    Assignee: <span ng-bind="ctrl.ticket.assignee.firstName"></span></br>
-    Attachments:
-    <div>
-        <table>
-            <tr th:each="attachment: ${attachments}">
-                <td th:text="${attachment.id}" />
-                <a href="/" th:href="@{/ticketOverview/__${id}__/download}">Download</a>
-            </tr>
-        </table>
+<form>
+    <div ng-init="ctrl.getTicket()">
+        <div>
+            <h1 class="page-header">Ticket - <span ng-bind="ctrl.ticket.name"></span></h1>
+            <div class="form-group">
+                <span class="edit-ticket-text">Created on:</span> <span ng-bind="ctrl.ticket.createdOn"></span>
+            </div>
+            <div class="form-group">
+                <span class="edit-ticket-text">Status:</span> <span ng-bind="ctrl.ticket.status"></span>
+            </div>
+            <div class="form-group">
+                <span class="edit-ticket-text">Category</span> <span ng-bind="ctrl.ticket.category"></span>
+            </div>
+            <div class="form-group">
+                <span class="edit-ticket-text">Urgency:</span> <span ng-bind="ctrl.ticket.urgency"></span>
+            </div>
+            <div class="form-group">
+                <span class="edit-ticket-text">Desired resolution date:</span> <span ng-bind="ctrl.ticket.desiredDate"></span>
+            </div>
+            <div class="form-group">
+                <span class="edit-ticket-text">Owner:</span> <span ng-bind="ctrl.ticket.owner.firstName"></span>
+            </div>
+            <div class="form-group">
+                <span class="edit-ticket-text">Approver:</span> <span ng-bind="ctrl.ticket.approver.firstName"></span>
+            </div>
+            <div class="form-group">
+                <span class="edit-ticket-text">Assignee:</span> <span ng-bind="ctrl.ticket.assignee.firstName"></span>
+            </div>
+            <div class="form-group">
+                <span class="edit-ticket-text">Description:</span> <span ng-bind="ctrl.ticket.description"></span>
+            </div>
+            <button type="button" ng-click="ctrl.edit(id)" class="btn btn-success custom-width">Edit</button>
+            <button type="button" ng-click="ctrl.showHomePage()" class="btn btn-info custom-width">Back</button>
+        </div>
+
+        <div>
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>Date</th>
+                    <th>User</th>
+                    <th>Action</th>
+                    <th>Description</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="history in ctrl.ticket.ticketHistory">
+                    <td><span ng-bind="history.date"></span></td>
+                    <td><span ng-bind="history.user.firstName"></span></td>
+                    <td><span ng-bind="history.action"></span></td>
+                    <td><span ng-bind="history.details"></span></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div>
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>Date</th>
+                    <th>User</th>
+                    <th>Comment</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="comment in ctrl.ticket.ticketComments">
+                    <td><span ng-bind="comment.commentDate"></span></td>
+                    <td><span ng-bind="comment.commentUser.firstName"></span></td>
+                    <td><span ng-bind="comment.text"></span></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
     </div>
-    Description: <span ng-bind="ctrl.ticket.description"></span></br>
-    <button type="button" ng-click="ctrl.edit(ctrl.ticket.id)" class="btn btn-success custom-width">Edit</button>
-</div>
-
-<div ng-controller="ShowHistoryController as hstr">
-    <table>
-        <thead>
-        <tr>
-            <th>Date</th>
-            <th>User</th>
-            <th>Action</th>
-            <th>Description</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr ng-repeat="history in hstr.histories">
-            <td><span ng-bind="history.historyDate"></span></td>
-            <td><span ng-bind="history.historyUser.firstName"></span></td>
-            <td><span ng-bind="history.action"></span></td>
-            <td><span ng-bind="history.description"></span></td>
-        </tr>
-        </tbody>
-    </table>
-</div>
-
-<div ng-controller="ShowCommentsController as cmnts">
-    <table>
-        <thead>
-        <tr>
-            <th>Date</th>
-            <th>User</th>
-            <th>Comment</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr ng-repeat="comment in cmnts.comments">
-            <td><span ng-bind="comment.commentDate"></span></td>
-            <td><span ng-bind="comment.commentUser.firstName"></span></td>
-            <td><span ng-bind="comment.text"></span></td>
-        </tr>
-        </tbody>
-    </table>
-</div>
-
-<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.4/angular.js"></script>
-<script type="text/javascript" th:src="@{/static/js/app.js}"></script>
-<script type="text/javascript" th:src="@{/static/js/service/app_service.js}"></script>
-<script type="text/javascript" th:src="@{/static/js/controller/ticket_overview_controller.js}"></script>
-<script type="text/javascript" th:src="@{/static/js/controller/show_history_controller.js}"></script>
-<script type="text/javascript" th:src="@{/static/js/controller/show_comments_controller.js}"></script>
-
-</body>
-</html>
+</form>

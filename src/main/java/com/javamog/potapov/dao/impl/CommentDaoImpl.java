@@ -1,7 +1,7 @@
 package com.javamog.potapov.dao.impl;
 
 import com.javamog.potapov.dao.CommentDao;
-import com.javamog.potapov.model.Comment;
+import com.javamog.potapov.model.ticket.Comment;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;

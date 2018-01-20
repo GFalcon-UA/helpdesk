@@ -12,24 +12,39 @@
 
          service.Login = Login;
          service.setCredentials = setCredentials;
-         service.clearCredentials = clearCredentials;
+         service.refreshCredentials = refreshCredentials;
 
         return service;
 
         function Login(username, password, callback) {
             $http.post('/authenticate?username=' + username +"&password="+password,{})
-             .then(function (response) {
+             .then( function (response) {
                  callback(response);
-             });
+             }
+             );
         }
+
+       function refreshCredentials(){
+               $rootScope.globals = {};
+               $cookies.remove('globals');
+               $http.defaults.headers.common.Authorization = 'Basic';
+       }
 
         function setCredentials(username, password) {
              var authdata = username + ':' + password;
-
+             var role = '';
+             $http.get('/user/role').then( function(response){
+                    role = response.data.authority;
+                },
+                function(errResponse){
+                    console.log(errResponse);
+                }
+             );
              $rootScope.globals = {
                  currentUser: {
                  username: username,
-                 authdata: authdata
+                 authdata: authdata,
+                 role: role
                  }
              };
 
@@ -39,13 +54,6 @@
              var expires = new Date();
              expires.setDate(expires.getDate() + 7);
              $cookies.putObject('globals', $rootScope.globals, { expires: expires });
-        }
-
-        function clearCredentials() {
-        console.log("Clear dat fuckin credentials");
-             $rootScope.globals = {};
-             $cookies.remove('globals');
-             $http.defaults.headers.common.Authorization = 'Basic';
         }
      };
 })();

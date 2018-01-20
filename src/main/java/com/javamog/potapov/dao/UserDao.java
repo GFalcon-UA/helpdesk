@@ -1,17 +1,16 @@
 package com.javamog.potapov.dao;
 
-import com.javamog.potapov.model.User;
+import com.javamog.potapov.model.user.User;
+
+import java.util.List;
 
 public interface UserDao {
 
     void saveUser(User user);
 
-    User getUser();
-
     User getUser(String email);
-
-    void evictUser(User user);
 
     void updateUser(User user);
 
+    List<User> getAll();
 }

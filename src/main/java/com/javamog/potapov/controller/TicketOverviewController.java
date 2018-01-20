@@ -1,11 +1,8 @@
 package com.javamog.potapov.controller;
 
-import com.javamog.potapov.model.Attachment;
-import com.javamog.potapov.model.Ticket;
-import com.javamog.potapov.model.User;
+import com.javamog.potapov.model.ticket.Attachment;
+import com.javamog.potapov.model.ticket.Ticket;
 import com.javamog.potapov.service.TicketService;
-import com.javamog.potapov.service.UserService;
-import com.javamog.potapov.utils.UserUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,7 +15,7 @@ import java.net.URLConnection;
 import java.util.List;
 
 @Controller
-@RequestMapping("/ticketOverview/{id}")
+@RequestMapping("/ticketOverview")
 public class TicketOverviewController {
 
     @Autowired
@@ -27,14 +24,6 @@ public class TicketOverviewController {
     @ModelAttribute("id")
     public String getId(@PathVariable("id") String id) {
         return id;
-    }
-
-    @GetMapping
-    public String showTicketOverviewPage(Model model, @PathVariable("id") Long id) {
-        Ticket ticket = ticketService.getTicketById(id);
-        List<Attachment> attachments = ticket.getTicketAttachments();
-        model.addAttribute("attachments", attachments);
-        return "ticket_overview";
     }
 
     @RequestMapping(value = "/download", method = RequestMethod.GET)

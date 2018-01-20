@@ -1,6 +1,10 @@
-package com.javamog.potapov.model;
+package com.javamog.potapov.model.user;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.javamog.potapov.model.*;
+import com.javamog.potapov.model.history.History;
+import com.javamog.potapov.model.ticket.Comment;
+import com.javamog.potapov.model.ticket.Ticket;
 
 import javax.persistence.*;
 import java.util.List;
@@ -25,7 +29,7 @@ public class User {
 
     @Column(name = "role", nullable = false)
     @Enumerated(EnumType.STRING)
-    private Role role;
+    private UserRole role;
 
     @Column(name = "email", nullable = false)
     private String email;
@@ -48,10 +52,6 @@ public class User {
     @JsonIgnore
     private List<Ticket> approveTickets;
 
-    @OneToMany(mappedBy = "historyUser", cascade = CascadeType.ALL)
-    @JsonIgnore
-    private List<History> userHistory;
-
     @OneToMany(mappedBy = "commentUser", cascade = CascadeType.ALL)
     @JsonIgnore
     private List<Comment> userComments;
@@ -64,7 +64,7 @@ public class User {
         return id;
     }
 
-    public void setId(Long id) {
+    private void setId(Long id) {
         this.id = id;
     }
 
@@ -92,12 +92,12 @@ public class User {
         this.phone = phone;
     }
 
-    public Role getRoleId() {
+    public UserRole getRole() {
         return role;
     }
 
-    public void setRoleId(Role roleId) {
-        this.role = roleId;
+    public void setRole(UserRole role) {
+        this.role = role;
     }
 
     public String getEmail() {
@@ -148,14 +148,6 @@ public class User {
         this.approveTickets = myApproveTickets;
     }
 
-    public List<History> getUserHistory() {
-        return userHistory;
-    }
-
-    public void setUserHistory(List<History> userHistory) {
-        this.userHistory = userHistory;
-    }
-
     public List<Comment> getUserComments() {
         return userComments;
     }
@@ -171,4 +163,5 @@ public class User {
     public void setUserFeedback(List<Feedback> userFeedback) {
         this.userFeedback = userFeedback;
     }
+
 }

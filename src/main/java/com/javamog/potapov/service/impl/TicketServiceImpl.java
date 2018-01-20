@@ -2,14 +2,21 @@ package com.javamog.potapov.service.impl;
 
 import com.javamog.potapov.dao.*;
 import com.javamog.potapov.model.*;
+import com.javamog.potapov.model.ticket.*;
+import com.javamog.potapov.model.user.User;
+import com.javamog.potapov.service.AttachmentService;
+import com.javamog.potapov.service.HistoryService;
 import com.javamog.potapov.service.TicketService;
 import com.javamog.potapov.utils.*;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -17,28 +24,18 @@ import java.util.List;
 @Transactional
 public class TicketServiceImpl implements TicketService {
 
-    private static final String TICKET_IS_CREATED = "Ticket is created";
-    private static final String FILE_IS_ATTACHED = "File is attached";
-    private static final String TICKET_IS_EDITED = "Ticket is edited";
-    private static final String TICKET_STATUS_CHANGED = "Ticket status is changed";
-
     @Autowired
     private TicketDao ticketDao;
 
     @Autowired
+    private HistoryService historyService;
+
+    @Autowired
+    private AttachmentService attachmentService;
+
+    @Autowired
     private UserDao userDao;
 
-    @Autowired
-    private CategoryDao categoryDao;
-
-    @Autowired
-    private AttachmentDao attachmentDao;
-
-    @Autowired
-    private CommentDao commentDao;
-
-    @Autowired
-    private HistoryDao historyDao;
 
     @Override
     public Ticket getTicketById(Long id) {
@@ -47,96 +44,63 @@ public class TicketServiceImpl implements TicketService {
 
     @Override
     public void createNewTicket(Ticket ticket, String category, String dateInString,
-                                        MultipartFile file, String commentText) {
-
-        ticketDao.saveTicket(ticket);
-        User user = userDao.getUser(UserUtils.getLoggedInUserEmail());
-
-        ticket.setCategory(categoryDao.getCategoryByName(category));
-
-        History createHistory = HistoryUtils.addHistoryRecord(user, ticket, TICKET_IS_CREATED, TICKET_IS_CREATED);
-        historyDao.saveHistory(createHistory);
+                                MultipartFile file, String commentText) {
 
 
-        try {
-            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-            Date date = dateFormat.parse(dateInString);
-            ticket.setDesiredDate(date);
-        } catch (Exception exception) {
-            exception.printStackTrace();
-        }
-
+        User user = userDao.getUser(UserUtils.getCurrentUser().getUsername());
+        Date desiredDate = DateUtils.parseDate(dateInString);
+        ticket.setStatus(TicketStatus.NEW);
+        ticket.setCategory(TicketCategory.getByDescription(category));
+        ticket.setDesiredDate(desiredDate);
+        ticket.addHistoryRecord(historyService.create());
         ticket.setCreatedOn(new Date());
         ticket.setOwner(user);
-
+        if (!StringUtils.isEmpty(commentText)) {
+            ticket.addComment(createComment(user, commentText, desiredDate));
+        }
         if (file.getSize() != 0) {
-            Attachment attachment = AttachmentUtils.setAttachment(/*ticket, */file);
-            attachment.setAttachmentTicket(ticket);
-            attachmentDao.saveAttachment(attachment);
-            History attachmentHistory = HistoryUtils.addHistoryRecord(user, ticket, FILE_IS_ATTACHED,
-                    FILE_IS_ATTACHED + ": " + file.getOriginalFilename());
-            historyDao.saveHistory(attachmentHistory);
+            ticket.addAttachment(attachmentService.createAttachment(file));
+            ticket.addHistoryRecord(historyService.fileAttached(file.getName()));
         }
+        ticketDao.saveTicket(ticket);
+    }
 
-
-        if (commentText.length() != 0) {
-            Comment comment = CommentUtils.addComment(user, /*ticket, */commentText);
-            comment.setCommentTicket(ticket);
-            commentDao.saveComment(comment);
-        }
-
-
+    private Comment createComment(User user, String commentText, Date desiredDate) {
+        Comment comment = new Comment();
+        comment.setCommentUser(user);
+        comment.setText(commentText);
+        comment.setCommentDate(desiredDate);
+        return comment;
     }
 
     @Override
-    public List<Ticket> editTicket(Ticket ticket, String category, String dateInString,
-                                        MultipartFile file, String commentText) {
+    public void editTicket(Ticket editedTicket) {
+        editedTicket.addHistoryRecord(historyService.edit());
+        ticketDao.updateTicket(editedTicket);
+    }
 
-        User user = userDao.getUser(UserUtils.getLoggedInUserEmail());
+    @Override
+    public ResponseEntity<List<Ticket>> getTickets(String username) {
+        User user = userDao.getUser(username);
+        List<Ticket> result = getAllTickets(user);
+        return new ResponseEntity<>(result, HttpStatus.OK);
+    }
 
-        if (category != null) {
-            ticket.setCategory(categoryDao.getCategoryByName(category));
+    @Override
+    public void changeStatus(Ticket ticket, TicketStatus status) {
+
+    }
+
+    private List<Ticket> getAllTickets(User user) {
+        List<Ticket> result = new ArrayList<>();
+        if (UserRole.EMPLOYEE.equals(user.getRole())) {
+            result.addAll(user.getOwnTickets());
+        } else if (UserRole.MANAGER.equals(user.getRole())) {
+            result.addAll(user.getOwnTickets());
+            result.addAll(ticketDao.getTicketsForManager(user.getId()));
+        } else if (UserRole.ENGINEER.equals(user.getRole())) {
+            result.addAll(ticketDao.getTicketForEngineer(user.getId()));
         }
-
-        History editHistory = HistoryUtils.addHistoryRecord(user, ticket, TICKET_IS_EDITED, TICKET_IS_EDITED);
-        historyDao.saveHistory(editHistory);
-
-        if (ticket.getState().equals(State.NEW)) {
-            History statusHistory = HistoryUtils.addHistoryRecord(user, ticket, TICKET_STATUS_CHANGED,
-                    TICKET_STATUS_CHANGED + " from " + State.DRAFT + " to " + State.NEW);
-            historyDao.saveHistory(statusHistory);
-        }
-
-        if (dateInString != null) {
-            try {
-                SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-                Date date = dateFormat.parse(dateInString);
-                ticket.setDesiredDate(date);
-            } catch (Exception exception) {
-                exception.printStackTrace();
-            }
-        }
-
-        if (file.getSize() != 0) {
-            Attachment attachment = AttachmentUtils.setAttachment(/*ticket, */file);
-            List<Attachment> attachments = ticket.getTicketAttachments();
-            attachments.add(attachment);
-            ticket.setTicketAttachments(attachments);
-
-            attachmentDao.saveAttachment(attachment);
-
-            History attachmentHistory = HistoryUtils.addHistoryRecord(user, ticket, FILE_IS_ATTACHED,
-                    FILE_IS_ATTACHED + ": " + file.getName());
-            historyDao.saveHistory(attachmentHistory);
-        }
-
-        if (commentText != null) {
-            Comment comment = CommentUtils.addComment(user, /*ticket, */commentText);
-            commentDao.saveComment(comment);
-        }
-
-        ticketDao.updateTicket(ticket);
-
-        return user.getOwnTickets();
+        return result;
     }
 }

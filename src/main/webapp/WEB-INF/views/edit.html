@@ -1,37 +1,29 @@
-<!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymeleaf.org"
-      lang="en">
-<head>
-    <title>Edit ticket</title>
-</head>
-<body>
-<div>
+<div ng-init="ctrl.getTicket();">
 
-    <h1>Edit ticket</h1>
-    <form th:action="@{/edit/__${id}__}" th:object="${ticket}" enctype="multipart/form-data" method="post">
+    <h1 class="page-header">Edit ticket</h1>
+    <form th:action="@{/ticket/edit}" th:object="${ticket}" enctype="multipart/form-data" method="post">
 
-        <div>
+        <div class="form-group">
             <label for="abc">Category</label>
-            <select id="abc" name="category" >
+            <select id="abc" class="form-control" name="category">
                 <option th:each="category : ${categories}"
-                        th:value="${category.getName()}"><span th:text="${category.getName()}" /></option>
+                          th:value="${category.getDescription()}"><span th:text="${category.getDescription()}" /></option>
             </select>
         </div>
 
-        <div>
+        <div class="form-group">
             <label for="abc1">Name</label>
-            <input type="text" id="abc1" th:field="*{name}"/>
+            <input type="text" id="abc1" class="form-control" th:field="*{name}"/>
         </div>
 
-        <div>
+        <div class="form-group">
             <label for="abc2">Description</label>
-            <input type="text" id="abc2" th:field="*{description}"/>
+            <input type="text" id="abc2" class="form-control" th:field="*{description}"/>
         </div>
 
-        <div>
+        <div class="form-group">
             <label for="abc3">Urgency</label>
-            <select id="abc3" th:field="*{urgency}">
+            <select id="abc3" class="form-control" ng-model ="ctrl.ticket.urgency">
                 <option value="CRITICAL">CRITICAL</option>
                 <option value="HIGH">HIGH</option>
                 <option value="MEDIUM">MEDIUM</option>
@@ -39,37 +31,26 @@
             </select>
         </div>
 
-        <div>
+        <div class="form-group">
             <label for="abc4">Desired resolution date</label>
-            <input type="date" id="abc4" name="desiredDate"/>
+            <input type="date" id="abc4" name="desiredDate" class="form-control" ng-model ="ctrl.ticket.desiredDate" required/>
         </div>
 
-        <div>
-            <!--<div>
-                <table>
-                    <tr th:each="attachment: ${ticket.attachments}">
-                        <td th:text="${attachment.id}" />
-                        <a href="/" th:href="@{/edit/delete}">Delete</a>
-                    </tr>
-                </table>
-            </div>-->
-            <a href="/" th:href="@{/edit/__${id}__/delete}">Delete</a>
+        <div class="form-group">
             <label for="abc5">Add attachments</label>
-            <input type="file" id="abc5" name="file"/>
+            <input type="file" id="abc5" name="file" class="form-control-file" ng-model="ctrl.attachment" />
         </div>
 
-        <div>
+        <div class="form-group">
             <label for="abc6">Comment</label>
-            <input type="text" id="abc6" name="comment"/>
+            <input type="text" id="abc6" name="comment" class="form-control" ng-model="ctrl.comment"/>
         </div>
 
-        <div>
-            <button type="submit" name="save" value="save">Save changes</button>
-            <button type="submit" name="submit" value="submit">Submit</button>
+        <div class="form-group">
+            <button type="submit" name="save" value="save" class="btn btn-success" ng-click="ctrl.saveTicket()">Save changes</button>
+            <button type="submit" name="cancel" value="cancel" class="btn btn-warning" ng-click="ctrl.discardChanges()">Discard changes</button>
         </div>
 
     </form>
 
 </div>
-</body>
-</html>

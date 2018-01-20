@@ -1,9 +1,8 @@
 package com.javamog.potapov.configuration.security;
 
-import com.javamog.potapov.model.User;
+import com.javamog.potapov.model.user.User;
 import com.javamog.potapov.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -12,8 +11,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Collections;
 
 @Service
 public class CustomUserDetailsService implements UserDetailsService {
@@ -33,14 +31,7 @@ public class CustomUserDetailsService implements UserDetailsService {
             throw new UsernameNotFoundException("Username not found");
         }
         return new org.springframework.security.core.userdetails.User(user.getEmail(),
-                user.getPassword(), getGrantedAuthorities(user));
-    }
-
-
-    private List<GrantedAuthority> getGrantedAuthorities(User user){
-        List<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>();
-        authorities.add(new SimpleGrantedAuthority("ROLE_"+user.getRoleId()));
-        return authorities;
+                user.getPassword(), Collections.singletonList(new SimpleGrantedAuthority("ROLE_"+user.getRole())));
     }
 
 }

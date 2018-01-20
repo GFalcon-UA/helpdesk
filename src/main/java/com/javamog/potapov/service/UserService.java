@@ -1,7 +1,6 @@
 package com.javamog.potapov.service;
 
-import com.javamog.potapov.model.Ticket;
-import com.javamog.potapov.model.User;
+import com.javamog.potapov.model.user.User;
 
 import java.util.List;
 
@@ -15,6 +14,5 @@ public interface UserService {
 
     void updateUser(User user);
 
-    List<Ticket> getUserTickets(User user);
-
+    List<User> getAll();
 }

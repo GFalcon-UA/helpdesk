@@ -1,11 +1,13 @@
-package com.javamog.potapov.model;
+package com.javamog.potapov.model.ticket;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.javamog.potapov.utils.State;
-import com.javamog.potapov.utils.Urgency;
+import com.javamog.potapov.model.Feedback;
+import com.javamog.potapov.model.history.History;
+import com.javamog.potapov.model.user.User;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -16,6 +18,7 @@ public class Ticket {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "TICKET_ID", unique = true)
+
     private Long id;
 
     @Column(name = "name")
@@ -34,11 +37,11 @@ public class Ticket {
 
     @Column(name = "state_id")
     @Enumerated(EnumType.STRING)
-    private State state;
+    private TicketStatus status;
 
     @Column(name = "urgency_id")
     @Enumerated(EnumType.STRING)
-    private Urgency urgency;
+    private TicketUrgency urgency;
 
     @ManyToOne
     @JoinColumn(name = "owner_id")
@@ -52,26 +55,21 @@ public class Ticket {
     @JoinColumn(name = "approver_id")
     private User approver;
 
-    @ManyToOne
-    @JoinColumn(name = "category_id")
-    private Category category;
+    @Column(name = "category")
+    @Enumerated(EnumType.STRING)
+    private TicketCategory category;
 
-    @OneToMany(mappedBy = "historyTicket", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @JsonIgnore
-    private List<History> ticketHistory;
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    private List<History> ticketHistory = new ArrayList<>();;
 
-    @OneToMany(mappedBy = "attachmentTicket", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @JsonIgnore
-    private List<Attachment> ticketAttachments;
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    private List<Attachment> ticketAttachments = new ArrayList<>();;
 
-    @OneToMany(mappedBy = "commentTicket", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @JsonIgnore
-    private List<Comment> ticketComments;
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    private List<Comment> ticketComments = new ArrayList<>();;
 
-    @OneToMany(mappedBy = "feedbackTicket", cascade = CascadeType.ALL)
-    @JsonIgnore
-    private List<Feedback> ticketFeedback;
-
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    private List<Feedback> ticketFeedback = new ArrayList<>();
     public Long getId() {
         return id;
     }
@@ -112,27 +110,27 @@ public class Ticket {
         this.desiredDate = date;
     }
 
-    public State getState() {
-        return state;
+    public TicketStatus getStatus() {
+        return status;
     }
 
-    public void setState(State state) {
-        this.state = state;
+    public void setStatus(TicketStatus status) {
+        this.status = status;
     }
 
-    public Urgency getUrgency() {
+    public TicketUrgency getUrgency() {
         return urgency;
     }
 
-    public void setUrgency(Urgency urgency) {
+    public void setUrgency(TicketUrgency urgency) {
         this.urgency = urgency;
     }
 
-    public Category getCategory() {
+    public TicketCategory getCategory() {
         return category;
     }
 
-    public void setCategory(Category category) {
+    public void setCategory(TicketCategory category) {
         this.category = category;
     }
 
@@ -164,7 +162,7 @@ public class Ticket {
         return ticketHistory;
     }
 
-    public void setTicketHistory(List<History> ticketHistory) {
+    private void setTicketHistory(List<History> ticketHistory) {
         this.ticketHistory = ticketHistory;
     }
 
@@ -172,7 +170,7 @@ public class Ticket {
         return ticketAttachments;
     }
 
-    public void setTicketAttachments(List<Attachment> ticketAttachments) {
+    private void setTicketAttachments(List<Attachment> ticketAttachments) {
         this.ticketAttachments = ticketAttachments;
     }
 
@@ -180,7 +178,7 @@ public class Ticket {
         return ticketComments;
     }
 
-    public void setTicketComments(List<Comment> ticketComments) {
+    private void setTicketComments(List<Comment> ticketComments) {
         this.ticketComments = ticketComments;
     }
 
@@ -188,7 +186,27 @@ public class Ticket {
         return ticketFeedback;
     }
 
-    public void setTicketFeedback(List<Feedback> ticketFeedback) {
+    private void setTicketFeedback(List<Feedback> ticketFeedback) {
         this.ticketFeedback = ticketFeedback;
+    }
+
+    public void addHistoryRecord(History history){
+        getTicketHistory().add(history);
+    }
+
+    public void addComment(Comment comment){
+        getTicketComments().add(comment);
+    }
+
+    public void addFeedback(Feedback feedback){
+        getTicketFeedback().add(feedback);
+    }
+
+    public void addAttachment(Attachment attachment){
+        getTicketAttachments().add(attachment);
+    }
+
+    public void removeFromAttachments(Attachment attachment) {
+        getTicketAttachments().remove(attachment);
     }
 }

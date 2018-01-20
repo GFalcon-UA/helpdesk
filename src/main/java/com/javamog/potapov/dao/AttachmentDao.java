@@ -1,6 +1,6 @@
 package com.javamog.potapov.dao;
 
-import com.javamog.potapov.model.Attachment;
+import com.javamog.potapov.model.ticket.Attachment;
 
 public interface AttachmentDao {
 

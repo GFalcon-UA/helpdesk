@@ -11,19 +11,23 @@
     <script src="//code.angularjs.org/1.6.0/angular-route.min.js"></script>
     <script src="//code.angularjs.org/1.6.0/angular-cookies.min.js"></script>
     <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="/static/css/helpdesk.css"/>
     <script type="text/javascript" th:src="@{/static/js/app.js}"></script>
     <script type="text/javascript" th:src="@{/static/js/service/app_service.js}"></script>
     <script type="text/javascript" th:src="@{/static/js/service/authentication_service.js}"></script>
     <script type="text/javascript" th:src="@{/static/js/controller/login_controller.js}"></script>
+    <script type="text/javascript" th:src="@{/static/js/controller/main_controller.js}"></script>
+    <script type="text/javascript" th:src="@{/static/js/controller/ticket_controller.js}"></script>
     <script type="text/javascript" th:src="@{/static/js/controller/ticketlist_controller.js}"></script>
 </head>
 <body>
-<div class="container">
+<div class="container" ng-controller="MainController as mc">
     <div class="col-sm-8 col-sm-offset-2">
         <div ng-class="{ 'alert': flash, 'alert-success': flash.type === 'success', 'alert-danger': flash.type === 'error' }"
              ng-if="flash" ng-bind="flash.message"></div>
         <div ng-view></div>
     </div>
+    <button ng-click="mc.logout()" class="btn btn-xs btn-default align-self-end">Logout</button>
 </div>
 </body>
 </html>
