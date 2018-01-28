@@ -1,128 +1,57 @@
-'use strict';
+(function () {
 
-App.factory('AppService', ['$http', '$q', function($http, $q){
+    'use strict';
 
-    return {
+     angular
+            .module('myApp')
+            .factory('AppService', AppService);
 
-        showTicketList: function () {
-            return $http.get('http://localhost:8080/ticket-list/')
-                .then(
-                    function(response){
-                        return response.data;
-                    },
-                    function(errResponse){
-                        console.error('Error while show ticketlist (Service)');
-                        return $q.reject(errResponse);
-                    }
-                );
-        },
+     AppService.$inject = ['$http', '$q', '$rootScope','$cookies'];
 
-        submitLogin: function(email){
-            return $http.post('http://localhost:8080/ticket-list/', email)
-                .then(
-                    function(response){
-                        return response;
-                    },
-                    function(errResponse){
-                        console.error('Error while login user (Service)');
-                        return $q.reject(errResponse);
-                    }
-                );
-        },
+     function AppService($http, $q, $rootScope,$cookies){
+         var service = {};
+         service.showTicketOverview = showTicketOverview;
+         service.showTicketList = showTicketList;
+         service.fetchCategories = fetchCategories;
+         return service;
 
-        showTicketOverview: function(){
-            return $http.get('http://localhost:8080/ticket-overview/')
-                .then(
-                    function(response){
-                        return response.data;
-                    },
-                    function(errResponse){
-                        console.error('Error while ticket overview (Service)');
-                        return $q.reject(errResponse);
-                    }
-                );
-        },
+         function showTicketList(){
+             return $http.get('/ticket/all')
+                          .then(
+                              function(response){
+                                  return response.data;
+                              },
+                              function(errResponse){
+                                  console.error('Error fetching tickets');
+                                  return $q.reject(errResponse);
+                              }
+                          );
+         }
 
-        showHistory: function(){
-            return $http.get('http://localhost:8080/showHistory/')
-                .then(
-                    function(response){
-                        return response.data;
-                    },
-                    function(errResponse){
-                        console.error('Error while showing history (Service)');
-                        return $q.reject(errResponse);
-                    }
-                );
-        },
+         function showTicketOverview(id){
+             return $http.get('/ticket/'+id)
+                 .then(
+                     function(response){
+                         return response.data;
+                     },
+                     function(errResponse){
+                         console.error('Error while ticket overview (Service)');
+                         return $q.reject(errResponse);
+                     }
+                 );
+         };
 
-        showComments: function(){
-            return $http.get('http://localhost:8080/showComments/')
-                .then(
-                    function(response){
-                        return response.data;
-                    },
-                    function(errResponse){
-                        console.error('Error while showing comments (Service)');
-                        return $q.reject(errResponse);
-                    }
-                );
-        },
+         function fetchCategories(){
+            return $http.get('/ticket/categories').then(
+                   function(response){
+                       return response.data;
+                   },
+                   function(errResponse){
+                       console.error('Error while ticket overview (Service)');
+                       return $q.reject(errResponse);
+                   }
+               );
+         }
 
-
-
-        fetchAllUsers: function() {
-            return $http.get('http://localhost:8080/SpringMVC4RestAPI/user/')
-                .then(
-                    function(response){
-                        return response.data;
-                    },
-                    function(errResponse){
-                        console.error('Error while fetching users');
-                        return $q.reject(errResponse);
-                    }
-                );
-        },
-
-        createUser: function(user){
-            return $http.post('http://localhost:8080/SpringMVC4RestAPI/user/', user)
-                .then(
-                    function(response){
-                        return response.data;
-                    },
-                    function(errResponse){
-                        console.error('Error while creating user');
-                        return $q.reject(errResponse);
-                    }
-                );
-        },
-
-        updateUser: function(user, id){
-            return $http.put('http://localhost:8080/SpringMVC4RestAPI/user/'+id, user)
-                .then(
-                    function(response){
-                        return response.data;
-                    },
-                    function(errResponse){
-                        console.error('Error while updating user');
-                        return $q.reject(errResponse);
-                    }
-                );
-        },
-
-        deleteUser: function(id){
-            return $http.delete('http://localhost:8080/SpringMVC4RestAPI/user/'+id)
-                .then(
-                    function(response){
-                        return response.data;
-                    },
-                    function(errResponse){
-                        console.error('Error while deleting user');
-                        return $q.reject(errResponse);
-                    }
-                );
-        }
-
-    };
-
-}]);
+       }
+})();

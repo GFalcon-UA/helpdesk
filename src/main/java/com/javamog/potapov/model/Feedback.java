@@ -1,5 +1,9 @@
 package com.javamog.potapov.model;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.javamog.potapov.model.ticket.Ticket;
+import com.javamog.potapov.model.user.User;
+
 import javax.persistence.*;
 import java.util.Date;
 
@@ -10,7 +14,7 @@ public class Feedback {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "FEEDBACK_ID")
-    private int id;
+    private Long id;
 
 
     @Column(name = "rate")
@@ -21,17 +25,17 @@ public class Feedback {
 
     private String text;
 
-    public int getId() {
-        return id;
-    }
-
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User feedbackUser;
 
-    @ManyToOne
-    @JoinColumn(name = "ticket_id")
-    private Ticket feedbackTicket;
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     public int getRate() {
         return rate;
@@ -63,13 +67,5 @@ public class Feedback {
 
     public void setFeedbackUser(User feedbackUser) {
         this.feedbackUser = feedbackUser;
-    }
-
-    public Ticket getFeedbackTicket() {
-        return feedbackTicket;
-    }
-
-    public void setFeedbackTicket(Ticket feedbackTicket) {
-        this.feedbackTicket = feedbackTicket;
     }
 }

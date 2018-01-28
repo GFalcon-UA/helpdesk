@@ -1,1 +1,6 @@
-INSERT INTO USER(first_name, last_name, phone, role_id, email, addres) VALUES ('Maxim', 'Potapov', '12345', 'EMPLOYEE', 'user1_mogilev@yopmail.com', 'abcd'); INSERT INTO CATEGORY(name) VALUES ('Application & Services'), ('Benefits & Paperwork'), ('Hardware & Software'), ('People & Management'), ('Security & Acces'), ('Workplaces & Facilities');
+INSERT INTO USER (first_name, last_name, phone, role, email, password, address) VALUES ('Maxim', 'Potapov', '12345', 'EMPLOYEE', 'user1_mogilev@yopmail.com', '1234', 'abcd');
+INSERT INTO USER (first_name, last_name, phone, role, email, password, address) VALUES ('Evgeniy', 'Potapov', '12345', 'EMPLOYEE', 'user2_mogilev@yopmail.com', '1234', 'abcd');
+INSERT INTO USER (first_name, last_name, phone, role, email, password, address) VALUES ('Vasiliy', 'Potapov', '12345', 'MANAGER', 'manager1_mogilev@yopmail.com', '1234', 'abcd');
+INSERT INTO USER (first_name, last_name, phone, role, email, password, address) VALUES ('Artur', 'Potapov', '12345', 'MANAGER', 'manager2_mogilev@yopmail.com', '1234', 'abcd');
+INSERT INTO USER (first_name, last_name, phone, role, email, password, address) VALUES ('Genadiy', 'Potapov', '12345', 'ENGINEER', 'engineer1_mogilev@yopmail.com', '1234', 'abcd');
+INSERT INTO USER (first_name, last_name, phone, role, email, password, address) VALUES ('Dmitriy', 'Potapov', '12345', 'ENGINEER', 'engineer2_mogilev@yopmail.com', '1234', 'abcd');

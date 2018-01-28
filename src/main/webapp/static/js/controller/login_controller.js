@@ -1,26 +1,29 @@
-'use strict';
+(function () {
+    'use strict';
 
-App.controller('LoginController', ['$window', '$scope', 'AppService', function($window, $scope, AppService) {
-    var self = this;
-    self.email = '';
+    angular
+        .module('myApp')
+        .controller('LoginController', LoginController);
 
-    self.submitLogin = function(email){
-        UserService.submitLogin(email)
-            .then(
-                //self.showTicketList()
-                function(d){
-                    //self.user = d;
-                    $window.location.assign("/ticketList");
-                },
-                function(errResponse){
-                    console.error('Error while submit login (controller).');
+    LoginController.$inject = ['$location', 'AuthenticationService'];
+
+    function LoginController($location, AuthenticationService) {
+       var vm = this;
+       vm.login = login;
+       AuthenticationService.refreshCredentials();
+
+        function login() {
+            this.dataLoading = true;
+            AuthenticationService.Login(this.username, this.password, function (response) {
+                if (response.status = "OK") {
+                    AuthenticationService.setCredentials(vm.username, vm.password);
+                    $location.path('/');
+                } else {
+                    $location.path('/login');
+                    this.dataLoading = false;
                 }
-            );
-    };
+            });
+        };
+    }
 
-    self.submit = function () {
-        console.log('Login User', self.email);
-        $window.localStorage['email'] = self.email;
-        self.submitLogin(self.email);
-    };
-}]);
+})();
