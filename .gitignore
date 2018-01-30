@@ -47,3 +47,33 @@ $RECYCLE.BIN/
 .idea/
 target/
 *.iml
+
+### Windows template
+# Windows thumbnail cache files
+
+# Dump file
+
+# Folder config file
+
+# Recycle Bin used on file shares
+
+# Windows Installer files
+
+# Windows shortcuts
+### MicrosoftOffice template
+*.tmp
+
+# Word temporary
+~$*.doc*
+
+# Excel temporary
+~$*.xls*
+
+# Excel Backup File
+*.xlk
+
+# PowerPoint temporary
+~$*.ppt*
+
+# Visio autosave temporary files
+*.~vsd*

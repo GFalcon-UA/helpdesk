@@ -1,0 +1,14 @@
+Role 'Employee':
+
+user1_mogilev@yopmail.com/password
+user2_mogilev@yopmail.com/password
+
+Role 'Manager':
+
+manager1_mogilev@yopmail.com/password
+manager2_mogilev@yopmail.com/password
+
+Role 'Engineer':
+
+engineer1_mogilev@yopmail.com/password
+engineer2_mogilev@yopmail.com/password
