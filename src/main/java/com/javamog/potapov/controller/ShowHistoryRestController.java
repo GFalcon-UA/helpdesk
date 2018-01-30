@@ -1,5 +1,6 @@
 package com.javamog.potapov.controller;
 
+import com.javamog.potapov.model.History;
 import com.javamog.potapov.model.Ticket;
 import com.javamog.potapov.model.User;
 import com.javamog.potapov.service.UserService;
@@ -10,17 +11,21 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
 @RestController
-@RequestMapping("/ticket-overview")
-public class TicketOverviewRestController {
+@RequestMapping("/showHistory")
+public class ShowHistoryRestController {
 
     @Autowired
     private UserService userService;
 
     @GetMapping
-    public ResponseEntity<Ticket> ShowOverviewPage() {
+    public ResponseEntity<List<History>> ShowOverviewPage() {
         User user = userService.getUser("user1_mogilev@yopmail.com");
         Ticket ticket = user.getOwnTickets().get(0);
-        return new ResponseEntity<>(ticket, HttpStatus.OK);
+        List<History> histories = ticket.getTicketHistory();
+        return new ResponseEntity<>(histories, HttpStatus.OK);
     }
+
 }

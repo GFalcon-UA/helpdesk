@@ -1,8 +1,6 @@
 package com.javamog.potapov.dao;
 
-import com.javamog.potapov.model.ticket.Ticket;
-
-import java.util.List;
+import com.javamog.potapov.model.Ticket;
 
 public interface TicketDao {
 
@@ -12,9 +10,5 @@ public interface TicketDao {
 
     void evictTicket(Ticket ticket);
 
-    Ticket getTicketById(Long id);
-
-    List<Ticket> getTicketsForManager(Long id);
-
-    List<Ticket> getTicketForEngineer(Long id);
+    Ticket getTicketById(int id);
 }

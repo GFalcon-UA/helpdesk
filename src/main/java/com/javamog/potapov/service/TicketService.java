@@ -1,22 +1,16 @@
 package com.javamog.potapov.service;
 
-import com.javamog.potapov.model.ticket.Ticket;
-import com.javamog.potapov.model.ticket.TicketStatus;
-import org.springframework.http.ResponseEntity;
+import com.javamog.potapov.model.Ticket;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
 public interface TicketService {
+    public void saveTicket(Ticket ticket);
 
-    Ticket getTicketById(Long id);
+    public List<Ticket> createNewTicket(Ticket ticket, String category, String dateInString,
+                                        MultipartFile file, String comment);
 
-    void createNewTicket(Ticket ticket, String category, String dateInString,
-                         MultipartFile file, String comment);
-
-    void editTicket(Ticket ticket);
-
-    ResponseEntity<List<Ticket>> getTickets(String username);
-
-    void changeStatus(Ticket ticket, TicketStatus status);
+    public List<Ticket> editTicket(Ticket ticket, String category, String dateInString,
+                                        MultipartFile file, String comment);
 }

@@ -1,6 +1,5 @@
 package com.javamog.potapov.configuration;
 
-
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
@@ -17,15 +16,15 @@ import org.thymeleaf.spring5.SpringTemplateEngine;
 import org.thymeleaf.spring5.templateresolver.SpringResourceTemplateResolver;
 import org.thymeleaf.spring5.view.ThymeleafViewResolver;
 
-
 @Configuration
 @EnableWebMvc
 @ComponentScan(basePackages = "com.javamog.potapov")
-public class WebConfiguration implements ApplicationContextAware, WebMvcConfigurer {
+public class WebConfiguration /*extends WebMvcConfigurerAdapter*/ implements ApplicationContextAware, WebMvcConfigurer {
 
     @Autowired
-    private ApplicationContext applicationContext;
-    ;
+    ApplicationContext applicationContext;
+
+    //private ApplicationContext applicationContext;
 
     private static final String UTF8 = "UTF-8";
 
@@ -34,12 +33,16 @@ public class WebConfiguration implements ApplicationContextAware, WebMvcConfigur
         this.applicationContext = applicationContext;
     }
 
+    //@Bean
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         registry.addResourceHandler("/static/**").addResourceLocations("/static/");
     }
 
     @Bean(name="multipartResolver")
+    /*public StandardServletMultipartResolver resolver(){
+        return new StandardServletMultipartResolver();
+    }*/
     public CommonsMultipartResolver multipartResolver() {
         CommonsMultipartResolver multipartResolver = new CommonsMultipartResolver();
         multipartResolver.setMaxUploadSize(5242880);
@@ -50,11 +53,49 @@ public class WebConfiguration implements ApplicationContextAware, WebMvcConfigur
     public ViewResolver htmlViewResolver() {
         ThymeleafViewResolver resolver = new ThymeleafViewResolver();
         resolver.setTemplateEngine(templateEngine(htmlTemplateResolver()));
-        System.out.println();
         resolver.setContentType("text/html");
         resolver.setCharacterEncoding(UTF8);
         return resolver;
     }
+    /*public SpringResourceTemplateResolver htmlTemplateResolver(){
+        SpringResourceTemplateResolver templateResolver = new SpringResourceTemplateResolver();
+        templateResolver.setApplicationContext(this.applicationContext);
+        templateResolver.setPrefix("/WEB-INF/views/");
+        templateResolver.setSuffix(".html");
+        return templateResolver;
+    }*/
+
+    /*@Bean
+    public ViewResolver cssViewResolver() {
+        ThymeleafViewResolver resolver = new ThymeleafViewResolver();
+        resolver.setTemplateEngine(templateEngine(cssTemplateResolver()));
+        resolver.setContentType("text/css");
+        resolver.setCharacterEncoding(UTF8);
+        return resolver;
+    }*/
+
+    /*@Bean
+    public ViewResolver javascriptViewResolver() {
+        ThymeleafViewResolver resolver = new ThymeleafViewResolver();
+        resolver.setTemplateEngine(templateEngine(javascriptTemplateResolver()));
+        resolver.setContentType("application/javascript");
+        resolver.setCharacterEncoding(UTF8);
+        return resolver;
+    }*/
+
+    /*@Bean
+    public SpringTemplateEngine templateEngine(){
+        SpringTemplateEngine templateEngine = new SpringTemplateEngine();
+        templateEngine.setTemplateResolver(templateResolver());
+        return templateEngine;
+    }
+
+    @Bean
+    public ViewResolver viewResolver(){
+        ThymeleafViewResolver viewResolver = new ThymeleafViewResolver();
+        viewResolver.setTemplateEngine(templateEngine());
+        return viewResolver;
+    }*/
 
     private SpringTemplateEngine templateEngine(SpringResourceTemplateResolver templateResolver) {
         SpringTemplateEngine engine = new SpringTemplateEngine();

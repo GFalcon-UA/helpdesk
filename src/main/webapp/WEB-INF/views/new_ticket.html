@@ -3,17 +3,20 @@
       xmlns:th="http://www.thymeleaf.org"
       lang="en">
 <head>
-    <title>Edit ticket</title>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <title>New ticket</title>
 </head>
 <body>
 <div>
 
-    <h1>Edit ticket</h1>
-    <form th:action="@{/edit}" th:object="${ticket}" enctype="multipart/form-data" method="post">
+    <h1>Create new ticket</h1>
+    <form th:action="@{/create}" th:object="${ticket}" enctype="multipart/form-data" method="post">
 
         <div>
             <label for="abc">Category</label>
-            <select id="abc" name="category" >
+            <select id="abc" name="category" > <!--th:field="*{category}"-->
                 <option th:each="category : ${categories}"
                         th:value="${category.getName()}"><span th:text="${category.getName()}" /></option>
             </select>
@@ -41,21 +44,12 @@
 
         <div>
             <label for="abc4">Desired resolution date</label>
-            <input type="date" id="abc4" name="desiredDate"/>
+            <input type="date" id="abc4" name="desiredDate"/> <!--th:field="*{desiredDate}"-->
         </div>
 
         <div>
-            <!--<div>
-                <table>
-                    <tr th:each="attachment: ${ticket.attachments}">
-                        <td th:text="${attachment.id}" />
-                        <a href="/" th:href="@{/edit/delete}">Delete</a>
-                    </tr>
-                </table>
-            </div>-->
-            <a href="/" th:href="@{/edit/delete}">Delete</a>
-            <label for="abc5">Add attachments</label>
-            <input type="file" id="abc5" name="file"/>
+            <label for="file">Add attachments</label>
+            <input type="file" id="file" name="file"/>
         </div>
 
         <div>
@@ -64,7 +58,7 @@
         </div>
 
         <div>
-            <button type="submit" name="save" value="save">Save changes</button>
+            <button type="submit" name="draft" value="draft">Add to draft</button>
             <button type="submit" name="submit" value="submit">Submit</button>
         </div>
 
