@@ -1,1 +1,2 @@
-INSERT INTO USER(first_name, last_name, phone, role_id, email, addres) VALUES ('Maxim', 'Potapov', '12345', 'EMPLOYEE', 'user1_mogilev@yopmail.com', 'abcd'); INSERT INTO CATEGORY(name) VALUES ('Application & Services'), ('Benefits & Paperwork'), ('Hardware & Software'), ('People & Management'), ('Security & Acces'), ('Workplaces & Facilities');
+INSERT INTO USER(first_name, last_name, phone, role_id, email, addres) VALUES ('Maxim', 'Potapov', '12345', 'EMPLOYEE', 'user1_mogilev@yopmail.com', 'abcd');
+INSERT INTO CATEGORY(name) VALUES ('Application & Services'), ('Benefits & Paperwork'), ('Hardware & Software'), ('People & Management'), ('Security & Acces'), ('Workplaces & Facilities');
