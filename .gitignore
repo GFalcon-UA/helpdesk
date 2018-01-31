@@ -77,3 +77,4 @@ target/
 
 # Visio autosave temporary files
 *.~vsd*
+/out/
