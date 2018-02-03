@@ -66,13 +66,12 @@
       <version>1.1.2</version>
     </dependency>
 
-    <!--E-Mail-->
+    <!-- E-Mail -->
     <dependency>
-      <groupId>javax.mail</groupId>
-      <artifactId>javax.mail-api</artifactId>
+      <groupId>com.sun.mail</groupId>
+      <artifactId>javax.mail</artifactId>
       <version>1.6.0</version>
     </dependency>
-
 
     <!-- https://mvnrepository.com/artifact/com.googlecode.json-simple/json-simple -->
     <dependency>
