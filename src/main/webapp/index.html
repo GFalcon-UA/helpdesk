@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+    <head>
+        <title>HelpDesk</title>
+        <meta charset="utf-8" />
+        <base href="/">
+
+        <link rel='stylesheet' href='./webjars/bootstrap/3.3.7/dist/css/bootstrap.min.css'>
+        <link rel="stylesheet" href="./webjars/bootstrap/3.3.7/dist/css/bootstrap-theme.min.css">
+        <link rel="stylesheet" href="./webjars/angular/1.6.4/angular-csp.css">
+        <link rel="stylesheet" href="./webjars/angular-bootstrap/2.5.0/ui-bootstrap-csp.css">
+
+        <link rel="stylesheet" href="css/main.css"/>
+    </head>
+    <body ng-app="HelpDesk">
+        <div th:fragment="logout" class="logout navbar-form"
+             sec:authorize="isAuthenticated()">
+            Logged user: <span sec:authentication="name">Bob</span> |
+            Roles: <span sec:authentication="principal.authorities">[ROLE_USER, ROLE_ADMIN]</span> |
+            <!--/* When using CSRF this needs to be a POST */-->
+            <form th:action="@{/logout}" method="post" style="display:inline"><input type="submit" value="Logout"/></form>
+        </div>
+
+        <script src="./webjars/jquery/3.2.1/dist/jquery.min.js" type="application/javascript"></script>
+        <script src="./webjars/bootstrap/3.3.7/dist/js/bootstrap.min.js" type="application/javascript"></script>
+        <script src="./webjars/lodash/4.17.4/dist/lodash.min.js" type="application/javascript"></script>
+        <script src="./webjars/moment/2.18.1/min/moment.min.js" type="application/javascript"></script>
+
+        <script src="./webjars/angular/1.6.4/angular.min.js" type="application/javascript"></script>
+        <script src="./webjars/angular-cookies/1.6.4/angular-cookies.min.js" type="application/javascript"></script>
+        <script src="./webjars/angular-route/1.6.4/angular-route.min.js" type="application/javascript"></script>
+        <script src="./webjars/angular-bootstrap/2.5.0/ui-bootstrap.min.js" type="application/javascript"></script>
+        <script src="./webjars/angular-bootstrap/2.5.0/ui-bootstrap-tpls.min.js" type="application/javascript"></script>
+        <script src="./webjars/angular-smart-table/2.1.8/dist/smart-table.min.js" type="application/javascript"></script>
+        <script src="./webjars/angular-moment/1.0.1/angular-moment.min.js" type="application/javascript"></script>
+
+
+        <script src="js/auth/auth.module.js" type="application/javascript"></script>
+        <script src="js/auth/auth.factory.js" type="application/javascript"></script>
+        <script src="js/auth/auth.service.js" type="application/javascript"></script>
+        <script src="js/auth/pages-security.service.js" type="application/javascript"></script>
+        <script src="js/auth/user.provider.js" type="application/javascript"></script>
+
+        <script src="js/tickets/tickets.module.js" type="application/javascript"></script>
+        <script src="js/tickets/tickets.service.js" type="application/javascript"></script>
+        <script src="js/tickets/editor/editor.controller.js" type="application/javascript"></script>
+        <script src="js/tickets/feedback/feedback.controller.js" type="application/javascript"></script>
+        <script src="js/tickets/list/list.controller.js" type="application/javascript"></script>
+        <script src="js/tickets/overview/overview.controller.js" type="application/javascript"></script>
+
+
+        <script src="js/help-desk.module.js" type="application/javascript"></script>
+        <script src="js/help-desk.constants.js" type="application/javascript"></script>
+        <script src="js/help-desk.route.js" type="application/javascript"></script>
+
+    <div ng-view class="container"></div>
+    </body>
+</html>

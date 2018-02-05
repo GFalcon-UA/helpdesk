@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>Login page</title>
+        <meta charset="utf-8" />
+        <link rel="stylesheet" href="css/main.css" th:href="@{/css/main.css}" />
+	</head>
+    <body>
+        <h1>Login to the Help Desk</h1>
+        <p th:if="${loginError}" class="error">Please make sure you are using a valid email or password</p>
+        <form th:action="@{/login.html}" method="post">
+            <label for="username">User Name:</label>:
+            <input type="email" id="username" name="username" required autofocus="autofocus" /> <br />
+            <label for="password">Password:</label>:
+            <input type="password" id="password" name="password" required /> <br />
+            <input type="submit" value="Enter" />
+        </form>
+    <div>
+        <br/>
+        Role 'Employee':<br/>
+        <br/>
+        user1_mogilev@yopmail.com<br/>
+        user2_mogilev@yopmail.com<br/>
+        <br/>
+        Role 'Manager':<br/>
+        <br/>
+        manager1_mogilev@yopmail.com<br/>
+        manager2_mogilev@yopmail.com<br/>
+        <br/>
+        Role 'Engineer':<br/>
+        <br/>
+        engineer1_mogilev@yopmail.com<br/>
+        engineer2_mogilev@yopmail.com<br/>
+        <br/>
+        P@ssword1<br/>
+    </div>
+    </body>
+</html>

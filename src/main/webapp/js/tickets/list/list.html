@@ -1,0 +1,40 @@
+<div class="row">
+    <a class="btn btn-success" ng-href="/editor">Create New Ticket</a>
+</div>
+<div>
+    <button ng-click="vm.showAllTickets">All Tickets</button>
+    <button ng-click="vm.showMyTickets">My Tickets</button>
+</div>
+<div>
+    <input class="form-control" type="text" ng-model="vm.filterText" ng-change="vm.onFilterChange()"/>
+</div>
+<table class="table">
+    <thead>
+    <tr>
+        <td>ID</td>
+        <td>Name</td>
+        <td>Desired Date</td>
+        <td>Urgency</td>
+        <td>Status</td>
+        <td>Action</td>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <!--<td>ID</td>-->
+        <!--<td>Name</td>-->
+        <!--<td>Desired Date</td>-->
+        <!--<td>Urgency</td>-->
+        <!--<td>Status</td>-->
+        <!--<td>Action</td>-->
+    </tr>
+    </tbody>
+    <tfoot>
+    <tr>
+        <td colspan="2"><input type="text" value="{{vm.itemsPerPage}}"></td>
+        <td colspan="4">
+            <!--pagination-->
+        </td>
+    </tr>
+    </tfoot>
+</table>

@@ -79,3 +79,5 @@ target/
 *.~vsd*
 /out/
 /logs/
+!/target/dependency/webapp-runner.jar
+!/target/HelpDesk.war

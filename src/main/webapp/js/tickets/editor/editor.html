@@ -1,0 +1,68 @@
+<a class="btn btn-success" ng-href="/">Ticket List</a>
+<div class="title">
+    <span ng-if="!vm.ticket['nID']">Create new Ticket</span>
+    <samp ng-if="vm.ticket['nID']">Edit Ticket {{vm.ticket['nID']}}</samp>
+</div>
+<form>
+    <div class="row">
+        <label class="col-md-4" for="category">Category</label>
+        <select class="form-control col-md-6"
+                id="category"
+                required
+                ng-model="vm.categories.selected"
+                ng-options="obj as obj.name for obj in vm.categories.list track by obj.id"></select>
+    </div>
+    <div class="row">
+        <label class="col-md-4" for="name">Name</label>
+        <input id="name" type="text" required class="form-control col-md-6" ng-model="vm.ticket.name">
+    </div>
+    <div class="row">
+        <label class="col-md-4" for="description">Description</label>
+        <textarea id="description" class="col-md-6" ng-model="vm.ticket.description"></textarea>
+    </div>
+    <div class="row">
+        <label class="col-md-4" for="urgency">Urgency</label>
+        <select class="form-control col-md-6"
+                id="urgency"
+                required
+                ng-model="vm.urgency.selected"
+                ng-options="name for name in vm.urgency.list"></select>
+    </div>
+    <div class="row">
+        <label class="col-md-4" for="date">Desired resolution date</label>
+        <input type="text" class="col-md-6 form-control" id="date" ng-model="vm.ticket.desiredDate"/>
+        <!--<div class="col-md-6">-->
+            <!--<p class="input-group">-->
+                <!--<input type="text"-->
+                       <!--class="form-control"-->
+                       <!--uib-datepicker-popup="{{format}}"-->
+                       <!--ng-model="vm.ticket.desiredDate"-->
+                       <!--is-open="popup1.opened"-->
+                       <!--datepicker-options="dateOptions"-->
+                       <!--ng-required="true"-->
+                       <!--close-text="Close"-->
+                       <!--alt-input-formats="altInputFormats" />-->
+                <!--<span class="input-group-btn">-->
+                    <!--<button type="button"-->
+                            <!--class="btn btn-default"-->
+                            <!--ng-click="vm.openDatePicker()">-->
+                        <!--<i class="glyphicon glyphicon-calendar"></i>-->
+                    <!--</button>-->
+                <!--</span>-->
+            <!--</p>-->
+        <!--</div>-->
+    </div>
+    <div class="row">
+        <label class="col-md-4" for="attachment">Add attachments</label>
+        <input type="file" class="btn btn-default" id="attachment" ng-model="vm.attachment" />
+    </div>
+    <div class="row">
+        <label class="col-md-4">Comment</label>
+        <textarea class="form-control col-md-6" id="comment" ng-model="vm.ticket.comment"></textarea>
+    </div>
+    <div>
+        <button class="btn btn-default" ng-click="vm.saveDraft()">Save as Draft</button>
+        <button class="btn btn-success" ng-click="vm.submit()">Submit</button>
+    </div>
+
+</form>
