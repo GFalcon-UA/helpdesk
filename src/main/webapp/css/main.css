@@ -1,13 +1,102 @@
-body {
-    font-family: sans;
-    font-size: 1em;
+.container {
+    min-height: 100vh;
+}
+/* */
+.login-page {
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
-p.error {
-    font-weight: bold;
+.login-form {
+    width: 500px;
+}
+/* */
+.all-tickets-page {
+    width: 1000px;
+}
+
+.all-tickets-page .search-input {
+    width: 350px;
+    border-radius: 20px;
+}
+
+.all-tickets-page .table .btn {
+    position: relative;
+    text-align: left;
+}
+
+.all-tickets-page .table .btn .glyphicon {
+    transform: rotateZ(90deg);
+    position: absolute;
+    text-align: left;
+    right: 10px;
+    top: 10px;
+}
+
+.all-tickets-page .table .link {
+    color: #337ab7;
+}
+
+.all-tickets-page .table thead {
+    background-color: #ddd;
+}
+
+.all-tickets-page .table th {
+    font-weight: normal;
+    position: relative;
+}
+
+.all-tickets-page .table th .glyphicon {
+    font-size: 12px;
+    cursor: pointer;
+}
+
+.all-tickets-page .table th .up {
+    transform: rotateZ(-90deg);
+    transform-origin: 50% 50%;
+    font-weight: normal;
+    position: absolute;
+    right: 6px;
+    top: 6px;
+}
+
+.all-tickets-page .table th .down {
+    transform: rotateZ(90deg);
+    transform-origin: 50% 50%;
+    font-weight: normal;
+    position: absolute;
+    right: 24px;
+    bottom: -14px;
+}
+/* */
+.editor .warning {
     color: red;
 }
+/* */
+.task thead {
+    background-color: #ddd;
+}
 
-div.logout {
-    float: right;
+.task .table th {
+    font-weight: normal;
+    position: relative;
+}
+
+/* */
+.rating .star {
+    display: inline-block;
+    width: 10%;
+}
+.rating .star .star-icon {
+    margin-left: -6px;
+    font-size: 100px;
+    line-height: 100px;
+    color: #ccc;
+    display: block;
+}
+.rating .star .star-label {
+    text-align: center;
+    font-size: 14px;
+    display: block;
 }
