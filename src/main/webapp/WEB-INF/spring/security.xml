@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<b:beans xmlns="http://www.springframework.org/schema/security"
+         xmlns:b="http://www.springframework.org/schema/beans"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+						http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security.xsd">
+
+    <http auto-config="true" realm="helpdesk">
+        <intercept-url pattern="/" access="permitAll()"/>
+        <intercept-url pattern="**/*.log" access="permitAll()"/>
+        <intercept-url pattern="/login.html" access="permitAll()"/>
+        <intercept-url pattern="/index.html" access="isAuthenticated()"/>
+
+        <intercept-url pattern="/api/tickets/create" access="hasAnyRole('MANAGER', 'EMPLOYEE')"/>
+        <intercept-url pattern="/api/tickets/update" access="hasAnyRole('MANAGER', 'EMPLOYEE')"/>
+
+        <form-login login-page="/login.html"
+                    default-target-url="/index.html"
+                    authentication-failure-url="/login?error"
+                    username-parameter="username"
+                    password-parameter="password"/>
+        <logout logout-success-url="/login?logout"/>
+
+    </http>
+
+    <b:bean id="userDetailService" class="com.javamog.potapov.service.impl.UserServiceImpl"/>
+
+    <authentication-manager alias="authenticationManager">
+        <authentication-provider user-service-ref="userDetailService">
+            <password-encoder ref="encoder"/>
+        </authentication-provider>
+    </authentication-manager>
+    <b:bean id="encoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder">
+        <b:constructor-arg name="strength" value="11"/>
+    </b:bean>
+
+    <!--<b:bean id="tokenRepository"-->
+            <!--class="org.springframework.security.web.csrf.CookieCsrfTokenRepository"-->
+            <!--p:cookieHttpOnly="false"/>-->
+
+    <!--<user-service>-->
+        <!--<user name="user1_mogilev@yopmail.com" password="password" authorities="EMPLOYEE" />-->
+        <!--<user name="user2_mogilev@yopmail.com" password="password" authorities="EMPLOYEE" />-->
+        <!--<user name="manager1_mogilev@yopmail.com" password="password" authorities="MANAGER" />-->
+        <!--<user name="manager2_mogilev@yopmail.com" password="password" authorities="MANAGER" />-->
+        <!--<user name="engineer1_mogilev@yopmail.com" password="password" authorities="ENGINEER" />-->
+        <!--<user name="engineer1_mogilev@yopmail.com" password="password" authorities="ENGINEER" />-->
+    <!--</user-service>-->
+
+</b:beans>

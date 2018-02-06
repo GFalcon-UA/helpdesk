@@ -3,37 +3,44 @@ package com.javamog.potapov.domain;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.javamog.potapov.parent.entity.AbstractEntity;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 import java.util.Date;
 
 @Entity
 @Table(name = "HISTORY")
 public class History extends AbstractEntity {
 
-    @Column(name = "date")
+//    @Column(name = "date")
     @JsonFormat(shape = JsonFormat.Shape.STRING)
-    private Date historyDate;
+    private Date date;
 
-    @Column(name = "action")
+//    @Column(name = "action")
     private String action;
 
-    @Column(name = "description")
+//    @Column(name = "description")
     private String description;
 
+//    @ManyToOne
+//    @JoinColumn(name = "user_id")
     @ManyToOne
-    @JoinColumn(name = "user_id")
-    private User historyUser;
+    private User user;
 
+//    @ManyToOne
+//    @JoinColumn(name = "ticket_id")
     @ManyToOne
-    @JoinColumn(name = "ticket_id")
-    private Ticket historyTicket;
+    private Ticket ticket;
 
-    public Date getHistoryDate() {
-        return historyDate;
+    public History() {
     }
 
-    public void setHistoryDate(Date date) {
-        this.historyDate = date;
+    public Date getDate() {
+        return date;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
     }
 
     public String getAction() {
@@ -52,19 +59,23 @@ public class History extends AbstractEntity {
         this.description = description;
     }
 
-    public User getHistoryUser() {
-        return historyUser;
+    public User getUser() {
+        return user;
     }
 
-    public void setHistoryUser(User historyUser) {
-        this.historyUser = historyUser;
+    @Deprecated
+    public void setUser(User user) {
+        this.user = user;
     }
 
-    public Ticket getHistoryTicket() {
-        return historyTicket;
+    public Ticket getTicket() {
+        return ticket;
     }
 
-    public void setHistoryTicket(Ticket historyTicket) {
-        this.historyTicket = historyTicket;
+    @Deprecated
+    public void setTicket(Ticket ticket) {
+        this.ticket = ticket;
     }
+
+
 }

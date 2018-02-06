@@ -1,13 +1,43 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <Configuration status="WARN">
+    <Properties>
+        <Property name="log_level">UNFO</Property>
+        <Property name="pattern">%d{yyyy-MM-dd HH:mm:ss.SSS ZZZ} | %-5p | %25c{1.1.1.*} : %-4L (%M) : %m%n</Property>
+        <Property name="debug-pattern">%d{yyyy-MM-dd HH:mm:ss.SSS ZZZ} [%t] [ %-5p ] %l : %m%n</Property>
+    </Properties>
     <Appenders>
-        <Console name="console" target="SYSTEM_OUT">
-            <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss.SSS ZZZ} [%p] %c : %m%n"/>
+        <Console name="console-debug" target="SYSTEM_OUT">
+            <PatternLayout pattern="${debug-pattern}"/>
+            <ThresholdFilter level="INFO" onMatch="DENY" onMismatch="ACCEPT"/>
         </Console>
+        <Console name="console" target="SYSTEM_OUT">
+            <PatternLayout pattern="${pattern}"/>
+            <ThresholdFilter level="WARN" onMatch="DENY" onMismatch="ACCEPT"/>
+        </Console>
+        <Console name="console-err" target="SYSTEM_ERR">
+            <PatternLayout pattern="${pattern}"/>
+            <ThresholdFilter level="WARN" onMatch="ACCEPT" onMismatch="DENY"/>
+        </Console>
+
+        <!--<File name="file" fileName="logs/helpdesk.log">-->
+            <!--<PatternLayout pattern="${pattern}"/>-->
+        <!--</File>-->
+
+        <!--<RollingFile name="rolling-file" fileName="logs/rolling.log" append="true"-->
+                     <!--filePattern="logs/$${date:yyyy-MM}/app-%d{yyyy-MM-dd}-%i.log">-->
+            <!--<PatternLayout pattern="${pattern}"/>-->
+            <!--<Policies>-->
+                <!--<TimeBasedTriggeringPolicy />-->
+                <!--<SizeBasedTriggeringPolicy size="1 MB"/>-->
+            <!--</Policies>-->
+        <!--</RollingFile>-->
     </Appenders>
     <Loggers>
-        <asyncRoot level="INFO">
+        <asyncRoot level="${log_level}" includeLocation="true">
+            <AppenderRef ref="console-debug"/>
             <AppenderRef ref="console"/>
+            <AppenderRef ref="console-err"/>
+            <!--<AppenderRef ref="file"/>-->
         </asyncRoot>
     </Loggers>
 </Configuration>

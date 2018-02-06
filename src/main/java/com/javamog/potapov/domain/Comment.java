@@ -1,9 +1,11 @@
 package com.javamog.potapov.domain;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.javamog.potapov.Abstract.entity.AbstractEntity;
+import com.javamog.potapov.parent.entity.AbstractEntity;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 import java.util.Date;
 
 @Entity
@@ -11,20 +13,32 @@ import java.util.Date;
 public class Comment extends AbstractEntity {
 
 
-    @Column(name = "text")
+//    @Column(name = "text")
     private String text;
 
-    @Column(name = "commentDate")
+//    @Column(name = "commentDate")
     @JsonFormat(shape = JsonFormat.Shape.STRING)
-    private Date commentDate;
+    private Date date;
 
+//    @ManyToOne
+//    @JoinColumn(name = "user_id")
     @ManyToOne
-    @JoinColumn(name = "user_id")
-    private User commentUser;
+//    @JsonIgnore
+    private User user;
 
+//    @ManyToOne
+//    @JoinColumn(name = "ticket_id")
     @ManyToOne
-    @JoinColumn(name = "ticket_id")
-    private Ticket commentTicket;
+//    @JsonIgnore
+    private Ticket ticket;
+
+    public Comment(){
+
+    }
+
+    public Comment(String text) {
+        this.text = text;
+    }
 
     public String getText() {
         return text;
@@ -34,28 +48,30 @@ public class Comment extends AbstractEntity {
         this.text = text;
     }
 
-    public Date getCommentDate() {
-        return commentDate;
+    public Date getDate() {
+        return date;
     }
 
-    public void setCommentDate(Date commentDate) {
-        this.commentDate = commentDate;
+    public void setDate(Date date) {
+        this.date = date;
     }
 
-    public User getCommentUser() {
-        return commentUser;
+    public User getUser() {
+        return user;
     }
 
-    public void setCommentUser(User commentUser) {
-        this.commentUser = commentUser;
+    @Deprecated
+    public void setUser(User user) {
+        this.user = user;
     }
 
-    public Ticket getCommentTicket() {
-        return commentTicket;
+    public Ticket getTicket() {
+        return ticket;
     }
 
-    public void setCommentTicket(Ticket commentTicket) {
-        this.commentTicket = commentTicket;
+    @Deprecated
+    public void setTicket(Ticket ticket) {
+        this.ticket = ticket;
     }
 }
 

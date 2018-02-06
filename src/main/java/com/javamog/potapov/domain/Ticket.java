@@ -1,72 +1,84 @@
 package com.javamog.potapov.domain;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.javamog.potapov.domain.enums.State;
 import com.javamog.potapov.domain.enums.Urgency;
 import com.javamog.potapov.parent.entity.AbstractEntity;
 
 import javax.persistence.*;
 import java.util.Date;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
+import java.util.TreeSet;
 
 @Entity
 @Table(name = "TICKET")
 public class Ticket extends AbstractEntity {
 
-    @Column(name = "name")
+//    @Column(name = "name")
     private String name;
 
-    @Column(name = "description")
+//    @Column(name = "description")
     private String description;
 
-    @Column(name = "created_on")
+//    @Column(name = "created_on")
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
     private Date createdOn;
 
-    @Column(name = "desired_resolution_date")
+//    @Column(name = "desired_resolution_date")
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
     private Date desiredDate;
 
-    @Column(name = "state_id")
+//    @Column(name = "state_id")
     @Enumerated(EnumType.STRING)
     private State state;
 
-    @Column(name = "urgency_id")
+//    @Column(name = "urgency_id")
     @Enumerated(EnumType.STRING)
     private Urgency urgency;
 
+//    @ManyToOne
+//    @JoinColumn(name = "owner_id")
     @ManyToOne
-    @JoinColumn(name = "owner_id")
+//    @JsonIgnore
     private User owner;
 
+//    @ManyToOne
+//    @JoinColumn(name = "assignee_id")
     @ManyToOne
-    @JoinColumn(name = "assignee_id")
+//    @JsonIgnore
     private User assignee;
 
+//    @ManyToOne
+//    @JoinColumn(name = "approver_id")
     @ManyToOne
-    @JoinColumn(name = "approver_id")
+//    @JsonIgnore
     private User approver;
 
+    //@ManyToOne
+//    @JoinColumn(name = "category_id")
     @ManyToOne
-    @JoinColumn(name = "category_id")
+//    @JsonIgnore
     private Category category;
 
-    @OneToMany(mappedBy = "historyTicket", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @JsonIgnore
-    private List<History> ticketHistory;
+    @OneToMany(mappedBy = "ticket", cascade = CascadeType.ALL, orphanRemoval = true)
+//    @JsonIgnore
+    private Set<History> histories = new TreeSet<>((o1, o2) -> o1.getDate().compareTo(o2.getDate()));
 
-    @OneToMany(mappedBy = "attachmentTicket", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @JsonIgnore
-    private List<Attachment> ticketAttachments;
+    @OneToMany(mappedBy = "ticket", cascade = CascadeType.ALL, orphanRemoval = true)
+//    @JsonIgnore
+    private Set<Attachment> attachments = new HashSet<>();
 
-    @OneToMany(mappedBy = "commentTicket", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @JsonIgnore
-    private List<Comment> ticketComments;
+    @OneToMany(mappedBy = "ticket", cascade = CascadeType.ALL, orphanRemoval = true)
+//    @JsonIgnore
+    private Set<Comment> comments = new TreeSet<>((o1, o2) -> o1.getDate().compareTo(o2.getDate()));
 
-    @OneToMany(mappedBy = "feedbackTicket", cascade = CascadeType.ALL)
-    @JsonIgnore
-    private List<Feedback> ticketFeedback;
+    @OneToMany(mappedBy = "ticket", cascade = CascadeType.ALL, orphanRemoval = true)
+//    @JsonIgnore
+    private Set<Feedback> feedbacks = new TreeSet<>((o1, o2) -> o1.getDate().compareTo(o2.getDate()));
+
+    public Ticket() {
+    }
 
     public String getName() {
         return name;
@@ -96,8 +108,8 @@ public class Ticket extends AbstractEntity {
         return desiredDate;
     }
 
-    public void setDesiredDate(Date date) {
-        this.desiredDate = date;
+    public void setDesiredDate(Date desiredDate) {
+        this.desiredDate = desiredDate;
     }
 
     public State getState() {
@@ -116,18 +128,11 @@ public class Ticket extends AbstractEntity {
         this.urgency = urgency;
     }
 
-    public Category getCategory() {
-        return category;
-    }
-
-    public void setCategory(Category category) {
-        this.category = category;
-    }
-
     public User getOwner() {
         return owner;
     }
 
+    @Deprecated
     public void setOwner(User owner) {
         this.owner = owner;
     }
@@ -136,6 +141,7 @@ public class Ticket extends AbstractEntity {
         return assignee;
     }
 
+    @Deprecated
     public void setAssignee(User assignee) {
         this.assignee = assignee;
     }
@@ -144,39 +150,91 @@ public class Ticket extends AbstractEntity {
         return approver;
     }
 
+    @Deprecated
     public void setApprover(User approver) {
         this.approver = approver;
     }
 
-    public List<History> getTicketHistory() {
-        return ticketHistory;
+    public Category getCategory() {
+        return category;
     }
 
-    public void setTicketHistory(List<History> ticketHistory) {
-        this.ticketHistory = ticketHistory;
+    @Deprecated
+    public void setCategory(Category category) {
+        this.category = category;
     }
 
-    public List<Attachment> getTicketAttachments() {
-        return ticketAttachments;
+    public Set<History> getHistories() {
+        return histories;
     }
 
-    public void setTicketAttachments(List<Attachment> ticketAttachments) {
-        this.ticketAttachments = ticketAttachments;
+    public void setHistories(Set<History> histories) {
+        this.histories = histories;
     }
 
-    public List<Comment> getTicketComments() {
-        return ticketComments;
+    public void addHistories(History history) {
+        this.histories.add(history);
+        history.setTicket(this);
     }
 
-    public void setTicketComments(List<Comment> ticketComments) {
-        this.ticketComments = ticketComments;
+    public void removeHistories(History history) {
+        this.histories.remove(history);
+        history.setTicket(null);
     }
 
-    public List<Feedback> getTicketFeedback() {
-        return ticketFeedback;
+    public Set<Attachment> getAttachments() {
+        return attachments;
     }
 
-    public void setTicketFeedback(List<Feedback> ticketFeedback) {
-        this.ticketFeedback = ticketFeedback;
+    public void setAttachments(Set<Attachment> attachments) {
+        this.attachments = attachments;
     }
+
+    public void addAttachments(Attachment attachment) {
+        this.attachments.add(attachment);
+        attachment.setTicket(this);
+    }
+
+    public void removeAttachments(Attachment attachment) {
+        this.attachments.remove(attachment);
+        attachment.setTicket(null);
+    }
+
+    public Set<Comment> getComments() {
+        return comments;
+    }
+
+    public void setComments(Set<Comment> comments) {
+        this.comments = comments;
+    }
+
+    public void addComment(Comment comment) {
+        this.comments.add(comment);
+        comment.setTicket(this);
+    }
+
+    public void removeComment(Comment comment) {
+        this.comments.remove(comment);
+        comment.setTicket(null);
+    }
+
+    public Set<Feedback> getFeedbacks() {
+        return feedbacks;
+    }
+
+    public void setFeedbacks(Set<Feedback> feedbacks) {
+        this.feedbacks = feedbacks;
+    }
+
+    public void addFeedbacks(Feedback feedback) {
+        this.feedbacks.add(feedback);
+        feedback.setTicket(this);
+    }
+
+    public void removeFeedbacks(Feedback feedback) {
+        this.feedbacks.remove(feedback);
+        feedback.setTicket(null);
+    }
+
+
 }

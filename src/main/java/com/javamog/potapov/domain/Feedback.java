@@ -2,28 +2,36 @@ package com.javamog.potapov.domain;
 
 import com.javamog.potapov.parent.entity.AbstractEntity;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 import java.util.Date;
 
 @Entity
 @Table(name = "FEEDBACK")
 public class Feedback extends AbstractEntity {
 
-
-    @Column(name = "rate")
+//    @Column(name = "rate")
     private int rate;
 
-    private Date feedbackDate;
+    private Date date;
 
     private String text;
 
+//    @ManyToOne
+//    @JoinColumn(name = "user_id")
     @ManyToOne
-    @JoinColumn(name = "user_id")
-    private User feedbackUser;
+//    @JsonIgnore
+    private User user;
 
+//    @ManyToOne
+//    @JoinColumn(name = "ticket_id")
     @ManyToOne
-    @JoinColumn(name = "ticket_id")
-    private Ticket feedbackTicket;
+//    @JsonIgnore
+    private Ticket ticket;
+
+    public Feedback() {
+    }
 
     public int getRate() {
         return rate;
@@ -33,12 +41,12 @@ public class Feedback extends AbstractEntity {
         this.rate = rate;
     }
 
-    public Date getFeedbackDate() {
-        return feedbackDate;
+    public Date getDate() {
+        return date;
     }
 
-    public void setFeedbackDate(Date feedbackDate) {
-        this.feedbackDate = feedbackDate;
+    public void setDate(Date date) {
+        this.date = date;
     }
 
     public String getText() {
@@ -49,19 +57,21 @@ public class Feedback extends AbstractEntity {
         this.text = text;
     }
 
-    public User getFeedbackUser() {
-        return feedbackUser;
+    public User getUser() {
+        return user;
     }
 
-    public void setFeedbackUser(User feedbackUser) {
-        this.feedbackUser = feedbackUser;
+    @Deprecated
+    public void setUser(User user) {
+        this.user = user;
     }
 
-    public Ticket getFeedbackTicket() {
-        return feedbackTicket;
+    public Ticket getTicket() {
+        return ticket;
     }
 
-    public void setFeedbackTicket(Ticket feedbackTicket) {
-        this.feedbackTicket = feedbackTicket;
+    @Deprecated
+    public void setTicket(Ticket ticket) {
+        this.ticket = ticket;
     }
 }

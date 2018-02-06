@@ -6,14 +6,14 @@
         http://www.springframework.org/schema/beans/spring-beans-4.2.xsd">
 
        <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-              <!--
-              <property name="prefix">
-                  <value>/WEB-INF/app/</value>
-              </property>
-              <property name="suffix">
-                     <value>.jsp</value>
-              </property>
-              -->
+
+              <!--<property name="prefix">-->
+                  <!--<value>/WEB-INF/templates/</value>-->
+              <!--</property>-->
+              <!--<property name="suffix">-->
+                     <!--<value>.jsp</value>-->
+              <!--</property>-->
+
        </bean>
 
 </beans>

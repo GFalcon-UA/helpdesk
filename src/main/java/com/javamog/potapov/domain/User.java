@@ -1,58 +1,102 @@
 package com.javamog.potapov.domain;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.javamog.potapov.domain.enums.Role;
 import com.javamog.potapov.parent.entity.AbstractEntity;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "USER")
-public class User extends AbstractEntity {
+public class User extends AbstractEntity implements UserDetails {
 
     @Column(name = "first_name", nullable = false)
     private String firstName;
 
-    @Column(name = "last_name", nullable = false)
+    @Column(name = "last_name")
     private String lastName;
 
-    @Column(name = "phone", nullable = false)
+    @Column(name = "phone")
     private String phone;
 
-    @Column(name = "role_id", nullable = false)
+    @Column(name = "role", nullable = false)
     @Enumerated(EnumType.STRING)
-    private Role roleId;
+    private Role role;
 
     @Column(name = "email", nullable = false)
     private String email;
 
-    @Column(name = "addres", nullable = false)
-    private String addres;
+    @Column(name = "address")
+    private String address;
 
-    @OneToMany(mappedBy = "owner", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @JsonIgnore
-    private List<Ticket> ownTickets;
+    @OneToMany(mappedBy = "owner", cascade = CascadeType.ALL, orphanRemoval = true)
+//    @JsonIgnore
+    private Set<Ticket> ownTickets = new HashSet<>();
 
-    @OneToMany(mappedBy = "assignee", cascade = CascadeType.ALL)
-    @JsonIgnore
-    private List<Ticket> assignTickets;
+    @OneToMany(mappedBy = "assignee", cascade = CascadeType.ALL, orphanRemoval = true)
+//    @JsonIgnore
+    private Set<Ticket> assignTickets = new HashSet<>();
 
-    @OneToMany(mappedBy = "approver", cascade = CascadeType.ALL)
-    @JsonIgnore
-    private List<Ticket> approveTickets;
+    @OneToMany(mappedBy = "approver", cascade = CascadeType.ALL, orphanRemoval = true)
+//    @JsonIgnore
+    private Set<Ticket> approveTickets = new HashSet<>();
 
-    @OneToMany(mappedBy = "historyUser", cascade = CascadeType.ALL)
-    @JsonIgnore
-    private List<History> userHistory;
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+//    @JsonIgnore
+    private Set<History> histories = new HashSet<>();
 
-    @OneToMany(mappedBy = "commentUser", cascade = CascadeType.ALL)
-    @JsonIgnore
-    private List<Comment> userComments;
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+//    @JsonIgnore
+    private Set<Comment> comments = new HashSet<>();
 
-    @OneToMany(mappedBy = "feedbackUser", cascade = CascadeType.ALL)
-    @JsonIgnore
-    private List<Feedback> userFeedback;
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+//    @JsonIgnore
+    private Set<Feedback> feedbacks = new HashSet<>();
+
+    @Column(name = "password")
+    private String password;
+
+    public User() {
+    }
+
+    @Override
+    public Set<Role> getAuthorities() {
+        Set<Role> roles = new HashSet<>();
+        roles.add(this.role);
+        return roles;
+    }
+
+    @Override
+    public String getPassword() {
+        return this.password;
+    }
+
+    @Override
+    public String getUsername() {
+        return email;
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return true;
+    }
 
     public String getFirstName() {
         return firstName;
@@ -78,12 +122,12 @@ public class User extends AbstractEntity {
         this.phone = phone;
     }
 
-    public Role getRoleId() {
-        return roleId;
+    public Role getRole() {
+        return role;
     }
 
-    public void setRoleId(Role roleId) {
-        this.roleId = roleId;
+    public void setRole(Role role) {
+        this.role = role;
     }
 
     public String getEmail() {
@@ -94,59 +138,123 @@ public class User extends AbstractEntity {
         this.email = email;
     }
 
-    public String getAddres() {
-        return addres;
+    public String getAddress() {
+        return address;
     }
 
-    public void setAddres(String addres) {
-        this.addres = addres;
+    public void setAddress(String address) {
+        this.address = address;
     }
 
-    public List<Ticket> getOwnTickets() {
+    public Set<Ticket> getOwnTickets() {
         return ownTickets;
     }
 
-    public void setOwnTickets(List<Ticket> tickets) {
-        this.ownTickets = tickets;
+    public void setOwnTickets(Set<Ticket> ownTickets) {
+        this.ownTickets = ownTickets;
     }
 
-    public List<Ticket> getAssignTickets() {
+    public void addOwnTicket(Ticket ownTicket){
+        ownTickets.add(ownTicket);
+        ownTicket.setOwner(this);
+    }
+
+    public void removeOwnTicket(Ticket ownTicket){
+        ownTickets.remove(ownTicket);
+        ownTicket.setOwner(null);
+    }
+
+    public Set<Ticket> getAssignTickets() {
         return assignTickets;
     }
 
-    public void setAssignTickets(List<Ticket> myAssignTickets) {
-        this.assignTickets = myAssignTickets;
+    public void setAssignTickets(Set<Ticket> assignTickets) {
+        this.assignTickets = assignTickets;
     }
 
-    public List<Ticket> getApproveTickets() {
+    public void setAssignTicket(Ticket assignTicket){
+        assignTickets.add(assignTicket);
+        assignTicket.setAssignee(this);
+    }
+
+    public void removeAssignTicket(Ticket assignTicket){
+        assignTickets.remove(assignTicket);
+        assignTicket.setAssignee(null);
+    }
+
+    public Set<Ticket> getApproveTickets() {
         return approveTickets;
     }
 
-    public void setApproveTickets(List<Ticket> myApproveTickets) {
-        this.approveTickets = myApproveTickets;
+    public void setApproveTickets(Set<Ticket> approveTickets) {
+        this.approveTickets = approveTickets;
     }
 
-    public List<History> getUserHistory() {
-        return userHistory;
+    public void addApproveTicket(Ticket approveTicket){
+        approveTickets.add(approveTicket);
+        approveTicket.setApprover(this);
     }
 
-    public void setUserHistory(List<History> userHistory) {
-        this.userHistory = userHistory;
+    public void removeApproveTicket(Ticket approveTicket){
+        approveTickets.remove(approveTicket);
+        approveTicket.setApprover(null);
     }
 
-    public List<Comment> getUserComments() {
-        return userComments;
+    public Set<History> getHistories() {
+        return histories;
     }
 
-    public void setUserComments(List<Comment> userComments) {
-        this.userComments = userComments;
+    public void setHistories(Set<History> histories) {
+        this.histories = histories;
     }
 
-    public List<Feedback> getUserFeedback() {
-        return userFeedback;
+    public void addHistories(History historie) {
+        histories.add(historie);
+        historie.setUser(this);
     }
 
-    public void setUserFeedback(List<Feedback> userFeedback) {
-        this.userFeedback = userFeedback;
+    public void removeHistories(History historie) {
+        histories.remove(historie);
+        historie.setUser(null);
+    }
+
+    public Set<Comment> getComments() {
+        return comments;
+    }
+
+    public void setComments(Set<Comment> comments) {
+        this.comments = comments;
+    }
+
+    public void addComments(Comment comment) {
+        comments.add(comment);
+        comment.setUser(this);
+    }
+
+    public void removeComments(Comment comment) {
+        comments.remove(comment);
+        comment.setUser(null);
+    }
+
+    public Set<Feedback> getFeedbacks() {
+        return feedbacks;
+    }
+
+    public void setFeedbacks(Set<Feedback> feedbacks) {
+        this.feedbacks = feedbacks;
+    }
+
+    public void addFeedback(Feedback feedback) {
+        feedbacks.add(feedback);
+        feedback.setUser(this);
+    }
+
+    public void removeFeedback(Feedback feedback) {
+        feedbacks.remove(feedback);
+        feedback.setUser(null);
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 }
