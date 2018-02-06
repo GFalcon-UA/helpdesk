@@ -3,36 +3,64 @@
     <head>
         <title>Login page</title>
         <meta charset="utf-8" />
+        <link rel="stylesheet" href="./webjars/bootstrap/3.3.7/dist/css/bootstrap.min.css">
         <link rel="stylesheet" href="css/main.css" th:href="@{/css/main.css}" />
 	</head>
     <body>
-        <h1>Login to the Help Desk</h1>
-        <p th:if="${loginError}" class="error">Please make sure you are using a valid email or password</p>
-        <form th:action="@{/login.html}" method="post">
-            <label for="username">User Name:</label>:
-            <input type="email" id="username" name="username" required autofocus="autofocus" /> <br />
-            <label for="password">Password:</label>:
-            <input type="password" id="password" name="password" required /> <br />
-            <input type="submit" value="Enter" />
-        </form>
-    <div>
-        <br/>
-        Role 'Employee':<br/>
-        <br/>
-        user1_mogilev@yopmail.com<br/>
-        user2_mogilev@yopmail.com<br/>
-        <br/>
-        Role 'Manager':<br/>
-        <br/>
-        manager1_mogilev@yopmail.com<br/>
-        manager2_mogilev@yopmail.com<br/>
-        <br/>
-        Role 'Engineer':<br/>
-        <br/>
-        engineer1_mogilev@yopmail.com<br/>
-        engineer2_mogilev@yopmail.com<br/>
-        <br/>
-        P@ssword1<br/>
+
+    <div class="container">
+        <div>
+            <div class="container login-page">
+                <form class="login-form" th:action="@{/login.html}" method="post">
+                    <div class="row">
+                        <div class="col-xs-8 text-center"><h3>Login to the Help Desk</h3></div>
+                    </div>
+                    <br />
+                    <br />
+                    <br />
+                    <div class="row">
+                        <div class="col-xs-4"><h4>User Name:</h4></div>
+                        <div class="col-xs-8">
+                            <input type="email" class="form-control" id="username" name="username" required autofocus="autofocus"/>
+                        </div>
+                    </div>
+                    <br />
+                    <div class="row">
+                        <div class="col-xs-4"><h4>Password:</h4></div>
+                        <div class="col-xs-8">
+                            <input type="password" class="form-control" id="password" name="password" required />
+                        </div>
+                    </div>
+                    <br />
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <input type="submit" class="btn btn-sm btn-default pull-right" style="width: 160px;" value="Enter"/>
+                        </div>
+                    </div>
+                    <br/>
+                    <p th:if="${loginError}" style="color: red; text-align: center">Please make sure you are using a valid email or password</p>
+                </form>
+            </div>
+        </div>
+        <div>
+            <br/>
+            Role 'Employee':<br/>
+            <br/>
+            user1_mogilev@yopmail.com<br/>
+            user2_mogilev@yopmail.com<br/>
+            <br/>
+            Role 'Manager':<br/>
+            <br/>
+            manager1_mogilev@yopmail.com<br/>
+            manager2_mogilev@yopmail.com<br/>
+            <br/>
+            Role 'Engineer':<br/>
+            <br/>
+            engineer1_mogilev@yopmail.com<br/>
+            engineer2_mogilev@yopmail.com<br/>
+            <br/>
+            P@ssword1<br/>
+        </div>
     </div>
     </body>
 </html>
