@@ -1,5 +1,7 @@
 package com.javamog.potapov.domain;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.javamog.potapov.parent.entity.AbstractEntity;
 
 import javax.persistence.*;
@@ -11,10 +13,12 @@ import java.util.Set;
 public class Category extends AbstractEntity {
 
     @Column(name = "name", nullable = false)
+    @JsonProperty("sName")
     private String name;
 
     @OneToMany(mappedBy = "category", cascade = CascadeType.ALL, orphanRemoval = true)
-//    @JsonIgnore
+    @JsonBackReference
+    @JsonProperty("aoTickets")
     private Set<Ticket> tickets = new HashSet<>();
 
     public Category() {

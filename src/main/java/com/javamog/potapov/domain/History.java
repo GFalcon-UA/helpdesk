@@ -1,6 +1,8 @@
 package com.javamog.potapov.domain;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.javamog.potapov.parent.entity.AbstractEntity;
 
 import javax.persistence.Entity;
@@ -12,24 +14,24 @@ import java.util.Date;
 @Table(name = "HISTORY")
 public class History extends AbstractEntity {
 
-//    @Column(name = "date")
     @JsonFormat(shape = JsonFormat.Shape.STRING)
+    @JsonProperty("dDate")
     private Date date;
 
-//    @Column(name = "action")
+    @JsonProperty("sAction")
     private String action;
 
-//    @Column(name = "description")
+    @JsonProperty("sDescription")
     private String description;
 
-//    @ManyToOne
-//    @JoinColumn(name = "user_id")
+    @JsonBackReference
     @ManyToOne
+    @JsonProperty("oUser")
     private User user;
 
-//    @ManyToOne
-//    @JoinColumn(name = "ticket_id")
+    @JsonBackReference
     @ManyToOne
+    @JsonProperty("oTicket")
     private Ticket ticket;
 
     public History() {

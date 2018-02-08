@@ -1,68 +1,103 @@
-<a class="btn btn-success" ng-href="/">Ticket List</a>
-<div class="title">
-    <span ng-if="!vm.ticket['nID']">Create new Ticket</span>
-    <samp ng-if="vm.ticket['nID']">Edit Ticket {{vm.ticket['nID']}}</samp>
-</div>
-<form>
+<div class="container editor">
     <div class="row">
-        <label class="col-md-4" for="category">Category</label>
-        <select class="form-control col-md-6"
-                id="category"
-                required
-                ng-model="vm.categories.selected"
-                ng-options="obj as obj.name for obj in vm.categories.list track by obj.id"></select>
+        <div class="col-xs-2">
+            <a style="width: 120px;" class="btn btn-success" ng-href="/">Ticket List</a>
+        </div>
+        <div class="col-xs-6">
+            <h3 style="line-height: 34px; margin: 0;">Create new Ticket</h3>
+        </div>
     </div>
-    <div class="row">
-        <label class="col-md-4" for="name">Name</label>
-        <input id="name" type="text" required class="form-control col-md-6" ng-model="vm.ticket.name">
-    </div>
-    <div class="row">
-        <label class="col-md-4" for="description">Description</label>
-        <textarea id="description" class="col-md-6" ng-model="vm.ticket.description"></textarea>
-    </div>
-    <div class="row">
-        <label class="col-md-4" for="urgency">Urgency</label>
-        <select class="form-control col-md-6"
-                id="urgency"
-                required
-                ng-model="vm.urgency.selected"
-                ng-options="name for name in vm.urgency.list"></select>
-    </div>
-    <div class="row">
-        <label class="col-md-4" for="date">Desired resolution date</label>
-        <input type="text" class="col-md-6 form-control" id="date" ng-model="vm.ticket.desiredDate"/>
-        <!--<div class="col-md-6">-->
-            <!--<p class="input-group">-->
-                <!--<input type="text"-->
-                       <!--class="form-control"-->
-                       <!--uib-datepicker-popup="{{format}}"-->
-                       <!--ng-model="vm.ticket.desiredDate"-->
-                       <!--is-open="popup1.opened"-->
-                       <!--datepicker-options="dateOptions"-->
-                       <!--ng-required="true"-->
-                       <!--close-text="Close"-->
-                       <!--alt-input-formats="altInputFormats" />-->
-                <!--<span class="input-group-btn">-->
-                    <!--<button type="button"-->
-                            <!--class="btn btn-default"-->
-                            <!--ng-click="vm.openDatePicker()">-->
-                        <!--<i class="glyphicon glyphicon-calendar"></i>-->
-                    <!--</button>-->
-                <!--</span>-->
-            <!--</p>-->
+    <!--<div class="row">-->
+        <!--<div class="col-xs-2">-->
+            <!--<button style="width: 120px;" class="btn btn-success">Ticket Overview</button>-->
         <!--</div>-->
+        <!--<div class="col-xs-6">-->
+            <!--<h3 style="line-height: 34px; margin: 0;">Edit Ticket (2)</h3>-->
+        <!--</div>-->
+    <!--</div>-->
+    <div class="col-xs-1"></div>
+    <div class="col-xs-11">
+        <br />
+        <br />
+        <div class="row">
+            <div class="col-xs-2 text-right">
+                <h5>Category <span class="warning">*</span></h5>
+            </div>
+            <div class="col-xs-4">
+                <select class="form-control"
+                        id="category"
+                        required
+                        ng-model="vm.categories.selected"
+                        ng-options="obj as obj.name for obj in vm.categories.list track by obj.id"></select>
+            </div>
+        </div>
+        <br />
+        <div class="row">
+            <div class="col-xs-2 text-right">
+                <h5>Name <span class="warning">*</span></h5>
+            </div>
+            <div class="col-xs-4">
+                <input type="text" class="form-control" ng-model="vm.ticket.name" required/>
+            </div>
+        </div>
+        <br />
+        <div class="row">
+            <div class="col-xs-2 text-right">
+                <h5>Description</h5>
+            </div>
+            <div class="col-xs-5">
+                <textarea class="form-control" rows="3" ng-model="vm.ticket.description"></textarea>
+            </div>
+        </div>
+        <br />
+        <div class="row">
+            <div class="col-xs-2 text-right">
+                <h5>Urgency <span class="warning">*</span></h5>
+            </div>
+            <div class="col-xs-4">
+                <select class="form-control"
+                        id="urgency"
+                        required
+                        ng-model="vm.urgency.selected"
+                        ng-options="name for name in vm.urgency.list"></select>
+            </div>
+        </div>
+        <br />
+        <div class="row">
+            <div class="col-xs-2 text-right">
+                <h5>Desired resolution date</h5>
+            </div>
+            <div class="col-xs-4">
+                <input type="text" class="form-control"  ng-model="vm.ticket.desiredDate"/>
+            </div>
+        </div>
+        <br />
+        <div class="row">
+            <div class="col-xs-2 text-right">
+                <h5>Add attachments</h5>
+            </div>
+            <div class="col-xs-4">
+                <input type="file" class="btn btn-default" style="width: 140px;" ng-model="vm.attachment"/>
+            </div>
+        </div>
+        <br />
+        <div class="row">
+            <div class="col-xs-2 text-right">
+                <h5>Comment</h5>
+            </div>
+            <div class="col-xs-5">
+                <textarea class="form-control" rows="3" ng-model="vm.ticket.comment"></textarea>
+            </div>
+        </div>
+        <br />
+        <br />
+        <div class="row">
+            <div class="col-xs-10">
+                <div style="width: 160px;" class="btn btn-success pull-right" ng-click="vm.submit()">Submit</div>
+                <div style="width: 160px; margin-right: 20px;" class="btn btn-default pull-right" ng-click="vm.saveDraft()">Save as Draft</div>
+            </div>
+        </div>
+        <br />
+        <br />
     </div>
-    <div class="row">
-        <label class="col-md-4" for="attachment">Add attachments</label>
-        <input type="file" class="btn btn-default" id="attachment" ng-model="vm.attachment" />
-    </div>
-    <div class="row">
-        <label class="col-md-4">Comment</label>
-        <textarea class="form-control col-md-6" id="comment" ng-model="vm.ticket.comment"></textarea>
-    </div>
-    <div>
-        <button class="btn btn-default" ng-click="vm.saveDraft()">Save as Draft</button>
-        <button class="btn btn-success" ng-click="vm.submit()">Submit</button>
-    </div>
-
-</form>
+</div>

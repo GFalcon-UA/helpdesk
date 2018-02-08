@@ -1,21 +1,19 @@
 package com.javamog.potapov.parent.entity;
 
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import net.sf.brunneng.jom.annotations.Identifier;
 
 import javax.persistence.*;
 
 @MappedSuperclass
-@JsonIdentityInfo(
-        generator = ObjectIdGenerators.PropertyGenerator.class,
-        property = "id")
+//@JsonIdentityInfo(
+//        generator = ObjectIdGenerators.PropertyGenerator.class,
+//        property = "id")
 public class AbstractEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id")
-    @JsonProperty(value = "id")
+    @JsonProperty(value = "nId")
     private Long id;
 
     @Identifier

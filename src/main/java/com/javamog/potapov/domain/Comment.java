@@ -1,6 +1,8 @@
 package com.javamog.potapov.domain;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.javamog.potapov.parent.entity.AbstractEntity;
 
 import javax.persistence.Entity;
@@ -12,24 +14,21 @@ import java.util.Date;
 @Table(name = "COMMENT")
 public class Comment extends AbstractEntity {
 
-
-//    @Column(name = "text")
+    @JsonProperty("sTaxt")
     private String text;
 
-//    @Column(name = "commentDate")
     @JsonFormat(shape = JsonFormat.Shape.STRING)
+    @JsonProperty("dDate")
     private Date date;
 
-//    @ManyToOne
-//    @JoinColumn(name = "user_id")
     @ManyToOne
-//    @JsonIgnore
+    @JsonBackReference
+    @JsonProperty("oUser")
     private User user;
 
-//    @ManyToOne
-//    @JoinColumn(name = "ticket_id")
     @ManyToOne
-//    @JsonIgnore
+    @JsonBackReference
+    @JsonProperty("oTicket")
     private Ticket ticket;
 
     public Comment(){

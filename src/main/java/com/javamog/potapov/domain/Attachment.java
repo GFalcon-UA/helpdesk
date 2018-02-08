@@ -1,5 +1,8 @@
 package com.javamog.potapov.domain;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.javamog.potapov.parent.entity.AbstractEntity;
 
 import javax.persistence.*;
@@ -9,17 +12,17 @@ import java.io.Serializable;
 @Table(name = "ATTACHMENT")
 public class Attachment extends AbstractEntity implements Serializable {
 
-//    @Column(name = "ATTACHMENT_name")
+    @JsonProperty("sName")
     private String name;
 
     @Lob @Basic(fetch = FetchType.LAZY)
     @Column(name = "blob", nullable=false)
+    @JsonIgnore
     private byte[] content;
 
-//    @ManyToOne
-//    @JoinColumn(name = "ticket_id")
     @ManyToOne
-//    @JsonIgnore
+    @JsonBackReference
+    @JsonProperty("oTicket")
     private Ticket ticket;
 
     public Attachment() {

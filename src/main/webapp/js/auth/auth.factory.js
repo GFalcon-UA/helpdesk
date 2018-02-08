@@ -7,10 +7,10 @@
       function ($rootScope, $location, $pagesSecurityService, $userProvider, AuthService) {
 
         var enter = function (prevPath) {
-          if ($location.path() !== auth.loginPath) {
+          if ($location.path() !== auth.sLoginPath) {
             auth.path = $location.path();
-            if (!auth.authenticated) {
-              $location.path(auth.loginPath);
+            if (!auth.bAuthenticated) {
+              $location.path(auth.sLoginPath);
             } else if (!$pagesSecurityService.checkAuthorize($location.path())) {
               alert('Доступ запрещен!');
               $location.path(prevPath);
@@ -20,11 +20,11 @@
 
         var auth = {
 
-          authenticated: false,
+          bAuthenticated: false,
 
-          loginPath: '/login',
-          logoutPath: '/logout',
-          homePath: '/',
+          sLoginPath: '/login',
+          sLogoutPath: '/logout',
+          sHomePath: '/',
           path: $location.path(),
 
           authenticate: function (credentials, callback) {
@@ -38,23 +38,23 @@
             AuthService.login(headers).then(function (response) {
               if (response.data && response.data.name) {
                 $userProvider.setUser(response.data);
-                auth.authenticated = true;
+                auth.bAuthenticated = true;
               } else {
-                auth.authenticated = false;
+                auth.bAuthenticated = false;
               }
-              callback && callback(auth.authenticated);
-              $location.path(auth.path === auth.loginPath ? auth.homePath : auth.path);
+              callback && callback(auth.bAuthenticated);
+              $location.path(auth.path === auth.sLoginPath ? auth.sHomePath : auth.path);
             }, function () {
-              auth.authenticated = false;
+              auth.bAuthenticated = false;
               callback && callback(false);
             });
 
           },
 
           clear: function () {
-            $location.path(auth.loginPath);
-            auth.authenticated = false;
-            AuthService.logout(auth.logoutPath).then(function () {
+            $location.path(auth.sLoginPath);
+            auth.bAuthenticated = false;
+            AuthService.logout(auth.sLogoutPath).then(function () {
               $userProvider.setUser(null);
               console.log("Logout succeeded");
             }, function () {
@@ -64,9 +64,9 @@
 
           init: function (homePath, loginPath, logoutPath) {
 
-            auth.homePath = homePath;
-            auth.loginPath = loginPath;
-            auth.logoutPath = logoutPath;
+            auth.sHomePath = homePath;
+            auth.sLoginPath = loginPath;
+            auth.sLogoutPath = logoutPath;
 
             auth.authenticate({}, function (authenticated) {
               if (authenticated) {

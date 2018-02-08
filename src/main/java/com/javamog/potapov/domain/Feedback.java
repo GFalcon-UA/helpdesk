@@ -1,5 +1,7 @@
 package com.javamog.potapov.domain;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.javamog.potapov.parent.entity.AbstractEntity;
 
 import javax.persistence.Entity;
@@ -11,23 +13,23 @@ import java.util.Date;
 @Table(name = "FEEDBACK")
 public class Feedback extends AbstractEntity {
 
-//    @Column(name = "rate")
+    @JsonProperty("nRate")
     private int rate;
 
+    @JsonProperty("dDate")
     private Date date;
 
+    @JsonProperty("sText")
     private String text;
 
-//    @ManyToOne
-//    @JoinColumn(name = "user_id")
     @ManyToOne
-//    @JsonIgnore
+    @JsonBackReference
+    @JsonProperty("oUser")
     private User user;
 
-//    @ManyToOne
-//    @JoinColumn(name = "ticket_id")
     @ManyToOne
-//    @JsonIgnore
+    @JsonBackReference
+    @JsonProperty("oTicket")
     private Ticket ticket;
 
     public Feedback() {

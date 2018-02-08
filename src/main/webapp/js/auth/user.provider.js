@@ -34,21 +34,12 @@
       // username
 
       var setUser = function (u) {
-        if (u.authenticated) {
+        if (u.bAuthenticated) {
+          debugger;
           this.user = u.principal;
           this.user.sLogin = u.name;
           this.user.aRoles = u.authorities;
           $cookieStore.put('HelpDeskUser' , angular.toJson(this.user));
-          // this.user = {
-          //   sLogin: u.name,
-          //   aRoles: u.authorities//,
-            // bAccountNonExpired: u.principal.bAccountNonExpired,
-            // bAccountNonLocked: u.principal.bAccountNonLocked,
-            // bCredentialsNonExpired: u.principal.bCredentialsNonExpired,
-            // bEnabled: u.principal.bEnabled,
-            // nId: u.principal.nID,
-            // remoteAddress: u.details.remoteAddress
-          // };
         } else {
           if($cookieStore.get('HelpDeskUser')){
             $cookieStore.remove('HelpDeskUser');
@@ -62,7 +53,7 @@
       };
 
       var getUserId = function () {
-        return this.user ? this.user['id'] : undefined;
+        return this.user ? this.user['nId'] : undefined;
       };
 
       return {

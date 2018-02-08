@@ -20,4 +20,5 @@ public class UserDTO {
     private List<History> histories;
     private List<CommentDTO> comments;
     private List<FeedbackDTO> feedbacks;
+
 }

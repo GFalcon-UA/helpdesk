@@ -1,6 +1,8 @@
 package com.javamog.potapov.domain;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.javamog.potapov.domain.enums.State;
 import com.javamog.potapov.domain.enums.Urgency;
 import com.javamog.potapov.parent.entity.AbstractEntity;
@@ -15,66 +17,66 @@ import java.util.TreeSet;
 @Table(name = "TICKET")
 public class Ticket extends AbstractEntity {
 
-//    @Column(name = "name")
+    @JsonProperty("sName")
     private String name;
 
-//    @Column(name = "description")
+    @JsonProperty("sDescription")
     private String description;
 
-//    @Column(name = "created_on")
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy")
+    @JsonProperty("dCreatedOn")
     private Date createdOn;
 
-//    @Column(name = "desired_resolution_date")
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy")
+    @JsonProperty("dDesiredDate")
     private Date desiredDate;
 
-//    @Column(name = "state_id")
     @Enumerated(EnumType.STRING)
+    @JsonProperty("sState")
     private State state;
 
-//    @Column(name = "urgency_id")
     @Enumerated(EnumType.STRING)
+    @JsonProperty("sUrgency")
     private Urgency urgency;
 
-//    @ManyToOne
-//    @JoinColumn(name = "owner_id")
     @ManyToOne
-//    @JsonIgnore
+    @JsonManagedReference
+    @JsonProperty("oOwner")
     private User owner;
 
-//    @ManyToOne
-//    @JoinColumn(name = "assignee_id")
     @ManyToOne
-//    @JsonIgnore
+    @JsonManagedReference
+    @JsonProperty("oAssignee")
     private User assignee;
 
-//    @ManyToOne
-//    @JoinColumn(name = "approver_id")
     @ManyToOne
-//    @JsonIgnore
+    @JsonManagedReference
+    @JsonProperty("oApprover")
     private User approver;
 
-    //@ManyToOne
-//    @JoinColumn(name = "category_id")
     @ManyToOne
-//    @JsonIgnore
+    @JsonManagedReference
+    @JsonProperty("oCategory")
     private Category category;
 
     @OneToMany(mappedBy = "ticket", cascade = CascadeType.ALL, orphanRemoval = true)
-//    @JsonIgnore
+    @JsonManagedReference
+    @JsonProperty("aoHistory")
     private Set<History> histories = new TreeSet<>((o1, o2) -> o1.getDate().compareTo(o2.getDate()));
 
     @OneToMany(mappedBy = "ticket", cascade = CascadeType.ALL, orphanRemoval = true)
-//    @JsonIgnore
+    @JsonManagedReference
+    @JsonProperty("afAttachments")
     private Set<Attachment> attachments = new HashSet<>();
 
     @OneToMany(mappedBy = "ticket", cascade = CascadeType.ALL, orphanRemoval = true)
-//    @JsonIgnore
+    @JsonManagedReference
+    @JsonProperty("aoComments")
     private Set<Comment> comments = new TreeSet<>((o1, o2) -> o1.getDate().compareTo(o2.getDate()));
 
     @OneToMany(mappedBy = "ticket", cascade = CascadeType.ALL, orphanRemoval = true)
-//    @JsonIgnore
+    @JsonManagedReference
+    @JsonProperty("aoFeedbacks")
     private Set<Feedback> feedbacks = new TreeSet<>((o1, o2) -> o1.getDate().compareTo(o2.getDate()));
 
     public Ticket() {

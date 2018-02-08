@@ -1,5 +1,9 @@
 package com.javamog.potapov.domain;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.javamog.potapov.domain.enums.Role;
 import com.javamog.potapov.parent.entity.AbstractEntity;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -13,49 +17,62 @@ import java.util.Set;
 public class User extends AbstractEntity implements UserDetails {
 
     @Column(name = "first_name", nullable = false)
+    @JsonProperty("sFirstName")
     private String firstName;
 
     @Column(name = "last_name")
+    @JsonProperty("sLastName")
     private String lastName;
 
     @Column(name = "phone")
+    @JsonProperty("sPhone")
     private String phone;
 
     @Column(name = "role", nullable = false)
     @Enumerated(EnumType.STRING)
+    @JsonProperty("sRole")
     private Role role;
 
     @Column(name = "email", nullable = false)
+    @JsonProperty("sEmail")
     private String email;
 
     @Column(name = "address")
+    @JsonProperty("sAddress")
     private String address;
 
     @OneToMany(mappedBy = "owner", cascade = CascadeType.ALL, orphanRemoval = true)
-//    @JsonIgnore
+    @JsonBackReference
+    @JsonProperty("aoOwnTickets")
     private Set<Ticket> ownTickets = new HashSet<>();
 
     @OneToMany(mappedBy = "assignee", cascade = CascadeType.ALL, orphanRemoval = true)
-//    @JsonIgnore
+    @JsonBackReference
+    @JsonProperty("aoAssignTickets")
     private Set<Ticket> assignTickets = new HashSet<>();
 
     @OneToMany(mappedBy = "approver", cascade = CascadeType.ALL, orphanRemoval = true)
-//    @JsonIgnore
+    @JsonBackReference
+    @JsonProperty("aoApproveTickets")
     private Set<Ticket> approveTickets = new HashSet<>();
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
-//    @JsonIgnore
+    @JsonManagedReference
+    @JsonProperty("aoHistories")
     private Set<History> histories = new HashSet<>();
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
-//    @JsonIgnore
+    @JsonManagedReference
+    @JsonProperty("aoComments")
     private Set<Comment> comments = new HashSet<>();
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
-//    @JsonIgnore
+    @JsonManagedReference
+    @JsonProperty("aoFeedbacks")
     private Set<Feedback> feedbacks = new HashSet<>();
 
     @Column(name = "password")
+    @JsonIgnore
     private String password;
 
     public User() {

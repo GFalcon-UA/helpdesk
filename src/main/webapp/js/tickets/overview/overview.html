@@ -1,98 +1,159 @@
-<a class="btn btn-success" ng-href="/">Ticket List</a>
-<div>
-    <a class="btn btn-success" ng-href="/editor?ticketId={{vm.ticket.nID}}">Edit</a><br/>
-    <a class="btn btn-success" ng-href="/feedback?ticketId={{vm.ticket.nID}}">Leave Feedback</a>
-</div>
-<div class="title">Ticket ({{vm.ticket.nID}}) - {{vm.ticket.name}}</div>
-<div class="container">
-    <div class="form-control">
-        <label>Created on</label>
-        <label></label>
-    </div>
-    <div class="form-control">
-        <label>Status</label>
-        <label></label>
-    </div>
-    <div class="form-control">
-        <label>Category</label>
-        <label></label>
-    </div>
-    <div class="form-control">
-        <label>Urgency</label>
-        <label></label>
-    </div>
-    <div class="form-control">
-        <label>Desired resolution date</label>
-        <label></label>
-    </div>
-    <div class="form-control">
-        <label>Owner</label>
-        <label></label>
-    </div>
-    <div class="form-control">
-        <label>Apprower</label>
-        <label></label>
-    </div>
-    <div class="form-control">
-        <label>Assignee</label>
-        <label></label>
-    </div>
-    <div class="form-control">
-        <label>Attachments</label>
-        <div></div>
-    </div>
-    <div class="form-control">
-        <label>Description</label>
-        <label></label>
-    </div>
-</div>
-<div>
-    <button>History</button>
-    <button>Comments</button>
-</div>
-<div>
-    <button class="btn btn-link">Show All</button>
-    <table>
-        <thead>
-        <tr>
-            <td>Date</td>
-            <td>User</td>
-            <td>Action</td>
-            <td>Description</td>
-        </tr>
-        </thead>
-        <tbody>
-        <tr>
-            <!--<td>Date</td>-->
-            <!--<td>User</td>-->
-            <!--<td>Action</td>-->
-            <!--<td>Description</td>-->
-        </tr>
-        </tbody>
-    </table>
-</div>
-<div>
-    <button class="btn btn-link">Show All</button>
-    <table>
-        <thead>
-        <tr>
-            <td>Date</td>
-            <td>User</td>
-            <td>Comment</td>
-        </tr>
-        </thead>
-        <tbody>
-        <tr>
-            <!--<td>Date</td>-->
-            <!--<td>User</td>-->
-            <!--<td>Action</td>-->
-        </tr>
-        </tbody>
-    </table>
-    <form>
-        <div class="form-control">
-            <textarea ng-model="vm.newComment"></textarea>
-            <button>Add Comment</button>
+<div class="container task">
+    <br />
+    <div class="row">
+        <div class="col-xs-1">
+            <button class="btn btn-success">Ticket List</button>
         </div>
-    </form>
+        <div class="col-xs-1"></div>
+        <div class="col-xs-8">
+            <h3 style="line-height: 34px; margin: 0;">Ticket (2) - Task (2)</h3>
+        </div>
+        <div class="col-xs-2">
+            <button style="width: 160px;" class="btn btn-success">Edit</button>
+        </div>
+    </div>
+    <br />
+    <div class="row">
+        <div class="col-xs-3 text-right"><h5>Created on:</h5></div>
+        <div class="col-xs-7"><h5>11/17/2017</h5></div>
+        <div class="col-xs-2">
+            <button style="width: 160px;" class="btn btn-success">Leave Feedback</button>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-3 text-right"><h5>Status:</h5></div>
+        <div class="col-xs-7"><h5>Done</h5></div>
+    </div>
+    <div class="row">
+        <div class="col-xs-3 text-right"><h5>Category:</h5></div>
+        <div class="col-xs-7"><h5>Hardware upgrade</h5></div>
+    </div>
+    <div class="row">
+        <div class="col-xs-3 text-right"><h5>Urgency:</h5></div>
+        <div class="col-xs-7"><h5>High</h5></div>
+    </div>
+    <div class="row">
+        <div class="col-xs-3 text-right"><h5>Desired resolution date:</h5></div>
+        <div class="col-xs-7"><h5>11/17/2017</h5></div>
+    </div>
+    <div class="row">
+        <div class="col-xs-3 text-right"><h5>Owner</h5></div>
+        <div class="col-xs-7"><h5>Stephen King</h5></div>
+    </div>
+    <div class="row">
+        <div class="col-xs-3 text-right"><h5>Approver:</h5></div>
+        <div class="col-xs-7"><h5>Manager 1</h5></div>
+    </div>
+    <div class="row">
+        <div class="col-xs-3 text-right"><h5>Assignee:</h5></div>
+        <div class="col-xs-7"><h5>Admin 2</h5></div>
+    </div>
+    <div class="row">
+        <div class="col-xs-3 text-right"><h5>Attachments:</h5></div>
+        <div class="col-xs-7"><h5></h5></div>
+    </div>
+    <div class="row">
+        <div class="col-xs-3 text-right"><h5>Description:</h5></div>
+        <div class="col-xs-7">
+            <textarea rows="3" cols="40" class="form-controls" disabled></textarea>
+        </div>
+    </div>
+    <br />
+    <div class="row">
+        <div class="col-xs-6">
+            <button style="width: 100%;" class="btn pull-right btn-primary">History</button>
+        </div>
+        <div class="col-xs-6">
+            <button style="width: 100%;" class="btn pull-right btn-default">Comments</button>
+        </div>
+    </div>
+    <!--<div class="row">-->
+        <!--<div class="col-xs-6">-->
+            <!--<button style="width: 100%;" class="btn pull-right btn-default">History</button>-->
+        <!--</div>-->
+        <!--<div class="col-xs-6">-->
+            <!--<button style="width: 100%;" class="btn pull-right btn-primary">Comments</button>-->
+        <!--</div>-->
+    <!--</div>-->
+    <a><h3>Show All</h3></a>
+    <table class="table table-bordered">
+        <thead>
+        <tr>
+            <th>Date</th>
+            <th>User</th>
+            <th>Action</th>
+            <th>Description</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <th>Jan 18, 2017 12:16:57</th>
+            <td>Stephen King</td>
+            <td>Ticker is created</td>
+            <td>Ticker is created</td>
+        </tr>
+        <tr>
+            <th>Jan 19, 2017 15:16:57</th>
+            <td>Stephen King</td>
+            <td>Ticket is edited</td>
+            <td>Ticket is edited</td>
+        </tr>
+        <tr>
+            <th>Jan 20, 2017 15:16:57</th>
+            <td>Stephen King</td>
+            <td>Ticket status is changed</td>
+            <td>Ticket status is changed from 'Draft' to 'Submitted'</td>
+        </tr>
+        <tr>
+            <th>Jan 21, 2017 12:16:57</th>
+            <td>Stephen King</td>
+            <td>File is attached</td>
+            <td>File is attached: "My.png"</td>
+        </tr>
+        <tr>
+            <th>Jan 21, 2017 12:16:57</th>
+            <td>Stephen King</td>
+            <td>File is removed</td>
+            <td>File is attached: "My.png"</td>
+        </tr>
+        </tbody>
+    </table>
+    <!--<table class="table table-bordered">-->
+        <!--<thead>-->
+        <!--<tr>-->
+            <!--<th>Date</th>-->
+            <!--<th>User</th>-->
+            <!--<th>Comment</th>-->
+        <!--</tr>-->
+        <!--</thead>-->
+        <!--<tbody>-->
+        <!--<tr>-->
+            <!--<th>Jan 18, 2017 12:16:57</th>-->
+            <!--<td>Stephen King</td>-->
+            <!--<td>Comment 1</td>-->
+        <!--</tr>-->
+        <!--<tr>-->
+            <!--<th>Jan 19, 2017 15:16:57</th>-->
+            <!--<td>Manager1</td>-->
+            <!--<td>Comment 2</td>-->
+        <!--</tr>-->
+        <!--<tr>-->
+            <!--<th>Jan 20, 2017 15:16:57</th>-->
+            <!--<td>Manager1</td>-->
+            <!--<td>Comment 3</td>-->
+        <!--</tr>-->
+        <!--<tr>-->
+            <!--<th>Jan 21, 2017 12:16:57</th>-->
+            <!--<td>Manager1</td>-->
+            <!--<td>Comment 4</td>-->
+        <!--</tr>-->
+        <!--<tr>-->
+            <!--<th>Jan 21, 2017 12:16:57</th>-->
+            <!--<td>Manager1</td>-->
+            <!--<td>Comment 5</td>-->
+        <!--</tr>-->
+        <!--</tbody>-->
+    <!--</table>-->
+    <br />
+    <br />
 </div>
