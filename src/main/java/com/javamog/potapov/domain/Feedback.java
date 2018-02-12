@@ -1,6 +1,7 @@
 package com.javamog.potapov.domain;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.javamog.potapov.parent.entity.AbstractEntity;
 
@@ -10,13 +11,14 @@ import javax.persistence.Table;
 import java.util.Date;
 
 @Entity
-@Table(name = "FEEDBACK")
+@Table(name = "FEEDBACKS")
 public class Feedback extends AbstractEntity {
 
     @JsonProperty("nRate")
     private int rate;
 
     @JsonProperty("dDate")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy")
     private Date date;
 
     @JsonProperty("sText")
@@ -63,8 +65,7 @@ public class Feedback extends AbstractEntity {
         return user;
     }
 
-    @Deprecated
-    public void setUser(User user) {
+    protected void setUser(User user) {
         this.user = user;
     }
 
@@ -72,8 +73,7 @@ public class Feedback extends AbstractEntity {
         return ticket;
     }
 
-    @Deprecated
-    public void setTicket(Ticket ticket) {
+    protected void setTicket(Ticket ticket) {
         this.ticket = ticket;
     }
 }

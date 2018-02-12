@@ -13,7 +13,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Entity
-@Table(name = "USER")
+@Table(name = "USERS")
 public class User extends AbstractEntity implements UserDetails {
 
     @Column(name = "first_name", nullable = false)
@@ -96,21 +96,25 @@ public class User extends AbstractEntity implements UserDetails {
     }
 
     @Override
+    @JsonIgnore
     public boolean isAccountNonExpired() {
         return true;
     }
 
     @Override
+    @JsonIgnore
     public boolean isAccountNonLocked() {
         return true;
     }
 
     @Override
+    @JsonIgnore
     public boolean isCredentialsNonExpired() {
         return true;
     }
 
     @Override
+    @JsonIgnore
     public boolean isEnabled() {
         return true;
     }
@@ -243,7 +247,7 @@ public class User extends AbstractEntity implements UserDetails {
         this.comments = comments;
     }
 
-    public void addComments(Comment comment) {
+    public void addComment(Comment comment) {
         comments.add(comment);
         comment.setUser(this);
     }

@@ -1,1 +1,1 @@
-angular.module('Tickets', ['auth', 'ui.bootstrap', 'ngCookies']);
+angular.module('Tickets', ['auth', 'ui.bootstrap', 'ngCookies', 'ui.uploader']);

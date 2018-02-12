@@ -10,7 +10,7 @@ import java.util.Date;
 public class DateConverter {
 
     private static final Logger log = LogManager.getLogger(DateConverter.class);
-    private static final SimpleDateFormat dateFormat = new SimpleDateFormat("DD/MM/YYYY");
+    private static final SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
 
     public static String convert(Date date){
         return dateFormat.format(date);

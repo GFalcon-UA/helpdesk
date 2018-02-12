@@ -9,11 +9,8 @@ import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity
-@Table(name = "ATTACHMENT")
+@Table(name = "ATTACHMENTS")
 public class Attachment extends AbstractEntity implements Serializable {
-
-    @JsonProperty("sName")
-    private String name;
 
     @Lob @Basic(fetch = FetchType.LAZY)
     @Column(name = "blob", nullable=false)
@@ -28,14 +25,6 @@ public class Attachment extends AbstractEntity implements Serializable {
     public Attachment() {
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
     public byte[] getContent() {
         return content;
     }
@@ -48,8 +37,7 @@ public class Attachment extends AbstractEntity implements Serializable {
         return ticket;
     }
 
-    @Deprecated
-    public void setTicket(Ticket ticket) {
+    protected void setTicket(Ticket ticket) {
         this.ticket = ticket;
     }
 }

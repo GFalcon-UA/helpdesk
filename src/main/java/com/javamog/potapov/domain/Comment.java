@@ -11,7 +11,7 @@ import javax.persistence.Table;
 import java.util.Date;
 
 @Entity
-@Table(name = "COMMENT")
+@Table(name = "COMMENTS")
 public class Comment extends AbstractEntity {
 
     @JsonProperty("sTaxt")
@@ -59,8 +59,7 @@ public class Comment extends AbstractEntity {
         return user;
     }
 
-    @Deprecated
-    public void setUser(User user) {
+    protected void setUser(User user) {
         this.user = user;
     }
 
@@ -68,8 +67,7 @@ public class Comment extends AbstractEntity {
         return ticket;
     }
 
-    @Deprecated
-    public void setTicket(Ticket ticket) {
+    protected void setTicket(Ticket ticket) {
         this.ticket = ticket;
     }
 }

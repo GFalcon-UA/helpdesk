@@ -11,7 +11,7 @@ import javax.persistence.Table;
 import java.util.Date;
 
 @Entity
-@Table(name = "HISTORY")
+@Table(name = "HISTORIES")
 public class History extends AbstractEntity {
 
     @JsonFormat(shape = JsonFormat.Shape.STRING)
@@ -65,8 +65,7 @@ public class History extends AbstractEntity {
         return user;
     }
 
-    @Deprecated
-    public void setUser(User user) {
+    protected void setUser(User user) {
         this.user = user;
     }
 
@@ -74,8 +73,7 @@ public class History extends AbstractEntity {
         return ticket;
     }
 
-    @Deprecated
-    public void setTicket(Ticket ticket) {
+    protected void setTicket(Ticket ticket) {
         this.ticket = ticket;
     }
 

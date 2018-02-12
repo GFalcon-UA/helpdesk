@@ -14,7 +14,7 @@ import java.util.Set;
 import java.util.TreeSet;
 
 @Entity
-@Table(name = "TICKET")
+@Table(name = "TICKETS")
 public class Ticket extends AbstractEntity {
 
     @JsonProperty("sName")
@@ -134,8 +134,7 @@ public class Ticket extends AbstractEntity {
         return owner;
     }
 
-    @Deprecated
-    public void setOwner(User owner) {
+    protected void setOwner(User owner) {
         this.owner = owner;
     }
 
@@ -143,8 +142,7 @@ public class Ticket extends AbstractEntity {
         return assignee;
     }
 
-    @Deprecated
-    public void setAssignee(User assignee) {
+    protected void setAssignee(User assignee) {
         this.assignee = assignee;
     }
 
@@ -152,8 +150,7 @@ public class Ticket extends AbstractEntity {
         return approver;
     }
 
-    @Deprecated
-    public void setApprover(User approver) {
+    protected void setApprover(User approver) {
         this.approver = approver;
     }
 
@@ -161,8 +158,7 @@ public class Ticket extends AbstractEntity {
         return category;
     }
 
-    @Deprecated
-    public void setCategory(Category category) {
+    protected void setCategory(Category category) {
         this.category = category;
     }
 

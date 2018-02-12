@@ -14,16 +14,16 @@ import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Set;
 import java.util.TreeSet;
 
-@Controller
-@RequestMapping("api/tickets")
+@RestController
+@RequestMapping(value = "api/tickets", produces = "application/json")
 public class TicketController {
 
     private final static Logger log = LogManager.getLogger(TicketController.class);
@@ -35,8 +35,7 @@ public class TicketController {
     @Autowired
     private UserService userService;
 
-    @RequestMapping(value = "/list", method = RequestMethod.GET, produces = "application/json")
-    @ResponseBody
+    @RequestMapping(value = "/list", method = RequestMethod.GET)
     public ResponseEntity getTicketsList(@RequestParam(name = "nUserId") Long userId){
 
 //        User user = userService.findLoggedInUser();
@@ -50,8 +49,13 @@ public class TicketController {
         return JsonRestUtils.toJsonResponse(ticketList);
     }
 
-    @RequestMapping(value = "/create", method = RequestMethod.POST, produces = "application/json")
-    @ResponseBody
+    @RequestMapping(value = "/get", method = RequestMethod.GET)
+    public ResponseEntity getTicket(@RequestParam(name = "nTicketId") Long ticketId){
+        Ticket ticket = ticketService.getTicket(ticketId);
+        return JsonRestUtils.toJsonResponse(ticket);
+    }
+
+    @RequestMapping(value = "/create", method = RequestMethod.POST)
     public ResponseEntity createTicket(@RequestParam(name = "nUserId") Long userId,
             @RequestBody String body, Errors errors) {
 
@@ -66,13 +70,13 @@ public class TicketController {
         urgency: newTicket.urgency,
         desiredDate: newTicket.desiredDate,
         comments: newTicket.comments,
-        state: isDraft ? 'DRAFT' : 'NEW'
+        oState: isDraft ? 'DRAFT' : 'NEW'
       }
          */
         Ticket ticket = new Ticket();
         Long categoryId = null;
-        if(ticketBody.containsKey("category")){
-            Object num = ticketBody.get("category");
+        if(ticketBody.containsKey("nCategory")){
+            Object num = ticketBody.get("nCategory");
             if(num instanceof Integer){
                 Integer integer = (Integer) num;
                 categoryId = integer.longValue();
@@ -83,20 +87,22 @@ public class TicketController {
             }
 
         }
-        if(ticketBody.containsKey("name")){
-            ticket.setName((String) ticketBody.get("name"));
+        if(ticketBody.containsKey("sName")){
+            ticket.setName((String) ticketBody.get("sName"));
         }
-        if(ticketBody.containsKey("description")){
-            ticket.setDescription((String) ticketBody.get("description"));
+        if(ticketBody.containsKey("sDescription")){
+            ticket.setDescription((String) ticketBody.get("sDescription"));
         }
-        if(ticketBody.containsKey("urgency")){
-            ticket.setUrgency(Urgency.valueOf((String) ticketBody.get("urgency")));
+        if(ticketBody.containsKey("sUrgency")){
+            ticket.setUrgency(Urgency.valueOf((String) ticketBody.get("sUrgency")));
         }
-        if(ticketBody.containsKey("desiredDate")){
-            ticket.setDesiredDate(DateConverter.convert((String) ticketBody.get("desiredDate")));
+        if(ticketBody.containsKey("dDesiredDate")){
+            String dDesiredDate = (String) ticketBody.get("dDesiredDate");
+            Date desiredDate = DateConverter.convert(dDesiredDate);
+            ticket.setDesiredDate(desiredDate);
         }
-        if(ticketBody.containsKey("state")){
-            ticket.setState(State.valueOf((String) ticketBody.get("state")));
+        if(ticketBody.containsKey("sState")){
+            ticket.setState(State.valueOf((String) ticketBody.get("sState")));
         }
 
 //        TicketValidator validator = new TicketValidator();
@@ -108,8 +114,8 @@ public class TicketController {
 
         Ticket resultTicket = ticketService.createTicket(ticket, userId, categoryId);
 
-        if (ticketBody.containsKey("comments")) {
-            String text = (String) ticketBody.get("comments");
+        if (ticketBody.containsKey("sComment")) {
+            String text = (String) ticketBody.get("sComment");
             Comment comment = ticketService.addComment(resultTicket, text, userId);
             resultTicket.addComment(comment);
         }

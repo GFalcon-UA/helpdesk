@@ -2,10 +2,8 @@ package com.javamog.potapov.controller;
 
 import com.javamog.potapov.domain.Category;
 import com.javamog.potapov.domain.enums.Urgency;
-import com.javamog.potapov.dto.models.CategoryDTO;
-import com.javamog.potapov.dto.util.DTOConverter;
 import com.javamog.potapov.json.JsonRestUtils;
-import com.javamog.potapov.service.impl.MaintenanceEntityService;
+import com.javamog.potapov.service.MaintenanceEntityService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -26,12 +24,7 @@ public class EnumsController {
 
         List<Category> categories = entityService.getCategories();
 
-        List<CategoryDTO> categoryDTOList = new ArrayList<>();
-        for(Category obj : categories){
-            categoryDTOList.add(DTOConverter.convert(obj));
-        }
-
-        return JsonRestUtils.toJsonResponse(categoryDTOList);
+        return JsonRestUtils.toJsonResponse(categories);
     }
 
     @RequestMapping("/urgency")

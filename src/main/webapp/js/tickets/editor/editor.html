@@ -28,7 +28,7 @@
                         id="category"
                         required
                         ng-model="vm.categories.selected"
-                        ng-options="obj as obj.name for obj in vm.categories.list track by obj.id"></select>
+                        ng-options="obj as obj.sName for obj in vm.categories.list track by obj.nId"></select>
             </div>
         </div>
         <br />
@@ -37,7 +37,7 @@
                 <h5>Name <span class="warning">*</span></h5>
             </div>
             <div class="col-xs-4">
-                <input type="text" class="form-control" ng-model="vm.ticket.name" required/>
+                <input type="text" class="form-control" ng-model="vm.ticket.sName" required/>
             </div>
         </div>
         <br />
@@ -46,7 +46,7 @@
                 <h5>Description</h5>
             </div>
             <div class="col-xs-5">
-                <textarea class="form-control" rows="3" ng-model="vm.ticket.description"></textarea>
+                <textarea class="form-control" rows="3" ng-model="vm.ticket.sDescription"></textarea>
             </div>
         </div>
         <br />
@@ -68,7 +68,7 @@
                 <h5>Desired resolution date</h5>
             </div>
             <div class="col-xs-4">
-                <input type="text" class="form-control"  ng-model="vm.ticket.desiredDate"/>
+                <input type="text" class="form-control"  ng-model="vm.ticket.dDesiredDate"/>
             </div>
         </div>
         <br />
@@ -76,8 +76,22 @@
             <div class="col-xs-2 text-right">
                 <h5>Add attachments</h5>
             </div>
-            <div class="col-xs-4">
-                <input type="file" class="btn btn-default" style="width: 140px;" ng-model="vm.attachment"/>
+            <!--<div class="col-xs-4">-->
+                <!--<input type="file" class="btn btn-default" style="width: 140px;" ng-model="vm.fAttachment"/>-->
+            <!--</div>-->
+            <div class="well col-xs-5">
+                <div>
+                    <div style="float:right;">
+                        <!--<button ng-click="btn_upload()">Upload</button>-->
+                        <button ng-if="files.length > 0" ng-click="btn_clean()">Remove all</button>
+                    </div>
+                    <input type="file" id="file1" multiple/>
+                </div>
+                <div ng-repeat="file in files" style="margin-top: 20px;border-bottom-color: antiquewhite;border-bottom-style: double;">
+                    <div><span>{{file.name}}</span><div style="float:right;"><span>{{file.humanSize}}</span><a ng-click="btn_remove(file)" title="Remove from list to be uploaded"><i class="icon-remove"></i></a></div>
+                    </div>
+                    <progress style="width:400px;" value="{{file.loaded ? file.loaded : 0}}" max="{{file.size}}"></progress>
+                </div>
             </div>
         </div>
         <br />
@@ -86,7 +100,7 @@
                 <h5>Comment</h5>
             </div>
             <div class="col-xs-5">
-                <textarea class="form-control" rows="3" ng-model="vm.ticket.comment"></textarea>
+                <textarea class="form-control" rows="3" ng-model="vm.ticket.sComment"></textarea>
             </div>
         </div>
         <br />

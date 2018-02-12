@@ -11,31 +11,8 @@
         User: 1
       };
 
-      // principal
-      //   accountNonExpired
-      // accountNonLocked
-      // address
-      // approveTickets
-      // assignTickets
-      // authorities
-      // comments
-      // credentialsNonExpired
-      // email
-      // enabled
-      // feedbacks
-      // firstName
-      // histories
-      // lastName
-      // nID
-      // ownTickets
-      // password
-      // phone
-      // role
-      // username
-
       var setUser = function (u) {
-        if (u.bAuthenticated) {
-          debugger;
+        if (u.authenticated) {
           this.user = u.principal;
           this.user.sLogin = u.name;
           this.user.aRoles = u.authorities;
