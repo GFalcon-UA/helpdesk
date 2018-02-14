@@ -1,4 +1,4 @@
-<div class="container task">
+<div class="container task" ng-init="vm.getTicketInfo()">
     <br />
     <div class="row">
         <div class="col-xs-1">
@@ -6,7 +6,7 @@
         </div>
         <div class="col-xs-1"></div>
         <div class="col-xs-8">
-            <h3 style="line-height: 34px; margin: 0;">Ticket (2) - Task (2)</h3>
+            <h3 style="line-height: 34px; margin: 0;">Ticket ({{vm.oTicket.nId}}) - {{vm.oTicket.nName}}</h3>
         </div>
         <div class="col-xs-2">
             <button style="width: 160px;" class="btn btn-success">Edit</button>
@@ -15,38 +15,38 @@
     <br />
     <div class="row">
         <div class="col-xs-3 text-right"><h5>Created on:</h5></div>
-        <div class="col-xs-7"><h5>11/17/2017</h5></div>
+        <div class="col-xs-7"><h5>{{vm.oTicket.dCreatedOn}}</h5></div>
         <div class="col-xs-2">
             <button style="width: 160px;" class="btn btn-success">Leave Feedback</button>
         </div>
     </div>
     <div class="row">
         <div class="col-xs-3 text-right"><h5>Status:</h5></div>
-        <div class="col-xs-7"><h5>Done</h5></div>
+        <div class="col-xs-7"><h5>{{vm.oTicket.sState}}</h5></div>
     </div>
     <div class="row">
         <div class="col-xs-3 text-right"><h5>Category:</h5></div>
-        <div class="col-xs-7"><h5>Hardware upgrade</h5></div>
+        <div class="col-xs-7"><h5>{{vm.oTicket.oCategory.sName}}</h5></div>
     </div>
     <div class="row">
         <div class="col-xs-3 text-right"><h5>Urgency:</h5></div>
-        <div class="col-xs-7"><h5>High</h5></div>
+        <div class="col-xs-7"><h5>{{vm.oTicket.sUrgency}}</h5></div>
     </div>
     <div class="row">
         <div class="col-xs-3 text-right"><h5>Desired resolution date:</h5></div>
-        <div class="col-xs-7"><h5>11/17/2017</h5></div>
+        <div class="col-xs-7"><h5>{{vm.oTicket.dDesiredDate}}</h5></div>
     </div>
     <div class="row">
         <div class="col-xs-3 text-right"><h5>Owner</h5></div>
-        <div class="col-xs-7"><h5>Stephen King</h5></div>
+        <div class="col-xs-7"><h5>{{vm.getTicketOwner()}}</h5></div>
     </div>
     <div class="row">
         <div class="col-xs-3 text-right"><h5>Approver:</h5></div>
-        <div class="col-xs-7"><h5>Manager 1</h5></div>
+        <div class="col-xs-7"><h5>{{vm.getTicketApprover()}}</h5></div>
     </div>
     <div class="row">
         <div class="col-xs-3 text-right"><h5>Assignee:</h5></div>
-        <div class="col-xs-7"><h5>Admin 2</h5></div>
+        <div class="col-xs-7"><h5>{{vm.getTicketAssignee()}}</h5></div>
     </div>
     <div class="row">
         <div class="col-xs-3 text-right"><h5>Attachments:</h5></div>
@@ -55,28 +55,26 @@
     <div class="row">
         <div class="col-xs-3 text-right"><h5>Description:</h5></div>
         <div class="col-xs-7">
-            <textarea rows="3" cols="40" class="form-controls" disabled></textarea>
+            <textarea rows="3" cols="40" class="form-controls" disabled>{{vm.oTicket.sDescription}}</textarea>
         </div>
     </div>
     <br />
     <div class="row">
         <div class="col-xs-6">
-            <button style="width: 100%;" class="btn pull-right btn-primary">History</button>
+            <button style="width: 100%;"
+                    class="btn pull-right"
+                    ng-class="vm.bHistoryViewMode ? 'btn-primary': 'btn-default'"
+                    ng-click="vm.changeViewMode()">History</button>
         </div>
         <div class="col-xs-6">
-            <button style="width: 100%;" class="btn pull-right btn-default">Comments</button>
+            <button style="width: 100%;"
+                    class="btn pull-right"
+                    ng-class="!vm.bHistoryViewMode ? 'btn-primary': 'btn-default'"
+                    ng-click="vm.changeViewMode()">Comments</button>
         </div>
     </div>
-    <!--<div class="row">-->
-        <!--<div class="col-xs-6">-->
-            <!--<button style="width: 100%;" class="btn pull-right btn-default">History</button>-->
-        <!--</div>-->
-        <!--<div class="col-xs-6">-->
-            <!--<button style="width: 100%;" class="btn pull-right btn-primary">Comments</button>-->
-        <!--</div>-->
-    <!--</div>-->
-    <a><h3>Show All</h3></a>
-    <table class="table table-bordered">
+    <a ng-click="vm.showFullList()"><h3>Show All</h3></a>
+    <table class="table table-bordered" ng-if="vm.bHistoryViewMode">
         <thead>
         <tr>
             <th>Date</th>
@@ -86,74 +84,30 @@
         </tr>
         </thead>
         <tbody>
-        <tr>
-            <th>Jan 18, 2017 12:16:57</th>
-            <td>Stephen King</td>
-            <td>Ticker is created</td>
-            <td>Ticker is created</td>
-        </tr>
-        <tr>
-            <th>Jan 19, 2017 15:16:57</th>
-            <td>Stephen King</td>
-            <td>Ticket is edited</td>
-            <td>Ticket is edited</td>
-        </tr>
-        <tr>
-            <th>Jan 20, 2017 15:16:57</th>
-            <td>Stephen King</td>
-            <td>Ticket status is changed</td>
-            <td>Ticket status is changed from 'Draft' to 'Submitted'</td>
-        </tr>
-        <tr>
-            <th>Jan 21, 2017 12:16:57</th>
-            <td>Stephen King</td>
-            <td>File is attached</td>
-            <td>File is attached: "My.png"</td>
-        </tr>
-        <tr>
-            <th>Jan 21, 2017 12:16:57</th>
-            <td>Stephen King</td>
-            <td>File is removed</td>
-            <td>File is attached: "My.png"</td>
+        <tr ng-repeat="oItem in vm.aHistories">
+            <th>{{oItem.dDate}}</th>
+            <td>{{oItem.oUser.sFirstName + ' ' + oItem.oUser.sLastName}}</td>
+            <td>{{oItem.sAction}}</td>
+            <td>{{oItem.sDescription}}</td>
         </tr>
         </tbody>
     </table>
-    <!--<table class="table table-bordered">-->
-        <!--<thead>-->
-        <!--<tr>-->
-            <!--<th>Date</th>-->
-            <!--<th>User</th>-->
-            <!--<th>Comment</th>-->
-        <!--</tr>-->
-        <!--</thead>-->
-        <!--<tbody>-->
-        <!--<tr>-->
-            <!--<th>Jan 18, 2017 12:16:57</th>-->
-            <!--<td>Stephen King</td>-->
-            <!--<td>Comment 1</td>-->
-        <!--</tr>-->
-        <!--<tr>-->
-            <!--<th>Jan 19, 2017 15:16:57</th>-->
-            <!--<td>Manager1</td>-->
-            <!--<td>Comment 2</td>-->
-        <!--</tr>-->
-        <!--<tr>-->
-            <!--<th>Jan 20, 2017 15:16:57</th>-->
-            <!--<td>Manager1</td>-->
-            <!--<td>Comment 3</td>-->
-        <!--</tr>-->
-        <!--<tr>-->
-            <!--<th>Jan 21, 2017 12:16:57</th>-->
-            <!--<td>Manager1</td>-->
-            <!--<td>Comment 4</td>-->
-        <!--</tr>-->
-        <!--<tr>-->
-            <!--<th>Jan 21, 2017 12:16:57</th>-->
-            <!--<td>Manager1</td>-->
-            <!--<td>Comment 5</td>-->
-        <!--</tr>-->
-        <!--</tbody>-->
-    <!--</table>-->
+    <table class="table table-bordered" ng-if="!vm.bHistoryViewMode">
+        <thead>
+        <tr>
+            <th>Date</th>
+            <th>User</th>
+            <th>Comment</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat="oItem in vm.aComments">
+            <th>{{oItem.dDate}}</th>
+            <td>{{oItem.oUser.sFirstName + ' ' + oItem.oUser.sLastName}}</td>
+            <td>{{oItem.sText}}</td>
+        </tr>
+        </tbody>
+    </table>
     <br />
     <br />
 </div>

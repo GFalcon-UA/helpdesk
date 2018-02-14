@@ -16,11 +16,19 @@
           templateUrl: './js/tickets/editor/editor.html',
           controller: 'EditorCtrl',
           controllerAs: 'vm'
-        }).when('/overview', {
+        }).when('/editor/:id', {
+          templateUrl: './js/tickets/editor/editor.html',
+          controller: 'EditorCtrl',
+          controllerAs: 'vm'
+        }).when('/overview/:id', {
           templateUrl: './js/tickets/overview/overview.html',
           controller: 'OverviewCtrl',
           controllerAs: 'vm'
         }).when('/feedback', {
+          templateUrl: './js/tickets/feedback/feedback.html',
+          controller: 'FeedbackCtrl',
+          controllerAs: 'vm'
+        }).when('/feedback/:id', {
           templateUrl: './js/tickets/feedback/feedback.html',
           controller: 'FeedbackCtrl',
           controllerAs: 'vm'

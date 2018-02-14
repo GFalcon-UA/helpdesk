@@ -2,21 +2,19 @@ package com.javamog.potapov.dto.models;
 
 import lombok.Data;
 
-import java.util.List;
-
 @Data
 public class TicketDTO {
     private Long id;
-    private CategoryDTO category;
+    private Long categoryId;
     private String name;
     private String description;
     private String urgency;
     private String desiredDate;
-    private List<CommentDTO> comments;
+    private String comment;
     private String state;
-    private UserDTO owner;
-    private UserDTO assignee;
-    private UserDTO approver;
+    private Long ownerId;
+    private Long assigneeId;
+    private Long approverId;
     private String createdOn;
 
 }
