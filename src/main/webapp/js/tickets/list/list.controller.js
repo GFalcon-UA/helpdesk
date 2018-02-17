@@ -19,12 +19,12 @@
 
       vm.sFilterText = '';
       vm.onFilterChange = function () {
-
+        // todo
       };
 
       vm.sSortedBy = '';
       vm.sortTicketByField = function (field) {
-
+        // todo
       };
 
 

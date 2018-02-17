@@ -2,6 +2,7 @@ package com.javamog.potapov.domain;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.javamog.potapov.parent.entity.AbstractEntity;
 
@@ -24,7 +25,7 @@ public class History extends AbstractEntity {
     @JsonProperty("sDescription")
     private String description;
 
-    @JsonBackReference
+    @JsonManagedReference
     @ManyToOne
     @JsonProperty("oUser")
     private User user;

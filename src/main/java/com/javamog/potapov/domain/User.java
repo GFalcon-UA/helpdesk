@@ -57,12 +57,12 @@ public class User extends AbstractEntity implements UserDetails {
     private Set<Ticket> approveTickets = new HashSet<>();
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
-    @JsonManagedReference
+    @JsonBackReference
     @JsonProperty("aoHistories")
     private Set<History> histories = new HashSet<>();
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
-    @JsonManagedReference
+    @JsonBackReference
     @JsonProperty("aoComments")
     private Set<Comment> comments = new HashSet<>();
 

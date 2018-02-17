@@ -2,6 +2,7 @@ package com.javamog.potapov.domain;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.javamog.potapov.parent.entity.AbstractEntity;
 
@@ -14,7 +15,7 @@ import java.util.Date;
 @Table(name = "COMMENTS")
 public class Comment extends AbstractEntity {
 
-    @JsonProperty("sTaxt")
+    @JsonProperty("sText")
     private String text;
 
     @JsonFormat(shape = JsonFormat.Shape.STRING)
@@ -22,7 +23,7 @@ public class Comment extends AbstractEntity {
     private Date date;
 
     @ManyToOne
-    @JsonBackReference
+    @JsonManagedReference
     @JsonProperty("oUser")
     private User user;
 
