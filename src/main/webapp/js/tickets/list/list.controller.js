@@ -185,8 +185,12 @@
       fillTicketList();
 
       var getDateFromString = function (str) {
-        var arr = str.split('/');
-        return new Date(parseInt(arr[2]), parseInt(arr[1]), parseInt(arr[0]));
+        if(str){
+          var arr = str.split('/');
+          return new Date(parseInt(arr[2]), parseInt(arr[1]), parseInt(arr[0]));
+        } else {
+          return 0;
+        }
       }
 
     })

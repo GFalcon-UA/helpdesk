@@ -37,6 +37,10 @@ public class History extends AbstractEntity {
     public History() {
     }
 
+    public void setDate(Date date) {
+        this.date = date;
+    }
+
     public Date getDate() {
         return date;
     }

@@ -94,10 +94,10 @@ public class TicketServiceImpl implements TicketService {
         user.addOwnTicket(ticket);
         category.addTicket(ticket);
 
-        categoryDAO.saveOrUpdate(category);
         Ticket result = ticketDAO.saveOrUpdate(ticket);
 
         historyService.createTicket(user, result);
+        mailSender.sentNotification(result, State.DRAFT);
 
         return result;
     }
@@ -114,8 +114,6 @@ public class TicketServiceImpl implements TicketService {
         user.addComment(result);
         ticket.addComment(result);
 
-        ticketDAO.saveOrUpdate(ticket);
-        userDAO.saveOrUpdate(user);
         commentDAO.saveOrUpdate(result);
 
         return result;
@@ -135,8 +133,6 @@ public class TicketServiceImpl implements TicketService {
             Category newCategory = categoryDAO.findByIdExpected(ticketDTO.getCategoryId());
             oldCategory.removeTicket(ticket);
             newCategory.addTicket(ticket);
-            categoryDAO.saveOrUpdate(oldCategory);
-            categoryDAO.saveOrUpdate(newCategory);
         }
 
         if(!ticket.getName().equals(ticketDTO.getName())){
@@ -164,7 +160,6 @@ public class TicketServiceImpl implements TicketService {
             ticket.addComment(comment);
 
             commentDAO.saveOrUpdate(comment);
-            userDAO.saveOrUpdate(user);
         }
 
         Ticket result = ticketDAO.saveOrUpdate(ticket);
