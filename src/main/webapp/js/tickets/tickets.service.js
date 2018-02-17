@@ -102,7 +102,7 @@
           });
           return $http({
             method: 'POST',
-            url: '/api/tickets/create',
+            url: '/api/tickets/comment',
             params: {
               nUserId: $userProvider.getUserId(),
               nTicketId: nTicketId
@@ -116,7 +116,22 @@
           })
         };
 
-
+        this.setNewState = function (oTicket, sState) {
+          return $http({
+            method: 'PUT',
+            url: '/api/tickets/state',
+            params: {
+              nTicketId: oTicket['nId'],
+              nUserId: $userProvider.getUserId(),
+              sNewState: sState
+            }
+          }).then(function (resp) {
+            return resp;
+          }, function (err) {
+            console.error(angular.toJson(err));
+            return err;
+          })
+        };
 
         this.getCategories = function () {
           var self = this;

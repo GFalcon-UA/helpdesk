@@ -90,9 +90,7 @@ public class TicketController {
     public ResponseEntity changeTicketState(@RequestParam(name = "nUserId") Long userId,
             @RequestParam(name = "nTicketId") Long ticketId, @RequestParam(name = "sNewState") String state){
 
-
-
-        return JsonRestUtils.toJsonResponse("ok");
+        return JsonRestUtils.toJsonResponse(ticketService.setNewState(ticketId, userId, state));
     }
 
     private ResponseEntity saveTicket(Ticket targetTicket, String body, Long userId, Errors errors){

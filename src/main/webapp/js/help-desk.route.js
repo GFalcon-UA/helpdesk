@@ -24,11 +24,11 @@
           templateUrl: './js/tickets/overview/overview.html',
           controller: 'OverviewCtrl',
           controllerAs: 'vm'
-        }).when('/feedback', {
+        }).when('/leave-feedback/:ticketId', {
           templateUrl: './js/tickets/feedback/feedback.html',
           controller: 'FeedbackCtrl',
           controllerAs: 'vm'
-        }).when('/feedback/:id', {
+        }).when('/feedback/:feedbackId', {
           templateUrl: './js/tickets/feedback/feedback.html',
           controller: 'FeedbackCtrl',
           controllerAs: 'vm'

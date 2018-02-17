@@ -56,7 +56,7 @@
        */
 
       vm.setTicketState = function(oTicket, sState){
-        // todo
+        TicketService.setNewState(oTicket, sState);
       };
 
       vm.showActionButton = function (oTicket) {
@@ -138,6 +138,45 @@
           });
 
           vm.aTickets = result;
+
+          // set default action
+          angular.forEach(vm.aTickets, function (oTicket) {
+            if(!vm.showActionButton(oTicket)){
+              oTicket.runDefaultAction = function () {};
+              oTicket.sActionTitle = "";
+            } else if (vm.showSubmit(oTicket)) {
+              oTicket.runDefaultAction = function () {
+                vm.setTicketState(oTicket, "NEW");
+              };
+              oTicket.sActionTitle = "Submit";
+            } else if (vm.showApprove(oTicket)){
+              oTicket.runDefaultAction = function(){
+                vm.setTicketState(oTicket, "APPROVED");
+              };
+              oTicket.sActionTitle = "Approve";
+            } else if (vm.showAssign(oTicket)){
+              oTicket.runDefaultAction = function(){
+                vm.setTicketState(oTicket, "IN_PROGRESS");
+              };
+              oTicket.sActionTitle = "Assign to Me";
+            } else if (vm.showDone(oTicket)){
+              oTicket.runDefaultAction = function(){
+                vm.setTicketState(oTicket, "DONE");
+              };
+              oTicket.sActionTitle = "Done";
+            } else if (vm.showLeaveFeedback(oTicket)){
+              oTicket.runDefaultAction = function () {};
+              oTicket.sActionTitle = "Leave feedback";
+            } else if (vm.showViewFeedback(oTicket)){
+              oTicket.runDefaultAction = function () {};
+              oTicket.sActionTitle = "View feedback";
+            } else if (vm.showCancel(oTicket)){
+              oTicket.runDefaultAction = function(){
+                vm.setTicketState(oTicket, "CANCELED");
+              };
+              oTicket.sActionTitle = "Cancel";
+            }
+          })
 
         });
 
