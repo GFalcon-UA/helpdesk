@@ -11,6 +11,7 @@
       vm.oTicket = {};
       vm.aHistories = [];
       vm.aComments = [];
+      vm.sNewComment = '';
 
       vm.getTicketOwner = function () {
         if(vm.oTicket['oOwner']){
@@ -48,9 +49,18 @@
       vm.getTicketInfo = function () {
         var nId = parseInt($routeParams.id);
         TicketService.getTicket(nId).then(function (resp) {
-          debugger;
           vm.oTicket = resp;
           fillTable();
+        })
+      };
+
+      vm.addComment = function (nTicketId, sComment) {
+        vm.sNewComment = "";
+        TicketService.addComment(nTicketId, sComment).then(function (resp) {
+          if(angular.isArray(vm.oTicket.aoComments)){
+            vm.oTicket.aoComments.push(resp.data);
+            fillTable();
+          }
         })
       };
 

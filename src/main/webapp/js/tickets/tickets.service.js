@@ -161,7 +161,8 @@
             method: 'DELETE',
             url: '/api/file/remove',
             paramS: {
-              nAttachmentId: nId
+              nAttachmentId: nId,
+              nUserId: $userProvider.getUserId()
             }
           })
         };

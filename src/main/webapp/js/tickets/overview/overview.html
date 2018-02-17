@@ -109,5 +109,13 @@
         </tbody>
     </table>
     <br />
+    <div class="row" ng-if="!vm.bHistoryViewMode">
+        <div class="col-xs-7">
+            <textarea rows="3" cols="40" class="form-controls" ng-model="vm.sNewComment"></textarea>
+        </div>
+        <div class="col-xs-2">
+            <button style="width: 160px;" class="btn" ng-click="vm.addComment(vm.oTicket.nId, vm.sNewComment)">Add Comment</button>
+        </div>
+    </div>
     <br />
 </div>

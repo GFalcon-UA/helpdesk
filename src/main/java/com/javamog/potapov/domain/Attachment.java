@@ -22,6 +22,9 @@ public class Attachment extends AbstractEntity implements Serializable {
     @JsonProperty("oTicket")
     private Ticket ticket;
 
+    @JsonProperty("sFileName")
+    private String fileName;
+
     public Attachment() {
     }
 
@@ -39,5 +42,13 @@ public class Attachment extends AbstractEntity implements Serializable {
 
     protected void setTicket(Ticket ticket) {
         this.ticket = ticket;
+    }
+
+    public String getFileName() {
+        return fileName;
+    }
+
+    public void setFileName(String fileName) {
+        this.fileName = fileName;
     }
 }

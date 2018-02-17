@@ -14,10 +14,12 @@ public class FileController {
 
     @RequestMapping(value = "/upload", method = RequestMethod.POST)
     public void upload(@RequestParam(value = "nTicketId") Long ticketId,
+            @RequestParam(value = "nUserId") Long userId,
+            @RequestParam(value = "sFileName", required = false) String fileName,
             @RequestBody byte[] file){
 
         System.out.println("ok");
-        fileService.addAttachment(ticketId, file);
+        fileService.addAttachment(ticketId, file, fileName, userId);
 
     }
 
@@ -29,7 +31,7 @@ public class FileController {
     }
 
     @RequestMapping(value = "/remove", method = RequestMethod.DELETE)
-    public void remove(@RequestParam(value = "nAttachmentId") Long attachmentId){
-        fileService.removeAttachmentById(attachmentId);
+    public void remove(@RequestParam(value = "nAttachmentId") Long attachmentId, @RequestParam(value = "nUserId") Long userId){
+        fileService.removeAttachmentById(attachmentId, userId);
     }
 }
