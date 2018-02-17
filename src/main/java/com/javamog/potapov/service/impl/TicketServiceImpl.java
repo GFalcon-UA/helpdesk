@@ -14,6 +14,7 @@ import com.javamog.potapov.domain.enums.Urgency;
 import com.javamog.potapov.dto.models.TicketDTO;
 import com.javamog.potapov.dto.util.DateConverter;
 import com.javamog.potapov.mail.MailSender;
+import com.javamog.potapov.service.HistoryService;
 import com.javamog.potapov.service.TicketService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -46,6 +47,8 @@ public class TicketServiceImpl implements TicketService {
     @Autowired
     private MailSender mailSender;
 
+    @Autowired
+    private HistoryService historyService;
 
 
     @Override
@@ -93,6 +96,8 @@ public class TicketServiceImpl implements TicketService {
 
         categoryDAO.saveOrUpdate(category);
         Ticket result = ticketDAO.saveOrUpdate(ticket);
+
+        historyService.createTicket(user, result);
 
         return result;
     }
@@ -150,8 +155,8 @@ public class TicketServiceImpl implements TicketService {
             ticket.setDesiredDate(DateConverter.convert(ticketDTO.getDesiredDate()));
         }
 
+        User user = userDAO.findByIdExpected(userId);
         if(ticketDTO.getComment() != null && !ticketDTO.getComment().isEmpty()){
-            User user = userDAO.findByIdExpected(userId);
             Comment comment = new Comment();
             comment.setText(ticketDTO.getComment());
             comment.setDate(new Date());
@@ -163,6 +168,8 @@ public class TicketServiceImpl implements TicketService {
         }
 
         Ticket result = ticketDAO.saveOrUpdate(ticket);
+
+        historyService.editTicket(user, result);
 
         return result;
     }
@@ -181,6 +188,8 @@ public class TicketServiceImpl implements TicketService {
         }
         ticket.setState(newState);
         Ticket result = ticketDAO.saveOrUpdate(ticket);
+
+        historyService.changeStatus(user, result, oldState);
 
         mailSender.sentNotification(result, oldState);
 

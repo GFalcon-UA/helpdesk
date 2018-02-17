@@ -16,7 +16,7 @@ public class History extends AbstractEntity {
 
     @JsonFormat(shape = JsonFormat.Shape.STRING)
     @JsonProperty("dDate")
-    private Date date;
+    private Date date = new Date();
 
     @JsonProperty("sAction")
     private String action;
@@ -39,10 +39,6 @@ public class History extends AbstractEntity {
 
     public Date getDate() {
         return date;
-    }
-
-    public void setDate(Date date) {
-        this.date = date;
     }
 
     public String getAction() {
