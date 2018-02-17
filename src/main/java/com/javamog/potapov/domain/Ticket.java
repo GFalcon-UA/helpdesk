@@ -74,10 +74,15 @@ public class Ticket extends AbstractEntity {
     @JsonProperty("aoComments")
     private Set<Comment> comments = new TreeSet<>((o1, o2) -> o1.getDate().compareTo(o2.getDate()));
 
-    @OneToMany(mappedBy = "ticket", cascade = CascadeType.ALL, orphanRemoval = true)
+//    @OneToMany(mappedBy = "ticket", cascade = CascadeType.ALL, orphanRemoval = true)
+//    @JsonManagedReference
+//    @JsonProperty("aoFeedbacks")
+//    private Set<Feedback> feedbacks = new TreeSet<>((o1, o2) -> o1.getDate().compareTo(o2.getDate()));
+
+    @OneToOne(mappedBy = "ticket", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     @JsonManagedReference
-    @JsonProperty("aoFeedbacks")
-    private Set<Feedback> feedbacks = new TreeSet<>((o1, o2) -> o1.getDate().compareTo(o2.getDate()));
+    @JsonProperty("oFeedback")
+    private Feedback feedback;
 
     public Ticket() {
     }
@@ -216,23 +221,30 @@ public class Ticket extends AbstractEntity {
         comment.setTicket(null);
     }
 
-    public Set<Feedback> getFeedbacks() {
-        return feedbacks;
+//    public Set<Feedback> getFeedbacks() {
+//        return feedbacks;
+//    }
+//
+//    public void setFeedbacks(Set<Feedback> feedbacks) {
+//        this.feedbacks = feedbacks;
+//    }
+//
+//    public void addFeedbacks(Feedback feedback) {
+//        this.feedbacks.add(feedback);
+//        feedback.setTicket(this);
+//    }
+//
+//    public void removeFeedbacks(Feedback feedback) {
+//        this.feedbacks.remove(feedback);
+//        feedback.setTicket(null);
+//    }
+
+    public Feedback getFeedback() {
+        return feedback;
     }
 
-    public void setFeedbacks(Set<Feedback> feedbacks) {
-        this.feedbacks = feedbacks;
-    }
-
-    public void addFeedbacks(Feedback feedback) {
-        this.feedbacks.add(feedback);
+    public void setFeedback(Feedback feedback) {
+        this.feedback = feedback;
         feedback.setTicket(this);
     }
-
-    public void removeFeedbacks(Feedback feedback) {
-        this.feedbacks.remove(feedback);
-        feedback.setTicket(null);
-    }
-
-
 }

@@ -5,9 +5,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.javamog.potapov.parent.entity.AbstractEntity;
 
-import javax.persistence.Entity;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.util.Date;
 
 @Entity
@@ -29,7 +27,9 @@ public class Feedback extends AbstractEntity {
     @JsonProperty("oUser")
     private User user;
 
-    @ManyToOne
+//    @ManyToOne
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "ticket_id")
     @JsonBackReference
     @JsonProperty("oTicket")
     private Ticket ticket;

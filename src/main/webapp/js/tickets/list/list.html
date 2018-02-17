@@ -63,8 +63,27 @@
             <td>{{oTicket.sUrgency}}</td>
             <td>{{oTicket.sState}}</td>
             <th>
-                <div class="btn btn-success" style="width: 90%;">Submit
-                    <div class="glyphicon glyphicon-play"></div>
+                <!--<div class="btn btn-success" style="width: 90%;">Submit-->
+                    <!--<div class="glyphicon glyphicon-play"></div>-->
+                <!--</div>-->
+                <!-- Split button -->
+                <div class="btn-group" uib-dropdown style="width: 90%" ng-if="vm.showActionButton(oTicket)">
+                    <button id="split-button" type="button" class="btn btn-success" ng-click="oTicket.runDefaultAction()">{{oTicket.sActionTitle}}</button>
+                    <button type="button" class="btn btn-success" uib-dropdown-toggle>
+                        <span class="caret"></span>
+                        <span class="sr-only">Action menu</span>
+                    </button>
+                    <ul uib-dropdown-menu role="menu" aria-labelledby="split-button">
+                        <li role="menuitem" ng-if="vm.showSubmit(oTicket)"><a href="#" ng-click="vm.setTicketState(oTicket, 'SUBMIT')">Submit</a></li>
+                        <li role="menuitem" ng-if="vm.showApprove(oTicket)"><a href="#" ng-click="vm.setTicketState(oTicket, 'APPROVED')">Approve</a></li>
+                        <li role="menuitem" ng-if="vm.showDecline(oTicket)"><a href="#" ng-click="vm.setTicketState(oTicket, 'DECLINED')">Decline</a></li>
+                        <li role="menuitem" ng-if="vm.showCancel(oTicket)"><a href="#" ng-click="vm.setTicketState(oTicket, 'CANCELED')">Cancel</a></li>
+                        <li role="menuitem" ng-if="vm.showAssign(oTicket)"><a href="#" ng-click="vm.setTicketState(oTicket, 'IN_PROGRESS')">Assign to Me</a></li>
+                        <li role="menuitem" ng-if="vm.showDone(oTicket)"><a href="#" ng-click="vm.setTicketState(oTicket, 'DONE')">Done</a></li>
+                        <li class="divider"></li>
+                        <li role="menuitem" ng-if="vm.showLeaveFeedback(oTicket)"><a href="#">Leave feedback</a></li>
+                        <li role="menuitem" ng-if="vm.showViewFeedback(oTicket)"><a href="#">View feedback</a></li>
+                    </ul>
                 </div>
             </th>
         </tr>

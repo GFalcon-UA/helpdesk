@@ -96,6 +96,28 @@
           })
         };
 
+        this.addComment = function (nTicketId, sCommentText) {
+          var json = angular.toJson({
+            sComment: sCommentText
+          });
+          return $http({
+            method: 'POST',
+            url: '/api/tickets/create',
+            params: {
+              nUserId: $userProvider.getUserId(),
+              nTicketId: nTicketId
+            },
+            data: json
+          }).then(function (resp) {
+            return resp;
+          }, function (err) {
+            console.error(angular.toJson(err));
+            return err;
+          })
+        };
+
+
+
         this.getCategories = function () {
           var self = this;
           return $http({

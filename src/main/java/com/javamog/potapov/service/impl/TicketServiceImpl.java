@@ -13,6 +13,7 @@ import com.javamog.potapov.domain.enums.State;
 import com.javamog.potapov.domain.enums.Urgency;
 import com.javamog.potapov.dto.models.TicketDTO;
 import com.javamog.potapov.dto.util.DateConverter;
+import com.javamog.potapov.mail.MailSender;
 import com.javamog.potapov.service.TicketService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -41,6 +42,9 @@ public class TicketServiceImpl implements TicketService {
 
     @Autowired
     private CommentDAO commentDAO;
+
+    @Autowired
+    private MailSender mailSender;
 
 
 
@@ -159,6 +163,26 @@ public class TicketServiceImpl implements TicketService {
         }
 
         Ticket result = ticketDAO.saveOrUpdate(ticket);
+
+        return result;
+    }
+
+    @Override
+    public Ticket setNewState(Long ticketId, Long userId, String state){
+        Ticket ticket = getTicket(ticketId);
+        User user = userDAO.findByIdExpected(userId);
+        State oldState = ticket.getState();
+        State newState = State.valueOf(state);
+        if(newState.equals(State.APPROVED)){
+            user.addApproveTicket(ticket);
+        }
+        if(newState.equals(State.IN_PROGRESS)){
+            user.setAssignTicket(ticket);
+        }
+        ticket.setState(newState);
+        Ticket result = ticketDAO.saveOrUpdate(ticket);
+
+        mailSender.sentNotification(result, oldState);
 
         return result;
     }

@@ -13,4 +13,5 @@ public interface TicketService {
     Comment addComment(Ticket ticket, String comment, Long userId);
     Ticket getTicket(Long ticketId);
     Ticket updateTicket(TicketDTO ticketDTO, Long userId);
+    Ticket setNewState(Long ticketId, Long userId, String state);
 }

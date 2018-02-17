@@ -5,9 +5,9 @@ public enum State {
     NEW("Submit", "New"),
     APPROVED("Approve", "Approved"),
     DECLINED("Decline", "Declined"),
-    IN_PROGRESS("Cancel", "Cancelled"),
-    DONE("Assign to Me", "In Progress"),
-    CANCELED("Done", "Done");
+    CANCELED("Cancel", "Cancelled"),
+    IN_PROGRESS("Assign to Me", "In Progress"),
+    DONE("Done", "Done");
 
     private String action;
     private String status;

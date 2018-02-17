@@ -12,6 +12,8 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @Service
 @Transactional
 public class UserServiceImpl implements UserService{
@@ -34,7 +36,13 @@ public class UserServiceImpl implements UserService{
         return null;
     }
 
-//    @Override
+    @Override
+    @Transactional(readOnly = true)
+    public List<User> getUsersByRole(Role role) {
+        return userDAO.findAllBy("role", role);
+    }
+
+    //    @Override
 //    @Transactional(readOnly = true)
 //    public UserDetails loadUserByUsername(String s) throws UsernameNotFoundException {
 //        log.debug("loading by username = " + s);
@@ -49,7 +57,7 @@ public class UserServiceImpl implements UserService{
     }
 
     @Override
-    @Transactional
+    @Transactional(readOnly = true)
     public Role getRoleByUserId(Long id) {
         return getUserById(id).getRole();
     }

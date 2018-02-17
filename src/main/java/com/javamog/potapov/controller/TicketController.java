@@ -59,21 +59,69 @@ public class TicketController {
     public ResponseEntity createTicket(@RequestParam(name = "nUserId") Long userId,
             @RequestBody String body, Errors errors) {
 
-        //TicketDTO ticket = JsonRestUtils.readObject(body, TicketDTO.class);
+        return saveTicket(new Ticket(), body, userId, errors);
+    }
+
+    @RequestMapping(value = "/update", method = RequestMethod.PUT)
+    public ResponseEntity updateTicket(@RequestParam(name = "nUserId") Long userId, @RequestParam(name = "nTicketId") Long ticketId,
+            @RequestBody String body, Errors errors){
+
+        return saveTicket(ticketService.getTicket(ticketId), body, userId, errors);
+    }
+
+    @RequestMapping(value = "/comment", method = RequestMethod.POST)
+    public ResponseEntity addComment(@RequestParam(name = "nUserId") Long userId, @RequestParam(name = "nTicketId") Long ticketId,
+            @RequestBody String body, Errors errors){
+
+        Ticket resultTicket = ticketService.getTicket(ticketId);
+
+        HashMap<String, String> parsedContent =  new HashMap<>();
+        parsedContent = JsonRestUtils.readObject(body, parsedContent.getClass());
+        if (parsedContent.containsKey("sComment")) {
+            String text = parsedContent.get("sComment");
+            Comment comment = ticketService.addComment(resultTicket, text, userId);
+            resultTicket.addComment(comment);
+        }
+
+        return JsonRestUtils.toJsonResponse(resultTicket);
+    }
+
+    @RequestMapping(value = "/state", method = RequestMethod.PUT)
+    public ResponseEntity changeTicketState(@RequestParam(name = "nUserId") Long userId,
+            @RequestParam(name = "nTicketId") Long ticketId, @RequestParam(name = "sNewState") String state){
+
+
+
+        return JsonRestUtils.toJsonResponse("ok");
+    }
+
+    private ResponseEntity saveTicket(Ticket targetTicket, String body, Long userId, Errors errors){
+        Long categoryId = parseCategoryId(body);
+        Ticket ticket = parseTicket(body, targetTicket);
+
+        //        TicketValidator validator = new TicketValidator();
+        //        validator.validate(ticket, errors);
+        //
+        //        if(errors.hasErrors()){
+        //            return JsonRestUtils.toJsonErrorResponse(HttpStatus.NOT_IMPLEMENTED, errors.getAllErrors().toString());
+        //        }
+
+        Ticket resultTicket = ticketService.createTicket(ticket, userId, categoryId);
+
         HashMap<String, Object> ticketBody =  new HashMap<String, Object>();
         ticketBody = JsonRestUtils.readObject(body, ticketBody.getClass());
-        /*
-        {
-        category: newTicket.category,
-        name: newTicket.name,
-        description: newTicket.description,
-        urgency: newTicket.urgency,
-        desiredDate: newTicket.desiredDate,
-        comments: newTicket.comments,
-        oState: isDraft ? 'DRAFT' : 'NEW'
-      }
-         */
-        Ticket ticket = new Ticket();
+        if (ticketBody.containsKey("sComment")) {
+            String text = (String) ticketBody.get("sComment");
+            Comment comment = ticketService.addComment(resultTicket, text, userId);
+            resultTicket.addComment(comment);
+        }
+
+        return JsonRestUtils.toJsonResponse(resultTicket);
+    }
+
+    private Long parseCategoryId(String jsonBody){
+        HashMap<String, Object> ticketBody =  new HashMap<String, Object>();
+        ticketBody = JsonRestUtils.readObject(jsonBody, ticketBody.getClass());
         Long categoryId = null;
         if(ticketBody.containsKey("nCategory")){
             Object num = ticketBody.get("nCategory");
@@ -85,42 +133,32 @@ public class TicketController {
             } else {
                 categoryId = Long.parseLong((String) num);
             }
-
         }
+        return categoryId;
+    }
+
+    private Ticket parseTicket(String jsonBody, Ticket ticketObjectToSave){
+        HashMap<String, Object> ticketBody =  new HashMap<String, Object>();
+        ticketBody = JsonRestUtils.readObject(jsonBody, ticketBody.getClass());
+
         if(ticketBody.containsKey("sName")){
-            ticket.setName((String) ticketBody.get("sName"));
+            ticketObjectToSave.setName((String) ticketBody.get("sName"));
         }
         if(ticketBody.containsKey("sDescription")){
-            ticket.setDescription((String) ticketBody.get("sDescription"));
+            ticketObjectToSave.setDescription((String) ticketBody.get("sDescription"));
         }
         if(ticketBody.containsKey("sUrgency")){
-            ticket.setUrgency(Urgency.valueOf((String) ticketBody.get("sUrgency")));
+            ticketObjectToSave.setUrgency(Urgency.valueOf((String) ticketBody.get("sUrgency")));
         }
         if(ticketBody.containsKey("dDesiredDate")){
             String dDesiredDate = (String) ticketBody.get("dDesiredDate");
             Date desiredDate = DateConverter.convert(dDesiredDate);
-            ticket.setDesiredDate(desiredDate);
+            ticketObjectToSave.setDesiredDate(desiredDate);
         }
         if(ticketBody.containsKey("sState")){
-            ticket.setState(State.valueOf((String) ticketBody.get("sState")));
+            ticketObjectToSave.setState(State.valueOf((String) ticketBody.get("sState")));
         }
-
-//        TicketValidator validator = new TicketValidator();
-//        validator.validate(ticket, errors);
-//
-//        if(errors.hasErrors()){
-//            return JsonRestUtils.toJsonErrorResponse(HttpStatus.NOT_IMPLEMENTED, errors.getAllErrors().toString());
-//        }
-
-        Ticket resultTicket = ticketService.createTicket(ticket, userId, categoryId);
-
-        if (ticketBody.containsKey("sComment")) {
-            String text = (String) ticketBody.get("sComment");
-            Comment comment = ticketService.addComment(resultTicket, text, userId);
-            resultTicket.addComment(comment);
-        }
-
-        return JsonRestUtils.toJsonResponse(resultTicket);
+        return ticketObjectToSave;
     }
 
 }
