@@ -1,6 +1,7 @@
 package com.javamog.potapov.controller;
 
 import com.javamog.potapov.domain.Comment;
+import com.javamog.potapov.domain.Feedback;
 import com.javamog.potapov.domain.Ticket;
 import com.javamog.potapov.domain.User;
 import com.javamog.potapov.domain.enums.State;
@@ -93,6 +94,32 @@ public class TicketController {
         return JsonRestUtils.toJsonResponse(ticketService.setNewState(ticketId, userId, state));
     }
 
+    @RequestMapping(value = "/getFeedback", method = RequestMethod.GET)
+    public ResponseEntity getFeedback(@RequestParam(name = "nTicketId") Long ticketId){
+
+        return JsonRestUtils.toJsonResponse(ticketService.getFeedback(ticketId));
+    }
+
+    @RequestMapping(value = "/setFeedback", method = RequestMethod.POST)
+    public ResponseEntity setFeedback(@RequestParam(name = "nUserId") Long userId,
+            @RequestParam(name = "nTicketId") Long ticketId,
+            @RequestBody String json){
+
+        HashMap<String, Object> parsedJson = JsonRestUtils.readObject(json, new HashMap<String, Object>().getClass());
+        Integer rate = -1;
+        if(parsedJson.containsKey("nRate")){
+            rate = (Integer) parsedJson.get("nRate");
+        }
+        String text = "";
+        if(parsedJson.containsKey("nRate")){
+            text = (String) parsedJson.get("nRate");
+        }
+
+        Feedback feedback = ticketService.setFeedback(ticketId, userId, rate, text);
+
+        return JsonRestUtils.toJsonResponse(feedback);
+    }
+
     private ResponseEntity saveTicket(Ticket targetTicket, String body, Long userId, Errors errors){
         Long categoryId = parseCategoryId(body);
         Ticket ticket = parseTicket(body, targetTicket);
@@ -104,7 +131,8 @@ public class TicketController {
         //            return JsonRestUtils.toJsonErrorResponse(HttpStatus.NOT_IMPLEMENTED, errors.getAllErrors().toString());
         //        }
 
-        Ticket resultTicket = ticketService.createTicket(ticket, userId, categoryId);
+        Ticket resultTicket = null;
+        resultTicket = ticketService.saveTicket(ticket, userId, categoryId);
 
         HashMap<String, Object> ticketBody =  new HashMap<String, Object>();
         ticketBody = JsonRestUtils.readObject(body, ticketBody.getClass());

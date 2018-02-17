@@ -19,9 +19,9 @@
             <ThresholdFilter level="WARN" onMatch="ACCEPT" onMismatch="DENY"/>
         </Console>
 
-        <!--<File name="file" fileName="logs/helpdesk.log">-->
-            <!--<PatternLayout pattern="${pattern}"/>-->
-        <!--</File>-->
+        <File name="file" fileName="logs/helpdesk.log">
+            <PatternLayout pattern="${pattern}"/>
+        </File>
 
         <!--<RollingFile name="rolling-file" fileName="logs/rolling.log" append="true"-->
                      <!--filePattern="logs/$${date:yyyy-MM}/app-%d{yyyy-MM-dd}-%i.log">-->
@@ -37,7 +37,7 @@
             <AppenderRef ref="console-debug"/>
             <AppenderRef ref="console"/>
             <AppenderRef ref="console-err"/>
-            <!--<AppenderRef ref="file"/>-->
+            <AppenderRef ref="file"/>
         </asyncRoot>
     </Loggers>
 </Configuration>

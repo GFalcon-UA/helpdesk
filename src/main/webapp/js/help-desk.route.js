@@ -24,11 +24,7 @@
           templateUrl: './js/tickets/overview/overview.html',
           controller: 'OverviewCtrl',
           controllerAs: 'vm'
-        }).when('/leave-feedback/:ticketId', {
-          templateUrl: './js/tickets/feedback/feedback.html',
-          controller: 'FeedbackCtrl',
-          controllerAs: 'vm'
-        }).when('/feedback/:feedbackId', {
+        }).when('/feedback/:id', {
           templateUrl: './js/tickets/feedback/feedback.html',
           controller: 'FeedbackCtrl',
           controllerAs: 'vm'

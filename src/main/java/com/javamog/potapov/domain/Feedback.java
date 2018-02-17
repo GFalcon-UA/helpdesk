@@ -27,7 +27,6 @@ public class Feedback extends AbstractEntity {
     @JsonProperty("oUser")
     private User user;
 
-//    @ManyToOne
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "ticket_id")
     @JsonBackReference

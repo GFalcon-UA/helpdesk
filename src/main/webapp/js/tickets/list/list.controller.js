@@ -51,6 +51,10 @@
         $location.path('/editor');
       };
 
+      vm.openFeedbackPage = function (oTicket) {
+        $location.path('/feedback/' + oTicket['nId'])
+      };
+
       /*
        * Ticket actions
        */
@@ -104,8 +108,7 @@
       };
 
       vm.showLeaveFeedback = function (oTicket) {
-        if (oTicket['sState'] === 'DONE' && oTicket['oOwner']['nId'] === vm.oCurrentuser['nId'] && !vm.showViewFeedback(oTicket)) return true;
-        return false;
+        return TicketService.showLeaveFeedbackButton(oTicket)
       };
 
       vm.showViewFeedback = function (oTicket) {

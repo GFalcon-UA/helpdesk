@@ -15,7 +15,7 @@ import java.util.Date;
 @Table(name = "HISTORIES")
 public class History extends AbstractEntity {
 
-    @JsonFormat(shape = JsonFormat.Shape.STRING)
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy")
     @JsonProperty("dDate")
     private Date date = new Date();
 

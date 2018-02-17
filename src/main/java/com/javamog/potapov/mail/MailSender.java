@@ -67,10 +67,9 @@ public class MailSender {
             tr.connect(myMail, pass);
             tr.sendMessage(message, message.getAllRecipients());
             tr.close();
-            log.info("Sending mail to " + mailMessage.getAddress() + " - SUCCESS");
+            log.info("Sending mail to " + (mailMessage.getAddress() != null ? mailMessage.getAddress() : mailMessage.getAddresses().toString()) + " - SUCCESS");
         } catch (MessagingException e) {
-            log.error(e.getStackTrace());
-            e.printStackTrace();
+            log.error(e.getMessage());
         }
     }
 

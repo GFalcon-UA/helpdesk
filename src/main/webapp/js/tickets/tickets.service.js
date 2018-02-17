@@ -133,6 +133,49 @@
           })
         };
 
+        this.getFeedBack = function (nTicketId) {
+          return $http({
+            method: 'GET',
+            url: '/api/tickets/getFeedback',
+            params: {
+              nTicketId: nTicketId
+            }
+          }).then(function (resp) {
+            try {
+              return angular.fromJson(resp.data);
+            } catch (e){
+              return resp.data;
+            }
+          }, function (err) {
+            console.error(angular.toJson(err));
+            return err;
+          })
+        };
+
+        this.setFeedBack = function (nTicketId, oFeedback) {
+          return $http({
+            method: 'POST',
+            url: '/api/tickets/setFeedback',
+            params: {
+              nUserId: $userProvider.getUserId(),
+              nTicketId: nTicketId
+            },
+            data: angular.toJson({
+              nRate: oFeedback.nRate,
+              sText: oFeedback.sText
+            })
+          }).then(function (resp) {
+            try {
+              return angular.fromJson(resp.data);
+            } catch (e){
+              return resp.data;
+            }
+          }, function (err) {
+            console.error(angular.toJson(err));
+            return err;
+          })
+        };
+
         this.getCategories = function () {
           var self = this;
           return $http({
@@ -167,6 +210,10 @@
           })
         };
 
+        this.showLeaveFeedbackButton = function (oTicket) {
+          return oTicket['sState'] === 'DONE' && oTicket['oOwner']['nId'] === vm.oCurrentuser['nId'] && !vm.showViewFeedback(oTicket);
+        };
+
         this.sortObjectArrayByField = function (array, field) {
           if (!((angular.isArray(array) && angular.isString(field)) && angular.isObject(array[0]))) {
             return array;
@@ -175,9 +222,6 @@
             return o1[field] - o2[field];
           })
         }
-
-
-
 
       }])
 })();

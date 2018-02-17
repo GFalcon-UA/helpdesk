@@ -1,38 +1,46 @@
 <div class="container rating">
     <br />
     <div class="col-xs-2">
-        <button style="width: 120px;" class="btn btn-success">Back</button>
+        <button style="width: 120px;" class="btn btn-success" ng-click="vm.goToBack()">Back</button>
     </div>
     <div class="col-xs-8">
-        <h3 style="margin: 0; line-height: 34px;">Ticket (2) - Task 2</h3>
+        <h3 style="margin: 0; line-height: 34px;">Ticket ({{vm.oFeedBack.oTicket.nId}}) - {{vm.oFeedBack.oTicket.sName}}</h3>
         <br />
         <br />
-        <h3>Feedback</h3>
-        <div class="row">
-            <div class="star">
-                <span class="star-icon">★</span>
+        <h3 ng-if="!vm.oFeedBack['nId']">Please, rate your satisfaction with the solution:</h3>
+        <h3 ng-if="vm.oFeedBack['nId']">Feedback</h3>
+        <div class="row" ng-disabled="!vm.oFeedBack['nId']">
+            <div class="star" ng-click="vm.setRate(1)" style="cursor: pointer">
+                <span class="star-icon" ng-class="vm.isSelected(1) ? 'selected-star' : ''">★</span>
                 <label class="star-label">1</label>
             </div>
-            <div class="star">
-                <span class="star-icon">★</span>
+            <div class="star" ng-click="vm.setRate(2)" style="cursor: pointer">
+                <span class="star-icon" ng-class="vm.isSelected(2) ? 'selected-star' : ''">★</span>
                 <label class="star-label">2</label>
             </div>
-            <div class="star">
-                <span class="star-icon">★</span>
+            <div class="star" ng-click="vm.setRate(3)" style="cursor: pointer">
+                <span class="star-icon" ng-class="vm.isSelected(3) ? 'selected-star' : ''">★</span>
                 <label class="star-label">3</label>
             </div>
-            <div class="star">
-                <span class="star-icon" style="color: yellow;">★</span>
+            <div class="star" ng-click="vm.setRate(4)" style="cursor: pointer">
+                <span class="star-icon" ng-class="vm.isSelected(4) ? 'selected-star' : ''">★</span>
                 <label class="star-label">4</label>
             </div>
-            <div class="star">
-                <span class="star-icon">★</span>
+            <div class="star" ng-click="vm.setRate(5)" style="cursor: pointer">
+                <span class="star-icon" ng-class="vm.isSelected(5) ? 'selected-star' : ''">★</span>
                 <label class="star-label">5</label>
             </div>
         </div>
         <br />
         <br />
-        <textarea rows="7" cols="60" class="form-controls">There is some feedback about an Admin work with a ticket</textarea>
+        <textarea rows="7" cols="60" class="form-controls" ng-model="vm.oFeedBack.sText" ng-disabled="!vm.oFeedBack['nId']">{{vm.oFeedBack.sText}}</textarea>
+    </div>
+    <div class="col-xs-10" ng-if="!vm.oFeedBack['nId']">
+        <div class="row">
+            <br />
+            <br />
+            <button style="width: 120px;" class="btn pull-right btn-success" ng-click="vm.submit(vm.oFeedBack)">Submit</button>
+        </div>
         <br />
         <br />
     </div>

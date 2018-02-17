@@ -64,6 +64,22 @@
         })
       };
 
+      vm.showLeaveFeedback = function () {
+        return TicketService.showLeaveFeedbackButton(vm.oTicket)
+      };
+
+      vm.leaveFeedback = function (id) {
+        $location.path('/feedback/' + id);
+      };
+
+      vm.goToEditor = function (id) {
+        $location.path('/editor/' + id);
+      };
+
+      vm.enableEditorPage = function (oTicket) {
+        return oTicket['sState'] === 'DRAFT';
+      };
+
       function fillTable() {
         vm.aHistories = [];
         vm.aComments = [];

@@ -1,6 +1,6 @@
 (function () {
   'use strict';
-  angular.module('Tickets').controller('EditorCtrl', function (TicketService, uiUploader, $log, $scope, $location, $userProvider) {
+  angular.module('Tickets').controller('EditorCtrl', function (TicketService, uiUploader, $log, $scope, $location, $userProvider, $routeParams) {
 
     var vm = this;
 
@@ -23,6 +23,18 @@
       submitTicket(false)
     };
 
+    vm.init = function () {
+      if($routeParams.id){
+        TicketService.getTicket(parseInt($routeParams.id)).then(function (resp) {
+          vm.ticket = resp;
+        })
+      }
+
+      fillCategoryList();
+      fillUrgencyList()
+
+    };
+
     $scope.btn_remove = function(file) {
       $log.info('deleting=' + file);
       uiUploader.removeFile(file);
@@ -30,7 +42,7 @@
     $scope.btn_clean = function() {
       uiUploader.removeAll();
     };
-    $scope.btn_upload = function() {
+    $scope.btn_upload = function(overviewTicktId) {
       $log.info('uploading...');
       debugger;
       uiUploader.startUpload({
@@ -46,7 +58,11 @@
         onCompletedAll: function(files) {
           // files is an array of File objects
           $log.log(files);
-          goToTicketList();
+          if(overviewTicktId){
+            goToOverview(overviewTicktId);
+          } else {
+            goToTicketList();
+          }
         }
       });
     };
@@ -124,25 +140,40 @@
 
     function submitTicket(isDraft) {
       mergeEnums();
-      TicketService.createTicket(vm.ticket, isDraft).then(
-        function (result) {
-          vm.ticket = result.data;
-          debugger;
-          if($scope.files.length > 0){
-            $scope.btn_upload();
-          } else {
-            goToTicketList()
+      if(vm.ticket.hasOwnProperty('nId')){
+        TicketService.updateTicket(vm.ticket, isDraft).then(
+          function (result) {
+            vm.ticket = result.data;
+            if($scope.files.length > 0){
+              $scope.btn_upload(vm.ticket['nId']);
+            } else {
+              goToOverview(vm.ticket['nId'])
+            }
           }
-        }
-      )
+        )
+      } else {
+        TicketService.createTicket(vm.ticket, isDraft).then(
+          function (result) {
+            vm.ticket = result.data;
+            debugger;
+            if($scope.files.length > 0){
+              $scope.btn_upload();
+            } else {
+              goToTicketList()
+            }
+          }
+        )
+      }
+
+    }
+
+    function goToOverview(nId) {
+      $location.path('/overview/' + nId);
     }
 
     function goToTicketList() {
       $location.path('/');
     }
-
-    fillCategoryList();
-    fillUrgencyList()
 
   })
 })();

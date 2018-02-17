@@ -1,18 +1,9 @@
 package com.javamog.potapov.service.impl;
 
-import com.javamog.potapov.dao.CategoryDAO;
-import com.javamog.potapov.dao.CommentDAO;
-import com.javamog.potapov.dao.TicketDAO;
-import com.javamog.potapov.dao.UserDAO;
-import com.javamog.potapov.domain.Category;
-import com.javamog.potapov.domain.Comment;
-import com.javamog.potapov.domain.Ticket;
-import com.javamog.potapov.domain.User;
+import com.javamog.potapov.dao.*;
+import com.javamog.potapov.domain.*;
 import com.javamog.potapov.domain.enums.Role;
 import com.javamog.potapov.domain.enums.State;
-import com.javamog.potapov.domain.enums.Urgency;
-import com.javamog.potapov.dto.models.TicketDTO;
-import com.javamog.potapov.dto.util.DateConverter;
 import com.javamog.potapov.mail.MailSender;
 import com.javamog.potapov.service.HistoryService;
 import com.javamog.potapov.service.TicketService;
@@ -45,6 +36,9 @@ public class TicketServiceImpl implements TicketService {
     private CommentDAO commentDAO;
 
     @Autowired
+    private FeedbackDAO feedbackDAO;
+
+    @Autowired
     private MailSender mailSender;
 
     @Autowired
@@ -59,7 +53,7 @@ public class TicketServiceImpl implements TicketService {
             result.addAll(ticketDAO.findAllBy("owner", currentUser));
         } else if (currentUser.getRole().equals(Role.MANAGER)){
             result.addAll(ticketDAO.findAllBy("owner", currentUser));
-            result.addAll(ticketDAO.findAllBy("oState", State.NEW).stream()
+            result.addAll(ticketDAO.findAllBy("state", State.NEW).stream()
                     .filter(o -> o.getOwner().getRole().equals(Role.EMPLOYEE)).collect(
                     Collectors.toSet()));
             result.addAll(ticketDAO.findAllBy("approver", currentUser).stream()
@@ -70,7 +64,7 @@ public class TicketServiceImpl implements TicketService {
                             || o.getState().equals(State.DONE))
                     .collect(Collectors.toSet()));
         } else if (currentUser.getRole().equals(Role.ENGINEER)){
-            result.addAll(ticketDAO.findAllBy("oState", State.APPROVED).stream()
+            result.addAll(ticketDAO.findAllBy("state", State.APPROVED).stream()
                     .filter(o -> o.getOwner().getRole().equals(Role.EMPLOYEE)
                             || o.getOwner().getRole().equals(Role.MANAGER))
                     .collect(Collectors.toSet()));
@@ -85,7 +79,7 @@ public class TicketServiceImpl implements TicketService {
     }
 
     @Override
-    public Ticket createTicket(Ticket ticket, Long userId, Long categoryId) {
+    public Ticket saveTicket(Ticket ticket, Long userId, Long categoryId) {
         User user = userDAO.findByIdExpected(userId);
         Category category = categoryDAO.findByIdExpected(categoryId);
 
@@ -125,51 +119,6 @@ public class TicketServiceImpl implements TicketService {
     }
 
     @Override
-    public Ticket updateTicket(TicketDTO ticketDTO, Long userId) {
-        Ticket ticket = ticketDAO.findByIdExpected(ticketDTO.getId());
-
-        if(!ticket.getCategory().getId().equals(ticketDTO.getCategoryId())){
-            Category oldCategory = ticket.getCategory();
-            Category newCategory = categoryDAO.findByIdExpected(ticketDTO.getCategoryId());
-            oldCategory.removeTicket(ticket);
-            newCategory.addTicket(ticket);
-        }
-
-        if(!ticket.getName().equals(ticketDTO.getName())){
-            ticket.setName(ticketDTO.getName());
-        }
-
-        if(!ticket.getDescription().equals(ticketDTO.getDescription())){
-            ticket.setDescription(ticketDTO.getDescription());
-        }
-
-        if(!ticket.getUrgency().name().equals(ticketDTO.getUrgency())){
-            ticket.setUrgency(Urgency.valueOf(ticketDTO.getName()));
-        }
-
-        if(!ticket.getDesiredDate().equals(DateConverter.convert(ticketDTO.getDesiredDate()))){
-            ticket.setDesiredDate(DateConverter.convert(ticketDTO.getDesiredDate()));
-        }
-
-        User user = userDAO.findByIdExpected(userId);
-        if(ticketDTO.getComment() != null && !ticketDTO.getComment().isEmpty()){
-            Comment comment = new Comment();
-            comment.setText(ticketDTO.getComment());
-            comment.setDate(new Date());
-            user.addComment(comment);
-            ticket.addComment(comment);
-
-            commentDAO.saveOrUpdate(comment);
-        }
-
-        Ticket result = ticketDAO.saveOrUpdate(ticket);
-
-        historyService.editTicket(user, result);
-
-        return result;
-    }
-
-    @Override
     public Ticket setNewState(Long ticketId, Long userId, String state){
         Ticket ticket = getTicket(ticketId);
         User user = userDAO.findByIdExpected(userId);
@@ -188,6 +137,35 @@ public class TicketServiceImpl implements TicketService {
 
         mailSender.sentNotification(result, oldState);
 
+        return result;
+    }
+
+    @Override
+    public Feedback setFeedback(Long ticketId, Long userId, Integer rate, String text) {
+        Ticket ticket = getTicket(ticketId);
+        User user = userDAO.findByIdExpected(userId);
+        Feedback feedback = new Feedback();
+
+        feedback.setRate(rate);
+        feedback.setText(text);
+        user.addFeedback(feedback);
+        ticket.setFeedback(feedback);
+
+        Feedback result = feedbackDAO.saveOrUpdate(feedback);
+        mailSender.sentFeedBackNotification(ticket);
+
+        return result;
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public Feedback getFeedback(Long ticketId) {
+        Ticket ticket = getTicket(ticketId);
+        Feedback result = ticket.getFeedback();
+        if(result == null){
+            result = new Feedback();
+            ticket.setFeedback(result);
+        }
         return result;
     }
 }

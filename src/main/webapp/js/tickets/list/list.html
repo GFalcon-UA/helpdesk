@@ -50,8 +50,6 @@
                 <div class="glyphicon glyphicon-play down"></div>
             </th>
             <th>Action
-                <div class="glyphicon glyphicon-play up"></div>
-                <div class="glyphicon glyphicon-play down"></div>
             </th>
         </tr>
         </thead>
@@ -63,10 +61,6 @@
             <td>{{oTicket.sUrgency}}</td>
             <td>{{oTicket.sState}}</td>
             <th>
-                <!--<div class="btn btn-success" style="width: 90%;">Submit-->
-                    <!--<div class="glyphicon glyphicon-play"></div>-->
-                <!--</div>-->
-                <!-- Split button -->
                 <div class="btn-group" uib-dropdown style="width: 90%" ng-if="vm.showActionButton(oTicket)">
                     <button id="split-button" type="button" class="btn btn-success" ng-click="oTicket.runDefaultAction()">{{oTicket.sActionTitle}}</button>
                     <button type="button" class="btn btn-success" uib-dropdown-toggle>
@@ -80,51 +74,12 @@
                         <li role="menuitem" ng-if="vm.showCancel(oTicket)"><a href="#" ng-click="vm.setTicketState(oTicket, 'CANCELED')">Cancel</a></li>
                         <li role="menuitem" ng-if="vm.showAssign(oTicket)"><a href="#" ng-click="vm.setTicketState(oTicket, 'IN_PROGRESS')">Assign to Me</a></li>
                         <li role="menuitem" ng-if="vm.showDone(oTicket)"><a href="#" ng-click="vm.setTicketState(oTicket, 'DONE')">Done</a></li>
-                        <li class="divider"></li>
-                        <li role="menuitem" ng-if="vm.showLeaveFeedback(oTicket)"><a href="#">Leave feedback</a></li>
-                        <li role="menuitem" ng-if="vm.showViewFeedback(oTicket)"><a href="#">View feedback</a></li>
+                        <li role="menuitem" ng-if="vm.showLeaveFeedback(oTicket)"><a href="#" ng-click="vm.openFeedbackPage(oTicket)">Leave feedback</a></li>
+                        <li role="menuitem" ng-if="vm.showViewFeedback(oTicket)"><a href="#" ng-click="vm.openFeedbackPage(oTicket)">View feedback</a></li>
                     </ul>
                 </div>
             </th>
         </tr>
         </tbody>
-        <!--<tbody>-->
-        <!--<tr>-->
-            <!--<th scope="row">1</th>-->
-            <!--<td><u class="link">Task 1</u></td>-->
-            <!--<td>11/11/2017</td>-->
-            <!--<td>High</td>-->
-            <!--<td>Draft</td>-->
-            <!--<th>-->
-                <!--<div class="btn btn-success" style="width: 90%;">Submit-->
-                    <!--<div class="glyphicon glyphicon-play"></div>-->
-                <!--</div>-->
-            <!--</th>-->
-        <!--</tr>-->
-        <!--<tr>-->
-            <!--<th scope="row">2</th>-->
-            <!--<td><u class="link">Task 2</u></td>-->
-            <!--<td>14/11/2017</td>-->
-            <!--<td>High</td>-->
-            <!--<td>In Progress</td>-->
-            <!--<th>-->
-                <!--<div class="btn btn-success" style="width: 90%;">Approve-->
-                    <!--<div class="glyphicon glyphicon-play"></div>-->
-                <!--</div>-->
-            <!--</th>-->
-        <!--</tr>-->
-        <!--<tr>-->
-            <!--<th scope="row">3</th>-->
-            <!--<td><u class="link">Task 3</u></td>-->
-            <!--<td>15/11/2017</td>-->
-            <!--<td>Low</td>-->
-            <!--<td>Draft</td>-->
-            <!--<th>-->
-                <!--<div class="btn btn-success" style="width: 90%;">Submit-->
-                    <!--<div class="glyphicon glyphicon-play"></div>-->
-                <!--</div>-->
-            <!--</th>-->
-        <!--</tr>-->
-        <!--</tbody>-->
     </table>
 </div>

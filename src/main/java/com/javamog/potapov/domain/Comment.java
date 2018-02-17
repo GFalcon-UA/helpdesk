@@ -18,7 +18,7 @@ public class Comment extends AbstractEntity {
     @JsonProperty("sText")
     private String text;
 
-    @JsonFormat(shape = JsonFormat.Shape.STRING)
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy")
     @JsonProperty("dDate")
     private Date date;
 
