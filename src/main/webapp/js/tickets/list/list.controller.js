@@ -56,7 +56,9 @@
        */
 
       vm.setTicketState = function(oTicket, sState){
-        TicketService.setNewState(oTicket, sState);
+        TicketService.setNewState(oTicket, sState).then(function () {
+          fillTicketList();
+        });
       };
 
       vm.showActionButton = function (oTicket) {
