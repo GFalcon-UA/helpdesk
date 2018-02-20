@@ -4,6 +4,8 @@ import com.javamog.potapov.dao.*;
 import com.javamog.potapov.domain.*;
 import com.javamog.potapov.domain.enums.Role;
 import com.javamog.potapov.domain.enums.State;
+import com.javamog.potapov.dto.models.FeedbackDTO;
+import com.javamog.potapov.dto.models.TicketDTO;
 import com.javamog.potapov.mail.MailSender;
 import com.javamog.potapov.service.HistoryService;
 import com.javamog.potapov.service.TicketService;
@@ -79,21 +81,67 @@ public class TicketServiceImpl implements TicketService {
     }
 
     @Override
-    public Ticket saveTicket(Ticket ticket, Long userId, Long categoryId) {
+    public Ticket saveTicket(TicketDTO ticketDTO, Long userId, Long categoryId) {
+
         User user = userDAO.findByIdExpected(userId);
         Category category = categoryDAO.findByIdExpected(categoryId);
+        Ticket ticket;
+        Ticket result;
 
-        ticket.setCreatedOn(new Date());
+        if(ticketDTO.getId() == null){
+            ticket = getCreatedTicket(ticketDTO, category, user);
+            ticket.setCreatedOn(new Date());
+            result = ticketDAO.saveOrUpdate(ticket);
+            historyService.createTicket(user, result);
+        } else {
+            ticket = getUpdatedTicket(ticketDTO, category);
+            result = ticketDAO.saveOrUpdate(ticket);
+            historyService.editTicket(user, ticket);
+        }
 
-        user.addOwnTicket(ticket);
-        category.addTicket(ticket);
-
-        Ticket result = ticketDAO.saveOrUpdate(ticket);
-
-        historyService.createTicket(user, result);
         mailSender.sentNotification(result, State.DRAFT);
-
         return result;
+    }
+
+    private Ticket getCreatedTicket(TicketDTO ticketDTO, Category category, User user){
+        Ticket ticket = new Ticket();
+        ticket.setCreatedOn(new Date());
+        user.addOwnTicket(ticket);
+        mergeTicket(ticket, ticketDTO, category);
+
+        return ticket;
+    }
+
+    private Ticket getUpdatedTicket(TicketDTO ticketDTO, Category category){
+        Ticket ticket = ticketDAO.findByIdExpected(ticketDTO.getId());
+        mergeTicket(ticket, ticketDTO, category);
+        return ticket;
+    }
+
+    private void mergeTicket(Ticket ticket, TicketDTO ticketDTO, Category category){
+        if(ticket.getCategory() == null || !ticket.getCategory().equals(category)){
+            if(ticket.getCategory() != null){
+                ticket.getCategory().removeTicket(ticket);
+            }
+            category.addTicket(ticket);
+        }
+
+        if(ticketDTO.getName() != null){
+            ticket.setName(ticketDTO.getName());
+        }
+        if(ticketDTO.getDescription() != null){
+            ticket.setDescription(ticketDTO.getDescription());
+        }
+        if(ticketDTO.getUrgency() != null){
+            ticket.setUrgency(ticketDTO.getUrgency());
+        }
+        if(ticketDTO.getDesiredDate() != null){
+            ticket.setDesiredDate(ticketDTO.getDesiredDate());
+        }
+        if(ticketDTO.getState() != null){
+            ticket.setState(ticketDTO.getState());
+        }
+
     }
 
     @Override
@@ -141,13 +189,13 @@ public class TicketServiceImpl implements TicketService {
     }
 
     @Override
-    public Feedback setFeedback(Long ticketId, Long userId, Integer rate, String text) {
+    public Feedback setFeedback(Long ticketId, Long userId, FeedbackDTO feedbackDTO) {
         Ticket ticket = getTicket(ticketId);
         User user = userDAO.findByIdExpected(userId);
         Feedback feedback = new Feedback();
 
-        feedback.setRate(rate);
-        feedback.setText(text);
+        feedback.setRate(feedbackDTO.getRate());
+        feedback.setText(feedbackDTO.getText());
         user.addFeedback(feedback);
         ticket.setFeedback(feedback);
 

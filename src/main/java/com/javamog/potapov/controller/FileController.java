@@ -1,7 +1,9 @@
 package com.javamog.potapov.controller;
 
+import com.javamog.potapov.json.JsonRestUtils;
 import com.javamog.potapov.service.FileService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
@@ -13,21 +15,27 @@ public class FileController {
     private FileService fileService;
 
     @RequestMapping(value = "/upload", method = RequestMethod.POST)
-    public void upload(@RequestParam(value = "nTicketId") Long ticketId,
-            @RequestParam(value = "nUserId") Long userId,
-            @RequestParam(value = "sFileName", required = false) String fileName,
-            @RequestBody byte[] file){
+    @ResponseBody
+    public ResponseEntity upload(
+            @RequestParam("nTicketId") Long ticketId,
+            @RequestParam("nUserId") Long userId,
+            @RequestParam("sFileName") String name,
+            @RequestParam("sFileType") String type,
+            @RequestBody byte[] file
+    ){
 
-        System.out.println("ok");
-        fileService.addAttachment(ticketId, file, fileName, userId);
+        Long attachmentId = fileService.addAttachment(ticketId, userId, name, type, file);
 
+        return JsonRestUtils.toJsonResponse(attachmentId);
     }
 
     @RequestMapping(value = "/download", method = RequestMethod.GET)
     @ResponseBody
-    public byte[] download(@RequestParam(value = "nAttachmentId") Long attachmentId){
+    public ResponseEntity download(@RequestParam(value = "nAttachmentId") Long attachmentId){
 
-        return fileService.getAttachmentById(attachmentId);
+        //byte[] encode = Base64.getEncoder().encode(fileService.getAttachmentById(attachmentId));
+
+        return JsonRestUtils.toJsonResponse(fileService.getAttachmentById(attachmentId));
     }
 
     @RequestMapping(value = "/remove", method = RequestMethod.DELETE)

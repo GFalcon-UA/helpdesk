@@ -1,6 +1,6 @@
 (function () {
   'use strict';
-  angular.module('Tickets').controller('EditorCtrl', function (TicketService, uiUploader, $log, $scope, $location, $userProvider, $routeParams) {
+  angular.module('Tickets').controller('EditorCtrl', function (TicketService, $log, $scope, $location, $userProvider, $routeParams) {
 
     var vm = this;
 
@@ -13,7 +13,7 @@
       list: [],
       selected: undefined
     };
-    vm.attachment = {};
+    vm.files = [];
 
     vm.saveDraft = function () {
       submitTicket(true)
@@ -22,6 +22,8 @@
     vm.submit = function () {
       submitTicket(false)
     };
+
+    vm.goToTicketList = goToTicketList;
 
     vm.init = function () {
       if($routeParams.id){
@@ -35,44 +37,35 @@
 
     };
 
-    $scope.btn_remove = function(file) {
-      $log.info('deleting=' + file);
-      uiUploader.removeFile(file);
-    };
-    $scope.btn_clean = function() {
-      uiUploader.removeAll();
-    };
-    $scope.btn_upload = function(overviewTicktId) {
-      $log.info('uploading...');
-      debugger;
-      uiUploader.startUpload({
-        url: '/api/file/upload?nTicketId=' + vm.ticket.nId + '&nUserId=' + $userProvider.getUserId(),
-        concurrency: 2,
-        onProgress: function(file) {
-          $log.info(file.name + '=' + file.humanSize);
-          $scope.$apply();
-        },
-        onCompleted: function(file, response) {
-          $log.info(file + 'response' + response);
-        },
-        onCompletedAll: function(files) {
-          // files is an array of File objects
-          $log.log(files);
-          if(overviewTicktId){
-            goToOverview(overviewTicktId);
-          } else {
-            goToTicketList();
-          }
-        }
+    vm.removeFile = function (file) {
+      TicketService.removeAttachmentById(file.nId).then(function () {
+        vm.files.splice(vm.files.indexOf(file), 1);
       });
     };
 
-    $scope.files = [];
+    vm.btn_remove = function(file) {
+      // $log.info('deleting=' + file);
+      // uiUploader.removeFile(file);
+      vm.files.splice(vm.files.indexOf(file), 1);
+    };
+    vm.btn_clean = function() {
+      // uiUploader.removeAll();
+      vm.files.splice(0, vm.files.length)
+    };
 
-    var element = document.getElementById('file1');
+    var upload = function(overviewTicktId) {
+      TicketService.uploadUttachments(vm.ticket.nId, vm.files).then(function (resp) {
+        if(overviewTicktId){
+          goToOverview(overviewTicktId);
+        } else {
+          goToTicketList();
+        }
+      })
+    };
+
+    var element = document.getElementById('fileuploader');
     element.addEventListener('change', function(e) {
       var files = e.target.files;
-      debugger;
 
       var aAvailableFileExtensions = ['pdf', 'png', 'doc', 'docx', 'jpeg', 'jpg'];
       var invalidFiles = [];
@@ -109,8 +102,9 @@
       }
 
       if(files.length > 0){
-        uiUploader.addFiles(files);
-        $scope.files = uiUploader.getFiles();
+        angular.forEach(files, function (file) {
+          vm.files.push(file);
+        });
         $scope.$apply();
       }
     });
@@ -144,8 +138,8 @@
         TicketService.updateTicket(vm.ticket, isDraft).then(
           function (result) {
             vm.ticket = result.data;
-            if($scope.files.length > 0){
-              $scope.btn_upload(vm.ticket['nId']);
+            if(vm.files.length > 0){
+              upload(vm.ticket['nId']);
             } else {
               goToOverview(vm.ticket['nId'])
             }
@@ -155,9 +149,8 @@
         TicketService.createTicket(vm.ticket, isDraft).then(
           function (result) {
             vm.ticket = result.data;
-            debugger;
-            if($scope.files.length > 0){
-              $scope.btn_upload();
+            if(vm.files.length > 0){
+              upload();
             } else {
               goToTicketList()
             }
@@ -172,7 +165,7 @@
     }
 
     function goToTicketList() {
-      $location.path('/');
+      $location.path('/list');
     }
 
   })

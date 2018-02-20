@@ -1,100 +1,74 @@
 package com.javamog.potapov.dto.util;
 
-import com.javamog.potapov.domain.*;
-import com.javamog.potapov.dto.models.*;
-import org.modelmapper.ModelMapper;
+import com.javamog.potapov.domain.enums.State;
+import com.javamog.potapov.domain.enums.Urgency;
+import com.javamog.potapov.dto.models.FeedbackDTO;
+import com.javamog.potapov.dto.models.TicketDTO;
+import com.javamog.potapov.json.JsonRestUtils;
+
+import java.util.Date;
+import java.util.HashMap;
 
 public class DTOConverter {
 
-    private static ModelMapper modelMapper = new ModelMapper();
-    public static Category convert(CategoryDTO categoryDTO){
-        Category category = modelMapper.map(categoryDTO, Category.class);
+    public static TicketDTO parseTicket(String json){
+        TicketDTO ticket = new TicketDTO();
 
-        return category;
-    }
+        HashMap<String, Object> ticketBody =  new HashMap<String, Object>();
+        ticketBody = JsonRestUtils.readObject(json, ticketBody.getClass());
 
-    public static Comment convert(CommentDTO commentDTO) {
-        Comment comment = modelMapper.map(commentDTO, Comment.class);
+        if(ticketBody.containsKey("nId")){
+            Long id;
+            Object num = ticketBody.get("nId");
+            if(num instanceof Integer){
+                Integer integer = (Integer) num;
+                id = integer.longValue();
+            } else if (num instanceof Long){
+                id = (Long) num;
+            } else {
+                id = Long.parseLong((String) num);
+            }
 
-        comment.setDate(DateConverter.convert(commentDTO.getDate()));
-
-        return comment;
-    }
-
-    public static Feedback convert(FeedbackDTO feedbackDTO) {
-        Feedback feedback = modelMapper.map(feedbackDTO, Feedback.class);
-
-        feedback.setDate(DateConverter.convert(feedbackDTO.getDate()));
-
-        return feedback;
-    }
-
-    public static History convert(HistoryDTO historyDTO) {
-        History history = modelMapper.map(historyDTO, History.class);
-
-        history.setDate(DateConverter.convert(historyDTO.getDate()));
-
-        return history;
-    }
-
-    public static Ticket convert(TicketDTO ticketDTO) {
-        Ticket ticket = modelMapper.map(ticketDTO, Ticket.class);
-
-        ticket.setCreatedOn(DateConverter.convert(ticketDTO.getCreatedOn()));
-        ticket.setDesiredDate(DateConverter.convert(ticketDTO.getDesiredDate()));
+            ticket.setId(id);
+        }
+        if(ticketBody.containsKey("sName")){
+            ticket.setName((String) ticketBody.get("sName"));
+        }
+        if(ticketBody.containsKey("sDescription")){
+            ticket.setDescription((String) ticketBody.get("sDescription"));
+        }
+        if(ticketBody.containsKey("sUrgency")){
+            ticket.setUrgency(Urgency.valueOf((String) ticketBody.get("sUrgency")));
+        }
+        if(ticketBody.containsKey("dDesiredDate")){
+            String dDesiredDate = (String) ticketBody.get("dDesiredDate");
+            Date desiredDate = DateConverter.convert(dDesiredDate);
+            ticket.setDesiredDate(desiredDate);
+        }
+        if(ticketBody.containsKey("sState")){
+            ticket.setState(State.valueOf((String) ticketBody.get("sState")));
+        }
 
         return ticket;
     }
 
-    public static User convert(UserDTO userDTO){
-        User user = modelMapper.map(userDTO, User.class);
+    public static FeedbackDTO parseFeedback(String json){
+        FeedbackDTO feedback = new FeedbackDTO();
 
-        return user;
-    }
+        HashMap<String, Object> parsedJson = JsonRestUtils.readObject(json, new HashMap<String, Object>().getClass());
+        Integer rate = -1;
+        if(parsedJson.containsKey("nRate")){
+            rate = (Integer) parsedJson.get("nRate");
+        }
+        String text = "";
+        if(parsedJson.containsKey("nRate")){
+            text = (String) parsedJson.get("nRate");
+        }
 
-    public static CategoryDTO convert(Category category){
-        CategoryDTO categoryDTO = modelMapper.map(category, CategoryDTO.class);
+        feedback.setRate(rate);
+        feedback.setText(text);
 
-        return categoryDTO;
-    }
-
-    public static CommentDTO convert(Comment comment){
-        CommentDTO commentDTO = modelMapper.map(comment, CommentDTO.class);
-
-        commentDTO.setDate(DateConverter.convert(comment.getDate()));
-
-        return commentDTO;
-    }
-
-    public static FeedbackDTO convert(Feedback feedback){
-        FeedbackDTO feedbackDTO = modelMapper.map(feedback, FeedbackDTO.class);
-
-        feedbackDTO.setDate(DateConverter.convert(feedback.getDate()));
-
-        return feedbackDTO;
-    }
-
-    public static HistoryDTO convert(History history){
-        HistoryDTO historyDTO = modelMapper.map(history, HistoryDTO.class);
-
-        historyDTO.setDate(DateConverter.convert(history.getDate()));
-
-        return historyDTO;
-    }
-
-    public static TicketDTO convert(Ticket ticket){
-        TicketDTO ticketDTO = modelMapper.map(ticket, TicketDTO.class);
-
-        ticketDTO.setCreatedOn(DateConverter.convert(ticket.getCreatedOn()));
-        ticketDTO.setDesiredDate(DateConverter.convert(ticket.getDesiredDate()));
-
-        return ticketDTO;
-    }
-
-    public static UserDTO convert(User user){
-        UserDTO userDTO = modelMapper.map(user, UserDTO.class);
-
-        return userDTO;
+        return feedback;
     }
 
 

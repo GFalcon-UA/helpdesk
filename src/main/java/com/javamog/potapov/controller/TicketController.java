@@ -4,9 +4,8 @@ import com.javamog.potapov.domain.Comment;
 import com.javamog.potapov.domain.Feedback;
 import com.javamog.potapov.domain.Ticket;
 import com.javamog.potapov.domain.User;
-import com.javamog.potapov.domain.enums.State;
-import com.javamog.potapov.domain.enums.Urgency;
-import com.javamog.potapov.dto.util.DateConverter;
+import com.javamog.potapov.dto.models.TicketDTO;
+import com.javamog.potapov.dto.util.DTOConverter;
 import com.javamog.potapov.json.JsonRestUtils;
 import com.javamog.potapov.service.TicketService;
 import com.javamog.potapov.service.UserService;
@@ -18,7 +17,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Date;
 import java.util.HashMap;
 import java.util.Set;
 import java.util.TreeSet;
@@ -60,14 +58,14 @@ public class TicketController {
     public ResponseEntity createTicket(@RequestParam(name = "nUserId") Long userId,
             @RequestBody String body, Errors errors) {
 
-        return saveTicket(new Ticket(), body, userId, errors);
+        return saveTicket(body, userId, errors);
     }
 
     @RequestMapping(value = "/update", method = RequestMethod.PUT)
-    public ResponseEntity updateTicket(@RequestParam(name = "nUserId") Long userId, @RequestParam(name = "nTicketId") Long ticketId,
+    public ResponseEntity updateTicket(@RequestParam(name = "nUserId") Long userId,
             @RequestBody String body, Errors errors){
 
-        return saveTicket(ticketService.getTicket(ticketId), body, userId, errors);
+        return saveTicket(body, userId, errors);
     }
 
     @RequestMapping(value = "/comment", method = RequestMethod.POST)
@@ -105,24 +103,15 @@ public class TicketController {
             @RequestParam(name = "nTicketId") Long ticketId,
             @RequestBody String json){
 
-        HashMap<String, Object> parsedJson = JsonRestUtils.readObject(json, new HashMap<String, Object>().getClass());
-        Integer rate = -1;
-        if(parsedJson.containsKey("nRate")){
-            rate = (Integer) parsedJson.get("nRate");
-        }
-        String text = "";
-        if(parsedJson.containsKey("nRate")){
-            text = (String) parsedJson.get("nRate");
-        }
 
-        Feedback feedback = ticketService.setFeedback(ticketId, userId, rate, text);
+        Feedback feedback = ticketService.setFeedback(ticketId, userId, DTOConverter.parseFeedback(json));
 
         return JsonRestUtils.toJsonResponse(feedback);
     }
 
-    private ResponseEntity saveTicket(Ticket targetTicket, String body, Long userId, Errors errors){
+    private ResponseEntity saveTicket(String body, Long userId, Errors errors){
         Long categoryId = parseCategoryId(body);
-        Ticket ticket = parseTicket(body, targetTicket);
+        TicketDTO ticketDTO = DTOConverter.parseTicket(body);
 
         //        TicketValidator validator = new TicketValidator();
         //        validator.validate(ticket, errors);
@@ -132,7 +121,7 @@ public class TicketController {
         //        }
 
         Ticket resultTicket = null;
-        resultTicket = ticketService.saveTicket(ticket, userId, categoryId);
+        resultTicket = ticketService.saveTicket(ticketDTO, userId, categoryId);
 
         HashMap<String, Object> ticketBody =  new HashMap<String, Object>();
         ticketBody = JsonRestUtils.readObject(body, ticketBody.getClass());
@@ -161,30 +150,6 @@ public class TicketController {
             }
         }
         return categoryId;
-    }
-
-    private Ticket parseTicket(String jsonBody, Ticket ticketObjectToSave){
-        HashMap<String, Object> ticketBody =  new HashMap<String, Object>();
-        ticketBody = JsonRestUtils.readObject(jsonBody, ticketBody.getClass());
-
-        if(ticketBody.containsKey("sName")){
-            ticketObjectToSave.setName((String) ticketBody.get("sName"));
-        }
-        if(ticketBody.containsKey("sDescription")){
-            ticketObjectToSave.setDescription((String) ticketBody.get("sDescription"));
-        }
-        if(ticketBody.containsKey("sUrgency")){
-            ticketObjectToSave.setUrgency(Urgency.valueOf((String) ticketBody.get("sUrgency")));
-        }
-        if(ticketBody.containsKey("dDesiredDate")){
-            String dDesiredDate = (String) ticketBody.get("dDesiredDate");
-            Date desiredDate = DateConverter.convert(dDesiredDate);
-            ticketObjectToSave.setDesiredDate(desiredDate);
-        }
-        if(ticketBody.containsKey("sState")){
-            ticketObjectToSave.setState(State.valueOf((String) ticketBody.get("sState")));
-        }
-        return ticketObjectToSave;
     }
 
 }

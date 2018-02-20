@@ -10,6 +10,7 @@ import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import java.util.Date;
+import java.util.Objects;
 
 @Entity
 @Table(name = "COMMENTS")
@@ -18,7 +19,7 @@ public class Comment extends AbstractEntity {
     @JsonProperty("sText")
     private String text;
 
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy hh:mm")
     @JsonProperty("dDate")
     private Date date;
 
@@ -70,6 +71,35 @@ public class Comment extends AbstractEntity {
 
     protected void setTicket(Ticket ticket) {
         this.ticket = ticket;
+    }
+
+    @Override
+    public String toString() {
+        return "Comment{" +
+                "text='" + text + '\'' +
+                ", date=" + date +
+                ", user=" + user.getId() +
+                ", ticket=" + ticket.getId() +
+                "} " + super.toString();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o)
+            return true;
+        if (!(o instanceof Comment))
+            return false;
+        Comment comment = (Comment) o;
+        return Objects.equals(getText(), comment.getText()) &&
+                Objects.equals(getDate(), comment.getDate()) &&
+                Objects.equals(getUser(), comment.getUser()) &&
+                Objects.equals(getTicket(), comment.getTicket());
+    }
+
+    @Override
+    public int hashCode() {
+
+        return Objects.hash(getText(), getDate(), getUser(), getTicket());
     }
 }
 

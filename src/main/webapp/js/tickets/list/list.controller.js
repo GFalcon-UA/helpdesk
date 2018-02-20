@@ -7,24 +7,85 @@
 
       vm.oCurrentuser = $userProvider.getUser();
 
-      vm.oState = {
-        bAll: true,
-        bMine: false
-      };
-
+      vm.oState = {};
       vm.aTickets = [];
-      vm.nItemsPerPage = 5;
-
-      vm.aUrgency = ['CRITICAL', 'HIGH', 'MEDIUM', 'LOW'];
-
+      vm.aMyTickets = [];
+      vm.aShowedTickets = [];
+      vm.aUrgency = [];
       vm.sFilterText = '';
-      vm.onFilterChange = function () {
-        // todo
+      vm.sSortedBy = '';
+      vm.oSorting = {};
+
+      vm.init = function () {
+        vm.oCurrentuser = $userProvider.getUser();
+
+        vm.oState = {
+          bAll: true,
+          bMine: false
+        };
+
+        vm.aUrgency = ['CRITICAL', 'HIGH', 'MEDIUM', 'LOW'];
+
+        vm.oSorting = {
+          sByField: '',
+          bDescending: {
+            nId: true,
+            sName: true,
+            dDesiredDate: true,
+            sUrgency: true,
+            sState: true
+          }
+        };
+
+        fillTicketList();
       };
 
-      vm.sSortedBy = '';
-      vm.sortTicketByField = function (field) {
-        // todo
+      vm.onFilterChange = function (text) {
+        var arr = [];
+        if(vm.oState.bMine){
+          arr = vm.aTickets.filter(function (obj) {
+            if(vm.oCurrentuser.sRole === 'EMPLOYEE'){
+              return vm.oCurrentuser.nId == obj.oOwner.nId;
+            }
+            if(vm.oCurrentuser.sRole === 'MANAGER'){
+              return (obj.oOwner && obj.oOwner.nId == vm.oCurrentuser.nId) || (obj.oApprover && obj.oApprover.nId == vm.oCurrentuser.nId);
+            }
+            if(vm.oCurrentuser.sRole === 'ENGINEER'){
+              return obj.oAssignee && obj.oAssignee.nId == vm.oCurrentuser.nId
+            }
+            return false;
+          });
+        } else {
+          arr = vm.aTickets;
+        }
+        if(!text || text === ''){
+          vm.aShowedTickets = angular.copy(arr);
+        } else {
+          vm.aShowedTickets = angular.copy(arr.filter(function (obj) {
+            var id = obj.nId + '';
+            if(id.toLowerCase().match(text.toLowerCase())){
+              return true;
+            }
+            if(obj.sName && obj.sName.toLowerCase().match(text.toLowerCase())){
+              return true;
+            }
+            if(obj.dDesiredDate && obj.dDesiredDate.toLowerCase().match(text.toLowerCase())){
+              return true;
+            }
+            if(obj.sUrgency && obj.sUrgency.toLowerCase().match(text.toLowerCase())){
+              return true;
+            }
+            if(obj.sState && obj.sState.toLowerCase().match(text.toLowerCase())){
+              return true;
+            }
+            return false;
+          }));
+        }
+      };
+
+      vm.sortTicketByField = function (sFieldName) {
+        vm.oSorting.sByField = sFieldName;
+        vm.aShowedTickets = angular.copy(sortedObjectsArrayByField(vm.aShowedTickets, vm.oSorting));
       };
 
 
@@ -33,14 +94,14 @@
           bAll: true,
           bMine: false
         };
-
+        vm.onFilterChange(vm.sFilterText);
       };
       vm.showMyTickets = function () {
         vm.oState = {
           bAll: false,
           bMine: true
         };
-
+        vm.onFilterChange(vm.sFilterText);
       };
 
       vm.openTicketOverview = function (oTicket) {
@@ -115,6 +176,8 @@
         return oTicket.hasOwnProperty("oFeedback") && oTicket.oFeedback.nId;
       };
 
+
+
       //////////////////
 
       function fillTicketList() {
@@ -181,13 +244,11 @@
               };
               oTicket.sActionTitle = "Cancel";
             }
-          })
-
+          });
+          vm.onFilterChange();
         });
 
       }
-
-      fillTicketList();
 
       var getDateFromString = function (str) {
         if(str){
@@ -196,6 +257,33 @@
         } else {
           return 0;
         }
+      };
+
+
+      function sortedObjectsArrayByField(array, config){
+        var sFieldId = config['sByField'];
+        var bAsc = config.bDescending[sFieldId];
+        config.bDescending[sFieldId] = !config.bDescending[sFieldId];
+
+        function compare(a, b) {
+          if(sFieldId === 'dDesiredDate'){
+            if(getDateFromString(a) < getDateFromString(b)) return -1;
+            if(getDateFromString(a) > getDateFromString(b)) return 1;
+            return 0
+          } else if(sFieldId === 'sUrgency'){
+            if(vm.aUrgency.indexOf(a) < vm.aUrgency.indexOf(b)) return -1;
+            if(vm.aUrgency.indexOf(a) > vm.aUrgency.indexOf(b)) return 1;
+            return 0
+          } else {
+            if(a < b) return -1;
+            if(a > b) return 1;
+            return 0
+          }
+        }
+
+        return array.sort(function (first, second) {
+          return bAsc ? compare(first[sFieldId], second[sFieldId]) : compare(second[sFieldId], first[sFieldId]);
+        });
       }
 
     })

@@ -7,6 +7,7 @@ import com.javamog.potapov.parent.entity.AbstractEntity;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.Objects;
 
 @Entity
 @Table(name = "FEEDBACKS")
@@ -74,5 +75,36 @@ public class Feedback extends AbstractEntity {
 
     protected void setTicket(Ticket ticket) {
         this.ticket = ticket;
+    }
+
+    @Override
+    public String toString() {
+        return "Feedback{" +
+                "rate=" + rate +
+                ", date=" + date +
+                ", text='" + text + '\'' +
+                ", user=" + user.getId() +
+                ", ticket=" + ticket.getId() +
+                "} " + super.toString();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o)
+            return true;
+        if (!(o instanceof Feedback))
+            return false;
+        Feedback feedback = (Feedback) o;
+        return getRate() == feedback.getRate() &&
+                Objects.equals(getDate(), feedback.getDate()) &&
+                Objects.equals(getText(), feedback.getText()) &&
+                Objects.equals(getUser(), feedback.getUser()) &&
+                Objects.equals(getTicket(), feedback.getTicket());
+    }
+
+    @Override
+    public int hashCode() {
+
+        return Objects.hash(getRate(), getDate(), getText(), getUser(), getTicket());
     }
 }

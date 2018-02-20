@@ -8,10 +8,7 @@ import com.javamog.potapov.domain.enums.Urgency;
 import com.javamog.potapov.parent.entity.AbstractEntity;
 
 import javax.persistence.*;
-import java.util.Date;
-import java.util.HashSet;
-import java.util.Set;
-import java.util.TreeSet;
+import java.util.*;
 
 @Entity
 @Table(name = "TICKETS")
@@ -223,5 +220,51 @@ public class Ticket extends AbstractEntity {
     public void setFeedback(Feedback feedback) {
         this.feedback = feedback;
         feedback.setTicket(this);
+    }
+
+    @Override
+    public String toString() {
+        return "Ticket{" +
+                "name='" + name + '\'' +
+                ", description='" + description + '\'' +
+                ", createdOn=" + createdOn +
+                ", desiredDate=" + desiredDate +
+                ", state=" + state +
+                ", urgency=" + urgency +
+                ", owner=" + owner.getId() +
+                ", assignee=" + assignee.getId() +
+                ", approver=" + approver.getId() +
+                ", category=" + category.getId() +
+                ", feedback=" + feedback.getId() +
+                "} " + super.toString();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o)
+            return true;
+        if (!(o instanceof Ticket))
+            return false;
+        Ticket ticket = (Ticket) o;
+        return Objects.equals(getName(), ticket.getName()) &&
+                Objects.equals(getDescription(), ticket.getDescription()) &&
+                Objects.equals(getCreatedOn(), ticket.getCreatedOn()) &&
+                Objects.equals(getDesiredDate(), ticket.getDesiredDate()) &&
+                getState() == ticket.getState() &&
+                getUrgency() == ticket.getUrgency() &&
+                Objects.equals(getOwner(), ticket.getOwner()) &&
+                Objects.equals(getAssignee(), ticket.getAssignee()) &&
+                Objects.equals(getApprover(), ticket.getApprover()) &&
+                Objects.equals(getCategory(), ticket.getCategory()) &&
+                Objects.equals(getFeedback(), ticket.getFeedback());
+    }
+
+    @Override
+    public int hashCode() {
+
+        return Objects
+                .hash(getName(), getDescription(), getCreatedOn(), getDesiredDate(), getState(), getUrgency(),
+                        getOwner(),
+                        getAssignee(), getApprover(), getCategory(), getFeedback());
     }
 }

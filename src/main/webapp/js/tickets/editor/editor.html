@@ -2,7 +2,7 @@
 
     <div class="row" ng-if="!vm.ticket['nId']">
         <div class="col-xs-2">
-            <a style="width: 120px;" class="btn btn-success" ng-href="/">Ticket List</a>
+            <a style="width: 120px;" class="btn btn-success" ng-href="/list">Ticket List</a>
         </div>
         <div class="col-xs-6">
             <h3 style="line-height: 34px; margin: 0;">Create new Ticket</h3>
@@ -11,10 +11,10 @@
 
     <div class="row" ng-if="vm.ticket['nId']">
         <div class="col-xs-2">
-            <button style="width: 120px;" class="btn btn-success">Ticket Overview</button>
+            <a style="width: 120px;" class="btn btn-success" ng-href="{{'/overview/' + vm.ticket['nId']}}">Ticket Overview</a>
         </div>
         <div class="col-xs-6">
-            <h3 style="line-height: 34px; margin: 0;">Edit Ticket (2)</h3>
+            <h3 style="line-height: 34px; margin: 0;">Edit Ticket ({{vm.ticket['nId']}})</h3>
         </div>
     </div>
 
@@ -79,19 +79,19 @@
             <div class="col-xs-2 text-right">
                 <h5>Add attachments</h5>
             </div>
-            <!--<div class="col-xs-4">-->
-                <!--<input type="file" class="btn btn-default" style="width: 140px;" ng-model="vm.fAttachment"/>-->
-            <!--</div>-->
             <div class="well col-xs-5">
+                <div ng-repeat="file in vm.ticket.afAttachments">
+                    <span>{{file.sFileName}}</span><button ng-click="vm.removeFile(file)">Delete</button><br/>
+                </div>
                 <div>
                     <div style="float:right;">
                         <!--<button ng-click="btn_upload()">Upload</button>-->
-                        <button ng-if="files.length > 0" ng-click="btn_clean()">Remove all</button>
+                        <button ng-if="files.length > 0" ng-click="vm.btn_clean()">Remove all</button>
                     </div>
-                    <input type="file" id="file1" multiple/>
+                    <input type="file" id="fileuploader" multiple/>
                 </div>
-                <div ng-repeat="file in files" style="margin-top: 20px;border-bottom-color: antiquewhite;border-bottom-style: double;">
-                    <div><span>{{file.name}}</span><div style="float:right;"><span>{{file.humanSize}}</span><a ng-click="btn_remove(file)" title="Remove from list to be uploaded"><i class="icon-remove"></i></a></div>
+                <div ng-repeat="file in vm.files" style="margin-top: 20px;border-bottom-color: antiquewhite;border-bottom-style: double;">
+                    <div><span>{{file.name}}</span><div style="float:right;"><span>{{file.humanSize}}</span><a ng-click="vm.btn_remove(file)" title="Remove from list to be uploaded"><i class="icon-remove"></i></a></div>
                     </div>
                     <progress style="width:400px;" value="{{file.loaded ? file.loaded : 0}}" max="{{file.size}}"></progress>
                 </div>

@@ -1,4 +1,4 @@
-<div class="container all-tickets-page">
+<div class="container all-tickets-page" ng-init="vm.init()">
     <br />
     <br />
     <br />
@@ -24,39 +24,54 @@
     </div>
     <br />
     <br />
-    <input type="text" title="filter" class="form-control search-input" />
+    <input type="text"
+           title="filter"
+           ng-model-options="{ debounce: 1000 }"
+           ng-model="vm.sFilterText"
+           ng-change="vm.onFilterChange(vm.sFilterText)"
+           class="form-control search-input" />
     <br />
     <table class="table table-bordered">
         <thead>
         <tr>
-            <th>ID
-                <div class="glyphicon glyphicon-play up"></div>
-                <div class="glyphicon glyphicon-play down"></div>
+            <th ng-click="vm.sortTicketByField('nId')" style="cursor: pointer">ID
+                <span ng-if="vm.oSorting.sByField === 'nId'" style="float: right">
+                <span ng-show="vm.oSorting.bDescending['nId']">&#9660;</span>
+                <span ng-show="!vm.oSorting.bDescending['nId']">&#9650;</span>
+                </span>
             </th>
-            <th>Name
-                <div class="glyphicon glyphicon-play up"></div>
-                <div class="glyphicon glyphicon-play down"></div>
+            <th ng-click="vm.sortTicketByField('sName')" style="cursor: pointer">Name
+                <span ng-if="vm.oSorting.sByField === 'sName'" style="float: right">
+                <span ng-show="vm.oSorting.bDescending['sName']">&#9660;</span>
+                <span ng-show="!vm.oSorting.bDescending['sName']">&#9650;</span>
+                </span>
             </th>
-            <th>Desired Date
-                <div class="glyphicon glyphicon-play up"></div>
-                <div class="glyphicon glyphicon-play down"></div>
+            <th ng-click="vm.sortTicketByField('dDesiredDate')" style="cursor: pointer">Desired Date
+                <span ng-if="vm.oSorting.sByField === 'dDesiredDate'" style="float: right">
+                <span ng-show="vm.oSorting.bDescending['dDesiredDate']">&#9660;</span>
+                <span ng-show="!vm.oSorting.bDescending['dDesiredDate']">&#9650;</span>
+                </span>
             </th>
-            <th>Urgency
-                <div class="glyphicon glyphicon-play up"></div>
-                <div class="glyphicon glyphicon-play down"></div>
+            <th ng-click="vm.sortTicketByField('sUrgency')" style="cursor: pointer">Urgency
+                <span ng-if="vm.oSorting.sByField === 'sUrgency'" style="float: right">
+                <span ng-show="vm.oSorting.bDescending['sUrgency']">&#9660;</span>
+                <span ng-show="!vm.oSorting.bDescending['sUrgency']">&#9650;</span>
+                </span>
             </th>
-            <th>Status
-                <div class="glyphicon glyphicon-play up"></div>
-                <div class="glyphicon glyphicon-play down"></div>
+            <th ng-click="vm.sortTicketByField('sState')" style="cursor: pointer">Status
+                <span ng-if="vm.oSorting.sByField === 'sState'" style="float: right">
+                <span ng-show="vm.oSorting.bDescending['sState']">&#9660;</span>
+                <span ng-show="!vm.oSorting.bDescending['sState']">&#9650;</span>
+                </span>
             </th>
             <th>Action
             </th>
         </tr>
         </thead>
         <tbody>
-        <tr ng-repeat="oTicket in vm.aTickets">
+        <tr ng-repeat="oTicket in vm.aShowedTickets">
             <th scope="row">{{oTicket.nId}}</th>
-            <td><u class="link" ng-click="vm.openTicketOverview(oTicket)">{{oTicket.sName}}</u></td>
+            <td style="cursor: pointer" ng-click="vm.openTicketOverview(oTicket)"><u class="link">{{oTicket.sName}}</u></td>
             <td>{{oTicket.dDesiredDate}}</td>
             <td>{{oTicket.sUrgency}}</td>
             <td>{{oTicket.sState}}</td>

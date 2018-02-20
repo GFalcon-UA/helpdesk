@@ -6,6 +6,7 @@ import com.javamog.potapov.parent.entity.AbstractEntity;
 
 import javax.persistence.*;
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 
 @Entity
@@ -48,5 +49,28 @@ public class Category extends AbstractEntity {
     public void removeTicket(Ticket ticket) {
         this.tickets.remove(ticket);
         ticket.setCategory(null);
+    }
+
+    @Override
+    public String toString() {
+        return "Category{" +
+                "name='" + name + '\'' +
+                "} " + super.toString();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o)
+            return true;
+        if (!(o instanceof Category))
+            return false;
+        Category category = (Category) o;
+        return Objects.equals(getName(), category.getName());
+    }
+
+    @Override
+    public int hashCode() {
+
+        return Objects.hash(getName());
     }
 }

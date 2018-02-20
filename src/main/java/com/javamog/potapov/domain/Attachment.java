@@ -7,6 +7,8 @@ import com.javamog.potapov.parent.entity.AbstractEntity;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Arrays;
+import java.util.Objects;
 
 @Entity
 @Table(name = "ATTACHMENTS")
@@ -24,6 +26,9 @@ public class Attachment extends AbstractEntity implements Serializable {
 
     @JsonProperty("sFileName")
     private String fileName;
+
+    @JsonProperty("sMIMEtype")
+    private String mimeType;
 
     public Attachment() {
     }
@@ -51,4 +56,42 @@ public class Attachment extends AbstractEntity implements Serializable {
     public void setFileName(String fileName) {
         this.fileName = fileName;
     }
+
+    public String getMimeType() {
+        return mimeType;
+    }
+
+    public void setMimeType(String mimeType) {
+        this.mimeType = mimeType;
+    }
+
+    @Override
+    public String toString() {
+        return "Attachment{" +
+                "ticket=" + ticket.getId() +
+                ", fileName='" + fileName + '\'' +
+                ", mimeType='" + mimeType + '\'' +
+                "} " + super.toString();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o)
+            return true;
+        if (!(o instanceof Attachment))
+            return false;
+        Attachment that = (Attachment) o;
+        return Arrays.equals(getContent(), that.getContent()) &&
+                Objects.equals(getTicket(), that.getTicket());
+    }
+
+    @Override
+    public int hashCode() {
+
+        int result = Objects.hash(getTicket());
+        result = 31 * result + Arrays.hashCode(getContent());
+        return result;
+    }
+
+
 }

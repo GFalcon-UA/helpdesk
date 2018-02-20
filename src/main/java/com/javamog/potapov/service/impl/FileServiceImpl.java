@@ -13,6 +13,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Arrays;
+import java.util.Set;
+
 @Service
 @Transactional
 public class FileServiceImpl implements FileService {
@@ -29,19 +32,27 @@ public class FileServiceImpl implements FileService {
     private UserDAO userDAO;
 
     @Override
-    public Long addAttachment(Long ticketId, byte[] fileContent, String fileName, Long userId) {
+    public Long addAttachment(Long ticketId, Long userId, String fileName, String mimeType, byte[] content) {
         User user = userDAO.findByIdExpected(userId);
         Ticket ticket = ticketDAO.findByIdExpected(ticketId);
         Attachment attachment = new Attachment();
-        attachment.setContent(fileContent);
-        ticket.addAttachments(attachment);
+        attachment.setContent(content);
+        attachment.setFileName(fileName);
+        attachment.setMimeType(mimeType);
+        Attachment result;
+        if(ticket.getAttachments().contains(attachment)){
+            Set<Attachment> attachments = ticket.getAttachments();
+            result = attachments.stream().filter(attach -> Arrays.equals(attach.getContent(), content)).findFirst().get();
+        } else {
+            ticket.addAttachments(attachment);
 
-        attachmentDAO.saveOrUpdate(attachment);
-        ticketDAO.saveOrUpdate(ticket);
+            result = attachmentDAO.saveOrUpdate(attachment);
+            //        ticketDAO.saveOrUpdate(ticket);
 
-        historyService.attachFile(user, ticket, fileName);
+            historyService.attachFile(user, ticket, fileName);
+        }
 
-        return attachment.getId();
+        return result.getId();
     }
 
     @Override
@@ -59,7 +70,7 @@ public class FileServiceImpl implements FileService {
         ticket.removeAttachments(attachment);
 
         attachmentDAO.delete(attachmentId);
-        ticketDAO.saveOrUpdate(ticket);
+//        ticketDAO.saveOrUpdate(ticket);
 
         historyService.attachFile(user, ticket, fileName);
     }

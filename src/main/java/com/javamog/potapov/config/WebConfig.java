@@ -7,6 +7,10 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.support.ResourceBundleMessageSource;
+import org.springframework.web.WebApplicationInitializer;
+import org.springframework.web.context.support.GenericWebApplicationContext;
+import org.springframework.web.multipart.support.StandardServletMultipartResolver;
+import org.springframework.web.servlet.DispatcherServlet;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
@@ -16,10 +20,14 @@ import org.thymeleaf.spring4.templateresolver.SpringResourceTemplateResolver;
 import org.thymeleaf.spring4.view.ThymeleafViewResolver;
 import org.thymeleaf.templatemode.TemplateMode;
 
+import javax.servlet.MultipartConfigElement;
+import javax.servlet.ServletContext;
+import javax.servlet.ServletRegistration;
+
 @Configuration
 @EnableWebMvc
 @ComponentScan
-public class WebConfig extends WebMvcConfigurerAdapter implements ApplicationContextAware {
+public class WebConfig extends WebMvcConfigurerAdapter implements ApplicationContextAware, WebApplicationInitializer {
 
 
     private ApplicationContext applicationContext;
@@ -32,6 +40,8 @@ public class WebConfig extends WebMvcConfigurerAdapter implements ApplicationCon
     public void setApplicationContext(final ApplicationContext applicationContext) throws BeansException {
         this.applicationContext = applicationContext;
     }
+
+
 
     /**
      *  Message externalization/internationalization
@@ -93,4 +103,28 @@ public class WebConfig extends WebMvcConfigurerAdapter implements ApplicationCon
         registry.addResourceHandler("/js/**").addResourceLocations("/js/");
     }
 
+
+
+    // Multipart Configuration
+
+    @Override
+    public void onStartup(ServletContext servletContext) {
+        String TMP_FOLDER = "/tmp";
+        int MAX_UPLOAD_SIZE = 5 * 1024 * 1024;
+
+        ServletRegistration.Dynamic appServlet = servletContext.addServlet("mvc", new DispatcherServlet(
+                new GenericWebApplicationContext()));
+
+        appServlet.setLoadOnStartup(1);
+
+        MultipartConfigElement multipartConfigElement = new MultipartConfigElement(TMP_FOLDER,
+                MAX_UPLOAD_SIZE, MAX_UPLOAD_SIZE * 2, MAX_UPLOAD_SIZE / 2);
+
+        appServlet.setMultipartConfig(multipartConfigElement);
+    }
+
+    @Bean
+    public StandardServletMultipartResolver multipartResolver() {
+        return new StandardServletMultipartResolver();
+    }
 }

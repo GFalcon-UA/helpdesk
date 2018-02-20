@@ -2,7 +2,7 @@
 package com.javamog.potapov.service;
 
 public interface FileService {
-    Long addAttachment(Long ticketId, byte[] fileContent, String fileName, Long userId);
+    Long addAttachment(Long ticketId, Long userId, String fileName, String mimeType, byte[] content);
 
     byte[] getAttachmentById(Long attachmentId);
 

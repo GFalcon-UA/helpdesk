@@ -8,7 +8,7 @@
 
         $locationProvider.html5Mode(true);
 
-        $routeProvider.when('/', {
+        $routeProvider.when('/list', {
           templateUrl: './js/tickets/list/list.html',
           controller: 'ListCtrl',
           controllerAs: 'vm'
@@ -28,7 +28,7 @@
           templateUrl: './js/tickets/feedback/feedback.html',
           controller: 'FeedbackCtrl',
           controllerAs: 'vm'
-        }).otherwise('/');
+        }).otherwise('/list');
 
         // $httpProvider.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 

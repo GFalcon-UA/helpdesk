@@ -10,12 +10,13 @@ import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import java.util.Date;
+import java.util.Objects;
 
 @Entity
 @Table(name = "HISTORIES")
 public class History extends AbstractEntity {
 
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy hh:mm")
     @JsonProperty("dDate")
     private Date date = new Date();
 
@@ -78,5 +79,34 @@ public class History extends AbstractEntity {
         this.ticket = ticket;
     }
 
+    @Override
+    public String toString() {
+        return "History{" +
+                "date=" + date +
+                ", action='" + action + '\'' +
+                ", description='" + description + '\'' +
+                ", user=" + user.getId() +
+                ", ticket=" + ticket.getId() +
+                "} " + super.toString();
+    }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o)
+            return true;
+        if (!(o instanceof History))
+            return false;
+        History history = (History) o;
+        return Objects.equals(getDate(), history.getDate()) &&
+                Objects.equals(getAction(), history.getAction()) &&
+                Objects.equals(getDescription(), history.getDescription()) &&
+                Objects.equals(getUser(), history.getUser()) &&
+                Objects.equals(getTicket(), history.getTicket());
+    }
+
+    @Override
+    public int hashCode() {
+
+        return Objects.hash(getDate(), getAction(), getDescription(), getUser(), getTicket());
+    }
 }
