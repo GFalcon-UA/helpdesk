@@ -121,7 +121,7 @@
     <br />
     <div class="row" ng-if="!vm.bHistoryViewMode">
         <div class="col-xs-7">
-            <textarea rows="3" cols="40" class="form-controls" ng-model="vm.sNewComment"></textarea>
+            <textarea rows="3" cols="40" class="form-controls" ng-model="vm.sNewComment" ng-maxlength="500"></textarea>
             <br />
             <button style="width: 160px;" class="btn" ng-click="vm.addComment(vm.oTicket.nId, vm.sNewComment)">Add Comment</button>
         </div>

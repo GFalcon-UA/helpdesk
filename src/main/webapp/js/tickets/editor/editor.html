@@ -40,7 +40,7 @@
                 <h5>Name <span class="warning">*</span></h5>
             </div>
             <div class="col-xs-4">
-                <input type="text" class="form-control" ng-model="vm.ticket.sName" required/>
+                <input type="text" class="form-control" ng-model="vm.ticket.sName" ng-maxlength="100" required/>
             </div>
         </div>
         <br />
@@ -49,7 +49,7 @@
                 <h5>Description</h5>
             </div>
             <div class="col-xs-5">
-                <textarea class="form-control" rows="3" ng-model="vm.ticket.sDescription"></textarea>
+                <textarea class="form-control" rows="3" ng-model="vm.ticket.sDescription" ng-maxlength="500"></textarea>
             </div>
         </div>
         <br />
@@ -103,7 +103,7 @@
                 <h5>Comment</h5>
             </div>
             <div class="col-xs-5">
-                <textarea class="form-control" rows="3" ng-model="vm.ticket.sComment"></textarea>
+                <textarea class="form-control" rows="3" ng-model="vm.ticket.sComment" ng-maxlength="500"></textarea>
             </div>
         </div>
         <br />

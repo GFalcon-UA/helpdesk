@@ -66,6 +66,7 @@
             return resp;
           }, function (err) {
             console.error(angular.toJson(err));
+            alert(err.data);
             return err;
           })
         };
@@ -92,6 +93,7 @@
             return resp;
           }, function (err) {
             console.error(angular.toJson(err));
+            alert(err.data);
             return err;
           })
         };
