@@ -1,4 +1,4 @@
-# final-epam-project
+# HelpDesk (final EPAM project)
 
 To start application run the following command from your terminal:<br/>
 
