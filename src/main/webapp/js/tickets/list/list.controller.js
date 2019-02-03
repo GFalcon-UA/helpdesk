@@ -1,3 +1,28 @@
+/*
+ *  MIT License
+ * -----------
+ *
+ * Copyright (c) 2016-2019 Oleksii V. KHALIKOV, PE (gfalcon.com.ua)
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in all
+ * copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE.
+ */
+
 (function () {
   'use strict';
 
@@ -42,15 +67,15 @@
 
       vm.onFilterChange = function (text) {
         var arr = [];
-        if(vm.oState.bMine){
+        if (vm.oState.bMine) {
           arr = vm.aTickets.filter(function (obj) {
-            if(vm.oCurrentuser.sRole === 'EMPLOYEE'){
+            if (vm.oCurrentuser.sRole === 'EMPLOYEE') {
               return vm.oCurrentuser.nId == obj.oOwner.nId;
             }
-            if(vm.oCurrentuser.sRole === 'MANAGER'){
+            if (vm.oCurrentuser.sRole === 'MANAGER') {
               return (obj.oOwner && obj.oOwner.nId == vm.oCurrentuser.nId) || (obj.oApprover && obj.oApprover.nId == vm.oCurrentuser.nId);
             }
-            if(vm.oCurrentuser.sRole === 'ENGINEER'){
+            if (vm.oCurrentuser.sRole === 'ENGINEER') {
               return obj.oAssignee && obj.oAssignee.nId == vm.oCurrentuser.nId
             }
             return false;
@@ -58,24 +83,24 @@
         } else {
           arr = vm.aTickets;
         }
-        if(!text || text === ''){
+        if (!text || text === '') {
           vm.aShowedTickets = angular.copy(arr);
         } else {
           vm.aShowedTickets = angular.copy(arr.filter(function (obj) {
             var id = obj.nId + '';
-            if(id.toLowerCase().match(text.toLowerCase())){
+            if (id.toLowerCase().match(text.toLowerCase())) {
               return true;
             }
-            if(obj.sName && obj.sName.toLowerCase().match(text.toLowerCase())){
+            if (obj.sName && obj.sName.toLowerCase().match(text.toLowerCase())) {
               return true;
             }
-            if(obj.dDesiredDate && obj.dDesiredDate.toLowerCase().match(text.toLowerCase())){
+            if (obj.dDesiredDate && obj.dDesiredDate.toLowerCase().match(text.toLowerCase())) {
               return true;
             }
-            if(obj.sUrgency && obj.sUrgency.toLowerCase().match(text.toLowerCase())){
+            if (obj.sUrgency && obj.sUrgency.toLowerCase().match(text.toLowerCase())) {
               return true;
             }
-            if(obj.sState && obj.sState.toLowerCase().match(text.toLowerCase())){
+            if (obj.sState && obj.sState.toLowerCase().match(text.toLowerCase())) {
               return true;
             }
             return false;
@@ -120,7 +145,7 @@
        * Ticket actions
        */
 
-      vm.setTicketState = function(oTicket, sState){
+      vm.setTicketState = function (oTicket, sState) {
         TicketService.setNewState(oTicket, sState).then(function () {
           fillTicketList();
         });
@@ -177,7 +202,6 @@
       };
 
 
-
       //////////////////
 
       function fillTicketList() {
@@ -209,37 +233,40 @@
 
           // set default action
           angular.forEach(vm.aTickets, function (oTicket) {
-            if(!vm.showActionButton(oTicket)){
-              oTicket.runDefaultAction = function () {};
+            if (!vm.showActionButton(oTicket)) {
+              oTicket.runDefaultAction = function () {
+              };
               oTicket.sActionTitle = "";
             } else if (vm.showSubmit(oTicket)) {
               oTicket.runDefaultAction = function () {
                 vm.setTicketState(oTicket, "NEW");
               };
               oTicket.sActionTitle = "Submit";
-            } else if (vm.showApprove(oTicket)){
-              oTicket.runDefaultAction = function(){
+            } else if (vm.showApprove(oTicket)) {
+              oTicket.runDefaultAction = function () {
                 vm.setTicketState(oTicket, "APPROVED");
               };
               oTicket.sActionTitle = "Approve";
-            } else if (vm.showAssign(oTicket)){
-              oTicket.runDefaultAction = function(){
+            } else if (vm.showAssign(oTicket)) {
+              oTicket.runDefaultAction = function () {
                 vm.setTicketState(oTicket, "IN_PROGRESS");
               };
               oTicket.sActionTitle = "Assign to Me";
-            } else if (vm.showDone(oTicket)){
-              oTicket.runDefaultAction = function(){
+            } else if (vm.showDone(oTicket)) {
+              oTicket.runDefaultAction = function () {
                 vm.setTicketState(oTicket, "DONE");
               };
               oTicket.sActionTitle = "Done";
-            } else if (vm.showLeaveFeedback(oTicket)){
-              oTicket.runDefaultAction = function () {};
+            } else if (vm.showLeaveFeedback(oTicket)) {
+              oTicket.runDefaultAction = function () {
+              };
               oTicket.sActionTitle = "Leave feedback";
-            } else if (vm.showViewFeedback(oTicket)){
-              oTicket.runDefaultAction = function () {};
+            } else if (vm.showViewFeedback(oTicket)) {
+              oTicket.runDefaultAction = function () {
+              };
               oTicket.sActionTitle = "View feedback";
-            } else if (vm.showCancel(oTicket)){
-              oTicket.runDefaultAction = function(){
+            } else if (vm.showCancel(oTicket)) {
+              oTicket.runDefaultAction = function () {
                 vm.setTicketState(oTicket, "CANCELED");
               };
               oTicket.sActionTitle = "Cancel";
@@ -251,7 +278,7 @@
       }
 
       var getDateFromString = function (str) {
-        if(str){
+        if (str) {
           var arr = str.split('/');
           return new Date(parseInt(arr[2]), parseInt(arr[1]), parseInt(arr[0]));
         } else {
@@ -260,23 +287,23 @@
       };
 
 
-      function sortedObjectsArrayByField(array, config){
+      function sortedObjectsArrayByField(array, config) {
         var sFieldId = config['sByField'];
         var bAsc = config.bDescending[sFieldId];
         config.bDescending[sFieldId] = !config.bDescending[sFieldId];
 
         function compare(a, b) {
-          if(sFieldId === 'dDesiredDate'){
-            if(getDateFromString(a) < getDateFromString(b)) return -1;
-            if(getDateFromString(a) > getDateFromString(b)) return 1;
+          if (sFieldId === 'dDesiredDate') {
+            if (getDateFromString(a) < getDateFromString(b)) return -1;
+            if (getDateFromString(a) > getDateFromString(b)) return 1;
             return 0
-          } else if(sFieldId === 'sUrgency'){
-            if(vm.aUrgency.indexOf(a) < vm.aUrgency.indexOf(b)) return -1;
-            if(vm.aUrgency.indexOf(a) > vm.aUrgency.indexOf(b)) return 1;
+          } else if (sFieldId === 'sUrgency') {
+            if (vm.aUrgency.indexOf(a) < vm.aUrgency.indexOf(b)) return -1;
+            if (vm.aUrgency.indexOf(a) > vm.aUrgency.indexOf(b)) return 1;
             return 0
           } else {
-            if(a < b) return -1;
-            if(a > b) return 1;
+            if (a < b) return -1;
+            if (a > b) return 1;
             return 0
           }
         }

@@ -1,36 +1,63 @@
+<!--
+  ~  MIT License
+  ~ -----------
+  ~
+  ~ Copyright (c) 2016-2019 Oleksii V. KHALIKOV, PE (gfalcon.com.ua)
+  ~
+  ~ Permission is hereby granted, free of charge, to any person obtaining a copy
+  ~ of this software and associated documentation files (the "Software"), to deal
+  ~ in the Software without restriction, including without limitation the rights
+  ~ to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+  ~ copies of the Software, and to permit persons to whom the Software is
+  ~ furnished to do so, subject to the following conditions:
+  ~
+  ~ The above copyright notice and this permission notice shall be included in all
+  ~ copies or substantial portions of the Software.
+  ~
+  ~ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+  ~ IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+  ~ FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+  ~ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+  ~ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+  ~ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+  ~ SOFTWARE.
+  -->
+
 <div class="container all-tickets-page" ng-init="vm.init()">
-    <br />
-    <br />
-    <br />
+    <br/>
+    <br/>
+    <br/>
     <div class="row">
         <div class="col-xs-12" ng-if="vm.oCurrentuser.sRole === 'EMPLOYEE' || vm.oCurrentuser.sRole === 'MANAGER'">
-            <a style="width: 300px;" class="btn btn-lg pull-right btn-success" ng-href="/editor">Create New Ticket</a>
+            <a class="btn btn-lg pull-right btn-success" ng-href="/editor" style="width: 300px;">Create New Ticket</a>
         </div>
     </div>
-    <br />
-    <br />
+    <br/>
+    <br/>
     <div class="row">
         <div class="col-xs-6">
-            <button style="width: 100%;"
-                    class="btn btn-lg pull-right"
+            <button class="btn btn-lg pull-right"
                     ng-class="vm.oState.bAll ? 'btn-primary' : 'btn-default'"
-                    ng-click="vm.showAllTickets()">All Tickets</button>
+                    ng-click="vm.showAllTickets()"
+                    style="width: 100%;">All Tickets
+            </button>
         </div>
         <div class="col-xs-6">
-            <button style="width: 100%;" class="btn btn-lg pull-right"
-                    ng-class="vm.oState.bMine ? 'btn-primary' : 'btn-default'"
-                    ng-click="vm.showMyTickets()">My Tickets</button>
+            <button class="btn btn-lg pull-right" ng-class="vm.oState.bMine ? 'btn-primary' : 'btn-default'"
+                    ng-click="vm.showMyTickets()"
+                    style="width: 100%;">My Tickets
+            </button>
         </div>
     </div>
-    <br />
-    <br />
-    <input type="text"
-           title="filter"
-           ng-model-options="{ debounce: 1000 }"
-           ng-model="vm.sFilterText"
+    <br/>
+    <br/>
+    <input class="form-control search-input"
            ng-change="vm.onFilterChange(vm.sFilterText)"
-           class="form-control search-input" />
-    <br />
+           ng-model="vm.sFilterText"
+           ng-model-options="{ debounce: 1000 }"
+           title="filter"
+           type="text"/>
+    <br/>
     <table class="table table-bordered">
         <thead>
         <tr>
@@ -71,26 +98,45 @@
         <tbody>
         <tr ng-repeat="oTicket in vm.aShowedTickets">
             <th scope="row">{{oTicket.nId}}</th>
-            <td style="cursor: pointer" ng-click="vm.openTicketOverview(oTicket)"><u class="link">{{oTicket.sName}}</u></td>
+            <td ng-click="vm.openTicketOverview(oTicket)" style="cursor: pointer"><u class="link">{{oTicket.sName}}</u>
+            </td>
             <td>{{oTicket.dDesiredDate}}</td>
             <td>{{oTicket.sUrgency}}</td>
             <td>{{oTicket.sState}}</td>
             <th>
-                <div class="btn-group" uib-dropdown style="width: 90%" ng-if="vm.showActionButton(oTicket)">
-                    <button id="split-button" type="button" class="btn btn-success" ng-click="oTicket.runDefaultAction()">{{oTicket.sActionTitle}}</button>
-                    <button type="button" class="btn btn-success" uib-dropdown-toggle>
+                <div class="btn-group" ng-if="vm.showActionButton(oTicket)" style="width: 90%" uib-dropdown>
+                    <button class="btn btn-success" id="split-button" ng-click="oTicket.runDefaultAction()"
+                            type="button">{{oTicket.sActionTitle}}
+                    </button>
+                    <button class="btn btn-success" type="button" uib-dropdown-toggle>
                         <span class="caret"></span>
                         <span class="sr-only">Action menu</span>
                     </button>
-                    <ul uib-dropdown-menu role="menu" aria-labelledby="split-button">
-                        <li role="menuitem" ng-if="vm.showSubmit(oTicket)"><a href="#" ng-click="vm.setTicketState(oTicket, 'SUBMIT')">Submit</a></li>
-                        <li role="menuitem" ng-if="vm.showApprove(oTicket)"><a href="#" ng-click="vm.setTicketState(oTicket, 'APPROVED')">Approve</a></li>
-                        <li role="menuitem" ng-if="vm.showDecline(oTicket)"><a href="#" ng-click="vm.setTicketState(oTicket, 'DECLINED')">Decline</a></li>
-                        <li role="menuitem" ng-if="vm.showCancel(oTicket)"><a href="#" ng-click="vm.setTicketState(oTicket, 'CANCELED')">Cancel</a></li>
-                        <li role="menuitem" ng-if="vm.showAssign(oTicket)"><a href="#" ng-click="vm.setTicketState(oTicket, 'IN_PROGRESS')">Assign to Me</a></li>
-                        <li role="menuitem" ng-if="vm.showDone(oTicket)"><a href="#" ng-click="vm.setTicketState(oTicket, 'DONE')">Done</a></li>
-                        <li role="menuitem" ng-if="vm.showLeaveFeedback(oTicket)"><a href="#" ng-click="vm.openFeedbackPage(oTicket)">Leave feedback</a></li>
-                        <li role="menuitem" ng-if="vm.showViewFeedback(oTicket)"><a href="#" ng-click="vm.openFeedbackPage(oTicket)">View feedback</a></li>
+                    <ul aria-labelledby="split-button" role="menu" uib-dropdown-menu>
+                        <li ng-if="vm.showSubmit(oTicket)" role="menuitem"><a href="#"
+                                                                              ng-click="vm.setTicketState(oTicket, 'SUBMIT')">Submit</a>
+                        </li>
+                        <li ng-if="vm.showApprove(oTicket)" role="menuitem"><a href="#"
+                                                                               ng-click="vm.setTicketState(oTicket, 'APPROVED')">Approve</a>
+                        </li>
+                        <li ng-if="vm.showDecline(oTicket)" role="menuitem"><a href="#"
+                                                                               ng-click="vm.setTicketState(oTicket, 'DECLINED')">Decline</a>
+                        </li>
+                        <li ng-if="vm.showCancel(oTicket)" role="menuitem"><a href="#"
+                                                                              ng-click="vm.setTicketState(oTicket, 'CANCELED')">Cancel</a>
+                        </li>
+                        <li ng-if="vm.showAssign(oTicket)" role="menuitem"><a href="#"
+                                                                              ng-click="vm.setTicketState(oTicket, 'IN_PROGRESS')">Assign
+                            to Me</a></li>
+                        <li ng-if="vm.showDone(oTicket)" role="menuitem"><a href="#"
+                                                                            ng-click="vm.setTicketState(oTicket, 'DONE')">Done</a>
+                        </li>
+                        <li ng-if="vm.showLeaveFeedback(oTicket)" role="menuitem"><a href="#"
+                                                                                     ng-click="vm.openFeedbackPage(oTicket)">Leave
+                            feedback</a></li>
+                        <li ng-if="vm.showViewFeedback(oTicket)" role="menuitem"><a href="#"
+                                                                                    ng-click="vm.openFeedbackPage(oTicket)">View
+                            feedback</a></li>
                     </ul>
                 </div>
             </th>

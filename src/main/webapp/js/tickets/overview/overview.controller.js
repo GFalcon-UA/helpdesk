@@ -1,3 +1,28 @@
+/*
+ *  MIT License
+ * -----------
+ *
+ * Copyright (c) 2016-2019 Oleksii V. KHALIKOV, PE (gfalcon.com.ua)
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in all
+ * copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE.
+ */
+
 (function () {
   'use strict';
 
@@ -14,21 +39,21 @@
       vm.sNewComment = '';
 
       vm.getTicketOwner = function () {
-        if(vm.oTicket['oOwner']){
+        if (vm.oTicket['oOwner']) {
           return vm.oTicket['oOwner']['sFirstName'] + ' ' + vm.oTicket['oOwner']['sLastName'];
         } else {
           return '';
         }
       };
       vm.getTicketApprover = function () {
-        if(vm.oTicket['oApprover']){
+        if (vm.oTicket['oApprover']) {
           return vm.oTicket['oApprover']['sFirstName'] + ' ' + vm.oTicket['oApprover']['sLastName'];
         } else {
           return '';
         }
       };
       vm.getTicketAssignee = function () {
-        if(vm.oTicket['oAssignee']){
+        if (vm.oTicket['oAssignee']) {
           return vm.oTicket['oAssignee']['sFirstName'] + ' ' + vm.oTicket['oAssignee']['sLastName'];
         } else {
           return '';
@@ -57,7 +82,7 @@
       vm.addComment = function (nTicketId, sComment) {
         vm.sNewComment = "";
         TicketService.addComment(nTicketId, sComment).then(function (resp) {
-          if(angular.isArray(vm.oTicket.aoComments)){
+          if (angular.isArray(vm.oTicket.aoComments)) {
             vm.oTicket.aoComments.push(resp.data);
             fillTable();
           }
@@ -84,7 +109,7 @@
         TicketService.downloadAttachment(file);
       };
 
-      vm.download2 = function(file) {
+      vm.download2 = function (file) {
         var a = document.createElement("a");
         document.body.appendChild(a);
         a.style = "display: none";
@@ -101,33 +126,33 @@
       function fillTable() {
         vm.aHistories = [];
         vm.aComments = [];
-        if(vm.bHistoryViewMode && vm.bShortList){
-          if(vm.oTicket.aoHistory && vm.oTicket.aoHistory.length <= 5){
+        if (vm.bHistoryViewMode && vm.bShortList) {
+          if (vm.oTicket.aoHistory && vm.oTicket.aoHistory.length <= 5) {
             vm.aHistories = vm.oTicket.aoHistory;
           } else {
-            for(var i = 0; i < 5; i++){
+            for (var i = 0; i < 5; i++) {
               vm.aHistories.push(vm.oTicket.aoHistory[i]);
             }
           }
         }
-        if(vm.bHistoryViewMode && !vm.bShortList){
+        if (vm.bHistoryViewMode && !vm.bShortList) {
           vm.aHistories = vm.oTicket.aoHistory;
         }
 
-        if(!vm.bHistoryViewMode && vm.bShortList){
-          if(vm.oTicket.aoComments && vm.oTicket.aoComments.length <= 5){
+        if (!vm.bHistoryViewMode && vm.bShortList) {
+          if (vm.oTicket.aoComments && vm.oTicket.aoComments.length <= 5) {
             vm.aComments = vm.oTicket.aoComments;
           } else {
-            for(var j = 0; j < 5; j++){
+            for (var j = 0; j < 5; j++) {
               vm.aComments.push(vm.oTicket.aoComments[j]);
             }
           }
         }
-        if(!vm.bHistoryViewMode && !vm.bShortList){
+        if (!vm.bHistoryViewMode && !vm.bShortList) {
           vm.aComments = vm.oTicket.aoComments;
         }
       }
 
 
-  })
+    })
 })();

@@ -1,5 +1,30 @@
+<!--
+  ~  MIT License
+  ~ -----------
+  ~
+  ~ Copyright (c) 2016-2019 Oleksii V. KHALIKOV, PE (gfalcon.com.ua)
+  ~
+  ~ Permission is hereby granted, free of charge, to any person obtaining a copy
+  ~ of this software and associated documentation files (the "Software"), to deal
+  ~ in the Software without restriction, including without limitation the rights
+  ~ to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+  ~ copies of the Software, and to permit persons to whom the Software is
+  ~ furnished to do so, subject to the following conditions:
+  ~
+  ~ The above copyright notice and this permission notice shall be included in all
+  ~ copies or substantial portions of the Software.
+  ~
+  ~ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+  ~ IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+  ~ FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+  ~ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+  ~ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+  ~ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+  ~ SOFTWARE.
+  -->
+
 <div class="container task" ng-init="vm.getTicketInfo()">
-    <br />
+    <br/>
     <div class="row">
         <div class="col-xs-1">
             <a class="btn btn-success" ng-href="/list">Ticket List</a>
@@ -9,21 +34,23 @@
             <h3 style="line-height: 34px; margin: 0;">Ticket ({{vm.oTicket.nId}}) - {{vm.oTicket.sName}}</h3>
         </div>
         <div class="col-xs-2">
-            <button style="width: 160px;"
-                    class="btn btn-success"
+            <button class="btn btn-success"
                     ng-click="vm.goToEditor(vm.oTicket['nId'])"
-                    ng-if="vm.enableEditorPage(vm.oTicket)">Edit</button>
+                    ng-if="vm.enableEditorPage(vm.oTicket)"
+                    style="width: 160px;">Edit
+            </button>
         </div>
     </div>
-    <br />
+    <br/>
     <div class="row">
         <div class="col-xs-3 text-right"><h5>Created on:</h5></div>
         <div class="col-xs-7"><h5>{{vm.oTicket.dCreatedOn}}</h5></div>
         <div class="col-xs-2">
-            <button style="width: 160px;"
-                    class="btn btn-success"
+            <button class="btn btn-success"
+                    ng-click="vm.leaveFeedback(vm.oTicket['nId'])"
                     ng-if="vm.showLeaveFeedback()"
-                    ng-click="vm.leaveFeedback(vm.oTicket['nId'])">Leave Feedback</button>
+                    style="width: 160px;">Leave Feedback
+            </button>
         </div>
     </div>
     <div class="row">
@@ -58,29 +85,33 @@
         <div class="col-xs-3 text-right"><h5>Attachments:</h5></div>
         <div class="col-xs-7">
             <h5 ng-repeat="file in vm.oTicket.afAttachments">
-                <span>{{file.sFileName}}</span><button ng-click="vm.downloadFile(file)">Download</button><br/>
+                <span>{{file.sFileName}}</span>
+                <button ng-click="vm.downloadFile(file)">Download</button>
+                <br/>
             </h5>
         </div>
     </div>
     <div class="row">
         <div class="col-xs-3 text-right"><h5>Description:</h5></div>
         <div class="col-xs-7">
-            <textarea rows="3" cols="40" class="form-controls" disabled>{{vm.oTicket.sDescription}}</textarea>
+            <textarea class="form-controls" cols="40" disabled rows="3">{{vm.oTicket.sDescription}}</textarea>
         </div>
     </div>
-    <br />
+    <br/>
     <div class="row">
         <div class="col-xs-6">
-            <button style="width: 100%;"
-                    class="btn pull-right"
+            <button class="btn pull-right"
                     ng-class="vm.bHistoryViewMode ? 'btn-primary': 'btn-default'"
-                    ng-click="vm.changeViewMode()">History</button>
+                    ng-click="vm.changeViewMode()"
+                    style="width: 100%;">History
+            </button>
         </div>
         <div class="col-xs-6">
-            <button style="width: 100%;"
-                    class="btn pull-right"
+            <button class="btn pull-right"
                     ng-class="!vm.bHistoryViewMode ? 'btn-primary': 'btn-default'"
-                    ng-click="vm.changeViewMode()">Comments</button>
+                    ng-click="vm.changeViewMode()"
+                    style="width: 100%;">Comments
+            </button>
         </div>
     </div>
     <a ng-click="vm.showFullList()"><h3 style="cursor: pointer">Show All</h3></a>
@@ -118,13 +149,15 @@
         </tr>
         </tbody>
     </table>
-    <br />
+    <br/>
     <div class="row" ng-if="!vm.bHistoryViewMode">
         <div class="col-xs-7">
-            <textarea rows="3" cols="40" class="form-controls" ng-model="vm.sNewComment" ng-maxlength="500"></textarea>
-            <br />
-            <button style="width: 160px;" class="btn" ng-click="vm.addComment(vm.oTicket.nId, vm.sNewComment)">Add Comment</button>
+            <textarea class="form-controls" cols="40" ng-maxlength="500" ng-model="vm.sNewComment" rows="3"></textarea>
+            <br/>
+            <button class="btn" ng-click="vm.addComment(vm.oTicket.nId, vm.sNewComment)" style="width: 160px;">Add
+                Comment
+            </button>
         </div>
     </div>
-    <br />
+    <br/>
 </div>

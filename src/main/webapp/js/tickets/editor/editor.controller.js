@@ -1,3 +1,28 @@
+/*
+ *  MIT License
+ * -----------
+ *
+ * Copyright (c) 2016-2019 Oleksii V. KHALIKOV, PE (gfalcon.com.ua)
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in all
+ * copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE.
+ */
+
 (function () {
   'use strict';
   angular.module('Tickets').controller('EditorCtrl', function (TicketService, $log, $scope, $location, $userProvider, $routeParams) {
@@ -26,7 +51,7 @@
     vm.goToTicketList = goToTicketList;
 
     vm.init = function () {
-      if($routeParams.id){
+      if ($routeParams.id) {
         TicketService.getTicket(parseInt($routeParams.id)).then(function (resp) {
           vm.ticket = resp;
         })
@@ -43,19 +68,19 @@
       });
     };
 
-    vm.btn_remove = function(file) {
+    vm.btn_remove = function (file) {
       // $log.info('deleting=' + file);
       // uiUploader.removeFile(file);
       vm.files.splice(vm.files.indexOf(file), 1);
     };
-    vm.btn_clean = function() {
+    vm.btn_clean = function () {
       // uiUploader.removeAll();
       vm.files.splice(0, vm.files.length)
     };
 
-    var upload = function(overviewTicktId) {
+    var upload = function (overviewTicktId) {
       TicketService.uploadUttachments(vm.ticket.nId, vm.files).then(function (resp) {
-        if(overviewTicktId){
+        if (overviewTicktId) {
           goToOverview(overviewTicktId);
         } else {
           goToTicketList();
@@ -64,44 +89,44 @@
     };
 
     var element = document.getElementById('fileuploader');
-    element.addEventListener('change', function(e) {
+    element.addEventListener('change', function (e) {
       var files = e.target.files;
 
       var aAvailableFileExtensions = ['pdf', 'png', 'doc', 'docx', 'jpeg', 'jpg'];
       var invalidFiles = [];
-      for(var i = 0; i < files.length; i++){
+      for (var i = 0; i < files.length; i++) {
         var bOversize = false;
         var bUnsuportedExtension = false;
-        if(files[i].size > 5 * 1024 * 1024){
+        if (files[i].size > 5 * 1024 * 1024) {
           bOversize = true;
           alert("The size of attached file should not be greater than 5 Mb. Please select another file.")
         }
-        if(!verifyExtension(files[i].name)){
+        if (!verifyExtension(files[i].name)) {
           bUnsuportedExtension = true;
           alert("The selected file type is not allowed. Please select a file of one of the following types: pdf, png, doc, docx, jpg, jpeg.");
         }
-        if(bOversize || bUnsuportedExtension){
+        if (bOversize || bUnsuportedExtension) {
           invalidFiles.push(i);
         }
       }
 
-      if(invalidFiles.length > 0){
-        for(var j = invalidFiles.length - 1; j >= 0; j--){
+      if (invalidFiles.length > 0) {
+        for (var j = invalidFiles.length - 1; j >= 0; j--) {
           files.splice(invalidFiles[j], 1);
         }
       }
 
-      function verifyExtension (sFileNameForCheck){
+      function verifyExtension(sFileNameForCheck) {
         var ext = sFileNameForCheck.split('.').pop().toLowerCase();
-        for (var i = 0; i < aAvailableFileExtensions.length; i++){
-          if (ext === aAvailableFileExtensions[i]){
+        for (var i = 0; i < aAvailableFileExtensions.length; i++) {
+          if (ext === aAvailableFileExtensions[i]) {
             return true;
           }
         }
         return false;
       }
 
-      if(files.length > 0){
+      if (files.length > 0) {
         angular.forEach(files, function (file) {
           vm.files.push(file);
         });
@@ -112,16 +137,17 @@
     function fillCategoryList() {
       TicketService.getCategories().then(function (data) {
         vm.categories.list = data;
-        if(vm.categories.list.length > 0){
+        if (vm.categories.list.length > 0) {
           vm.categories.selected = vm.categories.list[0];
         }
       })
     }
+
     function fillUrgencyList() {
       TicketService.getUrgencyList().then(function (data) {
         vm.urgency.list = data;
-        if(angular.isArray(data) && data.length > 0){
-          vm.urgency.selected = data[parseInt(data.length/2 + '')];
+        if (angular.isArray(data) && data.length > 0) {
+          vm.urgency.selected = data[parseInt(data.length / 2 + '')];
         }
       })
 
@@ -134,11 +160,11 @@
 
     function submitTicket(isDraft) {
       mergeEnums();
-      if(vm.ticket.hasOwnProperty('nId')){
+      if (vm.ticket.hasOwnProperty('nId')) {
         TicketService.updateTicket(vm.ticket, isDraft).then(
           function (result) {
             vm.ticket = result.data;
-            if(vm.files.length > 0){
+            if (vm.files.length > 0) {
               upload(vm.ticket['nId']);
             } else {
               goToOverview(vm.ticket['nId'])
@@ -149,7 +175,7 @@
         TicketService.createTicket(vm.ticket, isDraft).then(
           function (result) {
             vm.ticket = result.data;
-            if(vm.files.length > 0){
+            if (vm.files.length > 0) {
               upload();
             } else {
               goToTicketList()

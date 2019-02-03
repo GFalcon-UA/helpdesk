@@ -1,8 +1,33 @@
+<!--
+  ~  MIT License
+  ~ -----------
+  ~
+  ~ Copyright (c) 2016-2019 Oleksii V. KHALIKOV, PE (gfalcon.com.ua)
+  ~
+  ~ Permission is hereby granted, free of charge, to any person obtaining a copy
+  ~ of this software and associated documentation files (the "Software"), to deal
+  ~ in the Software without restriction, including without limitation the rights
+  ~ to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+  ~ copies of the Software, and to permit persons to whom the Software is
+  ~ furnished to do so, subject to the following conditions:
+  ~
+  ~ The above copyright notice and this permission notice shall be included in all
+  ~ copies or substantial portions of the Software.
+  ~
+  ~ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+  ~ IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+  ~ FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+  ~ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+  ~ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+  ~ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+  ~ SOFTWARE.
+  -->
+
 <div class="container editor" ng-init="vm.init()">
 
     <div class="row" ng-if="!vm.ticket['nId']">
         <div class="col-xs-2">
-            <a style="width: 120px;" class="btn btn-success" ng-href="/list">Ticket List</a>
+            <a class="btn btn-success" ng-href="/list" style="width: 120px;">Ticket List</a>
         </div>
         <div class="col-xs-6">
             <h3 style="line-height: 34px; margin: 0;">Create new Ticket</h3>
@@ -11,7 +36,8 @@
 
     <div class="row" ng-if="vm.ticket['nId']">
         <div class="col-xs-2">
-            <a style="width: 120px;" class="btn btn-success" ng-href="{{'/overview/' + vm.ticket['nId']}}">Ticket Overview</a>
+            <a class="btn btn-success" ng-href="{{'/overview/' + vm.ticket['nId']}}" style="width: 120px;">Ticket
+                Overview</a>
         </div>
         <div class="col-xs-6">
             <h3 style="line-height: 34px; margin: 0;">Edit Ticket ({{vm.ticket['nId']}})</h3>
@@ -20,8 +46,8 @@
 
     <div class="col-xs-1"></div>
     <div class="col-xs-11">
-        <br />
-        <br />
+        <br/>
+        <br/>
         <div class="row">
             <div class="col-xs-2 text-right">
                 <h5>Category <span class="warning">*</span></h5>
@@ -29,30 +55,30 @@
             <div class="col-xs-4">
                 <select class="form-control"
                         id="category"
-                        required
                         ng-model="vm.categories.selected"
-                        ng-options="obj as obj.sName for obj in vm.categories.list track by obj.nId"></select>
+                        ng-options="obj as obj.sName for obj in vm.categories.list track by obj.nId"
+                        required></select>
             </div>
         </div>
-        <br />
+        <br/>
         <div class="row">
             <div class="col-xs-2 text-right">
                 <h5>Name <span class="warning">*</span></h5>
             </div>
             <div class="col-xs-4">
-                <input type="text" class="form-control" ng-model="vm.ticket.sName" ng-maxlength="100" required/>
+                <input class="form-control" ng-maxlength="100" ng-model="vm.ticket.sName" required type="text"/>
             </div>
         </div>
-        <br />
+        <br/>
         <div class="row">
             <div class="col-xs-2 text-right">
                 <h5>Description</h5>
             </div>
             <div class="col-xs-5">
-                <textarea class="form-control" rows="3" ng-model="vm.ticket.sDescription" ng-maxlength="500"></textarea>
+                <textarea class="form-control" ng-maxlength="500" ng-model="vm.ticket.sDescription" rows="3"></textarea>
             </div>
         </div>
-        <br />
+        <br/>
         <div class="row">
             <div class="col-xs-2 text-right">
                 <h5>Urgency <span class="warning">*</span></h5>
@@ -60,61 +86,70 @@
             <div class="col-xs-4">
                 <select class="form-control"
                         id="urgency"
-                        required
                         ng-model="vm.urgency.selected"
-                        ng-options="name for name in vm.urgency.list"></select>
+                        ng-options="name for name in vm.urgency.list"
+                        required></select>
             </div>
         </div>
-        <br />
+        <br/>
         <div class="row">
             <div class="col-xs-2 text-right">
                 <h5>Desired resolution date</h5>
             </div>
             <div class="col-xs-4">
-                <input type="text" class="form-control"  ng-model="vm.ticket.dDesiredDate"/>
+                <input class="form-control" ng-model="vm.ticket.dDesiredDate" type="text"/>
             </div>
         </div>
-        <br />
+        <br/>
         <div class="row">
             <div class="col-xs-2 text-right">
                 <h5>Add attachments</h5>
             </div>
             <div class="well col-xs-5">
                 <div ng-repeat="file in vm.ticket.afAttachments">
-                    <span>{{file.sFileName}}</span><button ng-click="vm.removeFile(file)">Delete</button><br/>
+                    <span>{{file.sFileName}}</span>
+                    <button ng-click="vm.removeFile(file)">Delete</button>
+                    <br/>
                 </div>
                 <div>
                     <div style="float:right;">
                         <!--<button ng-click="btn_upload()">Upload</button>-->
-                        <button ng-if="files.length > 0" ng-click="vm.btn_clean()">Remove all</button>
+                        <button ng-click="vm.btn_clean()" ng-if="files.length > 0">Remove all</button>
                     </div>
-                    <input type="file" id="fileuploader" multiple/>
+                    <input id="fileuploader" multiple type="file"/>
                 </div>
-                <div ng-repeat="file in vm.files" style="margin-top: 20px;border-bottom-color: antiquewhite;border-bottom-style: double;">
-                    <div><span>{{file.name}}</span><div style="float:right;"><span>{{file.humanSize}}</span><a ng-click="vm.btn_remove(file)" title="Remove from list to be uploaded"><i class="icon-remove"></i></a></div>
+                <div ng-repeat="file in vm.files"
+                     style="margin-top: 20px;border-bottom-color: antiquewhite;border-bottom-style: double;">
+                    <div><span>{{file.name}}</span>
+                        <div style="float:right;"><span>{{file.humanSize}}</span><a ng-click="vm.btn_remove(file)"
+                                                                                    title="Remove from list to be uploaded"><i
+                                class="icon-remove"></i></a></div>
                     </div>
-                    <progress style="width:400px;" value="{{file.loaded ? file.loaded : 0}}" max="{{file.size}}"></progress>
+                    <progress max="{{file.size}}" style="width:400px;"
+                              value="{{file.loaded ? file.loaded : 0}}"></progress>
                 </div>
             </div>
         </div>
-        <br />
+        <br/>
         <div class="row">
             <div class="col-xs-2 text-right">
                 <h5>Comment</h5>
             </div>
             <div class="col-xs-5">
-                <textarea class="form-control" rows="3" ng-model="vm.ticket.sComment" ng-maxlength="500"></textarea>
+                <textarea class="form-control" ng-maxlength="500" ng-model="vm.ticket.sComment" rows="3"></textarea>
             </div>
         </div>
-        <br />
-        <br />
+        <br/>
+        <br/>
         <div class="row">
             <div class="col-xs-10">
-                <div style="width: 160px;" class="btn btn-success pull-right" ng-click="vm.submit()">Submit</div>
-                <div style="width: 160px; margin-right: 20px;" class="btn btn-default pull-right" ng-click="vm.saveDraft()">Save as Draft</div>
+                <div class="btn btn-success pull-right" ng-click="vm.submit()" style="width: 160px;">Submit</div>
+                <div class="btn btn-default pull-right" ng-click="vm.saveDraft()"
+                     style="width: 160px; margin-right: 20px;">Save as Draft
+                </div>
             </div>
         </div>
-        <br />
-        <br />
+        <br/>
+        <br/>
     </div>
 </div>
