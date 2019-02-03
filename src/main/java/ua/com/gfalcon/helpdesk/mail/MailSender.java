@@ -1,6 +1,5 @@
 /*
  *  MIT License
- * -----------
  *
  * Copyright (c) 2016-2019 Oleksii V. KHALIKOV, PE (gfalcon.com.ua)
  *
@@ -25,6 +24,7 @@
 
 package ua.com.gfalcon.helpdesk.mail;
 
+import org.springframework.beans.factory.annotation.Value;
 import ua.com.gfalcon.helpdesk.domain.Ticket;
 import ua.com.gfalcon.helpdesk.domain.User;
 import ua.com.gfalcon.helpdesk.domain.enums.Role;
@@ -50,9 +50,9 @@ public class MailSender {
     private static final Logger log = LogManager.getLogger(MailSender.class);
 
     // todo
-    private static final String myMail = "wealth.is.goal@gmail.com";
+    private static final String myMail = "info@gmail.com";
 
-    private static final String pass = "max3521267";
+    private static final String pass = "password_of_mail_box";
 
     private static final String host = "http://localhost:8080";
 

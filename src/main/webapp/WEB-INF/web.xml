@@ -2,7 +2,6 @@
 
 <!--
   ~  MIT License
-  ~ -----------
   ~
   ~ Copyright (c) 2016-2019 Oleksii V. KHALIKOV, PE (gfalcon.com.ua)
   ~
@@ -28,7 +27,7 @@
 <web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          version="3.0"
          xmlns="http://java.sun.com/xml/ns/javaee"
-         xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
+         xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_1.xsd"
          metadata-complete="false">
 
     <display-name>HelpDesk</display-name>
