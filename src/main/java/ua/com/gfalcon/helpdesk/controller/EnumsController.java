@@ -1,6 +1,5 @@
 /*
  *  MIT License
- * -----------
  *
  * Copyright (c) 2016-2019 Oleksii V. KHALIKOV, PE (gfalcon.com.ua)
  *
@@ -25,14 +24,14 @@
 
 package ua.com.gfalcon.helpdesk.controller;
 
-import ua.com.gfalcon.helpdesk.domain.Category;
-import ua.com.gfalcon.helpdesk.domain.enums.Urgency;
-import ua.com.gfalcon.helpdesk.json.JsonRestUtils;
-import ua.com.gfalcon.helpdesk.service.MaintenanceEntityService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import ua.com.gfalcon.helpdesk.domain.Category;
+import ua.com.gfalcon.helpdesk.domain.enums.Urgency;
+import ua.com.gfalcon.helpdesk.json.JsonRestUtils;
+import ua.com.gfalcon.helpdesk.service.MaintenanceEntityService;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -43,8 +42,13 @@ import java.util.List;
 @RequestMapping(value = "api/enums", produces = "application/json")
 public class EnumsController {
 
+    private final MaintenanceEntityService entityService;
+
+
     @Autowired
-    private MaintenanceEntityService entityService;
+    public EnumsController(MaintenanceEntityService entityService) {
+        this.entityService = entityService;
+    }
 
 
     @RequestMapping("/categories")

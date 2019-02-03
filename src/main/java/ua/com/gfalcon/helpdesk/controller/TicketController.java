@@ -1,6 +1,5 @@
 /*
  *  MIT License
- * -----------
  *
  * Copyright (c) 2016-2019 Oleksii V. KHALIKOV, PE (gfalcon.com.ua)
  *
@@ -25,6 +24,15 @@
 
 package ua.com.gfalcon.helpdesk.controller;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.validation.Errors;
+import org.springframework.validation.ObjectError;
+import org.springframework.web.bind.annotation.*;
 import ua.com.gfalcon.helpdesk.domain.Comment;
 import ua.com.gfalcon.helpdesk.domain.Feedback;
 import ua.com.gfalcon.helpdesk.domain.Ticket;
@@ -35,15 +43,6 @@ import ua.com.gfalcon.helpdesk.json.JsonRestUtils;
 import ua.com.gfalcon.helpdesk.service.TicketService;
 import ua.com.gfalcon.helpdesk.service.UserService;
 import ua.com.gfalcon.helpdesk.validators.TicketValidator;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.validation.Errors;
-import org.springframework.validation.ObjectError;
-import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
 import java.util.List;
@@ -58,12 +57,16 @@ public class TicketController {
 
     private final static Logger log = LogManager.getLogger(TicketController.class);
 
-    @Autowired
-    private TicketService ticketService;
+    private final TicketService ticketService;
 
-    @Qualifier("userServiceImpl")
+    private final UserService userService;
+
+
     @Autowired
-    private UserService userService;
+    public TicketController(TicketService ticketService, @Qualifier("userServiceImpl") UserService userService) {
+        this.ticketService = ticketService;
+        this.userService = userService;
+    }
 
 
     @RequestMapping(value = "/list", method = RequestMethod.GET)

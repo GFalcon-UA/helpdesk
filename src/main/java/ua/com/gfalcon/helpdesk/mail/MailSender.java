@@ -24,16 +24,15 @@
 
 package ua.com.gfalcon.helpdesk.mail;
 
-import org.springframework.beans.factory.annotation.Value;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import ua.com.gfalcon.helpdesk.domain.Ticket;
 import ua.com.gfalcon.helpdesk.domain.User;
 import ua.com.gfalcon.helpdesk.domain.enums.Role;
 import ua.com.gfalcon.helpdesk.domain.enums.State;
 import ua.com.gfalcon.helpdesk.service.UserService;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 
 import javax.mail.*;
 import javax.mail.internet.InternetAddress;

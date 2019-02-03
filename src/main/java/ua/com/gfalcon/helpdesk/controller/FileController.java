@@ -1,6 +1,5 @@
 /*
  *  MIT License
- * -----------
  *
  * Copyright (c) 2016-2019 Oleksii V. KHALIKOV, PE (gfalcon.com.ua)
  *
@@ -25,12 +24,12 @@
 
 package ua.com.gfalcon.helpdesk.controller;
 
-import ua.com.gfalcon.helpdesk.json.JsonRestUtils;
-import ua.com.gfalcon.helpdesk.service.FileService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+import ua.com.gfalcon.helpdesk.json.JsonRestUtils;
+import ua.com.gfalcon.helpdesk.service.FileService;
 
 
 
@@ -38,8 +37,13 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("api/file")
 public class FileController {
 
+    private final FileService fileService;
+
+
     @Autowired
-    private FileService fileService;
+    public FileController(FileService fileService) {
+        this.fileService = fileService;
+    }
 
 
     @RequestMapping(value = "/upload", method = RequestMethod.POST)
